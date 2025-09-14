@@ -1211,7 +1211,16 @@
 - Difference between labels and annotations ?
 
 ### Session-54
-- 
+- We write Dockerfiles & manifest files in VS ---> Push to the github ---> We create workstation (DockerHost) in aws, we install Docker, kubectl, eksctl ---> We pull Dockerfiles & manifest files in DockerHost ---> We push to dockerhub ---> Using eksctl command we create Amazon EKS kubernetes cluster ---> EkS have multiple EC2 instances (or) nodes (or) Spot Node group.
+- We dont have ssh access to Kubernetes master, it is completely managed by aws, even aws also manage Node group.
+- Eksctl command is used to create EKS kubernetes cluster.
+- We need to install eksctl in DockerHost (Workstation) also.
+- So create 1 workstation & install all client packages like docker, docker-compose, kubectl, eksctl. Nothing but creating 1 server for EKS kubernetes cluster login in superputty and check "kubectl version" and "eksctl version"
+- From this server, now create EKS kubernetes cluster, it will take time like 20min
+- Refer module from internet (Open-source) git repo for installing eksctl. You can see yaml file to install eksctl. So write a yaml file.
+- How to create cluser ? "eksctl create cluster --config-file=name.yaml"  Here workstation is creating ekscluster, we need to give access to aws console, so use "aws configure" Now it will take time to create ekscluster like atleast 20min.
+- What is mean by spot instances ?
+
 ### Session-55
 ### Session-56
 ### Session-57
