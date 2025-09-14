@@ -1182,6 +1182,35 @@
 - Instead of installing docker & docker compose manually, siva has created one shellscript to install automatically "curl <raw_url> | sudo bash"
 
 ### Session-53
+- What is Docker Host ? Nothing but a server which we created for Docker.
+- What are the disadvantages in Docker ?
+- What is Orchestrator ? Kubernetes is the popular container orchestrator tool.
+- Even though Docker is used for building the images & running the containers, but why we use Kubernetes to run & manage the containers ?
+- In VS we write Dockerfiles & Kubernetes manifest files ---> Push to Github ---> We pull Dockerfiles & Manifest files in DockerHost (Workstation) ---> We build images in DockerHost ---> Save it in Dockerhub ---> We push manifest files to Kubernetes using kubectl command which will be there in DockerHost.
+- Kubernetes is also same as Master-Node architecture which we know in jenkins, request will first come to Kubernetes and this K8 will asign work to nodes. If small project we can use one Kubernetes-Master, if big project we need Kubernetes Master-Node architecture.
+- So first we are practicing Kubernetes-Master (Same as Jenkins-Master alone) we call it as "minikube" is a single node cluster master & node are same.
+- We have a module in internet open-source git repo just type "Terraform aws minikube" developed by scholz.
+- Go through the code of Terraform-aws-minikube in VS. In this we created minikube cluster & workstation. In workstation (DockerHost) we setup a bootstrap to install docker & docker-compose.
+- A kubeconfig file is created in minikube cluster. To connect to minikube cluster, we should have kubectl command. This command is automatically installed in minikube cluster. Kubectl will check automatically in home folder. So we should create a folder ".kube" in home location & copy the kubeconfig file (From gitbash or from server using cat command) "cp kubeconfig .kube/config" renaming should be config not kubeconfig.
+- After creating workstation & minikube cluster, how to connect to minikube from workstation ? Install kubectl for centos & give execution access in workstation server. Move that kubectl into /usr/local/bin/kubectl
+- To connect to server, you must have authentication file (Kubeconfig), so create one folder ".kube" in home location in server & paste the authentication file inside this folder. You can copy form gitbash also using cat command. Vim config (Name should be config)
+- What are Kubernetes resources ? Namespaces, Pods,
+- In Docker, we call container but in Kubernetes we call Pod.
+- Difference between Container & Pod ?
+- Interview question ? Write a simple Pod definition ?
+- What is Sidecar in Pod ?  
+
+
+
+
+
+
+
+
+
+
+
+
 ### Session-54
 ### Session-55
 ### Session-56
