@@ -1226,13 +1226,14 @@
 - What is mean by spot instances ?
 
 ### Session-55
-- What is resource block in containers ? What is soft limit & hard limit in resource block in containers ?
-- Write a resource definition of Pod ?
-- Where to store configuration and secrets in kubernetes ?
-- To store the configuration we have "ConfigMap" in kubernetes. Nothing but a key-value pair. So create 1 ConfigMap. How to refer this Env variable ? We use a block "valueFrom" and also we have "envFrom" what is this ?
-- Secrets in kubernetes is also a key-value pair. We can refer using "secretRef"
-- We have 3 types of services in kubernetes ? ClusterIP, Nordport, Loadbalancers.
-- If you want Pod to Pod communication you must use service. That means we should attach Pod to Service.
+- What is resource block in containers ? What is Soft limit and Hard limit in resource block in containers ?
+- Write a resource definition of a Pod with resource block ?
+- Where to store the configuration and secrets in kubernetes ? Applications should fetch the configuration and secrets at the run time. 
+- To store the configuration in kubernetes, we have 'ConfigMap' in kubernetes. Nothing but a key-value pair. So create 1 ConfigMap.
+- How to define key-value pair in Pod ? Set 'env:' variable, use 'valueFrom' and 'configMapkeyRef' also we have 'envFrom' what is this ? Nothing but referring configMap directly in Pod.
+- Secrets in kubernetes is also a key-value pair for storing secrets. We can refer secrets using 'secretRef'
+- What are 'Services' in kubernetes ? For example we are running Pods but we are not able to browse them. For example we run nginx Pod, how to browse that Pod ? So we have 3 types of Services in kubernetes ClusterIP, Nordport, Load balancer. If you want to expose Pods to other applications (or) outside world we must use Services, Load balancing & Service mesh.
+- If you want Pod to Pod communication you must use Service. That means we should attach Pod to Service.
 - What if we want multiple Pods ? We can write another Pod definition also but it not good, So we have "ReplicaSet"
 - What is Deployment in Sets ?
 
