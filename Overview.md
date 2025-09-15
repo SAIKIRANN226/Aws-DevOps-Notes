@@ -1233,6 +1233,10 @@
 - What is Deployment in Sets ?
 
 ### Session-56
+- We have only 2 options. For example if you want to install windows 11 in your laptop, you must have a physical pendrive and it should have windows 11 software to install in your laptop, then we will give lot of configuration options while installing. So similarly we build image & push to the dockerhub right ? Then we write manifest files & inform kubernetes how to run the image.
+- Configuring roboshop project into kubernetes.
+- What is image pull policy in kubernetes ? Should mention as Always
+- 
 ### Session-57
 ### Session-58
 ### Session-59
