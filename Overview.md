@@ -1191,24 +1191,29 @@
 - So first we are practicing Kubernetes-Master (Same as Jenkins-Master alone) we call it as "Minikube" is a single node cluster Master & Node are same.
 - We have a module in internet (Open-source) a git repo just type "Terraform aws minikube" developed by scholz.
 - Go through the code of Terraform-aws-minikube in VS. In this we created minikube cluster & workstation. In workstation (DockerHost) we setup a bootstrap to install Docker & Docker-compose.
-- A "kubeconfig" file is created in minikube cluster. To connect to minikube cluster, we should have kubectl command. This command will check kubeconfig file in home folder because it uses this file to determine how to connect to a Minikube or Kubernetes cluster. So we should create a folder ".kube" in home location & copy the kubeconfig file (From gitbash or from server using cat command) "cp kubeconfig .kube/config" renaming should be config not kubeconfig.
-- After creating workstation & minikube cluster, how to connect to minikube from workstation ? Install kubectl for centos & give execution access in workstation server (DockerHost). Move that kubectl into /usr/local/bin/kubectl
-- To connect to kubernetes cluster server (Minikube) you must have authentication file (Kubeconfig), so create one folder ".kube" in home location in DockerHost server & paste the authentication file inside this folder. You can copy form gitbash also using cat command. Vim config (Name should be config)
-- What are Kubernetes resources ? Namespaces, Pods,
-- Every resource is in yaml format with a basic simple syntax. Every resource will start with apiVersion. When you push to github & pull in server then how to run that file ? kubectl apply -f namespace.yaml ; kubectl apply -f namespace.yaml
+- A 'kubeconfig' file is created in minikube cluster. This file contains authentication & cluster information how to connect to minikube cluster. So to connect kubernetes cluster we should have 'kubectl' command. This command will check kubeconfig file in home folder because it uses kubeconfig file to determine how to connect to a Minikube or Kubernetes cluster. So we should create a folder '.kube' in home location & copy the kubeconfig file (From gitbash or from server using cat command) then 'cp kubeconfig .kube/config' renaming should be config not kubeconfig.
+- After creating Workstation & Minikube cluster, how to connect to Minikube from Workstation ? Install kubectl for centos & give execution access in workstation server (DockerHost). Move that kubectl into /usr/local/bin/kubectl
+- To connect to kubernetes cluster server (Minikube) you must have authentication file (Kubeconfig), so create one folder '.kube' in home location in DockerHost server & paste the authentication file inside this folder. You can copy form gitbash also using cat command. Vim config (Name should be config)
+- What are Kubernetes resources ?
+- Workload resources (Pods, Deployments, StatefulSets)
+- Networking resources (Services, NetworkPolicies)
+- Storage & config (ConfigMaps, Secrets)
+- Cluster-level resources (Namespaces, Nodes)
+- Every resource is in yaml format with a basic simple syntax. Every resource will start with apiVersion. When you push to github & pull in server then how to run that file ? kubectl create -f <file-name>.yaml ; kubectl apply -f <file-name>.yaml ; kubectl delete -f <file-name>.yaml ; kubectl get namespaces (ns)
 - What is the difference between create & apply ?
-- In Docker, we call container but in Kubernetes we call Pod. Pod can contain multiple containers.
+- In Docker, we call container but in Kubernetes we call Pod (It is the smallest deployable unit in kubernetes). Pod can contain multiple containers.
 - Difference between Container & Pod ?
-- How we created docker container ? docker run -d -p 80:80 -v nginx:/usr/share/nginx/html --name roboshop-nginx nginx (or) using compose right ?
-- Then how to create Pod in kubernetes ? We will create a manifest file to create the Pods. Search in kubernetes.io for Pods creation there you can see yaml syntax to create Pods.
+- How we created docker container ? Using docker command (or) docker-compose
+- Then how to create Pod in kubernetes ? We will write a manifest file to create the Pods. Search in kubernetes.io for Pods creation, there you can see simple yaml syntax to create Pods.
 - If you dont give namespace, then Pod will be created in default namespace.
 - kubectl get pods ---> Will fetch pods from the default namespace, if they are available.
-- kubectl get pods -n roboshop ---> Pods will be fetched from the roboshop namespace.
+- kubectl get pods -n roboshop ---> Pods will be fetched from the roboshop namespace only.
 - Interview question ? Write a simple Pod definition ?
-- What is Sidecar, proxy in Pod ?
-- How to login to any container in kubernetes cluster ? kubectl exec -it -c --bash
+- What is logging solution ELK ? 
+- What is Sidecar, proxy in Pod ? Proxy means request will first come to sidecar and then main container will evaluate from where the request has come and then give reply.
+- How to login to any container in kubernetes cluster ? kubectl exec -it <file-name-without.yaml> -c <container-name> --bash
 - To get full information of that pod ? kubectl describe pod
-- Difference between labels and annotations ?
+- Difference between labels and annotations ? Its a key-value pair. Labels are used to select (or) to attach with other resources.
 
 ### Session-54
 - We write Dockerfiles & manifest files in VS ---> Push to the github ---> We create workstation (DockerHost) in aws, we install Docker, kubectl, eksctl ---> We pull Dockerfiles & manifest files in DockerHost ---> We push to dockerhub ---> Using eksctl command we create Amazon EKS kubernetes cluster ---> EkS have multiple EC2 instances (or) nodes (or) Spot Node group.
