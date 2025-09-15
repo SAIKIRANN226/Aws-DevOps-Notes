@@ -1218,10 +1218,20 @@
 - So create 1 workstation & install all client packages like docker, docker-compose, kubectl, eksctl. Nothing but creating 1 server for EKS kubernetes cluster login in superputty and check "kubectl version" and "eksctl version"
 - From this server, now create EKS kubernetes cluster, it will take time like 20min
 - Refer module from internet (Open-source) git repo for installing eksctl. You can see yaml file to install eksctl. So write a yaml file.
-- How to create cluser ? "eksctl create cluster --config-file=name.yaml"  Here workstation is creating ekscluster, we need to give access to aws console, so use "aws configure" Now it will take time to create ekscluster like atleast 20min.
+- How to create cluser ? "eksctl create cluster --config-file=name.yaml" Here workstation is creating ekscluster, we need to give access to aws console, use "aws configure" Now it will take time to create ekscluster like atleast 20min.
 - What is mean by spot instances ?
 
 ### Session-55
+- What is resource block in containers ? What is soft limit & hard limit in resource block in containers ?
+- Write a resource definition of Pod ?
+- Where to store configuration and secrets in kubernetes ?
+- To store the configuration we have "ConfigMap" in kubernetes. Nothing but a key-value pair. So create 1 ConfigMap. How to refer this Env variable ? We use a block "valueFrom" and also we have "envFrom" what is this ?
+- Secrets in kubernetes is also a key-value pair. We can refer using "secretRef"
+- We have 3 types of services in kubernetes ? ClusterIP, Nordport, Loadbalancers.
+- If you want Pod to Pod communication you must use service. That means we should attach Pod to Service.
+- What if we want multiple Pods ? We can write another Pod definition also but it not good, So we have "ReplicaSet"
+- What is Deployment in Sets ?
+
 ### Session-56
 ### Session-57
 ### Session-58
