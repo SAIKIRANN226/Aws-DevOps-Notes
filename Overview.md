@@ -1243,11 +1243,14 @@
 - What is image pull policy in kubernetes ? Should mention as Always
 - 
 ### Session-57
-- What are Stateful & Stateless applications ?
+- What are Stateful and Stateless applications ?
 - What are Internal volumes ? emptyDir, hostpath
 - What are External volumes ? Static provisioning, Dynamic provisioning
 - 
 ### Session-58
+- We have Hard disk and Cloud drives, what is the difference ? HD sits near to computer, Cloud drives are network drives like google drive, icloud etc.
+- External volumes 
+- We keep storage external (Outside) 
 ### Session-59
 ### Session-60
 ### Session-61
