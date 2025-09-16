@@ -1243,6 +1243,10 @@
 - What is image pull policy in kubernetes ? Should mention as Always
 - 
 ### Session-57
+- What are Stateful & Stateless applications ?
+- What are Internal volumes ? emptyDir, hostpath
+- What are External volumes ? Static provisioning, Dynamic provisioning
+- 
 ### Session-58
 ### Session-59
 ### Session-60
