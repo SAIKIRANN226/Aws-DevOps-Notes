@@ -1254,8 +1254,23 @@
 
 ### Session-58
 - What is the difference between Hard disk and Cloud drives ? HD sits near to the computer, Cloud drives are network drives like google drive, icloud etc.
-- External volumes 
-- We keep storage external (Outside) 
+- EBS (Elastic block store, created outside like HD) ; EFS (Elastic file system, like google drive)
+- External volumes are permanent. Static provisioning & Dynamic provisioning.
+- Static provisioning ---> We have to create storage by ourself. First we need to create storage this will create by storage admin or K8 admin. Create EBS volume in aws with 10GB ini same zone where the server is created. Next make this volume available to k8 cluster and also install drivers like aws-ebs-csi in server. A proper role (EC2 full access) should be attached to ec2 instance to access EBS.
+- What are kubernetes resources (or) objects ?
+- What is persistent volume in kubernetes ? It represents the external storage why this ? Because as a K8 admin you dont have access to storage space, so persistent volume will represent external storage, So we do operations on persistent volume (or) storage. We also have PVC (Persistent volume claim) Pods should request volume through PVC, it is like a request to PV (Persistent volume)
+- Pods connect to VPC ---> VPC connects to PV.
+- We have restrictions on volumes like readwriteonce, readwritemany, EBS volume should have readwriteonce access only once, because it is HD.
+- If Pods wants some storage they should request to PV through PVC.
+- When you apply, where your Pod is getting created ? In any Node. Where should that Pod is created is controlled by using 'Node selectors' we can labels the nodes also. We also have 'Affinity & Anti-affinity' that means we can decide Pod should not go to that particular nodes.
+- What is Dynamic provisioning ? Volume should be created automatically. In static we created external volume EBS, PV by ourself right, so in this Dynamic we have a object called 'StorageClass' that will automatically create external storage EBS, PV aswel based on the request and also install drivers and give role to that EC2 instance.
+- If networking is there then it is VPC resource, if networking is not there then it NON-VPC resource.
+- If Pod is created inside the namespace resource, since storage class is cluster level resource, admin should created this, so EBS will have storageClass cluster wide.
+- Go through the concept https://github.com/sivadevopsdaws74s/k8-resources/tree/master/storage
+- What is reclaim policy ? If you delete Pod, underline volume should also be deleted.
+- Next EFS, create file system in aws console. It will be more size like 47TB. EFS will work on NFS (Network file system) port number of NFS is 2049, so edit the security group so that it will allow port 2049 from worker nodes and install EFS drivers. Next create PV, PVC and use PVC in the Pod.
+- What are access points ? So give AmazonElasticfileSystemFullAccess in permissions.
+  
 ### Session-59
 ### Session-60
 ### Session-61
