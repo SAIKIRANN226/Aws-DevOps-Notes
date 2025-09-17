@@ -1244,11 +1244,16 @@
 - 
 ### Session-57
 - What are Stateful and Stateless applications ?
-- What are Internal volumes ? emptyDir, hostpath
-- What are External volumes ? Static provisioning, Dynamic provisioning
-- 
+- EBS ---> Hardk disk ; EFS ---> Google drive etc.
+- For example we have EKS cluster and Worker nodes. Where the data will be stored ? In worker nodes only. Here Nodes and Pods are ephemeral that means temporary. Sotring data in Nodes are risk because Nodes are temporary. So we should have some external storage (Like Hard disk, we use which is outside the laptop) That means we take separate storage interface, we mount this storage (This can be EBS/EFS) to EKS cluster, so here data will be stored in storage not in worker nodes.
+- Kubernetes volumes are of two types Internal volumes & External volumes.
+- What are Internal volumes ? Stores data in worker nodes. Internal volumes are ephemeral (Temporary) but we have usecases like 'emptyDir' and 'hostpath'
+- What does 'emptyDir' do in kubernetes ?
+- What does 'hostpath' and 'DaemonSet' do in kubernetes ?
+- External volumes are 2 types Static provisioning & Dynamic provisioning.
+
 ### Session-58
-- We have Hard disk and Cloud drives, what is the difference ? HD sits near to computer, Cloud drives are network drives like google drive, icloud etc.
+- What is the difference between Hard disk and Cloud drives ? HD sits near to the computer, Cloud drives are network drives like google drive, icloud etc.
 - External volumes 
 - We keep storage external (Outside) 
 ### Session-59
