@@ -74,76 +74,55 @@
 - systemctl disable nginx ---> Will disable nginx.
 - What is Network managment in linux ? How do you check port and process running ? netstat -lntp
 - What are the general trouble shooting process you do ?
-- How to give admin access (or) any other access to linux users ? Example two types of users. Linux admin
-  team ---> Full admin access ; DevOps team ---> Limited sudo access
-- Generally to give sudo access we have one file "/etc/sudoers" So "vim /etc/sudoers" It is not recommended
-  to open this file because it is crucial so linux has given one command to open then file safely that is
-  "visudo"
-- Ramesh ---> Give Admin full access, under wheelgroup & enter %admin ALL=(ALL) ALL
+- How to give admin access (or) any other access to linux users ? Example two types of users. Linux admin team should have Full admin access ; DevOps team should have Limited sudo access.
+- Generally to give sudo access we have one file 'vim /etc/sudoers' It is not recommended to open this file because it is crucial, so linux has given one command to open then file safely that is 'visudo'
+- Ramesh ---> Give Admin full access, under wheelgroup and enter %admin ALL=(ALL) ALL
 - Suresh limited access ---> %devops ALL=(ALL) /usr/bin/yum,/usr/bin/systemctl
-- For ramesh we have given full admin access but for suresh we can give only few limited access like "yum"
-  command (To know where this command is installed "which yum" (or) "which systemctl"
-- Everytime opening "visudo" is also a risky. Linux has given one location "vim /etc/sudoers.d"
+- For ramesh we have given full admin access but for suresh we can give only few limited access like 'yum' command (To know where this command is installed 'which yum' (or) 'which systemctl' (or) 'which <command-name>'
+- Everytime opening 'visudo' is also a risky. Linux has given one location 'vim /etc/sudoers.d'
 - vim /etc/sudoers.d/DevOps (Created folder) --> %devops ALL=(ALL) /usr/bin/yum,/usr/bin/systemctl
 - vim /etc/sudoers.d/Admin (Created folder) --> %admin ALL=(ALL) ALL
-- What is 3Tier architecture ?
+- What is 3Tier architecture ? Frontend, Backend, Database servers
 - In previous session how do we connected to servers in gitbash ? Then how putty will connect ?
-- In gitbash we call Privatekey as ".pem" but in putty we call it as ".ppk" (Putty privatekey)
-- How to create this putty private key (.ppk) ? Load .pem file in puttygen save with .ppk extension
+- In gitbash we call Privatekey as '.pem' but in putty we call it as '.ppk' (Putty privatekey)
+- How to create this putty private key ? Load '.pem' file in puttygen save with .ppk extension
 - Open putty --> connection --> ssh --> auth --> credentials --> load your saved .ppk file
-- Connection --> data --> username (ec2-user) --> then go to session & save (Important)
-- Create a server in aws & take the IP and paste it in putty (Hostname) click on load to connect.
-- To change the font open putty --> appearence --> change & then save to make effect in superputty.
+- Connection --> data --> username (ec2-user) --> then go to session and save (Important)
+- Create a server in AWS and take the IP, paste it in putty (Hostname) click on load to connect.
+- To change the font open putty --> appearence --> change and then save to make effect in superputty.
 - What is the Linux file system structure ?
-- When putty stucks (or) unable to enter any command then open putty first load your session then go to
-  connection ---> Give 30 in seconds then go to session & save, generally we have value 0 you need to give
-  any value like 30, that means every 30 seconds connection will be alive, you can give max 300.
-- What is Inode ? Inode is the representation of file & folder inside the memory, it is a number. How to
-  get that number ? ls -li
-- What is Symlink & Hardlink ? Symlink will point to the file not to the inode while Hardlink will point
-  directly to the inode not to the file.
-- How to create a Symlink for a file ? First create a file hello & add content in it using cat command, then
-  create symlinnk "ln -s /home/ec2-user/hello /tmp/hello-soft" We can give obsolute path or relative path.
-- How to create a Hardlink for a file ? "ln /home/ec2-user/hello /tmp/hello-hard"
-- We use nginx as front-end servers because it can handle high traffic, it is used as reverse proxy.
-- IIS is only used for windows based applications.
-- We have "winscp" for file transfer, it is a mini windows in linux server.
+- When putty stucks (or) unable to enter any command, then open putty first load your session then go to connection and give 30 in seconds then go to session and save, generally we have value 0 you need to give any value like 30, that means every 30 seconds connection will be alive, you can give max 300.
+- What is Inode ? For example we have a Hard Disk and inside the HD, we have some memory locations like a number, when you create file in HD, it will be saved in any of the memory location in HD, this file will point to memory location (A number) that is nothing but Inode. Inode is the representation of file and folder inside the memory, it is a number. How to get that number ? ls -li
+- What is Symlink and Hardlink ? Symlink will point to the actual file location not to the inode, while Hardlink will point directly to the inode not to the actual file location. Symlink has its own Inode.
+- How to create a Symlink for a file ? First create a file hello and add content in it using cat command, then create symlinnk 'ln -s /home/ec2-user/hello /tmp/hello-soft' we can give obsolute path or relative path.
+- How to create a Hardlink for a file ? 'ln /home/ec2-user/hello /tmp/hello-hard'
+- We use nginx as front-end servers because it can handle high traffic, it is used as reverse proxy. IIS is only used for windows based applications.
+- We have 'winscp' for file transfer, it is a mini windows in linux server.
 - Generally frontend servers called as HTTP servers on port 80. Hosts html, java based applications.
 - Backend is also HTTP servers but on port 8080. Hosts like tomcat, jboss, .net, python etc.
-- What is the difference between PublicIP vs PrivateIP ? How the Modem will provide PrivateIPs to the
-  internal systems (or) to laptops ? Using NAT
+- What is the difference between PublicIP vs PrivateIP ? How the Modem will provide PrivateIPs to the internal systems (or) to laptops ? Using NAT
 - What is NAT (Network address translation) ?
 - What is Fibre exchange points ?
 - What is Enterprise archive file ? Servlets (DB) ; JSPS (UI) ---> Monolithic
-- What is Monolithic vs Microservices ? Monolithic means Single unified application, easy to start, hard to
-  scale. Microservices will Split into independent services, scalable & flexible, but more complex.
-- Frontend (80) ---> HTML, JS, AngularJS, Java applications.
-- Backend (8080) ---> Databases like mysql, postgre etc.
-- To connect from one server to another server "telnet <IP> <port_number>"
-- If telnet is not installed ---> sudo yum install telnet -y ; netstat -lntp shows all TCP ports currently
-  being listened on, along with the process using each port. I use it in DevOps to check whether services
-  like Nginx, MySQL, or application servers are actually listening on the expected ports.
-- To check if a command is installed or not ? Use "which" usage is "which telnet" "which yum" etc.
-- If you type "ipconfig" in cmd you will get all details, IPv4 is my PrivateIP, IP under default gateway is
-  modem. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32
-  IPaddresses. If we allocate all these, we get problems. So they brought "NAT" Network Address Translation.
-  However latency will be slow that is nothing but time to respond will be somewhat slow.
-- Frontend (WEB) & Backend (API) are Stateless ; DB is Statefull.
-- WEB & API will work only when DB is in existence. Example of CRUD over facebook.
+- What is Monolithic vs Microservices ? Monolithic means Single unified application, easy to start, hard to scale. Microservices will Split into independent services, scalable and flexible, but more complex.
+- To connect from one server to another server 'telnet <IP> <port_number>'
+- If telnet is not installed ---> sudo yum install telnet -y ; netstat -lntp shows all TCP ports currently being listened on, along with the process using each port. I use it in DevOps to check whether services like Nginx, MySQL, or application servers are actually listening on the expected ports.
+- If you type 'ipconfig' in cmd you will get all details, IPv4 is my PrivateIP, IP under default gateway is modem. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32 IPaddresses. If we allocate all these, we get problems. So they brought 'NAT' Network Address Translation. However latency will be slow that is nothing but time to respond will be somewhat slow.
+- Frontend (WEB) and Backend (API) are Stateless ; DB is Statefull.
+- WEB and API will work only when DB is in existence. Example of CRUD over facebook.
 - We are using web servers as nginx on HTTP protocol only, it can also use HTTPS.
-- Installing packages using yum & dnf. But dnf is preferred while configuring project manually because it
-  consumes less memory when compared to yum. Yum is used in automation like shellscripting.
-- Location of nginx configuration "cd /etc/nginx/nginx.conf"
-- Location of the default content of the nginx "cd usr/share/nginx/html/"
-- What is Forward proxy & Reverse proxy ? Nginx is used as reverse proxy.
-- Reverse proxy is mainly used for Load balancers & Server anonymous.
-- Location of reverse proxy configuration "vim /etc/nginx/default.d/roboshop.conf"
+- Installing packages using yum and dnf. But dnf is preferred while configuring project manually because it consumes less memory when compared to yum. Yum is used in automation like shellscripting.
+- Location of nginx configuration 'cd /etc/nginx/nginx.conf'
+- Location of the default content of the nginx 'cd usr/share/nginx/html/'
+- What is Forward proxy and Reverse proxy ? Nginx is used as reverse proxy.
+- Reverse proxy is mainly used for Load balancers and Server anonymous.
+- Location of reverse proxy configuration 'vim /etc/nginx/default.d/roboshop.conf'
 - What are the famous HTTP status codes ?
 - Configure the Roboshop project manually ?
 - What is cache (Redis) server ? Example of downloaded movie by 1 user.
-- What is Domain name system (DNS) & how do you register your domain ?
+- What is Domain name system (DNS) and how do you register your domain ?
 - Steps to install any application in linux ?
-- What is the difference between Synchronous & Asynchronous in networking ?
+- What is the difference between Synchronous and Asynchronous in networking ?
 
 ### Session-12
 - Why we use SSH based authentication to connect to github accounts ?
