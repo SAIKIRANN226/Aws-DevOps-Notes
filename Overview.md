@@ -1270,9 +1270,29 @@
 - What is reclaim policy ? If you delete Pod, underline volume should also be deleted.
 - Next EFS, create file system in aws console. It will be more size like 47TB. EFS will work on NFS (Network file system) port number of NFS is 2049, so edit the security group so that it will allow port 2049 from worker nodes and install EFS drivers. Next create PV, PVC and use PVC in the Pod.
 - What are access points ? So give AmazonElasticfileSystemFullAccess in permissions.
-  
+
 ### Session-59
+- Helm charts purpose is to Templatise the kubernetes manifest files and package manager for kubernetes.
+- Basically we do only two steps one is Build the image or pull the image if it is public and another one is Configure the image through manifest files to run Pods.
+- Install Helm in server using commands from internet.
+- Chart.yaml and templates folder are mandatory to templatise the manifest files.
+- Go through the code of Helm-charts in VS.
+- How to run then ? helm install nginx .
+- We use values in 'values.yaml' file to templatise in Helm root folder.
+- How to use that value which we kept in values.yaml ? {{ .Values.deployment(anyname).replicas }}
+- Upgrade ? helm upgrade nginx .
+- Another purpose is 'Package manager' If image is already in Public, we dont need to build the image, next helm have some public repos to configure the image through manifest files.
+- What are Helm repos ?
+- What is Statefulset ? Used to create stateful applications in kubernetes. Nodes inside stateful applications should have static host names to communicate with other nodes. Stateful applications should follow orderly provisioning as well as terminate.
+- What is Deployment ? Used to create stateless applications in kubernetes.
+- What is the difference between Statefulset and Deployment ? Popular interview question.
+- What is Headless service ? Is used for stateful applications, when you hit the headless service, instead of getting single service IP address, you will get the all Pods IP address in the cluster, so that it is easy for 1 replica to communicate with other replica set. In database cluster 1 replica should send data to other replica, we should use headless service.
+- Now configure mongodb in statefulset using helm. We keep Chart.yaml, templates folder, values.yaml are mandatory.
+  
 ### Session-60
+- Continuation of configuring other components.
+- What is RBAC ?
+
 ### Session-61
 ### Session-62
 ### Session-63
