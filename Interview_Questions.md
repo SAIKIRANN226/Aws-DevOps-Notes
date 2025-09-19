@@ -1,19 +1,25 @@
 ### What you know about Git and Linux ?
-- Git commands and Linux commands.
+- Git commands and Linux commands. https://dzone.com/articles/top-35-git-commands-with-examples-and-bonus
 - Permissions in linux.
 - User management
 - Process management
 - Package management
 - Service management
-- Giving admin access or limited access to the users
+- Giving admin access or limited access to the users.
+
+### Top Git commands ?
+git config, git version, git init, git clone, git add, git commit, git status, git branch, git branch <name>, git branch -d <name>, git checkout <branch_name>, git remote add origin <url>, git push, git fetch, git pull, git stash, git log, git log --all, git show <commit_id>, git rm <file_name>, git merge <branch_name>, git rebase, git diff
+
+### Top Linux commands ?
+ls, cd, cd .., touch, mkdir, cat, vim, ls -l, ls -lr, ls -lt, ls -ltr, ls -la etc.
 
 ### How do you check the size of a folder in linux ?
-du -sh <folder-path>
+du -sh
 
-### How to check if a port is open ?
+### How to check if a port is open and How do you find which process is using a particular port ?
 netstat -lntp
 
-### How do you check running logs ?
+### How do you check running logs (or) monitor logs on a Linux server in real-time ?
 tail -f /path/to/logs
 
 ### What is swap memory in linux ?
@@ -23,10 +29,10 @@ Swap memory is extra space in your computer hard drive that works like a backup 
 ifconfig
 
 ### What is the purpose of a chmod ?
-Is used to change the permissions of a file or folder. We can set permissions to RWX permissions to owner, group and others
+Is used to change the permissions of a file or folder. We can set permissions to RWX permissions to owner, group and others.
 
 ### How to reboot the server when reboot command is not responding ?
-We can use the shutdown command with the reboot option ---> "sudo shutdown -r -f now"
+We can use the shutdown command with the reboot option ---> 'sudo shutdown -r -f now'
 
 ### What is the difference between Git and Github ?
 Git is a distributed version control used to track code changes in local and manage the versions. Github is a cloud based platform we can hosts our Git repositories, Providing collaboration features like PR, issue tracking etc.
@@ -35,9 +41,9 @@ Git is a distributed version control used to track code changes in local and man
 git merge combines two branches and creating a new merge commit-id and also preserving the history, so that we can track who did what changes. It is used for better collaboration. rebase moves on top of another branch which creates a linear history.
 
 ### How do you resolve a merge conflict in Git ?
-- Identify the conflicted files "git status"
+- Identify the conflicted files first 'git status'
 - Open files and manually resolve conflicts (Look for <<<<<< markers).
-- Mark as resolved "git add <file>"
+- Mark as resolved 'git add <file>'
 - Commit "git commit -m "Resolved merge conflict"
 
 ### What is the difference between fork and clone in GitHub ?
@@ -45,31 +51,23 @@ git merge combines two branches and creating a new merge commit-id and also pres
 - Clone: Downloads a repository to your local machine to start development.
 
 ### How can you revert a commit that has already been pushed to a shared branch ?
-git revert <commit_hash>
+git revert <commit_id>
 
-### What are GitHub Actions, and how have you used them ?
-- GitHub Actions is a CI/CD tool that automates workflows on GitHub (Build, Test, Deploy).
-- Example: Automating code build and deployment to AWS S3 or EC2 on push or pull request events.
+### What are GitHub Actions ?
+No we dint used Github actions, we used Jenkins as CICD tool.
 
 ### How do you check disk usage on a Linux server ?
 df -hT
 
-### How do you check the currently running processes and resource usage ?
-top ; ps -ef ; free -h
+### How do you check the current running processes and resource usage ?
+By using top, ps -ef, free -h, commands.
 
 ### Explain the difference between cron and at ?
-- cron: Schedules recurring jobs (Daily backups)
-- at: Schedules a one-time job (Run a script tomorrow at 2 PM)
-
-### How do you find which process is using a particular port ?
-netstat -lntp
+- cron is used to schedules for daily backups, while 'at' will schedules a one time job (Run a script tomorrow at 2 PM)
 
 ### What is the difference between Symlink and Hardlink ?
-- Hard link: Points directly to file inode (Memory location, its a number) in hard disk. File data exists even if original is deleted.
 - Symlink: Points to file path. Becomes broken if original is deleted.
-
-### How would you monitor logs on a Linux server in real-time ?
-tail -f /var/log/syslog  
+- Hard link Points directly to file inode (Memory location, its a number) in hard disk. File data exists even if original is deleted.
 
 ### How do you manage services in Linux (Start, Stop, Restart) ?
 - systemctl start <service>
@@ -84,19 +82,15 @@ tail -f /var/log/syslog
 - Group: read, execute
 - Others: read
 
-### How do you check if a process is consuming high CPU or memory ?
-- top → Sort by %CPU or %MEM.
-- ps aux --sort=-%cpu | head -n 10 → Top 10 CPU-consuming processes.
-- ps aux --sort=-%mem | head -n 10 → Top 10 memory-consuming processes.
-
 ### How to kill a process ?
-- kill -9 PID ---> Force kill
 - kill PID
+- kill -9 PID ---> Force kill
 
 ### Have you worked on any automation scripts recently ?
 Yes we have few applications running on VM, i was asked to write resources monitoring scripts, so i wrote for Disk Utilization. I developed this script and scheduled through crontab for every 15 min and i configured it to send alerts in email and team channels and also i wrote log cleanup script, since our application creates logs every day in our servers, for example "user-05-06-2024.log"
 
 ### Can you write a simple shellscript to list all S3 buckets ?
+
     #!/bin/bash
     R="\e[31m"
     G="\e[32m"
@@ -114,6 +108,7 @@ Yes we have few applications running on VM, i was asked to write resources monit
     echo "Done"
     
 ### How do you write a shellscript to backup a directory everyday ?
+
     #!/bin/bash
     R="\e[31m"
     G="\e[32m"
