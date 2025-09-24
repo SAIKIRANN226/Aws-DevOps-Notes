@@ -1133,41 +1133,53 @@
 - Instead of installing docker & docker compose manually, siva has created one shellscript to install automatically "curl <raw_url> | sudo bash"
 
 ### Session-53
-- What is Docker Host ? Nothing but a server which we created for Docker (or) We can also call "Workstation"
+- What is DockerHost (or) Workstation ? Nothing but a server which we created for Docker.
 - What are the disadvantages in Docker ?
-- What is Orchestrator ? Kubernetes is the most popular container orchestration tool.
-- Even though Docker is used for both building the images & running the containers, but why we use Kubernetes to run & manage the containers ?
-- In VS we write Dockerfiles & Kubernetes manifest files ---> Push to Github ---> We pull Dockerfiles & Manifest files in DockerHost (Workstation) ---> We build images in DockerHost ---> Save it in Dockerhub ---> We push manifest files to Kubernetes using "kubectl" command which need to be installed in DockerHost.
-- Kubernetes is also same as Master-Node architecture which we know in jenkins, request will first come to Kubernetes and this K8 will asign work to nodes. If small project 1 Kubernetes-Master (Minikube) is enough, if big project we need to create Kubernetes Master-Node architecture.
-- So first we are practicing Kubernetes-Master (Same as Jenkins-Master alone) we call it as "Minikube" is a single node cluster Master & Node are same.
-- We have a module in internet (Open-source) a git repo just type "Terraform aws minikube" developed by scholz.
-- Go through the code of Terraform-aws-minikube in VS. In this we created minikube cluster & workstation. In workstation (DockerHost) we setup a bootstrap to install Docker & Docker-compose.
-- A 'kubeconfig' file is created in minikube cluster. This file contains authentication & cluster information how to connect to minikube cluster. So to connect kubernetes cluster we should have 'kubectl' command. This command will check kubeconfig file in home folder because it uses kubeconfig file to determine how to connect to a Minikube or Kubernetes cluster. So we should create a folder '.kube' in home location & copy the kubeconfig file (From gitbash or from server using cat command) then 'cp kubeconfig .kube/config' renaming should be config not kubeconfig.
-- After creating Workstation & Minikube cluster, how to connect to Minikube from Workstation ? Install kubectl for centos & give execution access in workstation server (DockerHost). Move that kubectl into /usr/local/bin/kubectl
-- To connect to kubernetes cluster server (Minikube) you must have authentication file (Kubeconfig), so create one folder '.kube' in home location in DockerHost server & paste the authentication file inside this folder. You can copy form gitbash also using cat command. Vim config (Name should be config)
-- What are Kubernetes resources ?
+- What is Orchestrator ? Kubernetes is the most popular container Orchestration tool.
+- Even though Docker is used for both building the images and running the containers but why we use kubernetes to run and manage the containers ? Because of the above disadvantages in Docker.
+- In VS we write Dockerfiles and Kubernetes manifest files ---> Push to Github ---> We pull Dockerfiles and Manifest files in DockerHost ---> We build images in DockerHost ---> Save it in Dockerhub ---> We push manifest files to Kubernetes using 'kubectl' command which need to be installed in DockerHost.
+- Kubernetes is also same as Master-Node architecture which we know in jenkins, request will first come to Kubernetes-Master and this K8-master will asign work to nodes. If small project 1 Kubernetes-Master (Minikube) is enough, if big project we need to create Kubernetes Master-Node architecture.
+- So first we are practicing Kubernetes-Master (Same as Jenkins-Master alone) we call it as 'Minikube' is a single node cluster, Master and Node are same here.
+- We have a module in internet (Open-source) a git repo just type 'Terraform aws minikube' developed by scholz.
+- Go through the code of 'Terraform-aws-minikube' in VS. In this we created minikube cluster and workstation. In workstation, we setup a bootstrap to install Docker and Docker-compose.
+- A 'kubeconfig' file is created in minikube cluster. This file contains authentication and cluster information like how to connect to minikube cluster etc. So to connect kubernetes cluster we should have 'kubectl' command. This command will check kubeconfig file in home folder because it uses kubeconfig file to determine how to connect to a minikube or kubernetes cluster. So we should create a folder '.kube' in home location and copy the kubeconfig file (From gitbash or from server using cat command) 'cp kubeconfig .kube/config' renaming should be config not kubeconfig. So now we connect to cluster using kubectl only, not using SSH connection.
+- After creating Workstation and Minikube cluster, how to connect to Minikube from Workstation ? Install kubectl for centos and give execution access in workstation server (DockerHost). Move that kubectl into /usr/local/bin/kubectl
+- To connect to kubernetes cluster server (Minikube) you must have authentication file (Kubeconfig), so create one folder '.kube' in home location in DockerHost server and paste the authentication file inside this folder. You can copy form gitbash also using cat command. Vim config (Name should be config)
+- What are Kubernetes resources ? Go through the code of 'K8 resources' in VS.
 - Workload resources (Pods, Deployments, StatefulSets)
 - Networking resources (Services, NetworkPolicies)
-- Storage & config (ConfigMaps, Secrets)
+- Storage and config (ConfigMaps, Secrets)
 - Cluster-level resources (Namespaces, Nodes)
-- Every resource is in yaml format with a basic simple syntax. Every resource will start with apiVersion. When you push to github & pull in server then how to run that file ? kubectl create -f <file-name>.yaml ; kubectl apply -f <file-name>.yaml ; kubectl delete -f <file-name>.yaml ; kubectl get namespaces (ns)
-- What is the difference between create & apply ?
-- In Docker, we call container but in Kubernetes we call Pod (It is the smallest deployable unit in kubernetes). Pod can contain multiple containers.
-- Difference between Container & Pod ?
+- Every resource is in yaml format with a basic simple syntax. Every resource will start with apiVersion. When you push to github and pull in server then how to run that file ? kubectl create -f <file_name>.yaml ; kubectl apply -f <file_name>.yaml ; kubectl delete -f <file_name>.yaml ; kubectl get namespaces ns
+- What is the difference between create and apply ?
+- In Docker, we call container but in Kubernetes, we call Pod (It is the smallest deployable unit in kubernetes). Pod can contain multiple containers.
+- Difference between Container and Pod ?
 - How we created docker container ? Using docker command (or) docker-compose
 - Then how to create Pod in kubernetes ? We will write a manifest file to create the Pods. Search in kubernetes.io for Pods creation, there you can see simple yaml syntax to create Pods.
 - If you dont give namespace, then Pod will be created in default namespace.
 - kubectl get pods ---> Will fetch pods from the default namespace, if they are available.
 - kubectl get pods -n roboshop ---> Pods will be fetched from the roboshop namespace only.
 - Interview question ? Write a simple Pod definition ?
-- What is logging solution ELK ? 
-- What is Sidecar, proxy in Pod ? Proxy means request will first come to sidecar and then main container will evaluate from where the request has come and then give reply.
-- How to login to any container in kubernetes cluster ? kubectl exec -it <file-name-without.yaml> -c <container-name> --bash
-- To get full information of that pod ? kubectl describe pod
+  
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: Saikiran-Pod
+      spec:
+        containers:
+        - name: saikiran-contianer
+          image: nginx
+          ports:
+          - containerPort: 80
+  
+- What is logging solution ELK in kubernetes ? 
+- What is Sidecar and Proxy in Pod ? Proxy means request will first come to sidecar and then main container will evaluate from where the request has come and then give reply.
+- How to login to any container in kubernetes cluster ? kubectl exec -it <file_name_without.yaml> -c <container_name> --bash
+- To get full information of any Pod ? kubectl describe pod
 - Difference between labels and annotations ? Its a key-value pair. Labels are used to select (or) to attach with other resources.
 
 ### Session-54
-- We write Dockerfiles & Manifest files in VS ---> Push to the github ---> We create workstation (DockerHost) in aws, we install Docker, kubectl, eksctl ---> We pull Dockerfiles & Manifest files in DockerHost ---> We push to Dockerhub ---> Using eksctl command it will create Amazon EKS kubernetes cluster. EKS have multiple EC2 instances (or) nodes (or) Spot Node group (Is used to reduce the billing)
+- We write Dockerfiles and Manifest files in VS ---> Push to the github ---> We create workstation (DockerHost) in aws, we install Docker, kubectl, eksctl ---> We pull Dockerfiles & Manifest files in DockerHost ---> We push to Dockerhub ---> Using eksctl command it will create Amazon EKS kubernetes cluster. EKS have multiple EC2 instances (or) nodes (or) Spot Node group (Is used to reduce the billing)
 - We dont have SSH access to EKS kubernetes cluster, it is completely managed by aws, even aws also manage Node group.
 - We need to install eksctl in DockerHost (Workstation) also.
 - So create 1 workstation & install all client packages like docker, docker-compose, kubectl, eksctl and login in superputty and check 'kubectl version' and 'eksctl version'
