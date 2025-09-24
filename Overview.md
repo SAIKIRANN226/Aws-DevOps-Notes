@@ -1177,16 +1177,17 @@
 - How to login to any container in kubernetes cluster ? kubectl exec -it <file_name_without.yaml> -c <container_name> --bash
 - To get full information of any Pod ? kubectl describe pod
 - Difference between labels and annotations ? Its a key-value pair. Labels are used to select (or) to attach with other resources.
+- What is environment in kubernetes ? We can use anywhere.
 
 ### Session-54
-- We write Dockerfiles and Manifest files in VS ---> Push to the github ---> We create workstation (DockerHost) in aws, we install Docker, kubectl, eksctl ---> We pull Dockerfiles & Manifest files in DockerHost ---> We push to Dockerhub ---> Using eksctl command it will create Amazon EKS kubernetes cluster. EKS have multiple EC2 instances (or) nodes (or) Spot Node group (Is used to reduce the billing)
-- We dont have SSH access to EKS kubernetes cluster, it is completely managed by aws, even aws also manage Node group.
-- We need to install eksctl in DockerHost (Workstation) also.
-- So create 1 workstation & install all client packages like docker, docker-compose, kubectl, eksctl and login in superputty and check 'kubectl version' and 'eksctl version'
-- From this server (Workstation), now create EKS kubernetes cluster, it will take time like 20min.
+- We write Dockerfiles and Manifest files in VS ---> Push to the github ---> We create Workstation in AWS and install required client packages like docker, kubectl, eksctl ---> We pull Dockerfiles and Manifest files in DockerHost then we push to Dockerhub using 'eksctl' command it will create Amazon EKS kubernetes cluster. EKS have multiple EC2 instances (or) nodes (or) Spot Node group (Is used to reduce the billing)
+- We dont have SSH access to EKS kubernetes cluster, it is completely managed by AWS, even aws also manage Node group.
+- We need to install 'eksctl' in DockerHost (Workstation) also.
+- So create 1 workstation and install all client packages like docker, docker-compose, kubectl, eksctl and login in superputty then check 'kubectl version' and 'eksctl version'
+- From this server (Workstation) now create EKS kubernetes cluster, it will take time like 20min.
 - Refer module from internet (Open-source) git repo for installing eksctl. You can see yaml file to install eksctl. So write a yaml file.
-- How to create cluser ? 'eksctl create cluster --config-file=<file-name>.yaml' Here workstation is creating ekscluster, we need to give access to aws console, before that 'aws configure' Now it will take time to create ekscluster like atleast 20min.
-- What is mean by spot instances ?
+- How to create cluser ? 'eksctl create cluster --config-file=<file_name>.yaml' Here workstation is creating ekscluster, we need to give access to aws console, before that 'aws configure' Now it will take time to create ekscluster like atleast 20min.
+- What is mean by Spot Instances ?
 
 ### Session-55
 - What is resource block in containers ? What is Soft limit and Hard limit in resource block in containers ?
