@@ -1153,7 +1153,7 @@
 - Cluster-level resources (Namespaces, Nodes)
 - Every resource is in yaml format with a basic simple syntax. Every resource will start with apiVersion. When you push to github and pull in server then how to run that file ? kubectl create -f <file_name>.yaml ; kubectl apply -f <file_name>.yaml ; kubectl delete -f <file_name>.yaml ; kubectl get namespaces ns
 - What is the difference between create and apply ?
-- In Docker, we call container but in Kubernetes, we call Pod (It is the smallest deployable unit in kubernetes). Pod can contain multiple containers.
+- In Docker, we call container but in Kubernetes, we call Pod (It is the smallest deployable unit in kubernetes). Pod can contain multiple containers. Each Pod has separate IP address.
 - How we created docker container ? docker run -d -p 80:80 -v nginx:/usr/share/nginx/html --name roboshop-nginx nginx (or) using compose right ?
 - Then how to create Pod in kubernetes ? We will write a manifest file to create the Pods. Search in kubernetes.io for Pods creation, there you can see simple yaml syntax to create Pods.
 - If you dont give namespace, then Pod will be created in default namespace.
@@ -1177,7 +1177,7 @@
 - How to login to any container in kubernetes cluster ? kubectl exec -it <file_name_without.yaml> -c <container_name> --bash
 - To get full information of any Pod ? kubectl describe pod
 - Difference between labels and annotations ? Its a key-value pair. Labels are used to select (or) to attach with other resources.
-- What is environment in kubernetes ? Its like a key-value pairs, we can use anywhere it is like variables.
+- What is environment in kubernetes ? Its like a key-value pairs, we can use anywhere, it is like variables.
 
 ### Session-54
 - We write Dockerfiles and Manifest files in VS. Push to github. We create workstation in AWS and install all required client packages like docker, kubectl, eksctl. We pull Dockerfiles and Manifest files in DockerHost then we push to Dockerhub then using 'eksctl' command it will create Amazon EKS kubernetes cluster and it will have multiple EC2 instances (or) nodes (or) Spot Node group (Is used to reduce the billing)
