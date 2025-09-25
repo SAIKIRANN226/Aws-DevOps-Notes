@@ -23,3 +23,4 @@ We have more containers in VM and if any of the container got traffic increased 
 - If you want to expose Pods to other application or outside world, we use services and also for Load balancing and service mesh.
 - 3 types of services ClusterIP (Purely internal to kubernetes) NordPort (You can expose to outside world) Load balancers (You can expose to outside world) Services are like route53 records.
 - If you want to connect to Pod, first request should go to service then to Pod. That means if you want to communicate with Pod to Pod communication you must use service. Because Pod is very dynamic, they may be running or terminated we dont know.
+- 
