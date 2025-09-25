@@ -1172,7 +1172,7 @@
           ports:
           - containerPort: 80
   
-- What is logging solution ELK in kubernetes ? 
+- What is logging solution ELK in kubernetes ? Here container should store logs.
 - What is Sidecar and Proxy in Pod ? Proxy means request will first come to sidecar and then main container will evaluate from where the request has come and then give reply.
 - How to login to any container in kubernetes cluster ? kubectl exec -it <file_name_without.yaml> -c <container_name> --bash
 - To get full information of any Pod ? kubectl describe pod
