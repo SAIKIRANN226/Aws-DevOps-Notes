@@ -1138,7 +1138,7 @@
 - What is Orchestrator ? Kubernetes is the most popular container Orchestration tool.
 - Even though Docker is used for both building the images and running the containers but why we use kubernetes to run and manage the containers ? Because of the above disadvantages in Docker.
 - In VS we write Dockerfiles and Kubernetes manifest files ---> Push to Github ---> We pull Dockerfiles and Manifest files in DockerHost ---> We build images in DockerHost ---> Save it in Dockerhub ---> We push manifest files to Kubernetes using 'kubectl' command which need to be installed in DockerHost.
-- Kubernetes is also same as Master-Node architecture which we know in jenkins, request will first come to Kubernetes-Master and this K8-master will asign work to nodes. If small project 1 Kubernetes-Master (Minikube) is enough, if big project we need to create Kubernetes Master-Node architecture.
+- Kubernetes is also same as Master-Node architecture which we know in jenkins, request will first come to Kubernetes Master and this K8-master will asign work to nodes. If small project 1 Kubernetes-Master (Minikube) is enough, if big project we need to create Kubernetes Master-Node architecture.
 - So first we are practicing Kubernetes-Master (Same as Jenkins-Master alone) we call it as 'Minikube' is a single node cluster, Master and Node are same here.
 - We have a module in internet (Open-source) a git repo just type 'Terraform aws minikube' developed by scholz.
 - Go through the code of 'Terraform-aws-minikube' in VS. In this we created minikube cluster and workstation. In workstation, we setup a bootstrap to install Docker and Docker-compose.
@@ -1177,18 +1177,17 @@
 - How to login to any container in kubernetes cluster ? kubectl exec -it <file_name_without.yaml> -c <container_name> --bash
 - To get full information of any Pod ? kubectl describe pod
 - Difference between labels and annotations ? Its a key-value pair. Labels are used to select (or) to attach with other resources.
-- What is environment in kubernetes ? We can use anywhere it is like variables.
+- What is environment in kubernetes ? Its like a key-value pairs, we can use anywhere it is like variables.
 
 ### Session-54
-- We write Dockerfiles and Manifest files in VS. Push to the github. We create Workstation in AWS and install all required client packages like docker, kubectl, eksctl. We pull Dockerfiles and Manifest files in DockerHost then we push to Dockerhub using 'eksctl' command it will create Amazon EKS kubernetes cluster. EKS have multiple EC2 instances (or) nodes (or) Spot Node group (Is used to reduce the billing)
-- 
-- We dont have SSH access to EKS kubernetes cluster, it is completely managed by AWS, even aws also manage Node group.
-- We need to install 'eksctl' in DockerHost (Workstation) also.
+- We write Dockerfiles and Manifest files in VS. Push to github. We create workstation in AWS and install all required client packages like docker, kubectl, eksctl. We pull Dockerfiles and Manifest files in DockerHost then we push to Dockerhub then using 'eksctl' command it will create Amazon EKS kubernetes cluster and it will have multiple EC2 instances (or) nodes (or) Spot Node group (Is used to reduce the billing)
+- We dont have SSH access to EKS kubernetes cluster (Master) it is completely managed by AWS, even aws also manage Node group.
+- We need to install 'eksctl' in DockerHost (Workstation) also. Refer module from internet (Open-source) git repo for installing eksctl. You can see simple yaml file to install eksctl. So write a yaml file in VS.
 - So create 1 workstation and install all client packages like docker, docker-compose, kubectl, eksctl and login in superputty then check 'kubectl version' and 'eksctl version'
-- From this server (Workstation) now create EKS kubernetes cluster, it will take time like 20min.
-- Refer module from internet (Open-source) git repo for installing eksctl. You can see yaml file to install eksctl. So write a yaml file.
-- How to create cluser ? 'eksctl create cluster --config-file=<file_name>.yaml' Here workstation is creating ekscluster, we need to give access to aws console, before that 'aws configure' Now it will take time to create ekscluster like atleast 20min.
-- What is mean by Spot Instances ?
+- Eksctl means 'eks controller' it is the brain of kubernetes cluster.
+- From this server (Workstation) it will now create EKS kubernetes cluster, it will take time like 20min.
+- How to create cluser ? 'eksctl create cluster --config-file=<file_name>.yaml' Here workstation is creating ekscluster, we need to give access to aws console before that 'aws configure' Now it will take time to create ekscluster like atleast 20min.
+- What is mean by Spot Instances in kubernetes cluster ?
 
 ### Session-55
 - What is resource block in containers ? What is Soft limit and Hard limit in resource block in containers ?
