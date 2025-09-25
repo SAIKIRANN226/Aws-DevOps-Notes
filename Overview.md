@@ -1090,6 +1090,18 @@
 - First instruction is FROM. Nothing but we should have a baseOS or image, upon this image only we install everything for application.
 - After cloning repo in server. How to build the created docker image ? docker build -t <URL>/<USERNAME>/<IMAGE>:<VERSION> .
 - Here t --> tags, URL ---> After building the image, we need to push to somewhere right ? Which is dockerhub and URL is "docker.io" similar to dockerhub, we have ECR in aws for that also we have URL, similarly we have Nexus docker registry URL, you can push to any URL.
+
+        apiVersion: v1
+            kind: Pod
+            metadata:
+              name: Saikiran-Pod
+            spec:
+              containers:
+              - name: saikiran-contianer
+                image: nginx
+                ports:
+                - containerPort: 80
+  
 - Incase if you dont want to push to the dockerhub, you can create in local "docker build image:version ."
 - If you want to push from local to dockerhub then just retag it "docker tag image:version url/username/image:version
 - Login to docker then "docker push image:version url/username/image:version"
