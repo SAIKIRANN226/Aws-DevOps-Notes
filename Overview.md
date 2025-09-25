@@ -1186,18 +1186,39 @@
 - So create 1 workstation and install all client packages like docker, docker-compose, kubectl, eksctl and login in superputty then check 'kubectl version' and 'eksctl version'
 - Eksctl means 'eks controller' it is the brain of kubernetes cluster.
 - From this server (Workstation) it will now create EKS kubernetes cluster, it will take time like 20min.
-- How to create cluser ? 'eksctl create cluster --config-file=<file_name>.yaml' Here workstation is creating ekscluster, we need to give access to aws console before that 'aws configure' Now it will take time to create ekscluster like atleast 20min.
+- First clone the eksctl repo in workstation server and then create cluster using 'eksctl create cluster --config-file=<file_name>.yaml' Here workstation is creating ekscluster, we need to give access to aws console before that 'aws configure' Now it will take time to create ekscluster like atleast 20min.
 - What is mean by Spot Instances in kubernetes cluster ?
 
 ### Session-55
-- What is resource block in containers ? What is Soft limit and Hard limit in resource block in containers ?
+- Resources in Pod ? What is resource block in containers ? What is Soft limit and Hard limit in resource block in containers ? Requests are soft limit given when container starts and limits are hard limit.
 - Write a resource definition of a Pod with resource block ?
-- Where to store the configuration and secrets in kubernetes ? Applications should fetch the configuration and secrets at the run time. 
+
+         apiVersion: v1
+              kind: Pod
+              metadata:
+                name: hello-pod
+              spec:
+                containers:
+                - name: hello-pod
+                  image: nginx
+                  ports:
+                  - containerPort: 80
+                  resources:
+                    requests:
+                      cpu: "100m"
+                      memory: "68Mi"
+                    limits:
+                      cpu: "200m"
+                      memory: "128Mi"
+
+- In AWS we have SSM parameter to store configuration and secrets but what about in kubernetes ? Applications should fetch the configuration and secrets at the run time from configuration and secrets storage.
 - To store the configuration in kubernetes, we have 'ConfigMap' in kubernetes. Nothing but a key-value pair. So create 1 ConfigMap.
-- How to define key-value pair in Pod ? Set 'env:' variable, use 'valueFrom' and 'configMapkeyRef' also we have 'envFrom' what is this ? Nothing but referring configMap directly in Pod.
+- How to define above configmap key-value pair in Pod ? Set 'env:' variable, use 'valueFrom' and 'configMapkeyRef' also we have 'envFrom' what is this ? Nothing but referring configMap directly in Pod.
 - Secrets in kubernetes is also a key-value pair for storing secrets. We can refer secrets using 'secretRef'
-- What are 'Services' in kubernetes ? For example we are running Pods but we are not able to browse them. For example we run nginx Pod, how to browse that Pod ? So we have 3 types of Services in kubernetes ClusterIP, Nordport, Load balancer. If you want to expose Pods to other applications (or) outside world we must use Services, Load balancing & Service mesh.
-- If you want Pod to Pod communication you must use Service. That means we should attach Pod to Service.
+- What are 'Services' in kubernetes ? For example we are running Pods but we are not able to browse them. For example we run nginx Pod, how to browse that Pod ? If you want to expose Pods to other applications or outside world and also Load balancing and service mesh (It is like app-alb), we use services.
+- 3 types of services ClusterIP (Purely internal to kubernetes) NordPort (You can expose to outside world) Load balancers (You can expose to outside world) Services are like route53 records.
+- If you want to connect to Pod, first request should go to service then to Pod. That means if you want to communicate with Pod to Pod communication you must use service. Because Pod is very dynamic, they may be running or terminated we dont know.
+- If you want Pod to Pod communication you must use Service. That means we should attach Pod to Service. Because Pod IP is ephemeral (Dynamic) so we are using names as DNS to communicate with Pod to Pod. How do we attach Pod to service ? Using Labels and selectors.
 - What if we want multiple Pods ? We can write another Pod definition also but it not good, So we have "ReplicaSet"
 - What is Deployment in Sets ?
 
