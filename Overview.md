@@ -1223,10 +1223,18 @@
 - What is Deployment in Sets ?
 
 ### Session-56
-- We have only 2 options. For example if you want to install windows 11 in your laptop, you must have a physical pendrive and it should have windows 11 software to install in your laptop, then we will give lot of configuration options while installing. So similarly we build image & push to the dockerhub right ? Then we write manifest files & inform kubernetes how to run the image.
-- Configuring roboshop project into kubernetes.
-- What is image pull policy in kubernetes ? Should mention as Always
-- 
+- We have only 2 options. For example if you want to install windows 11 in your laptop, you must have a physical pendrive and it should have windows 11 software to install in your laptop, then we will give lot of configuration options while installing. So similarly we build image and push to the dockerhub right ? Then we write manifest files and inform kubernetes how to run the image.
+- Configuring roboshop project into kubernetes. Go through the code of 'K8-roboshop' in VS.
+- First we are configuring mongodb in 'K8-roboshop' in this we kept dockerfiles, pull in 'K8-roboshop' server and first login to the docker then build the image and push to the dockerhub using 'docker build -t joindevops/mongodb:v1 .' then push the image using 'docker push joindevops/mongodb:v1'
+- Next create manifest file (Kubernetes file) which resource should we use now ? Pod vs ReplicaSet vs DeploymentSet ? We use DeploymentSet resource. We should mention image pull policy as Always and what this policy ? It will pull the latest image everytime in Pod from the dockerhub. If not kept this as always, application will not update.
+- Attach this mongodb deployment to the clusterIP, because mongodb should not be exposed to outside world.
+- Now push to Github, Pull in server, Create namespace in K8-roboshop folder, In mongodb kubectl apply -f <file-name>
+- Similarly create for catalogue component also.
+- We hav Debug Pod in kubernetes ? In this file we can keep pod in running for 100000 seconds, so that we can do some operations.
+- If catalogue is not connecting to mongodb 'telnet mongodb 27017' that means here catalogue Pod is in another node and mongodb Pod is in another node, so request should go like this catalogue-Pod, catalogue-node, mongodb-service, mongodb-node, mongodb-Pod. Here siva has given allow all ports in SG.
+- Next go for the Web component. If config map is changed, you should restart the Pod.
+- Similarly do for the redis, cart and user components.
+
 ### Session-57
 - What are Stateful and Stateless applications ?
 - EBS ---> Hardk disk ; EFS ---> Google drive etc.
