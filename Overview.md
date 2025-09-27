@@ -1193,23 +1193,23 @@
 - Resources in Pod ? What is resource block in containers ? What is Soft limit and Hard limit in resource block in containers ? Requests are soft limit given when container starts and limits are hard limit.
 - Write a resource definition of a Pod with resource block ?
 
-         apiVersion: v1
-              kind: Pod
-              metadata:
-                name: hello-pod
-              spec:
-                containers:
-                - name: hello-pod
-                  image: nginx
-                  ports:
-                  - containerPort: 80
-                  resources:
-                    requests:
-                      cpu: "100m"
-                      memory: "68Mi"
-                    limits:
-                      cpu: "200m"
-                      memory: "128Mi"
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: hello-pod
+          spec:
+            containers:
+            - name: hello-pod
+              image: nginx
+              ports:
+              - containerPort: 80
+              resources:
+                requests:
+                  cpu: "100m"
+                  memory: "68Mi"
+                limits:
+                  cpu: "200m"
+                  memory: "128Mi"
 
 - In AWS we have SSM parameter to store configuration and secrets but what about in kubernetes ? Applications should fetch the configuration and secrets at the run time from configuration and secrets storage.
 - To store the configuration in kubernetes, we have 'ConfigMap' in kubernetes. Nothing but a key-value pair. So create 1 ConfigMap.
