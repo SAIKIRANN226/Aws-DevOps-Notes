@@ -1215,10 +1215,9 @@
 - To store the configuration in kubernetes, we have 'ConfigMap' in kubernetes. Nothing but a key-value pair. So create 1 ConfigMap.
 - How to define above configmap key-value pair in Pod ? Set 'env:' variable, use 'valueFrom' and 'configMapkeyRef' also we have 'envFrom' what is this ? Nothing but referring configMap directly in Pod.
 - Secrets in kubernetes is also a key-value pair for storing secrets. We can refer secrets using 'secretRef'
-- What are 'Services' in kubernetes ? For example we are running Pods but we are not able to browse them. For example we run nginx Pod, how to browse that Pod ? If you want to expose Pods to other applications or outside world and also Load balancing and service mesh (It is like app-alb), we use services.
-- 3 types of services ClusterIP (Purely internal to kubernetes) NordPort (You can expose to outside world) Load balancers (You can expose to outside world) Services are like route53 records.
-- If you want to connect to Pod, first request should go to service then to Pod. That means if you want to communicate with Pod to Pod communication you must use service. Because Pod is very dynamic, they may be running or terminated we dont know.
-- If you want Pod to Pod communication you must use Service. That means we should attach Pod to Service. Because Pod IP is ephemeral (Dynamic) so we are using names as DNS to communicate with Pod to Pod. How do we attach Pod to service ? Using Labels and selectors.
+- What are 'Services' in Kubernetes ? In Kubernetes, Services are used to provide a stable way to access Pods. Because Pods are ephemeral they can be created, destroyed or moved between nodes anytime. Each Pod gets its own IP address, but that IP changes if the Pod restarts. If your app (Say, frontend) needs to talk to another app (Say, backend), it can’t rely on these ever-changing Pod IPs. So we have a solution that is Services, which has a fixed IP address (ClusterIP) and sometimes a DNS name to access a set of Pods. We have three types of services. ClusterIP (Purely internal to kubernetes) NordPort (You can expose to outside world) Load balancers (You can expose to outside world). That means first request will go to service then to Pod. That means Pod should be attached to the service.
+- If you want Pod to Pod communication they should send a request to service first. That means we should attach Pod to a Service. How do we attach Pod to service ? Using Labels and Selectors.
+- So first write a Pod definition and then Serice definition in yaml file.
 - What if we want multiple Pods ? We can write another Pod definition also but it not good, So we have "ReplicaSet"
 - What is Deployment in Sets ?
 
