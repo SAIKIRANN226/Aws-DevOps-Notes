@@ -1133,6 +1133,8 @@
 - Instead of installing docker & docker compose manually, siva has created one shellscript to install automatically "curl <raw_url> | sudo bash"
 
 ### Session-53
+- Kubernetes and AWS are PaaS (Platform as a Service) that means whatever the services are required to make your application up and running, everything will be provided by them only. For example to store the configuration and secrets. In AWS we have SSM parameter store. In Kubernetes we have 'ConfigMap'
+- Docker is CaaS (Containers as a Service) can be used inside the PaaS also.
 - What is DockerHost (or) Workstation ? Nothing but a server which we created for Docker.
 - What are the disadvantages in Docker ?
 - What is Orchestrator ? Kubernetes is the most popular container Orchestration tool.
@@ -1142,9 +1144,9 @@
 - Kubernetes is also same as Master-Node architecture which we know in jenkins, request will first come to Kubernetes Master and this K8-master will asign work to nodes. If small project 1 Kubernetes-Master (Minikube) is enough, if big project we need to create Kubernetes Master-Node architecture.
 - So first we are practicing Kubernetes-Master (Same as Jenkins-Master alone) we call it as 'Minikube' is a single node cluster. Master and Node are same here.
 - We have a module in internet (Open-source) a git repo just type 'Terraform aws minikube' developed by scholz.
-- Go through the code of 'Terraform-aws-minikube' in VS. In this we created minikube cluster server and workstation server. In workstation, we setup a bootstrap to install Docker, kubectl and Docker-compose.
+- Go through the code of 'Terraform-aws-minikube' in VS. In this we created minikube cluster server and workstation server. In workstation, we setup a bootstrap to install Docker, Kubectl and Docker-compose.
 - A 'kubeconfig' file is created in minikube cluster (Login to minikube server in gitbash or in server). This file contains authentication and cluster information like how to connect to minikube cluster etc. So to connect kubernetes cluster we should have 'kubectl' command (This kubectl command is automatically installed in minikube cluster). This command will check kubeconfig file in home folder because it uses kubeconfig file to determine how to connect to a minikube or kubernetes cluster. So we should create a folder '.kube' in home location and copy the kubeconfig file (From gitbash or from server using cat command) 'cp kubeconfig .kube/config' renaming should be config not kubeconfig. So now we connect to cluster using kubectl only, not using SSH connection.
-- After creating Workstation and Minikube cluster, how to connect to Minikube from Workstation ? Install kubectl for centos and give execution access in workstation server (DockerHost). Move that kubectl into /usr/local/bin/kubectl
+- After creating Workstation and Minikube cluster, how to connect to Minikube from Workstation ? Install kubectl for centos8 and give execution access in workstation server (DockerHost). Move that kubectl into /usr/local/bin/kubectl
 - To connect to kubernetes cluster server (Minikube) you must have authentication file (Kubeconfig), so create one folder '.kube' in home location in DockerHost server also and paste the authentication file inside this folder. You can copy from gitbash also using cat command. Vim config (Name should be config)
 - What are Kubernetes resources ? Go through the code of 'K8 resources' in VS.
 - Workload resources (Pods, Deployments, StatefulSets)
@@ -1180,7 +1182,7 @@
 - What is environment in kubernetes ? Its like a key-value pairs, we can use anywhere, it is like variables.
 
 ### Session-54
-- We write Dockerfiles and Manifest files in VS. Push to github. We create workstation in AWS and install all required client packages like docker, kubectl, eksctl. We pull Dockerfiles and Manifest files in DockerHost then we push to Dockerhub then using 'eksctl' command it will create Amazon EKS kubernetes cluster and it will have multiple EC2 instances (or) nodes (or) Spot Node group (Is used to reduce the billing)
+- We write Dockerfiles and Manifest files in VS, Push to github, We create workstation in AWS and install all required client packages like docker, kubectl, eksctl. We pull Dockerfiles and Manifest files in DockerHost then we push to Dockerhub then using 'eksctl' command it will create Amazon EKS kubernetes cluster and it will have multiple EC2 instances (or) nodes (or) Spot Node group (Is used to reduce the billing)
 - We dont have SSH access to EKS kubernetes cluster (Master) it is completely managed by AWS, even aws also manage Node group.
 - We need to install 'eksctl' in DockerHost (Workstation) also. Refer module from internet (Open-source) git repo for installing eksctl. You can see simple yaml file to install eksctl. So write a yaml file in VS.
 - So create 1 workstation and install all client packages like docker, docker-compose, kubectl, eksctl and login in superputty then check 'kubectl version' and 'eksctl version'
@@ -1190,8 +1192,8 @@
 - What is mean by Spot Instances in kubernetes cluster ?
 
 ### Session-55
-- Resources in Pod ? What is resource block in containers ? What is Soft limit and Hard limit in resource block in containers ? Requests are soft limit given when container starts and limits are hard limit.
-- Write a resource definition of a Pod with resource block ?
+- What is resource block in containers ? Nothing but we can set the limits on CPU and Memory a container can use. We have two types of limits 'Soft limit' and 'Hard limit' Requests are soft limit given when container starts and limits are hard limit.
+- Write a resource definition of a Pod include resource block ?
 
           apiVersion: v1
           kind: Pod
@@ -1199,7 +1201,7 @@
             name: hello-pod
           spec:
             containers:
-            - name: hello-pod
+            - name: hello-container
               image: nginx
               ports:
               - containerPort: 80
@@ -1211,33 +1213,35 @@
                   cpu: "200m"
                   memory: "128Mi"
 
-- In AWS we have SSM parameter to store configuration and secrets but what about in kubernetes ? Applications should fetch the configuration and secrets at the run time from configuration and secrets storage.
-- To store the configuration in kubernetes, we have 'ConfigMap' in kubernetes. Nothing but a key-value pair. So create 1 ConfigMap.
-- How to define above configmap key-value pair in Pod ? Set 'env:' variable, use 'valueFrom' and 'configMapkeyRef' also we have 'envFrom' what is this ? Nothing but referring configMap directly in Pod.
+- In AWS, we have SSM parameter to store the configuration and secrets, similarly every platform as a configuration and secrets storage. In kubernetes also we have 'ConfigMap' nothing but a key-value pair. So create 1 ConfigMap.
+- How to define above configmap key-value pair in Pod ? Set 'env:' variable, use 'valueFrom' and 'configMapkeyRef' also we have 'envFrom' what is this ? Nothing but referring configMap directly in Pod. 
 - Secrets in kubernetes is also a key-value pair for storing secrets. We can refer secrets using 'secretRef'
 - What are 'Services' in Kubernetes ? In Kubernetes, Services are used to provide a stable way to access Pods. Because Pods are ephemeral they can be created, destroyed or moved between nodes anytime. Each Pod get its own IP address, but that IP changes if the Pod restarts. If your app (Say, frontend) needs to talk to another app (Say, backend), it can’t rely on these ever-changing Pod IPs. So we have a solution that is Services, which has a fixed IP address (ClusterIP) and sometimes a DNS name to access a set of Pods. We have three types of services. ClusterIP (Purely internal to kubernetes) NordPort (You can expose to outside world) Load balancers (You can expose to outside world). That means first request will go to service then to Pod. That means Pod should be attached to the service.
 - If you want Pod to Pod communication they should send a request to service first. That means we should attach Pod to a Service. How do we attach Pod to service ? Using Labels and Selectors.
 - So first write a Pod definition and then Serice definition in yaml file.
-- What if we want multiple Pods ? We can write another Pod definition also but it not good, So we have "ReplicaSet"
-- What is Deployment in Sets ?
+- What if we want multiple Pods ? We can write another Pod definition also but its not a good practice.
+- What is the difference between 'ReplicaSet' and 'DeploymentSet' ?
+- ReplicaSet will only creates identical Pods, if Pod crashes it will create new Pods. If you try to scale these Pods, it just create replica of Pods does not support rolling update, rollback in case of any failures.
+- DeploymentSet will manage ReplicaSets also support rolling update which gradually upgrade to new version and also supports rollback, we can revert to old version incase of failure. We can also scale up and down Pods.
+- Pods and ReplicaSets are the subset of DeploymentSets.
 
 ### Session-56
 - We build image and push to the Dockerhub then we write manifest file and inform Kubernetes how to run this image using this manifest file. These are the only two options we follow while configuring roboshop project.
 - Configuring Roboshop project into Kubernetes. Go through the code of 'K8-roboshop' in VS.
 - Start configuring mongodb component first in 'K8-roboshop' folder in VS.
-- First keep all mongodb code like catalogue.js, user.js files in mongodb folder
+- First keep all mongodb code like catalogue.js, user.js files in mongodb folder.
 - Second write Dockerfile for this mongodb.
-- Third write manifestfile to inform kubernetes how to run this image using this manifest file.
+- Third write manifestfile to inform kubernetes how to run this mongodb image using this manifest file.
 - Now pull in 'K8-roboshop' server and login to the Docker first then build the image using 'docker build -t joindevops/mongodb:v1 .'
-- Then push the image to Dockerhub using 'docker push joindevops/mongodb:v1'
-- Next create manifest file (Kubernetes file) which resource should we use now ? Pod vs ReplicaSet vs DeploymentSet ? We use DeploymentSet resource. We should mention image pull policy as Always this will pull the latest image everytime in Pod from the Dockerhub. If not kept this as always, application will not update.
+- Then push the mongodb image to Dockerhub using 'docker push joindevops/mongodb:v1'
+- Next create manifest file (Kubernetes file) which resource should we use now ? Pod vs ReplicaSet vs DeploymentSet ? We use DeploymentSet resource. We should mention image pull policy as Always, this policy will pull the latest image everytime in Pod from the Dockerhub. If we do not keep this policy, application will not update.
 - How do i force kubernetes to re-pull an image ? Using 'imagePullPolicy: Always'
-- Attach this mongodb deployment to the clusterIP because mongodb should not be exposed to outside world.
-- Now push to Github, Pull in server, Create namespace in K8-roboshop folder. In mongodb 'kubectl apply -f <file-name>'
+- Attach this mongodb deployment to the Service (ClusterIP) because mongodb should not be exposed to outside world.
+- Now push to Github, Pull in server, Create namespace in K8-roboshop folder. In mongodb 'kubectl apply -f <filename>'
 - Similarly create for catalogue and other components also.
-- We hav Debug Pod in kubernetes ? In this file we can keep pod in running for 100000 seconds, so that we can do some operations.
-- If catalogue is not connecting to mongodb 'telnet mongodb 27017' that means here catalogue Pod is in another node and mongodb Pod is in another node, so request should go like this catalogue-Pod, catalogue-Node, mongodb-service, mongodb-node, mongodb-Pod. Here siva has given allow all ports in SG.
-- Next go for the Web component. Note that if config map is changed, you should restart the Pod.
+- We have Debug Pod in kubernetes ? In this file we can keep Pod in running for 100000 seconds, so that we can do some operations on that Pod.
+- If catalogue is not connecting to mongodb 'telnet mongodb 27017' that means here catalogue Pod is in another node and mongodb Pod is in another node. So request should go like this catalogue-Pod, catalogue-Node, mongodb-Service, mongodb-Node, mongodb-Pod. Here siva has given allow all ports in SG as of now.
+- Next go for the Web component. Note that if config map is changed, you should restart the Pod. In web we used Loadbalancer as Service because web should expose to the outside world.
 - Similarly go for the redis, cart and user components.
 
 ### Session-57
