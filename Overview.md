@@ -1222,18 +1222,23 @@
 - What is Deployment in Sets ?
 
 ### Session-56
-- We have only two options. For example, if you want to install windows 11 in your laptop, you must have a physical pendrive and it should contain windows 11 software to install in your laptop, then we will give lot of configuration options while installing. Similarly we build image and push to the dockerhub right ? Then we write manifest files and inform kubernetes how to run the image.
+- We build image and push to the Dockerhub then we write manifest file and inform Kubernetes how to run this image using this manifest file. These are the only two options we follow while configuring roboshop project.
 - Configuring Roboshop project into Kubernetes. Go through the code of 'K8-roboshop' in VS.
-- First we are configuring mongodb component in 'K8-roboshop' in this we have Dockerfiles and pull in 'K8-roboshop' server and login to the Docker then build the image using 'docker build -t joindevops/mongodb:v1 .' then push the image to Dockerhub using 'docker push joindevops/mongodb:v1'
-- Next create manifest file (Kubernetes file) which resource should we use now ? Pod vs ReplicaSet vs DeploymentSet ? We use DeploymentSet resource. We should mention image pull policy as Always and what this policy ? It will pull the latest image everytime in Pod from the Dockerhub. If not kept this as always, application will not update.
+- Start configuring mongodb component first in 'K8-roboshop' folder in VS.
+- First keep all mongodb code like catalogue.js, user.js files in mongodb folder
+- Second write Dockerfile for this mongodb.
+- Third write manifestfile to inform kubernetes how to run this image using this manifest file.
+- Now pull in 'K8-roboshop' server and login to the Docker first then build the image using 'docker build -t joindevops/mongodb:v1 .'
+- Then push the image to Dockerhub using 'docker push joindevops/mongodb:v1'
+- Next create manifest file (Kubernetes file) which resource should we use now ? Pod vs ReplicaSet vs DeploymentSet ? We use DeploymentSet resource. We should mention image pull policy as Always this will pull the latest image everytime in Pod from the Dockerhub. If not kept this as always, application will not update.
 - How do i force kubernetes to re-pull an image ? Using 'imagePullPolicy: Always'
-- Attach this mongodb deployment to the clusterIP, because mongodb should not be exposed to outside world.
-- Now push to Github, Pull in server, Create namespace in K8-roboshop folder, In mongodb 'kubectl apply -f <file-name>'
-- Similarly create for catalogue component also.
+- Attach this mongodb deployment to the clusterIP because mongodb should not be exposed to outside world.
+- Now push to Github, Pull in server, Create namespace in K8-roboshop folder. In mongodb 'kubectl apply -f <file-name>'
+- Similarly create for catalogue and other components also.
 - We hav Debug Pod in kubernetes ? In this file we can keep pod in running for 100000 seconds, so that we can do some operations.
-- If catalogue is not connecting to mongodb 'telnet mongodb 27017' that means here catalogue Pod is in another node and mongodb Pod is in another node, so request should go like this catalogue-Pod, catalogue-node, mongodb-service, mongodb-node, mongodb-Pod. Here siva has given allow all ports in SG.
-- Next go for the Web component. If config map is changed, you should restart the Pod.
-- Similarly do for the redis, cart and user components.
+- If catalogue is not connecting to mongodb 'telnet mongodb 27017' that means here catalogue Pod is in another node and mongodb Pod is in another node, so request should go like this catalogue-Pod, catalogue-Node, mongodb-service, mongodb-node, mongodb-Pod. Here siva has given allow all ports in SG.
+- Next go for the Web component. Note that if config map is changed, you should restart the Pod.
+- Similarly go for the redis, cart and user components.
 
 ### Session-57
 - What are Stateful and Stateless applications ?
