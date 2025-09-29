@@ -1174,7 +1174,7 @@
           ports:
           - containerPort: 80
   
-- What is logging solution ELK in kubernetes ? Here container should store logs.
+- What is logging solution ELK in kubernetes ? Here container should store logs in 'ElasticSearch' is an external volume from aws.
 - What is Sidecar and Proxy in Pod ? Proxy means request will first come to sidecar and then main container will evaluate from where the request has come and then give reply.
 - How to login to any container in kubernetes cluster ? kubectl exec -it <file_name_without.yaml> -c <container_name> --bash
 - To get full information of any Pod ? kubectl describe pod
@@ -1241,26 +1241,27 @@
 - Similarly create for catalogue and other components also.
 - We have Debug Pod in kubernetes ? In this file we can keep Pod in running for 100000 seconds, so that we can do some operations on that Pod.
 - If catalogue is not connecting to mongodb 'telnet mongodb 27017' that means here catalogue Pod is in another node and mongodb Pod is in another node. So request should go like this catalogue-Pod, catalogue-Node, mongodb-Service, mongodb-Node, mongodb-Pod. Here siva has given allow all ports in SG as of now.
-- Next go for the Web component. Note that if config map is changed, you should restart the Pod. In web we used Loadbalancer as Service because web should expose to the outside world.
-- Similarly go for the redis, cart and user components.
+- Next go for the Web component. Note that if config map is changed, you should restart the Pod. In web we used Loadbalancer as Service because web should expose to the outside world. Similarly write for remaining components.
 
 ### Session-57
 - What are Stateful and Stateless applications ?
-- EBS ---> Hardk disk ; EFS ---> Google drive etc.
-- For example we have EKS cluster and Worker nodes. Where the data will be stored ? In worker nodes only. Here Nodes and Pods are ephemeral that means temporary. Sotring data in Nodes are risk because Nodes are temporary. So we should have some external storage (Like Hard disk, we use which is outside the laptop) That means we take separate storage interface, we mount this storage (This can be EBS/EFS) to EKS cluster, so here data will be stored in storage not in worker nodes.
-- Kubernetes volumes are of two types Internal volumes & External volumes.
+- EBS ---> Hard disk ; EFS ---> Google drive etc.
+- For example we have EKS cluster and Worker nodes. Where the data will be stored ? In worker nodes only. Here Nodes and Pods are ephemeral that means temporary. Storing data in Nodes are risk because Nodes are temporary. So we should have some external storage (Like Hard disk, we use which is outside the laptop) That means we take separate storage interface, we mount this storage (This can be EBS/EFS) to EKS cluster, so here data will be stored in storage not in worker nodes. Storage is the important topic.
+- Kubernetes volumes are of two types Internal volumes and External volumes.
 - What are Internal volumes ? Stores data in worker nodes. Internal volumes are ephemeral (Temporary) but we have usecases like 'emptyDir' and 'hostpath'
+- These temporary volumes or ephemeral volumes will be there until Pods and Worker nodes are there. While External volumes are permanent.
 - What does 'emptyDir' do in kubernetes ?
 - What does 'hostpath' and 'DaemonSet' do in kubernetes ?
-- External volumes are 2 types Static provisioning & Dynamic provisioning.
+- External volumes are 2 types Static provisioning and Dynamic provisioning.
 
 ### Session-58
 - What is the difference between Hard disk and Cloud drives ? HD sits near to the computer, Cloud drives are network drives like google drive, icloud etc.
-- EBS (Elastic block store, created outside like HD) ; EFS (Elastic file system, like google drive)
-- External volumes are permanent. Static provisioning & Dynamic provisioning.
-- Static provisioning ---> We have to create storage by ourself. First we need to create storage this will create by storage admin or K8 admin. Create EBS volume in aws with 10GB ini same zone where the server is created. Next make this volume available to k8 cluster and also install drivers like aws-ebs-csi in server. A proper role (EC2 full access) should be attached to ec2 instance to access EBS.
-- What are kubernetes resources (or) objects ?
-- What is persistent volume in kubernetes ? It represents the external storage why this ? Because as a K8 admin you dont have access to storage space, so persistent volume will represent external storage, So we do operations on persistent volume (or) storage. We also have PVC (Persistent volume claim) Pods should request volume through PVC, it is like a request to PV (Persistent volume)
+- EBS (Elastic block store, created outside the system say HD)
+- EFS (Elastic file system, say google drive)
+- External volumes are permanent. Static provisioning and Dynamic provisioning.
+- Static provisioning ---> We have to create storage by ourself. First we need to create storage, creating storage is the responsible of storage admin or K8 admin. Create EBS volume in aws with 10GB in same zone where the server is created. Next make this volume available to k8 cluster and also install drivers like 'aws-ebs-csi' in server. A proper role (EC2 full access) should be attached to ec2 instances to access EBS.
+- What are Kubernetes resources (or) Objects ?
+- What is Persistent volume in kubernetes ? It represents the external storage why this ? Because as a K8 admin you dont have access to storage space, so persistent volume will represent external storage. So we do operations on Persistent volume. We also have PVC (Persistent volume claim) Pods should request volume through PVC, it is like a request to PV (Persistent volume)
 - Pods connect to VPC ---> VPC connects to PV.
 - We have restrictions on volumes like readwriteonce, readwritemany, EBS volume should have readwriteonce access only once, because it is HD.
 - If Pods wants some storage they should request to PV through PVC.
