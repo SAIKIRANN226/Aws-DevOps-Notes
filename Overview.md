@@ -1243,9 +1243,10 @@
 - What is the difference between Statefulset and Deployment ? Popular interview question.
 - What is Headless service ? Is used for stateful applications, when you hit the headless service, instead of getting single service IP address, you will get the all Pods IP address in the cluster, so that it is easy for 1 replica to communicate with other replica set. In database cluster 1 replica should send data to other replica, we should use headless service.
 - Now configure mongodb in statefulset using helm. We keep Chart.yaml, templates folder, values.yaml are mandatory.
-  
+- How to run this mongodb ? 'helm install mongodb .'
+
 ### Session-60
-- Continuation of configuring other components.
+- Continuation of configuring other components using helm charts.
 - What is RBAC ?
 
 ### Session-61
