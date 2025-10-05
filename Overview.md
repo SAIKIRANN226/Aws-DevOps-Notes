@@ -1222,17 +1222,22 @@
 - What are the access points in EFS ? We can use 1 file system for entire organization also using access points. For example we can give 1 access point to roboshop project and another access point to flipkart project using unique path, user ID, group ID and permissions like 'AmazonElasticfileSystemFullAccess' in storage class.
 
 ### Session-59
-- Helm charts purpose is to Templatise the kubernetes manifest files and package manager for kubernetes.
-- Basically we do only two steps one is Build the image or pull the image if it is public and another one is Configure the image through manifest files to run Pods.
-- Install Helm in server using commands from internet.
-- Chart.yaml and templates folder are mandatory to templatise the manifest files.
-- Go through the code of Helm-charts in VS.
-- How to run then ? helm install nginx .
-- We use values in 'values.yaml' file to templatise in Helm root folder.
-- How to use that value which we kept in values.yaml ? {{ .Values.deployment(anyname).replicas }}
-- Upgrade ? helm upgrade nginx .
-- Another purpose is 'Package manager' If image is already in Public, we dont need to build the image, next helm have some public repos to configure the image through manifest files.
-- What are Helm repos ?
+- Helm charts purpose is to templatise the kubernetes manifest files and package manager for kubernetes.
+- Basically we do only two steps one is Build the image or pull the image, if it is public and another one is configure the image through manifest files to run Pods.
+- Once kubernetes manifest files are ready, changes in this manifest files will be very rare, so instead of changing in manifest files, so helm will keep all constant values separately to templatise manifest files without touching manifest files.
+- Install Helm in server using commands from internet or from helm website. 
+- First file to setup is 'Chart.yaml' and 'templates' folder are mandatory to templatise the manifest files. Whatever kubernetes resources you are using that must be kept in templates folder.
+- Go through the code of Helm-charts in VS. Here helm will hit kubectl command in the background itself.
+- Understand the helm commands in helm website for example 'helm install nginx .'
+- We keep constant values in 'values.yaml' file to templatise the manifest files in Helm root folder.
+- How to use that value which we kept in values.yaml ? {{ .Values.deployment(Anyname).replicas }}
+- Another purpose is 'Package manager' if image is already in Public, we dont need to build the image, next helm have some public repos to configure the image through manifest files.
+- In VM, we used yum install nginx -y, here yum is getting the package from the internet and install in VM right ? Then what about in kubernetes ? Real advantage of helm is image is already in public (So no need to build the image) and Helm have some public repos to configure the image through manifest files.
+- What are Helm repos ? We have artifactHUB
+- In static provisioning we have EBS drivers right ? We installed these drivers from the internet using yaml files right ? But here we using helm to install aws-ebs-csi drivers using below steps.
+- So first add helm repo in server, in this repo we have kubernetes resource files.
+- Next 'helm repo update' similar to yum update
+- Then install aws-ebs-csi drivers using shown command in internet.
 - What is Statefulset ? Used to create stateful applications in kubernetes. Nodes inside stateful applications should have static host names to communicate with other nodes. Stateful applications should follow orderly provisioning as well as terminate.
 - What is Deployment ? Used to create stateless applications in kubernetes.
 - What is the difference between Statefulset and Deployment ? Popular interview question.
