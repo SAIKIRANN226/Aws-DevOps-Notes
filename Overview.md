@@ -422,38 +422,32 @@
 - Earlier we used Ansible-vault but recently we migrated to AWS SSM Parameter, since our entire infra is in AWS. We integrated ansible-vault with SSM Parameter to fetch the values directly from the AWS instead of ansible-vault. Which is a seamless integration instead of depending ansible-vault and ansible-vault commands.
 
 ### Session-25
-- What is terraform & why it is used ? In how many ways we configured our project ? Why we prefer ansible
-  as configuration management while configuring the big project ? Another name of ansible ?
-- Why we din't prefer manual configuration over ansible & shellscript ?
-- What are the advantages of terraform ? V,C,A,I,C,A,M,H
-- What is Inventory management in terraform ? It is about tracking all the infrastructure resources which
-  terraform provisions and manages using terraform state file (Terraform.tfstate). This state file acts like
-  a inventory. When you terraform plan or apply. It will compare your desired state with current state.
-- What is declarative in terraform & How to install terraform ?
-- Install "hashicorp terraform extension" to get colors.
+- What is terraform and why it is used ? In how many ways we configured our project ? Why we prefer ansible as configuration management while configuring the big project ?
+- Why we din't prefer manual configuration over Ansible and Shellscript ?
+- What are the advantages of Terraform ? V, C, A, I, C, A, M, H
+- What is Inventory management in terraform ? It is about tracking all the infrastructure resources which terraform provisions and manages using terraform state file (Terraform.tfstate). This state file acts like a inventory. When you terraform plan (or) apply. It will compare your desired state with current state.
+- What is declarative in terraform and How to setup and install terraform ?
+- Install 'hashicorp terraform extension' to get colors.
 - How to get authentication to AWS to push the created infra ? aws CLI install
-- You can install aws cli in two ways ? One is regular method of downloading aws cli software & run the
-  file in windows laptop & Another one is just run the shown commands in cmd from the internet.
-- How to test wether the aws CLI is installed or not in cmd & gitbash ? aws --version
-- If credentials are not found then "aws configure" Before that you need to create terraform administrator
-  user in IAM ?
-- Where this credentials like Secret-key & Access-key will be saved ? .aws folder
-- What is the syntax of terrafrom to create any resources & what we call this syntax of terraform ?
-- What is the importance of provider in terraform & what is the extension of terraform to save ?
-- Where to run the terraform commands ? Terraform commands should be run in gitbash.
-- What are the terraform commands & what is their functionality ?
+- You can install aws cli in two ways ? One is regular method of downloading aws cli software and run the file in windows laptop. Another one is just run the shown commands in cmd from the internet.
+- How to test wether the aws CLI is installed (or) not in cmd and gitbash ? aws --version
+- If credentials are not found then do 'aws configure' before that you need to create terraform administrator user in IAM (or) use existing secret and access keys.
+- Where this credentials like Secret-key and Access-key will be saved ? .aws folder
+- What is the syntax of terrafrom to create any resources and what we call this syntax of terraform ?
+- What is the importance of provider in terraform and what is the extension of terraform to save ?
+- Where to run the terraform commands in gitbash ? Wherever .tf files exist
+- What are the terraform commands and what is their functionality ?
 - What is variable syntax ? Is really data-type in variable syntax is important ? NO!
 - Go through this https://github.com/daws-76s/terraform
-- We can also give Access-key & Secret-keys under region to get the authentication to AWS in provider section,
-  but why we dint prefer this ? Thats why we "aws CLI" to authenticate.
-- So Dont push the Access-key & Secret-key to the github (or) internet for safety reasons.
+- We can also give Access-key and Secret-keys under region to get the authentication to AWS in provider section, but its not safe to do. Thats why we downloaded 'aws CLI' to authenticate.
+- So Dont push the Access-key and Secret-key to the github (or) internet for safety reasons.
 - Go through the all files in Terraform folder in VS.
 
 ### Session-26
 - What is the importance of .gitignore file in terraform ?
 - What is the use of terraform.tfvars ?
-- How to give terraform.tfvars file from the command prompt for plan & apply ?
-- Here terraform.tfvars name is not mandatory we can use any name like "saikiran.tfvars"
+- How to give terraform.tfvars file from the command prompt for plan and apply ?
+- Here terraform.tfvars name is not mandatory, we can use any name like 'saikiran.tfvars'
 - If you dont give -var-file then terraform will take default values from variables.tf file
 - Write a terraform code using terraform.tfvars example ?
 - Variable preferences in terraform are below ?
@@ -462,45 +456,36 @@
 - terraform.tfvars
 - Environment variable.
 - Write a terraform code, if mongodb then t3.small (or) t2.micro using condition ?
-- Create instances & route53 records using Count_based loop & For_each loop ?
-- Count_based is to iterate list & For_each is to iterate maps.
-- What is function in terraform & what is length function here ? We cannot create our own functions, we
-  have to use terraform inbuilt functions only.
-- Why output block is used in terraform & what is the syntax of output ?
+- Create instances and route53 records using Count_based loop and For_each loop ?
+- Count_based is to iterate list and For_each is to iterate maps.
+- What is function in terraform and what is length function here ? We cannot create our own functions, we have to use terraform inbuilt functions only.
+- Why output block is used in terraform and why it is useful ? what is the syntax of output ?
 - Go through the output block in count folder VS ?
 
 ### Session-27 
-- What is locals in terraform & what is the syntax of the locals ? How to call a local ?
-- What is Data-sources in terraform & why it is used ? For example if you want AMI, then "terraform query
-  ami" in google search.
-- Can we query data from the existing resources also apart from the providers ? YES!
+- What is locals in terraform and syntax of the locals ? How to call a local ?
+- What is Data-sources in terraform and why it is used ? For example if you want AMI then 'terraform query ami' in google search. Here data-source is used to query the data dynamically from the providers aswel as from the existing resources also.
 - Types of loops ? Count_based, For_each, Dynamic_loop
-- What is Dynamic_loop & where it is useful ?
-- What is Terraform State (State & Remote state) ?
-- What is Declarative state & Desired state ?
-- What is Current state in terraform & where it will be stored ? Terraform.tfstate
+- What is Dynamic_loop and where it is useful ?
+- What is Terraform State (State and Remote state) ?
+- What is Declarative state and Desired state ?
+- What is Current state in terraform and where it will be stored ? Terraform.tfstate
 - When Desired state == Current state, then terraform will not take any action.
 - When Desired state =//= Current state, then terraform will create.
 - Why the terraform will create lock file while terraform is working on it ?
-- Explain the concept of local state using example of 2 persons are working on same repo ?
+- Explain the concept of local state using example of when 2 persons are working on same repo ?
 - What errors these persons will face, if they are working on same repo ?
-- So terraform will compare my state & devops person state. If both are running terraform apply, here
-  duplicates may come & some may get error as already exists.
-- So for this issue we have a central state file to check wether the infra already exists or not ? That is
-  remote state (S3 bucket).
+- So terraform will compare my state and devops person state. If both are running terraform apply, here duplicates may come and some may get error as already exist.
+- So for this issue we have a central state file to check wether the infra already exist or not ? That is remote state (S3 bucket).
 - Terraform.tfstate is a crucial file, should not delete.
-- What are the two disadvantages in local state ? For that only we have a remote state S3.
-- So create S3 bucket & lock that bucket using dynamodb table ?
-- What are the different remote states we have & why we use only "terraform s3 remote state"
+- What are the two disadvantages in local state ? Collaboration environment and Security
+- So create S3 bucket and lock that bucket using dynamodb table ?
+- What are the different remote states we have and why we use only 'terraform s3 remote state'
 - Where to keep this remote state in terraform code ? Another name of remote state is Backend.
 - If we write more lines of script we say configuration is increasing.
 - S3 buckets are chargeable in aws, so delete after practice.
-- Use different key names in s3 bucket like in the previous you have used different key "foreach" you can use
-  as per your wish but not with the same key names because it will merge all.
-- Interview question ? We are using S3 bucket with Dynamodb locking, here local state will not work because
-  it will create duplicates and errors, security will not be there inside the local. So thats why we have to
-  keep it safely in the remote storage like S3 bucket, it will provide better collaboration among the team
-  members and errors free.
+- Use different key names in s3 bucket like in the previous you have used different key 'foreach' you can use as per your wish but not with the same key names because it will merge all.
+- Interview question ? We are using S3 bucket with Dynamodb locking, here local state will not work because it will create duplicates and errors, security will not be there inside the local. So we have to keep it safely in the remote storage like S3 bucket, it will provide better collaboration among the team members and also security.
 
 ### Session-28
 - How to create multiple environments with terraform in 3 ways ? Using same code but with different
