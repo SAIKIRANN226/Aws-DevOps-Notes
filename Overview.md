@@ -981,6 +981,7 @@
 - To get full information of any Pod ? kubectl describe pod
 - Difference between labels and annotations ? Its a key-value pair. Labels are used to select (or) to attach with other resources.
 - What is environment in kubernetes ? Its like a key-value pairs, we can use anywhere, it is like variables.
+- Labels are used to select kubernetes objects, while Annotations are used to connect with external objects like LB.
 
 ### Session-54
 - We write Dockerfiles and Manifest files in VS, Push to github, We create workstation in AWS and install all required client packages like docker, kubectl, eksctl. We pull Dockerfiles and Manifest files in DockerHost then we push to Dockerhub then using 'eksctl' command it will create Amazon EKS kubernetes cluster and it will have multiple EC2 instances (or) nodes (or) Spot Node group (Is used to reduce the billing)
@@ -1120,7 +1121,7 @@ generally we face errors in kubernetes are like 'error image pull' why this ? be
 
 RBAC
 -----
-Till now we deployed k8 resources using with admin user like 'kubectl apply' with admin access, but in projects we dont get admin access, there will be separate eks-admin team, we are devops engineers for roboshop project. We will only get access to roboshop namespace.
+Till now we deployed k8 resources using with admin user like 'kubectl apply' with admin access, but in projects we dont get admin access, there will be separate eks-admin team, we are devops engineers for roboshop project. We will only get access to roboshop namespace. RBAC will generally administrators will do 
 
 What will happen when roboshop project starts ?
 --------------------------------
@@ -1151,7 +1152,30 @@ HPA (Horizontal Pod auto scaling)
 - Next one is 'your deployment should have resources implemented' For example 2 pods are running and i want avg utilization of these two pods. For example life of a human limit is 100 years so we compare years with this 100.
 
 ### Session-61
+- Configuring remaining components.
+- Horizontal scaling vs Vertical scaling ? Horizontal scaling is adding more servers, if one server crashes, then remaining servers can handle requests. Vertical scaling is increasing or decreasing CPU and memory resources of a single Pod. Horizontal scaling is better to choose.
+- Conditions to use horizontal scaling is, we should install metrics server and deployment should have resources mentioned, then only it will calculate the cpu and memory then depending up on this, it will scaleup or down.
+- Now we need to configure web component. Classic LB is very old, latest one is Application LB but when it comes to kubernetes in cloud bydefault it is taking classic LB. So to change this we need to use a 'ingress control' So first request will come to ingress controller then it will decide to go which application.
+- Go through the code of 'K8-ingress' in VS.
+- What is ingress resource ? If anybody hit 'app1.daws76s.online' --> ingress controller --> to ingress resource --> app1 service --> app1 Pod
+- EKS should have capability of creating Load Balancers, Target groups, Listeners, Rules. So to get that capability, we need to install ingress controller. Just search app-alb ingress controller in google. This is not our responsibility.
+- Install 'apache benchmark centos' in server from google. It is used for testing load.
+
 ### Session-62
+- What is your kubernetes architecture ? Nothing but incoming request to the system and outgoing request from the system.
+- Control plane have some components, one of them is 'kube-apiserver' when you enter a command like 'kubectl get pods' then this first request goes to kube-apiserver. kube-apiserver generally validate authentication and authorization.
+- Getting information is the responsibility of kube-apiserver and handover request to scheduler.
+- Creating resources is the responsibility of scheduler. This will decide in which node i should create Pod based on few factors like node labels and selectors, taints and tolerations, affinity and anti-affinity.
+- Next component is 'etcd' entire data corresponds to our cluster like a data-base. It is very crucial if we lose, we dont get the data back. It will be takecare by cloud team only. Not only this entire control plane will be taken care by aws cloud only.
+- Another component is 'kube-controller-manager' responsible for noticing and responding when nodes are down and then making nodes up. Job controller controls the jobs like create pods, once pod completes their task, jon controller will mark as completed. Replication controller it will make sure requested number of replicas are always running.
+- Node components ---> kubelet is a component that make sure nodes are connected to control plane.
+- Kube-proxy component is responsible to forward the request from services to pods.
+- 'Container runtime' can run any images to containers.
+- All the above points are kubernetes architecture, you need to explain this in interview.
+- Deployment strategies, we have used rolling update.
+- In Terraform cluster, we go for blue-green deployment strategy.
+- What is EKS upgrade ?
+
 ### Session-63
 ### Session-64
 ### Session-65
