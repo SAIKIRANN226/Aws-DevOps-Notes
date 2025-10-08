@@ -1174,9 +1174,15 @@ HPA (Horizontal Pod auto scaling)
 - All the above points are kubernetes architecture, you need to explain this in interview.
 - Deployment strategies, we have used rolling update.
 - In Terraform cluster, we go for blue-green deployment strategy.
-- What is EKS upgrade ?
+- How to do EKS upgrade ?
 
 ### Session-63
+- Important point to remember that creating eks cluster, upgrading, ingress controller are k8 administrator work.
+- What are taints and tolerations ? If i taint a node then bydefault scheduler cannot schedule the pod on that node. Few projects add their own nodes to the eks cluster then they taint the nodes. Tolerations is a excuse, pods specific to that project can have tolerations.
+- What are affinity and anti-affinity ?
+- Pod affinity means Pod1 is running, Pod2 likes Pod1, so Pod2 wants to run where Pod1 is running.
+- Pod anti-affinity means opposite.
+- How to upgrade the cluster ? Before upgrading, you can announce no releases or changes to the applications.
 ### Session-64
 ### Session-65
 ### Session-66
