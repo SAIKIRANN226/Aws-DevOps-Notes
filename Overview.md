@@ -1190,16 +1190,18 @@ HPA (Horizontal Pod auto scaling)
 - As a normal user, how can you monitor the facebook ? By checking facebook is running or not ? Login is working or not ? Input validations, Functionality test etc. All these checks are Black box because we dont know internal details of the FB. Whilte white box monitoring can be done by those who know the internal details, so only facebook employees can do like all FB servers are up and running ? CPU, Memory, Disk utilization, Log errors etc.
 - We have 4 golden signals in monitoring Latecny (Low latency) Traffic (Always measure traffic like how many users are sending request)  Errors (Log errors, application errors) Saturation (Measure CPU, Memory, Disk)
 - What is Time series database used in prometheus ?
-- In every node (Servers) have 'Node exporters' and prometheus are connected to node exporters and it will send data to the central storage in Prometheus. You need to install nord exporters (Port 9100) in servers.
+- In every node (Servers) have 'Node exporters' and prometheus are connected to node exporters and it will send data to the central storage in Prometheus. You need to install nord exporters (Port 9100) in servers. We can keep in ansible file to install node exporter.
 - What is Periodic time intervals in Time series database ? We can decide wether we want data for every 1m, 2m etc. For example if prometheus wants data from node1 for every 5min say then prometheus will connect to node1 export for every 5min and pull the metrics and save it in TSDB (Time series database) We need to configure this in prometheus.yaml file
-- Prometheus has few components like http-server, alert manager etc.
+- Prometheus has few components like http-server, alert manager and service discovery is nothing ec2 scrapping.
 - Create one server and install prometheus with t3.medium because we are installing grafana also with 30GB. Install prometheus from the website. Port number is 9090
 - Prometheus is collecting metrics from the node exporters which is in servers and also it can collects its own metrics also. If you type 'up' or 'up[2m]' in search it will show results. You can search for graph also.
 - In pormetheus, graph option is not that user-friendly, so we have to use grafana to visualize. After installing grafana, admin is the username and password to login.
 - Grafana is used for multiple sources, rightnow we are using prometheus, so install prometheus in grafana Data sources. Next create 'Dashboard' you can create multiple dashboards.
 - What is dynamic scrapping ? In cloud and dynamic enviroments IPs are ephemeral in auto-scaling to the newly created servers IPs, so we need to scrap_config code in prometheus.yaml file
 - Make sure prometheus server should have minimum permission to describeInstances. So create a role for Prometheus server.
-- We also have filter options to control only whichever instances we want prometheus to monitor.
+- We also have filter options to control only whichever instances we want prometheus to monitor. We should mention tags in nodes.
 
 ### Session-65
+- Alerting
+-  
 ### Session-66
