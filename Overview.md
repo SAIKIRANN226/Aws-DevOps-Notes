@@ -1103,52 +1103,25 @@
 ### Session-60
 - Continuation of configuring other components using helm charts.
 - What is RBAC ?
-Creating databases using statefulset
-
-What are the conditions to use stateful ?
-- First install EBS drivers using helm commands like helm repo add, update and upgrade
-- Give role AmazonEBSSCIDriverPolicy access to EC2 instances 
-- Install storageclass, this will create drivers automatically
-
-If you want better UI in kubernetes, we have a tool called 'K9s' install this tool in server from open source git called 'derailed/k9s' from internet 'viaWebi for linix and macos' after installing just type 'k9s'
-
-To see pods or services or namespaces use 'Shift+:'
-To see logs just type 'L'
-To come back just hit 'Esc' button
-
-generally we face errors in kubernetes are like 'error image pull' why this ? because for rabbitmq we dont have customised image it was pulled from the dockerhub, but we have given our customised path to pull the image. Another one container is not starting (Crashloopbackoff error)
-
-
-RBAC
------
-Till now we deployed k8 resources using with admin user like 'kubectl apply' with admin access, but in projects we dont get admin access, there will be separate eks-admin team, we are devops engineers for roboshop project. We will only get access to roboshop namespace. RBAC will generally administrators will do 
-
-What will happen when roboshop project starts ?
---------------------------------
-- Team leader and members will email to eks admin team about name space. admin team will get approvals from their manager and roboshop manager
-
-- then they create namespace for roboshop
-
+- Creating databases using statefulset
+- What are the conditions to use stateful ? First install EBS drivers using helm commands like helm repo add, update and upgrade. Give role AmazonEBSSCIDriverPolicy access to EC2 instances. Install storageclass, this will create drivers automatically
+- If you want better UI in kubernetes, we have a tool called 'K9s' install this tool in server from open source git called 'derailed/k9s' from internet 'viaWebi for linix and macos' after installing just type 'k9s'
+- To see pods or services or namespaces use 'Shift+:'
+- To see logs just type 'L'
+- To come back just hit 'Esc' button
+- Generally we face errors in kubernetes are like 'error image pull' why this ? because for rabbitmq we dont have customised image it was pulled from the dockerhub, but we have given our customised path to pull the image. Another one container is not starting (Crashloopbackoff error)
+- RBAC ---> Till now we deployed k8 resources using with admin user like 'kubectl apply' with admin access, but in projects we dont get admin access, there will be separate eks-admin team, we are devops engineers for roboshop project. We will only get access to roboshop namespace. RBAC will generally administrators will do 
+- What will happen when roboshop project starts ? Team leader and members will email to eks admin team about name space. Admin team will get approvals from their manager and roboshop manager then they create namespace for roboshop.
 - To give roles to them we have some k8 objects they are Role, Role binding, CLuster role, Clusterrole binding
-
 - So access will be given by eks-admin using above k8 objects. For example trainee (only read access) engineers (limited) TL (namespace admin) that is nothing but kubernetes RBAC
-
 - We integrate authentication using IAM in aws since we are in cloud, but authorisation will be from kubernetes EKS
-
 - So to set authentication first, you need to create user in IAM in aws and give least access like 'Describe cluster' and add ARNs
-
 - Next autorisation nothing but 'role binding' like tagging above user to roboshop project.
-
 - Now how EKS will understand interate with IAM ? We have option in kuberntes that is 'aws-auth ConfigMap' you need to edit this. How to get this ? 'kubectl get configmap aws-auth -n kube-system -o yaml' copy this code and paste in a file VS naming like 'aws-auth.yaml'
-
 - When the user try to kubectl get nodes. He wont get the access, because nodes are clusterlevel resources, but the above user has only read access like role and role binding are only for namespace level resources.
-
-HPA (Horizontal Pod auto scaling)
----------------------------------
+- HPA (Horizontal Pod auto scaling)
 - Generally what Auto-scaling will do ? It will check the avg CPU utilization, if crosses 75% then VMs are getting increased. So similarly in kuberntes also it should increase or decrease the Pods depending upon traffic using HPA.
-
 - We have conditions for HPA. 1.metrics server, generally in server to check this utilization we use top command, but in kubernetes dont know how much resources are using a Pod. So for that we need to install metrics server which measueres Pod resources dynamically. Install from internet. then it will  measure the Pod command is 'kubectl top pods'
-
 - Next one is 'your deployment should have resources implemented' For example 2 pods are running and i want avg utilization of these two pods. For example life of a human limit is 100 years so we compare years with this 100.
 
 ### Session-61
