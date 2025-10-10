@@ -983,13 +983,13 @@
 
 ### Session-54
 - We write Dockerfiles and Manifest files in VS, Push to github, We create Workstation in AWS and install all required client packages like docker, kubectl, eksctl. We pull Dockerfiles and Manifest files in DockerHost then we save created images in Dockerhub then using 'eksctl' command it will create Amazon EKS Kubernetes cluster and it will have multiple EC2 instances (or) nodes (or) Spot Node group (Is used to reduce the billing)
-- We dont have SSH access to EKS kubernetes cluster (Master) it is completely managed by AWS, even AWS also manage Node group.
+- We dont have SSH access to EKS kubernetes cluster (Master) it is completely managed by AWS, even Node group is also managed by AWS.
 - We need to install 'eksctl' in DockerHost (Workstation) also. Refer module from internet (Open-source) git repo for installing eksctl. You can see simple yaml file to install eksctl. So write a yaml file in VS.
-- So create 1 workstation and install all client packages like docker, docker-compose, kubectl, eksctl and login in superputty then check 'kubectl version' and 'eksctl version'
+- Overall create 1 workstation and install all client packages like docker, docker-compose, kubectl, eksctl and login in superputty then check 'kubectl version' and 'eksctl version'
 - Eksctl means 'eks controller' it is the brain of kubernetes cluster.
-- From this server (Workstation) it will now create EKS kubernetes cluster, it will take time like 20min.
-- First clone the eksctl repo in workstation server and then create cluster using 'eksctl create cluster --config-file=<file_name>.yaml' Here workstation is creating ekscluster, we need to give access to aws console before that 'aws configure' Now it will take time to create ekscluster like atleast 20min.
-- What is mean by Spot Instances in kubernetes cluster ?
+- From this server (Workstation) it will now create EKS kubernetes cluster, it will take time about 20min.
+- First clone the eksctl repo in Workstation server and then create cluster using 'eksctl create cluster --config-file=<file_name>.yaml' Here workstation is creating ekscluster. We need to give access to AWS console before that 'aws configure' Now it will take time to create ekscluster like atleast 20min.
+- What is mean by Spot Instances in kubernetes cluster ? These can be ideal for Dev not Prod.
 
 ### Session-55
 - What is resource block in containers ? Nothing but we can set the limits on CPU and Memory a container can use. We have two types of limits 'Soft limit' and 'Hard limit' Requests are soft limit given when container starts and limits are hard limit.
@@ -1013,12 +1013,12 @@
                   cpu: "200m"
                   memory: "128Mi"
 
-- In AWS, we have SSM parameter to store the configuration and secrets, similarly every platform as a configuration and secrets storage. In kubernetes also we have 'ConfigMap' nothing but a key-value pair. So create 1 ConfigMap.
-- How to define above configmap key-value pair in Pod ? Set 'env:' variable, use 'valueFrom' and 'configMapkeyRef' also we have 'envFrom' what is this ? Nothing but referring configMap directly in Pod. 
+- In AWS we have SSM parameter to store the configuration and secrets, similarly every platform as a configuration and secrets storage. In kubernetes also we have 'ConfigMap' nothing but a key-value pair. So create 1 ConfigMap.
+- How to define above ConfigMap key-value pair in Pod ? Set 'env:' variable, use 'valueFrom' and 'configMapkeyRef' also we have 'envFrom' what is this ? Nothing but referring configMap directly in Pod.
 - Secrets in kubernetes is also a key-value pair for storing secrets. We can refer secrets using 'secretRef'
-- What are 'Services' in Kubernetes ? In Kubernetes, Services are used to provide a stable way to access Pods. Because Pods are ephemeral they can be created, destroyed or moved between nodes anytime. Each Pod get its own IP address, but that IP changes if the Pod restarts. If your app (Say, frontend) needs to talk to another app (Say, backend), it can’t rely on these ever-changing Pod IPs. So we have a solution that is Services, which has a fixed IP address (ClusterIP) and sometimes a DNS name to access a set of Pods. We have three types of services. ClusterIP (Purely internal to kubernetes) NordPort (You can expose to outside world) Load balancers (You can expose to outside world). That means first request will go to service then to Pod. That means Pod should be attached to the service.
+- What are 'Services' in Kubernetes ? In Kubernetes, Services are used to provide a stable way to access Pods. Because Pods are ephemeral they can be created, destroyed or moved between nodes anytime. Each Pod get its own IP address but that IP changes if the Pod restarts. If your app (Say, frontend) needs to talk to another app (Say, backend) it can’t rely on these ever-changing Pod IPs. So we have a solution that is Services, which has a fixed IP address (ClusterIP) and sometimes a DNS name to access a set of Pods. We have three types of services. ClusterIP (Purely internal to kubernetes) NordPort (You can expose to outside world) Load balancers (You can expose to outside world). That means first request will go to service then to Pod. That means Pod should be attached to the service.
 - If you want Pod to Pod communication they should send a request to service first. That means we should attach Pod to a Service. How do we attach Pod to service ? Using Labels and Selectors.
-- So first write a Pod definition and then Serice definition in yaml file.
+- So first write a Pod definition and then Service definition in yaml file.
 - What if we want multiple Pods ? We can write another Pod definition also but its not a good practice.
 - What is the difference between 'ReplicaSet' and 'DeploymentSet' ?
 - ReplicaSet will only creates identical Pods, if Pod crashes it will create new Pods. If you try to scale these Pods, it just create replica of Pods does not support rolling update, rollback in case of any failures.
