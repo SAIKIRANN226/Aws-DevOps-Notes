@@ -1212,4 +1212,15 @@ HPA (Horizontal Pod auto scaling)
 - What is counter vs guage ? Two types of values counter and guage. Counter will always increase for example a CPU.
 
 ### Session-66
-- 
+- You no need to know everything in monitoring like prometheus or grafana because there will be a separate team.
+- Mainly we should know as a DevOps engineer is Terraform, Docker, kubernetes, Jenkins, Shellscript, Ansible, AWS services.
+- You have to tell that iam learning prometheus and grafana, you can keep like this profile.
+- Now in this session how to configure applications in EKS in prometheus using helm charts. You dont have to perfect this also, just know or leave it.
+- For ELK (ElasticSearch logstash kibana) also have separate team, so dont worry about this.
+- ElasticSearch is a DataBase to store the log files or documents. ELK is the most popular log monitoring tool.
+- Usually application logs shifted to external system for analysis.
+- Kibana is UI for ElasticSearch. So create a server and install all required components. You can also install from the siva repo from elk.MD file
+- So now you need to push the logs from server to above create ELK, for that you need to install Agents (File beat) in say for example we want to ship logs from web server of roboshop, so in filebeat configuration you need to replace with ELK IP address (Internal IP) to push the logs and give enabled true and also give the path of logs which you want to access.
+- We have 'Logstash' component which takes input from the agent and filter it in structured (Proper format) way and push it to the ELK. So install logstash from the siva repo only.
+- So here filebeat should send logs to logstash not ELK, so comment the ELK IP in filebeat.yaml configuration and uncomment the logstash lines and replace with internal IP of ELK.
+- Next add Input, Filters, Output. We have lot of filter, we use 'grok' filter it is a log pattern, we can generate this in 'Grok Debugger' website.
