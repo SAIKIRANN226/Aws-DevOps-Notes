@@ -1024,6 +1024,7 @@
 - ReplicaSet will only creates identical Pods, if Pod crashes it will create new Pods. If you try to scale these Pods, it just create replica of Pods does not support rolling update, rollback in case of any failures.
 - DeploymentSet will manage ReplicaSets also support rolling update which gradually upgrade to new version and also supports rollback, we can revert to old version incase of failure. We can also scale up and down Pods.
 - Pods and ReplicaSets are the subset of DeploymentSets.
+- DeploymentSet ---> Creates ReplicaSets ---> Create Pods
 
 ### Session-56
 - We build image and push to the Dockerhub then we write manifest file and inform Kubernetes how to run this image using this manifest file. These are the only two options we follow while configuring roboshop project.
