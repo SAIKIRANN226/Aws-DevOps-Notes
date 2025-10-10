@@ -1202,6 +1202,14 @@ HPA (Horizontal Pod auto scaling)
 - We also have filter options to control only whichever instances we want prometheus to monitor. We should mention tags in nodes.
 
 ### Session-65
-- Alerting
--  
+- Next concept is Alerting. First raise the alert in system (You can refer the documentation from the prometheus website, you have to mention in prometheus.yaml file under rule_files) 
+- What is alert-manager ? We need to manage all alerts, you need to install in server from the internet. To get all alerts to the alert-manager, you need to inform prometheus.yaml file
+- To send this alert in email, you need to configure 'Amazon simple email service' from the AWS. First add identity as email id, from this email id only we send email alerts. Next create smtp credentials. Keep all this code in alertmanager.yaml file only.
+- Prometheus datatypes are two types. Instance vector and Range vector.
+- What is Instance vector ? What is the value of instance rightnow ?
+- What is Range vector ? A series of values over the time.
+- What is scalar ? Its just a value.
+- What is counter vs guage ? Two types of values counter and guage. Counter will always increase for example a CPU.
+
 ### Session-66
+- 
