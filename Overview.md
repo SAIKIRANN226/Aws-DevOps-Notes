@@ -1063,7 +1063,7 @@
 - Static provisioning ---> We have to create storage by ourself. First we need to create storage, creating storage is the responsible of storage admin or K8 admin. Create EBS volume in AWS with 10GB in same zone where the server is created. Next make this volume available to k8 cluster and also install drivers like 'aws-ebs-csi' in server because when you installing something external resource, you need to install their drivers also. A proper role (EC2 full access) should be attached to ec2 instances (Node group) to access EBS.
 - What are Kubernetes resources (or) Objects ?
 - What is Persistent volume in kubernetes ? It represents the external storage because as a K8 admin you dont have access to storage space. We do operations on Persistent volume. We also have PVC (Persistent volume claim) Pods should request volume through PVC. It is like a request to PV (Persistent volume)
-- Pods connect to VPC ---> VPC connects to PV.
+- Pods connect to PVC ---> PVC connects to PV.
 - We have restrictions on volumes like readwriteonce, readwritemany, EBS volume should have readwriteonce access only once because it is HD.
 - If Pods wants some storage they should request to PV through PVC.
 - When you apply, where your Pod is getting created ? In any Node. Where should that Pod is created is controlled by using 'Node selectors' we can label the nodes also. We also have 'Affinity and Anti-affinity' that means we can decide like Pod should not go to that particular nodes.
@@ -1076,74 +1076,64 @@
 - What are the access points in EFS ? We can use 1 file system for entire organization also using access points. For example we can give 1 access point to roboshop project and another access point to flipkart project using unique path, user ID, group ID and permissions like 'AmazonElasticfileSystemFullAccess' in storage class.
 
 ### Session-59
+- Helm charts are used for 2 purposes to templatise K8 manifest files and another one is package manager.
 - Helm charts purpose is to templatise the kubernetes manifest files and package manager for kubernetes.
-- Basically we do only two steps one is Build the image or pull the image, if it is public and another one is configure the image through manifest files to run Pods.
-- Once kubernetes manifest files are ready, changes in this manifest files will be very rare, so instead of changing in manifest files, so helm will keep all constant values separately to templatise manifest files without touching manifest files.
-- Install Helm in server using commands from internet or from helm website. 
+- Basically we do only two steps one is Build the image or pull the image if public and another one is configure the image through manifest files to run Pods.
+- Once kubernetes manifest files are ready, changes in this manifest files will be very rare, so instead of changing in manifest files, we use helm charts which will keep all constant values separately to templatise manifest files without touching manifest files.
+- Install Helm in server using commands from internet (or) from helm website. 
 - First file to setup is 'Chart.yaml' and 'templates' folder are mandatory to templatise the manifest files. Whatever kubernetes resources you are using that must be kept in templates folder.
-- Go through the code of Helm-charts in VS. Here helm will hit kubectl command in the background itself.
+- Go through the code of 'Helm-charts' in VS. Here helm will hit kubectl command in the background itself.
 - Understand the helm commands in helm website for example 'helm install nginx .'
 - We keep constant values in 'values.yaml' file to templatise the manifest files in Helm root folder.
 - How to use that value which we kept in values.yaml ? {{ .Values.deployment(Anyname).replicas }}
-- Another purpose is 'Package manager' if image is already in Public, we dont need to build the image, next helm have some public repos to configure the image through manifest files.
-- In VM, we used yum install nginx -y, here yum is getting the package from the internet and install in VM right ? Then what about in kubernetes ? Real advantage of helm is image is already in public (So no need to build the image) and Helm have some public repos to configure the image through manifest files.
-- What are Helm repos ? We have artifactHUB
-- In static provisioning we have EBS drivers right ? We installed these drivers from the internet using yaml files right ? But here we using helm to install aws-ebs-csi drivers using below steps.
+- Another purpose is 'Package manager' Helm is the package manager for Kubernetes. It allows you to package, version, install, upgrade and manage Kubernetes applications easily using Helm charts — similar to how apt or yum manage packages on Linux.
+- What are Helm repos ? We have 'artifact HUB'
+- In static provisioning we have EBS drivers right ? We installed these drivers from the internet using yaml files but here we using helm to install 'aws-ebs-csi' drivers using below steps.
 - So first add helm repo in server, in this repo we have kubernetes resource files.
 - Next 'helm repo update' similar to yum update
-- Then install aws-ebs-csi drivers using shown command in internet.
-- What is Statefulset ? Used to create stateful applications in kubernetes. Nodes inside stateful applications should have static host names to communicate with other nodes. Stateful applications should follow orderly provisioning as well as terminate.
+- Then install 'aws-ebs-csi' drivers using shown command in internet.
+- What is Statefulset ? Used to create stateful applications in kubernetes. Nodes inside stateful applications should have static host names to communicate with other nodes. Stateful applications should follow orderly provisioning as well as terminate process.
+<img width="712" height="415" alt="Screenshot 2025-10-11 214559" src="https://github.com/user-attachments/assets/459f3e93-3c31-42f3-a340-d0bd81b2c003" />
 - What is Deployment ? Used to create stateless applications in kubernetes.
-- What is the difference between Statefulset and Deployment ? Popular interview question.
-- What is Headless service ? Is used for stateful applications, when you hit the headless service, instead of getting single service IP address, you will get the all Pods IP address in the cluster, so that it is easy for 1 replica to communicate with other replica set. In database cluster 1 replica should send data to other replica, we should use headless service.
+- What is the difference between Statefulset and Deployment ? Deployment is used for stateless applications, each pod is identical can be created and destroyed at anytime, Pod IPs will be changing after every restart and it is easy for scaling, mainly used for web, frontend and api. Statefulset are used for stateful applications, each pod has fixed name and also maintain stable storage using PVC and ensures orderly deployment and deleted in reverse sequential order. Mainly used for Databases like mongodb, mysql redis.
+- Interview question ? Why Headless service is useful for StatefulSet ? Normally a Service in Kubernetes gives a single cluster IP — it load balances traffic across all Pods behind it. So instead of single IP, it will give all Pod IPs. StatefulSet manages stateful Pods, each Pod has A unique stable hostname, Its own storage PVC, Ordered creation and termination. To make this possible, the StatefulSet must have a way to give each Pod a unique DNS name.
+But a Headless Service is created without a cluster IP
 - Now configure mongodb in statefulset using helm. We keep Chart.yaml, templates folder, values.yaml are mandatory.
 - How to run this mongodb ? 'helm install mongodb .'
 
 ### Session-60
 - Continuation of configuring other components using helm charts.
 - What is RBAC ?
-- Creating databases using statefulset
-- What are the conditions to use stateful ? First install EBS drivers using helm commands like helm repo add, update and upgrade. Give role AmazonEBSSCIDriverPolicy access to EC2 instances. Install storageclass, this will create drivers automatically
+- Creating databases using StatefulSet.
+- What are the conditions to use Stateful ? First install EBS drivers using helm commands like helm repo add, update and upgrade. Give role 'AmazonEBSSCIDriverPolicy' access to EC2 instances. Install storageclass, this will create drivers automatically
 - If you want better UI in kubernetes, we have a tool called 'K9s' install this tool in server from open source git called 'derailed/k9s' from internet 'viaWebi for linix and macos' after installing just type 'k9s'
-- To see pods or services or namespaces use 'Shift+:'
-- To see logs just type 'L'
-- To come back just hit 'Esc' button
-- Generally we face errors in kubernetes are like 'error image pull' why this ? because for rabbitmq we dont have customised image it was pulled from the dockerhub, but we have given our customised path to pull the image. Another one container is not starting (Crashloopbackoff error)
-- RBAC ---> Till now we deployed k8 resources using with admin user like 'kubectl apply' with admin access, but in projects we dont get admin access, there will be separate eks-admin team, we are devops engineers for roboshop project. We will only get access to roboshop namespace. RBAC will generally administrators will do 
-- What will happen when roboshop project starts ? Team leader and members will email to eks admin team about name space. Admin team will get approvals from their manager and roboshop manager then they create namespace for roboshop.
-- To give roles to them we have some k8 objects they are Role, Role binding, CLuster role, Clusterrole binding
-- So access will be given by eks-admin using above k8 objects. For example trainee (only read access) engineers (limited) TL (namespace admin) that is nothing but kubernetes RBAC
-- We integrate authentication using IAM in aws since we are in cloud, but authorisation will be from kubernetes EKS
-- So to set authentication first, you need to create user in IAM in aws and give least access like 'Describe cluster' and add ARNs
-- Next autorisation nothing but 'role binding' like tagging above user to roboshop project.
-- Now how EKS will understand interate with IAM ? We have option in kuberntes that is 'aws-auth ConfigMap' you need to edit this. How to get this ? 'kubectl get configmap aws-auth -n kube-system -o yaml' copy this code and paste in a file VS naming like 'aws-auth.yaml'
-- When the user try to kubectl get nodes. He wont get the access, because nodes are clusterlevel resources, but the above user has only read access like role and role binding are only for namespace level resources.
-- HPA (Horizontal Pod auto scaling)
-- Generally what Auto-scaling will do ? It will check the avg CPU utilization, if crosses 75% then VMs are getting increased. So similarly in kuberntes also it should increase or decrease the Pods depending upon traffic using HPA.
-- We have conditions for HPA. 1.metrics server, generally in server to check this utilization we use top command, but in kubernetes dont know how much resources are using a Pod. So for that we need to install metrics server which measueres Pod resources dynamically. Install from internet. then it will  measure the Pod command is 'kubectl top pods'
-- Next one is 'your deployment should have resources implemented' For example 2 pods are running and i want avg utilization of these two pods. For example life of a human limit is 100 years so we compare years with this 100.
+- Generally we face errors in Kubernetes are like 'error image pull' because for rabbitmq we dont have customised image, it was pulled from the dockerhub, but we have given our customised path to pull the image. Another one container is not starting (CrashLoopBackOff error) means the Pods container keeps crashing and restarting repeatedly.
+It usually happens due to wrong configuration, application errors or missing dependencies. You fix it by checking Pod logs and correcting the root cause.
+- RBAC ---> Till now we deployed K8 resources using with admin user like 'kubectl apply' with admin access but in projects, we dont get admin access, there will be separate eks-admin team. We are DevOps engineers for roboshop project. We will only get access to Roboshop Namespace. RBAC will generally administrators will do not DevOps.
+- EKS Admin Team → Controls the entire EKS cluster.
+- DevOps Team (Roboshop) → Controls only their namespace (Once granted).
+- HPA (Horizontal Pod Auto-scaling)
+- Generally what Auto-scaling will do ? It will check the avg CPU utilization, if crosses 75% then VMs are getting increased. So similarly in kubernetes also, it should increase or decrease the Pods depending upon the traffic using HPA. So we need to install Metrics server, generally in server to check this utilization we use top command, but in kubernetes dont know how much resources are using a Pod. So for that we need to install metrics server which measures Pod resources dynamically. Install from internet. Then it will measure the Pod. Command is 'kubectl top pods'
+- Next one is 'Your deployment should have resources implemented' For example 2 pods are running and i want avg utilization of these two Pods. For example life of a human limit is 100 years, so we compare years with number 100.
 
 ### Session-61
-- Configuring remaining components.
-- Horizontal scaling vs Vertical scaling ? Horizontal scaling is adding more servers, if one server crashes, then remaining servers can handle requests. Vertical scaling is increasing or decreasing CPU and memory resources of a single Pod. Horizontal scaling is better to choose.
-- Conditions to use horizontal scaling is, we should install metrics server and deployment should have resources mentioned, then only it will calculate the cpu and memory then depending up on this, it will scaleup or down.
-- Now we need to configure web component. Classic LB is very old, latest one is Application LB but when it comes to kubernetes in cloud bydefault it is taking classic LB. So to change this we need to use a 'ingress control' So first request will come to ingress controller then it will decide to go which application.
+- Continuation of configuring remaining components.
+- Horizontal scaling (vs) Vertical scaling ? Horizontal scaling is adding more servers. If one server crashes then remaining servers can handle requests. Vertical scaling is increasing (or) decreasing CPU and memory resources of a single Pod. Horizontal scaling is better to choose.
+- Conditions to use Horizontal scaling is we should install metrics server and deployment should have resources mentioned then only it will calculate the CPU and Memory then depending up on this it will scaleup or down.
+- Now we need to configure web component. Classic LB is very old. Latest one is Application LB but when it comes to kubernetes in cloud by default it is taking Classic LB. So to change this we need to use a 'ingress control' So first request will come to ingress controller then it will decide to go which application. Installing ingress controller is not DevOps work, it is by EKS admin work.
 - Go through the code of 'K8-ingress' in VS.
-- What is ingress resource ? If anybody hit 'app1.daws76s.online' --> ingress controller --> to ingress resource --> app1 service --> app1 Pod
-- EKS should have capability of creating Load Balancers, Target groups, Listeners, Rules. So to get that capability, we need to install ingress controller. Just search app-alb ingress controller in google. This is not our responsibility.
-- Install 'apache benchmark centos' in server from google. It is used for testing load.
 
 ### Session-62
-- What is your kubernetes architecture ? Nothing but incoming request to the system and outgoing request from the system.
-- Control plane have some components, one of them is 'kube-apiserver' when you enter a command like 'kubectl get pods' then this first request goes to kube-apiserver. kube-apiserver generally validate authentication and authorization.
+- What is your Kubernetes architecture ? Nothing but incoming request to the system and outgoing request from the system.
+- Control plane have some components. One of them is 'kube-apiserver' when you enter a command like 'kubectl get pods' then this first request goes to kube-apiserver. Kube-apiserver generally validate authentication and authorization.
 - Getting information is the responsibility of kube-apiserver and handover request to scheduler.
 - Creating resources is the responsibility of scheduler. This will decide in which node i should create Pod based on few factors like node labels and selectors, taints and tolerations, affinity and anti-affinity.
-- Next component is 'etcd' entire data corresponds to our cluster like a data-base. It is very crucial if we lose, we dont get the data back. It will be takecare by cloud team only. Not only this entire control plane will be taken care by aws cloud only.
-- Another component is 'kube-controller-manager' responsible for noticing and responding when nodes are down and then making nodes up. Job controller controls the jobs like create pods, once pod completes their task, jon controller will mark as completed. Replication controller it will make sure requested number of replicas are always running.
+- Next component is 'etcd' entire data corresponds to our cluster like a data-base. It is very crucial if we lose, we dont get the data back. It will be takecare by cloud team only. Not only this entire control plane will be taken care by AWS cloud only.
+- Another component is 'kube-controller-manager' responsible for noticing and responding when nodes are down and then making nodes up. Job controller controls the jobs like create pods, once pod completes their task, job controller will mark as completed. Replication controller it will make sure requested number of replicas are always running.
 - Node components ---> kubelet is a component that make sure nodes are connected to control plane.
 - Kube-proxy component is responsible to forward the request from services to pods.
 - 'Container runtime' can run any images to containers.
-- All the above points are kubernetes architecture, you need to explain this in interview.
+- All the above points are kubernetes architecture you need to explain this in interview.
 - Deployment strategies, we have used rolling update.
 - In Terraform cluster, we go for blue-green deployment strategy.
 - How to do EKS upgrade ?
