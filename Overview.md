@@ -1027,52 +1027,52 @@
 - DeploymentSet ---> Creates ReplicaSets ---> Create Pods
 
 ### Session-56
-- We build image and push to the Dockerhub then we write manifest file and inform Kubernetes how to run this image using this manifest file. These are the only two options we follow while configuring roboshop project.
+- We build image and save in Dockerhub then we write manifest file and inform Kubernetes how to run this image using this manifest file. These are the only two options we follow while configuring roboshop project.
 - Configuring Roboshop project into Kubernetes. Go through the code of 'K8-roboshop' in VS.
 - Start configuring mongodb component first in 'K8-roboshop' folder in VS.
 - First keep all mongodb code like catalogue.js, user.js files in mongodb folder.
 - Second write Dockerfile for this mongodb.
-- Third write manifestfile to inform kubernetes how to run this mongodb image using this manifest file.
+- Third write K8 manifestfile to inform kubernetes how to run this mongodb image using this manifest file.
 - Now pull in 'K8-roboshop' server and login to the Docker first then build the image using 'docker build -t joindevops/mongodb:v1 .'
 - Then push the mongodb image to Dockerhub using 'docker push joindevops/mongodb:v1'
 - Next create manifest file (Kubernetes file) which resource should we use now ? Pod vs ReplicaSet vs DeploymentSet ? We use DeploymentSet resource. We should mention image pull policy as Always, this policy will pull the latest image everytime in Pod from the Dockerhub. If we do not keep this policy, application will not update.
-- How do i force kubernetes to re-pull an image ? Using 'imagePullPolicy: Always'
+- How do i force Kubernetes to re-pull an image ? Using 'imagePullPolicy: Always'
 - Attach this mongodb deployment to the Service (ClusterIP) because mongodb should not be exposed to outside world.
-- Now push to Github, Pull in server, Create namespace in K8-roboshop folder. In mongodb 'kubectl apply -f <filename>'
+- Now push to Github, Pull in server, Create namespace in K8-roboshop folder. In mongodb 'kubectl apply -f <filename>.yaml'
 - Similarly create for catalogue and other components also.
-- We have Debug Pod in kubernetes ? In this file we can keep Pod in running for 100000 seconds, so that we can do some operations on that Pod.
+- We have Debug Pod in Kubernetes ? In this file we can keep Pod in running for 100000 seconds, so that we can do some operations on that Pod.
 - If catalogue is not connecting to mongodb 'telnet mongodb 27017' that means here catalogue Pod is in another node and mongodb Pod is in another node. So request should go like this catalogue-Pod, catalogue-Node, mongodb-Service, mongodb-Node, mongodb-Pod. Here siva has given allow all ports in SG as of now.
-- Next go for the Web component. Note that if config map is changed, you should restart the Pod. In web we used Loadbalancer as Service because web should expose to the outside world. Similarly write for remaining components.
+- Next go for the Web component. Note that if config map is changed, you should restart the Pod. In web we used Load balancer as Service because web should expose to the outside world. Similarly write for remaining components.
 
 ### Session-57
 - What are Stateful and Stateless applications ?
-- EBS ---> Hard disk ; EFS ---> Google drive etc.
-- For example we have EKS cluster and Worker nodes. Where the data will be stored ? In worker nodes only. Here Nodes and Pods are ephemeral that means temporary. Storing data in Nodes are risk because Nodes are temporary. So we should have some external storage (Like Hard disk, we use which is outside the laptop) That means we take separate storage interface, we mount this storage (This can be EBS/EFS) to EKS cluster, so here data will be stored in storage not in worker nodes. Storage is the important topic.
+- EBS ---> Hard disk and EFS ---> Google drive etc.
+- For example we have EKS cluster and Worker nodes. Where the data will be stored ? In worker nodes only. Here Nodes and Pods are ephemeral that means temporary. Storing data in Nodes are risk because Nodes are temporary. So we should have some external storage or like temporary storage (Like Hard disk, we use which is outside the laptop) That means we take separate storage interface, we mount this storage (This can be EBS/EFS) to EKS cluster, so here data will be stored in storage (Volumes) not in worker nodes.
 - Kubernetes volumes are of two types Internal volumes and External volumes.
-- What are Internal volumes ? Stores data in worker nodes. Internal volumes are ephemeral (Temporary) but we have usecases like 'emptyDir' and 'hostpath'
+- What are Internal volumes ? Stores data in worker nodes. Internal volumes are ephemeral (Temporary) but we have use cases like 'emptyDir' and 'Hostpath'
 - These temporary volumes or ephemeral volumes will be there until Pods and Worker nodes are there. While External volumes are permanent.
-- What does 'emptyDir' do in kubernetes ?
+- What does 'emptyDir' do in kubernetes ? A temporary storage inside the Pod.
 - What does 'hostpath' and 'DaemonSet' do in kubernetes ?
 - External volumes are 2 types Static provisioning and Dynamic provisioning.
 
 ### Session-58
-- What is the difference between Hard disk and Cloud drives ? HD sits near to the computer, Cloud drives are network drives like google drive, icloud etc.
+- What is the difference between Hard disk and Cloud drives ? HD sits near to the computer. Cloud drives are network drives like google drive, icloud etc.
 - EBS (Elastic block store, created outside the system say HD)
 - EFS (Elastic file system, say google drive)
 - External volumes are permanent. We have Static provisioning and Dynamic provisioning.
-- Static provisioning ---> We have to create storage by ourself. First we need to create storage, creating storage is the responsible of storage admin or K8 admin. Create EBS volume in aws with 10GB in same zone where the server is created. Next make this volume available to k8 cluster and also install drivers like 'aws-ebs-csi' in server. A proper role (EC2 full access) should be attached to ec2 instances to access EBS.
+- Static provisioning ---> We have to create storage by ourself. First we need to create storage, creating storage is the responsible of storage admin or K8 admin. Create EBS volume in AWS with 10GB in same zone where the server is created. Next make this volume available to k8 cluster and also install drivers like 'aws-ebs-csi' in server because when you installing something external resource, you need to install their drivers also. A proper role (EC2 full access) should be attached to ec2 instances (Node group) to access EBS.
 - What are Kubernetes resources (or) Objects ?
-- What is Persistent volume in kubernetes ? It represents the external storage why this ? Because as a K8 admin you dont have access to storage space, so Persistent volume will represent external storage. So we do operations on Persistent volume. We also have PVC (Persistent volume claim) Pods should request volume through PVC, it is like a request to PV (Persistent volume)
+- What is Persistent volume in kubernetes ? It represents the external storage because as a K8 admin you dont have access to storage space. We do operations on Persistent volume. We also have PVC (Persistent volume claim) Pods should request volume through PVC. It is like a request to PV (Persistent volume)
 - Pods connect to VPC ---> VPC connects to PV.
-- We have restrictions on volumes like readwriteonce, readwritemany, EBS volume should have readwriteonce access only once, because it is HD.
+- We have restrictions on volumes like readwriteonce, readwritemany, EBS volume should have readwriteonce access only once because it is HD.
 - If Pods wants some storage they should request to PV through PVC.
 - When you apply, where your Pod is getting created ? In any Node. Where should that Pod is created is controlled by using 'Node selectors' we can label the nodes also. We also have 'Affinity and Anti-affinity' that means we can decide like Pod should not go to that particular nodes.
-- What is Dynamic provisioning ? Volume should be created automatically. In static we created external volume EBS, PV by ourself right, so in this Dynamic we have a object called 'StorageClass' that will automatically create external storage EBS, PV aswel based on the request and also install drivers and give role to that EC2 instance.
-- If networking is there then it is VPC resource, if networking is not there then it NON-VPC resource.
-- If Pod is created inside the namespace resource, since storage class is cluster level resource, admin should create this, so EBS will have storageClass cluster wide.
+- What is Dynamic provisioning ? Volume should be created automatically by K8. In static we created external volume EBS, PV by ourself right ? But in Dynamic, we have a object called 'StorageClass' that will automatically create external storage EBS, PV aswel based on the request and also install drivers and give role to that EC2 instance.
+- If networking is there then it is VPC resource, if networking is not there then it NON VPC resource.
+- If Pod is created inside the namespace resource. Since storage class is cluster level resource, admin should create this, so EBS will have storageClass cluster wide.
 - Go through the concept https://github.com/sivadevopsdaws74s/k8-resources/tree/master/storage
 - What is Reclaim policy ? Nothing but what happens to PV when PVC is deleted, for that only we have 2 policies those are Retain policy, PV and Data will be remain. When you select Delete policy, underline volume also be deleted.
-- Next EFS, create file system in AWS console. It will be more in size say 47TB for a single file. There will be No limit on size in EFS. EFS will work on NFS (Network file system) port number of NFS is 2049, edit this security group, so that it will allow port 2049 from worker nodes and install EFS drivers. Next create PV, PVC and use PVC in the Pod.
+- Next EFS, create file system in AWS console. It will be more in size say 47TB for a single file. There will be No limit on size in EFS. Next create PV, PVC and use PVC in the Pod.
 - What are the access points in EFS ? We can use 1 file system for entire organization also using access points. For example we can give 1 access point to roboshop project and another access point to flipkart project using unique path, user ID, group ID and permissions like 'AmazonElasticfileSystemFullAccess' in storage class.
 
 ### Session-59
