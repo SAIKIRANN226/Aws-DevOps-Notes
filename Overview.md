@@ -1136,21 +1136,21 @@ It usually happens due to wrong configuration, application errors or missing dep
 - All the above points are kubernetes architecture you need to explain this in interview.
 - Deployment strategies, we have used rolling update.
 - In Terraform cluster, we go for blue-green deployment strategy.
-- How to do EKS upgrade ?
+- How to do EKS upgrade ? This will be done by EKS admin team not DevOps team.
 
 ### Session-63
-- Important point to remember that creating eks cluster, upgrading, ingress controller are k8 administrator work.
-- What are taints and tolerations ? If i taint a node then bydefault scheduler cannot schedule the pod on that node. Few projects add their own nodes to the eks cluster then they taint the nodes. Tolerations is a excuse, pods specific to that project can have tolerations.
+- Important point to remember that creating eks cluster, upgrading, ingress controller are K8 admin work.
+- What are taints and tolerations ? If i taint a node then by default scheduler cannot schedule the pod on that node. Few projects add their own nodes to the eks cluster then they taint the nodes. Tolerations is a excuse, pods specific to that project can have tolerations.
 - What are affinity and anti-affinity ?
 - Pod affinity means Pod1 is running, Pod2 likes Pod1, so Pod2 wants to run where Pod1 is running.
 - Pod anti-affinity means opposite.
-- How to upgrade the cluster ? Before upgrading, you can announce no releases or changes to the applications.
-- 
+- How to upgrade the EKS cluster ? Before upgrading you can announce NO releases or changes to the applications.
+
 ### Session-64
-- From this session, we learn about monitoring. Actually there will be a separate team and comes under support. It is SRE responsibility.
-- Monitoring are of two types White box and Black box. Black box is closed, we dont know internal details. White box is open, we know internal details of app or system.
-- As a normal user, how can you monitor the facebook ? By checking facebook is running or not ? Login is working or not ? Input validations, Functionality test etc. All these checks are Black box because we dont know internal details of the FB. Whilte white box monitoring can be done by those who know the internal details, so only facebook employees can do like all FB servers are up and running ? CPU, Memory, Disk utilization, Log errors etc.
-- We have 4 golden signals in monitoring Latecny (Low latency) Traffic (Always measure traffic like how many users are sending request)  Errors (Log errors, application errors) Saturation (Measure CPU, Memory, Disk)
+- From this session we learn about monitoring. Actually there will be a separate team that comes under support team. It is the job of SRE role not DevOps.
+- Monitoring are of two types White box and Black box. Black box is closed we dont know internal details. White box is open we know internal details of app (or) system.
+- As a normal user, how can you monitor the facebook ? By checking facebook is running or not ? Login is working or not ? Input validations, Functionality test etc. All these checks are Black box because we dont know internal details of the FB. White box monitoring can be done by those who know the internal details, so only facebook employees can do like all FB servers are up and running ? CPU, Memory, Disk utilization, Log errors etc.
+- We have 4 golden signals in monitoring Latency (Low latency) Traffic (Always measure traffic like how many users are sending request) Errors (Log errors, application errors) Saturation (Measure CPU, Memory, Disk)
 - What is Time series database used in prometheus ?
 - In every node (Servers) have 'Node exporters' and prometheus are connected to node exporters and it will send data to the central storage in Prometheus. You need to install nord exporters (Port 9100) in servers. We can keep in ansible file to install node exporter.
 - What is Periodic time intervals in Time series database ? We can decide wether we want data for every 1m, 2m etc. For example if prometheus wants data from node1 for every 5min say then prometheus will connect to node1 export for every 5min and pull the metrics and save it in TSDB (Time series database) We need to configure this in prometheus.yaml file
