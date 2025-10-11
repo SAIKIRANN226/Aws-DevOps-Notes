@@ -459,4 +459,50 @@ Using a parallel key word in stages
 - Store artifacts in S3 and deploy using CodeDeploy/CloudFormation/Terraform.
 - Jenkins pipeline can push Docker images to Amazon ECR and deploy to EKS or ECS.
 
+### Why do we need kubernetes when you have Docker already ?
+- Docker is an image building, storing and container creation technology but Kubernetes is container orchestration technology, you can tell the disadvantages of docker here.
 
+### What is Namespace in Kubernetes ?
+It is an Isolation in kubernetes similar to VPC, Usually we create one namespace for one project. So resources will be isolated to the namespace level.
+
+### What is the difference between Pod and Container ? 
+Pod is the smallest deployable unit in kubernetes, it can have multiple containers shares same storage and network.
+
+### How do you restrict Pods and Containers to use limited host resources ?
+We can limit using requests and limits in yaml that can restrict containers not to use more CPU and memory.
+
+### How can you restrict resources to Pod if enginner forgot to mention them ?
+We have resource called limit range in kubernetes at namespace level, so when engineer forgets to mention, limit range will be applied automatically.
+
+### How do you configure a health check in Pod ?
+- We can configure using 'Liveness probe' and 'Readiness probe'
+- Readiness probe is used to check at the time of container creation wether Pod is ready to take the traffic or not ?
+- Liveness probe will kick in when readiness is done. It will be checked at a particular interval to check if the application is working properly or not ?
+
+### What is imagepull policy in Pod ?
+- We have 3 types of policies
+- If not present then it will pull, if available already it will not pull
+- Always, wether image available or not it will always pull.
+- Never, If present in host it can run the Pod, otherwise error
+- Keeping always is best, so that it will update the applications.
+
+### How do you provide env variables to the Pod in better way ?
+We can create configMap resource, we can refer this configMap in the Pod, so that entire config will be loaded at the time of container creation. In future if you want to add more configuration, you can do changes in configmap and restart the Pod, so that you no need to make changes in Pod definition.
+
+### What are secrets in Kubernetes ?
+Secrets are confidential information like username and password etc. We can store this information in secrets and refer it in Pod definition using configMap
+
+### What are Services in kubernetes ?
+- Pods are natually ephemeral in Kubernetes. So Pod IP will be changed every time it is created. To achieve Pod to Pod communication, we cant relay on IP address and the solution is Service. Service can have name and Port, so Pod should be attached to the service, multiple pods can also be attached to service using label selectors. Service can also act like a LB between Pods. We have 3 types of services
+- ClusterIP ---> Default type. It can get 1 IP address, we can configure clusterIP to achieve Pod to Pod communication and this is used only for internal purpose.
+- Node Port ---> Nord Port by default creates clusterIP in background. When we say Node port and port is opened in each and every node. This port will be directed to clusterIP. Node port can be accessed over internet.
+- Load Balancer ---> LB can be created through cloud providers like AWS. LB by default creates Node port and ClusterIP in the background.
+
+### What is ReplicaSet in Kubernetes ?
+By default we cant increase the number of Pods, If you want multiple instances of Pods to serve the traffic we can use ReplicaSet useful for high availability and auto-scaling purpose.
+
+### What is Deplyoment in Kubernetes ?
+Deployment is the most important resource in kubernetes to maintain the applications. It ensures zero downtime of applications. Deployment creates replicaset in background to maintain the desired number of replicas. We can use deployment for stateless applications.
+
+### What is Daemon Set in Kubernetes ?
+Daemon set is similar to Deployment set but there is one difference Deployment makes pods available in any node but Daemon set make sure one replica of Pod runs in each and every node in K8 cluster.
