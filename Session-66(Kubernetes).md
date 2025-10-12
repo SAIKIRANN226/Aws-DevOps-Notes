@@ -1,1 +1,2 @@
-
+- How to configure applications in EKS in prometheus using helm charts. You dont have to perfect this also just know or leave it.
+- For ELK (ElasticSearch logstash kibana) also have separate team. So dont worry about this.
