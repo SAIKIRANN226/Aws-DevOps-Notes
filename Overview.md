@@ -1125,63 +1125,58 @@ It usually happens due to wrong configuration, application errors or missing dep
 
 ### Session-62
 - What is your Kubernetes architecture ? Nothing but incoming request to the system and outgoing request from the system.
-- Control plane have some components. One of them is 'kube-apiserver' when you enter a command like 'kubectl get pods' then this first request goes to kube-apiserver. Kube-apiserver generally validate authentication and authorization.
-- Getting information is the responsibility of kube-apiserver and handover request to scheduler.
-- Creating resources is the responsibility of scheduler. This will decide in which node i should create Pod based on few factors like node labels and selectors, taints and tolerations, affinity and anti-affinity.
-- Next component is 'etcd' entire data corresponds to our cluster like a data-base. It is very crucial if we lose, we dont get the data back. It will be takecare by cloud team only. Not only this entire control plane will be taken care by AWS cloud only.
+- Control plane have few components. One of them is 'kube-apiserver' when you enter a command like 'kubectl get pods' first request goes to kube-apiserver. Kube-apiserver generally validate authentication and authorization.
+- Getting information is the responsibility of kube-apiserver and handover request to Scheduler.
+- Creating resources is the responsibility of Scheduler. This will decide in which node i should create Pod based on few factors like node labels and selectors, taints and tolerations, affinity and anti-affinity.
+- Next component is 'etcd' is the central database of Kubernetes that stores all cluster data — like configuration, state of Pods, Nodes, Secrets and more. It is very crucial if we lose, we dont get the data back. Etcd and Control Plane will be taken care by AWS.
 - Another component is 'kube-controller-manager' responsible for noticing and responding when nodes are down and then making nodes up. Job controller controls the jobs like create pods, once pod completes their task, job controller will mark as completed. Replication controller it will make sure requested number of replicas are always running.
 - Node components ---> kubelet is a component that make sure nodes are connected to control plane.
 - Kube-proxy component is responsible to forward the request from services to pods.
 - 'Container runtime' can run any images to containers.
 - All the above points are kubernetes architecture you need to explain this in interview.
 - Deployment strategies, we have used rolling update.
-- In Terraform cluster, we go for blue-green deployment strategy.
-- How to do EKS upgrade ? This will be done by EKS admin team not DevOps team.
+- In Terraform, a Blue-Green Deployment means creating two identical environments — one (Blue) currently running the live app and another (Green) as a new version — then switching traffic to Green once it's tested and stable, ensuring zero downtime and easy rollback.
 
 ### Session-63
-- Important point to remember that creating eks cluster, upgrading, ingress controller are K8 admin work.
-- What are taints and tolerations ? If i taint a node then by default scheduler cannot schedule the pod on that node. Few projects add their own nodes to the eks cluster then they taint the nodes. Tolerations is a excuse, pods specific to that project can have tolerations.
-- What are affinity and anti-affinity ?
-- Pod affinity means Pod1 is running, Pod2 likes Pod1, so Pod2 wants to run where Pod1 is running.
+- Important point to remember that creating EKS cluster, upgrading, ingress controller are K8 admin work.
+- What are taints and tolerations ?
+- Taints are like 'Do Not Enter' sign on a Node.
+- Tolerations are like 'Special Passes' that allow certain Pods to enter despite the sign.
+- For example if i taint a node then by default scheduler cannot schedule the pod on that node. Tolerations is a excuse that allow certain Pods to enter despite having taints to Node.
+- Affinity ---> Stay together and Anti-affinity ---> Stay apart
+- Pod affinity means Pod 1 is running and Pod 2 likes Pod 1 then Pod 2 wants to run where the Pod 1 is running.
 - Pod anti-affinity means opposite.
-- How to upgrade the EKS cluster ? Before upgrading you can announce NO releases or changes to the applications.
+- How to upgrade the EKS cluster ? Before upgrading we will announce NO releases or changes to the applications. Upgrading the EKS cluster the job of K8 admin team.
 
 ### Session-64
-- From this session, we learn about monitoring. Actually there will be a separate team that comes under support team. It is the job of SRE role not DevOps enginner but you can tell that iam learning monitoring tools like Prometheus and Grafana.
-- Monitoring are of two types White box and Black box. Black box is closed, we dont know internal details. White box is open, we know internal details of app (or) system.
-- As a normal user how can you monitor the facebook ? By checking facebook website is running or not ? Login is working or not ? Input validations etc. All these checks are Black box because we dont know internal details of the FB. White box monitoring can be done by those who know the internal details of the FB, only facebook employees can check all FB servers are up and running ? CPU, Memory, Disk utilization, Log errors etc.
+- Monitoring concept. Actually there will be a separate team that comes under support team. It is the job of SRE role not DevOps enginner but you can tell that iam learning monitoring tools like Prometheus and Grafana.
+- Monitoring are of two types White box and Black box. Black box is closed, we dont know the internal details. White box is open, we know the internal details of app (or) system.
+- As a normal user how can you monitor the facebook ? By checking facebook website is running or not ? Login is working or not ? Input validations etc. All these checks are Black box because we dont know the internal details of the FB. White box monitoring can be done by those who know the internal details of the FB like facebook employees can check all FB servers are up and running ? CPU, Memory, Disk utilization, Log errors etc.
 - We have 4 golden signals in monitoring ---> Latency (Low latency) Traffic (Always measure traffic like how many users are sending request) Errors (Log errors, application errors) Saturation (Measure CPU, Memory, Disk)
 - What is Time series database (TSDB) used in Prometheus ? Prometheus has a built-in small database that stores all the data it collects from your servers, apps or containers — like CPU usage, memory, requests etc. But it doesn’t store data like a normal database (MySQL or MongoDB). It stores data over time — that’s why it’s called a Time Series Database (TSDB). For example 'CPU was 30% at 10:00 AM'
-- In every node (Servers) have 'Node exporters' and prometheus is connected to node exporters and it will send data to the central storage in Prometheus. You need to install nord exporters in servers. We can keep code in ansible file to install node exporter.
+- In every node (Servers) have 'Node exporters' and Prometheus is connected to node exporters and it will send data to the central storage in Prometheus. You need to install nord exporters in servers. We can keep code in ansible file to install node exporter.
 - What is Periodic time intervals in TSDB ? We can decide wether we want data for every 1m, 2m, 15s etc. For example if prometheus wants data from node 1 for every 5min say then prometheus will connect to node 1 exporter for every 5min and pull the metrics and save it in TSDB. We need to configure this in prometheus.yaml file
 - Prometheus has few components like http-server, alert manager and service discovery (Nothing but ec2 scrapping)
 - Create 1 server and install prometheus with t3.medium (30GB) because we are installing grafana also. Install prometheus from the website.
-- Prometheus is collecting metrics from the node exporters and it can collects its own metrics also. If you type 'up' or 'up[2m]' in search bar, it will show results. You can search for graph also.
-- In Prometheus, graph option is not that user-friendly, so we have to use grafana to visualize. After installing grafana, admin is the username and password to login.
-- Grafana is used for multiple sources, rightnow we are using for prometheus. So install prometheus in grafana Data sources option. Next create 'Dashboard' you can create multiple dashboards.
+- Prometheus is collecting metrics from the node exporters and it can collects its own metrics also. If you type 'up' or 'up[2m]' in search bar, it will show the results. You can search for graph also.
+- In Prometheus, graph option is not that user-friendly (We use Grafana). After installing grafana, admin is the username and password to login.
+- Grafana is used for multiple sources, rightnow we are using for Prometheus. So install prometheus in grafana Data sources option. Next create 'Dashboard' you can create multiple dashboards.
 - What is dynamic scrapping ? In cloud and dynamic enviroments IPs are ephemeral in auto-scaling to the newly created servers IPs, so we need to keep 'scrap_config' code in prometheus.yaml file then prometheus automatically finds new targets to scrape metrics without adding them manually. Make sure prometheus server should have minimum permission to describeInstances. So create a role for Prometheus server.
 - We also have filter options to control only whichever instances we want prometheus to monitor. We should mention 'tags' in nodes.
 
 ### Session-65
-- Next concept is Alerting. First raise the alert in system (You can refer the documentation from the prometheus website, you have to mention in prometheus.yaml file under rule_files) 
-- What is alert-manager ? We need to manage all alerts, you need to install in server from the internet. To get all alerts to the alert-manager, you need to inform prometheus.yaml file
-- To send this alert in email, you need to configure 'Amazon simple email service' from the AWS. First add identity as email id, from this email id only we send email alerts. Next create smtp credentials. Keep all this code in alertmanager.yaml file only.
+- Next concept is Alerting. If instance is down or shows 0 value in grafana interface then we need to send alert to the alert manager. So raise the alert in system (You can refer the documentation from the prometheus website, you have to mention in prometheus.yaml file under rule_files)
+- What is alert-manager ? It will manage all incoming alerts. Install alert manager in server from the internet and also inform prometheus.yaml file
+- To send this alert in email you need to configure 'Amazon simple email service' from AWS. First add identity as email id. From this email id only we send email alerts. Next create SMTP credentials. Keep all this code in alertmanager.yaml file only.
 - Prometheus datatypes are two types. Instance vector and Range vector.
-- What is Instance vector ? What is the value of instance rightnow ?
-- What is Range vector ? A series of values over the time.
-- What is scalar ? Its just a value.
-- What is counter vs guage ? Two types of values counter and guage. Counter will always increase for example a CPU.
+- What is Instance vector ? What is the value of instance rightnow like cpu usage ? You get the latest CPU usage for each instance at this moment.
+- What is Range vector ? This gives CPU usage values collected during the last 5 minutes not just one moment.
+- What is scalar ? Its just a value or a single number.
+- What is Counter vs Guage ? Counter will keep increasing for example a CPU. Guage means it can go UP and DOWN anytime.
 
 ### Session-66
-- You no need to know everything in monitoring like prometheus or grafana because there will be a separate team.
-- Mainly we should know as a DevOps engineer is Terraform, Docker, kubernetes, Jenkins, Shellscript, Ansible, AWS services.
-- You have to tell that iam learning prometheus and grafana, you can keep like this profile.
-- Now in this session how to configure applications in EKS in prometheus using helm charts. You dont have to perfect this also, just know or leave it.
-- For ELK (ElasticSearch logstash kibana) also have separate team, so dont worry about this.
-- ElasticSearch is a DataBase to store the log files or documents. ELK is the most popular log monitoring tool.
-- Usually application logs shifted to external system for analysis.
-- Kibana is UI for ElasticSearch. So create a server and install all required components. You can also install from the siva repo from elk.MD file
-- So now you need to push the logs from server to above create ELK, for that you need to install Agents (File beat) in say for example we want to ship logs from web server of roboshop, so in filebeat configuration you need to replace with ELK IP address (Internal IP) to push the logs and give enabled true and also give the path of logs which you want to access.
-- We have 'Logstash' component which takes input from the agent and filter it in structured (Proper format) way and push it to the ELK. So install logstash from the siva repo only.
-- So here filebeat should send logs to logstash not ELK, so comment the ELK IP in filebeat.yaml configuration and uncomment the logstash lines and replace with internal IP of ELK.
-- Next add Input, Filters, Output. We have lot of filter, we use 'grok' filter it is a log pattern, we can generate this in 'Grok Debugger' website.
+- ELK (ElasticSearch Logstash Kibana) is a DataBase to store the log files. A popular log monitoring tool. Usually application logs shifted to this ELK for analysis and Kibana is the UI for ElasticSearch.
+- So create a server for ELK and install all required components (Refer elk.MD file from siva repo)
+- So now you need to push the logs from server to above created ELK. For that you need to install Agent (File beat also called as Sidecar) in sever. For example we want to ship logs from web server of roboshop. So in file beat configuration you need to replace with ELK Internal IP to push the logs (Give enabled true) and also give the path of logs which you want to access.
+- We have 'Logstash' component which takes input from the agent and filter it in a proper format and push it to the ELK. So install logstash from the siva repo only.
+- So here filebeat should send logs to logstash not ELK. So comment the ELK IP in filebeat.yaml configuration and uncomment the logstash lines and replace with ELK Internal IP.
