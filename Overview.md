@@ -1147,21 +1147,20 @@ It usually happens due to wrong configuration, application errors or missing dep
 - How to upgrade the EKS cluster ? Before upgrading you can announce NO releases or changes to the applications.
 
 ### Session-64
-- From this session we learn about monitoring. Actually there will be a separate team that comes under support team. It is the job of SRE role not DevOps.
-- Monitoring are of two types White box and Black box. Black box is closed we dont know internal details. White box is open we know internal details of app (or) system.
-- As a normal user, how can you monitor the facebook ? By checking facebook is running or not ? Login is working or not ? Input validations, Functionality test etc. All these checks are Black box because we dont know internal details of the FB. White box monitoring can be done by those who know the internal details, so only facebook employees can do like all FB servers are up and running ? CPU, Memory, Disk utilization, Log errors etc.
-- We have 4 golden signals in monitoring Latency (Low latency) Traffic (Always measure traffic like how many users are sending request) Errors (Log errors, application errors) Saturation (Measure CPU, Memory, Disk)
-- What is Time series database used in prometheus ?
-- In every node (Servers) have 'Node exporters' and prometheus are connected to node exporters and it will send data to the central storage in Prometheus. You need to install nord exporters (Port 9100) in servers. We can keep in ansible file to install node exporter.
-- What is Periodic time intervals in Time series database ? We can decide wether we want data for every 1m, 2m etc. For example if prometheus wants data from node1 for every 5min say then prometheus will connect to node1 export for every 5min and pull the metrics and save it in TSDB (Time series database) We need to configure this in prometheus.yaml file
-- Prometheus has few components like http-server, alert manager and service discovery is nothing ec2 scrapping.
-- Create one server and install prometheus with t3.medium because we are installing grafana also with 30GB. Install prometheus from the website. Port number is 9090
-- Prometheus is collecting metrics from the node exporters which is in servers and also it can collects its own metrics also. If you type 'up' or 'up[2m]' in search it will show results. You can search for graph also.
-- In pormetheus, graph option is not that user-friendly, so we have to use grafana to visualize. After installing grafana, admin is the username and password to login.
-- Grafana is used for multiple sources, rightnow we are using prometheus, so install prometheus in grafana Data sources. Next create 'Dashboard' you can create multiple dashboards.
-- What is dynamic scrapping ? In cloud and dynamic enviroments IPs are ephemeral in auto-scaling to the newly created servers IPs, so we need to scrap_config code in prometheus.yaml file
-- Make sure prometheus server should have minimum permission to describeInstances. So create a role for Prometheus server.
-- We also have filter options to control only whichever instances we want prometheus to monitor. We should mention tags in nodes.
+- From this session, we learn about monitoring. Actually there will be a separate team that comes under support team. It is the job of SRE role not DevOps enginner but you can tell that iam learning monitoring tools like Prometheus and Grafana.
+- Monitoring are of two types White box and Black box. Black box is closed, we dont know internal details. White box is open, we know internal details of app (or) system.
+- As a normal user how can you monitor the facebook ? By checking facebook website is running or not ? Login is working or not ? Input validations etc. All these checks are Black box because we dont know internal details of the FB. White box monitoring can be done by those who know the internal details of the FB, only facebook employees can check all FB servers are up and running ? CPU, Memory, Disk utilization, Log errors etc.
+- We have 4 golden signals in monitoring ---> Latency (Low latency) Traffic (Always measure traffic like how many users are sending request) Errors (Log errors, application errors) Saturation (Measure CPU, Memory, Disk)
+- What is Time series database (TSDB) used in Prometheus ? Prometheus has a built-in small database that stores all the data it collects from your servers, apps or containers — like CPU usage, memory, requests etc. But it doesn’t store data like a normal database (MySQL or MongoDB). It stores data over time — that’s why it’s called a Time Series Database (TSDB). For example 'CPU was 30% at 10:00 AM'
+- In every node (Servers) have 'Node exporters' and prometheus is connected to node exporters and it will send data to the central storage in Prometheus. You need to install nord exporters in servers. We can keep code in ansible file to install node exporter.
+- What is Periodic time intervals in TSDB ? We can decide wether we want data for every 1m, 2m, 15s etc. For example if prometheus wants data from node 1 for every 5min say then prometheus will connect to node 1 exporter for every 5min and pull the metrics and save it in TSDB. We need to configure this in prometheus.yaml file
+- Prometheus has few components like http-server, alert manager and service discovery (Nothing but ec2 scrapping)
+- Create 1 server and install prometheus with t3.medium (30GB) because we are installing grafana also. Install prometheus from the website.
+- Prometheus is collecting metrics from the node exporters and it can collects its own metrics also. If you type 'up' or 'up[2m]' in search bar, it will show results. You can search for graph also.
+- In Prometheus, graph option is not that user-friendly, so we have to use grafana to visualize. After installing grafana, admin is the username and password to login.
+- Grafana is used for multiple sources, rightnow we are using for prometheus. So install prometheus in grafana Data sources option. Next create 'Dashboard' you can create multiple dashboards.
+- What is dynamic scrapping ? In cloud and dynamic enviroments IPs are ephemeral in auto-scaling to the newly created servers IPs, so we need to keep 'scrap_config' code in prometheus.yaml file then prometheus automatically finds new targets to scrape metrics without adding them manually. Make sure prometheus server should have minimum permission to describeInstances. So create a role for Prometheus server.
+- We also have filter options to control only whichever instances we want prometheus to monitor. We should mention 'tags' in nodes.
 
 ### Session-65
 - Next concept is Alerting. First raise the alert in system (You can refer the documentation from the prometheus website, you have to mention in prometheus.yaml file under rule_files) 
