@@ -1,42 +1,38 @@
 ### Basic Linux commands
-- ls ---> list subdirectories
-- cd ---> change directory
-- cd .. ---> to change the current working directory to its parent directory.
-- / ---> root directory
-- "-" ---> file
-- w ---> write
-- r ---> read
-- x ---> execute
-- ls -l ---> lengthy format in alphabetical order
-- ls -lr ---> lengthy format in reverse alphabetical order
-- ls --help ---> will provide all the commands regarding ls, but we dont use all
-- ls -lt ---> lengthy format based on latest timing
-- ls -ltr ---> lengthy format based on oldest timing
-- ls -la ---> lists all folders and files including hidden
-- touch ---> create the empty file
-- mkdir ---> creates folder. Blue color is folder, white color is file.
+- ls ---> List sub directories.
+- cd ---> Change directory.
+- cd .. ---> To change the current working directory to its parent directory.
+- / ---> Root directory.
+- "-" ---> File; w ---> Write; r ---> Read; x ---> Execute
+- ls -l ---> Lengthy format in alphabetical order.
+- ls -lr ---> Lengthy format in reverse alphabetical order.
+- ls --help ---> Will provide all the commands regarding ls, however we dont use all.
+- ls -lt ---> Lengthy format based on latest timing.
+- ls -ltr ---> Lengthy format based on oldest timing.
+- ls -la ---> Lists all folders and files including hidden.
+- touch ---> Creates only empty file.
+- mkdir ---> Creates only empty folder. Blue colour is folder and white colour is file.
 
-### CRUD (CREATE,READ,UPDATE,DELETE)
-So in entire software (or) you take any technology the background is CRUD. Example:- www.facebook.com, 
-login (or) signup (or) update etc. What ever you do CRUD will happen in the background.
+### CRUD (CREATE, READ, UPDATE, DELETE)
+So in entire software (or) you take any technology the background will be CRUD. Example facebook login (or) signup (or) update etc. What ever you do CRUD will happen in the background.
 
 ### Updating file with content
 - cat > file-name and then start entering content (Replaces the content)
-- cat >> file-name will appends (Add) the new content
-- To save this ---> enter and ctrl+D
+- cat >> file-name will appends new content. To save this ---> Press enter and ctrl+D
 - To read file ---> cat <file-name>
 
 ### Remove file and folder
 - rm <file-name> ---> Deletes the file
 - rmdir <folder-name> ---> Deletes the empty folder
-- rm -r <folder-name> ---> Deletes the files also ("r" means recursive go inside and delete everything)
+- rm -r <folder-name> ---> Deletes folder and files init ("r" means recursive, go inside and delete everything)
 
 ### Copy command
 - cp <source_where_the_file_is> <destination>
-- cp -r ---> recursive and Usage is "cp sample /Videos"
+- Usage is "cp sample /Videos"
+- cp -r ---> recursive and Usage is "cp -r sample /Videos"
 
 ### Move command
-With in the same folder if you use mv command, it works as a rename also. So mv command can also be used for renaming and Usage is "mv sample /Videos"
+With in the same folder if you use mv command, it works as rename also. So mv command can also be used for renaming and Usage is "mv sample /Videos"
 
 ### grep command
 - grep <word-to-find> <file-name>
