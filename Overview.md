@@ -1,19 +1,19 @@
 ### Sessions (1-11)
 - What is Computer and what characterstics does computer hold ? What are the use cases of Server, TV, Phone ?
 - What is Client-Server Architecture ? Transferring media from Phone to Laptop (Viceversa)
-- How does Operating system works ? For example windows OS ?
+- How does Operating system works ? For example windows OS ? We have 2 types of OS Linux and Windows.
 - What is the difference between Linux (Servers world) and Windows Operating systems ?
-- How to connect to Linux server (Node) ?
+- How to connect to Linux server (Node) ? Box ---> Server, Lock ---> Public key, Key ---> Private key
 - What are the Authentication mechanisms to connect to linux server ?
 - Generate (or) create a link between LOCK and KEY ? ssh-keygen -f <file_name>
 - You can directly generate keys in .ssh folder using 'ssh-keygen -f <file_name>'
-- Enable extensions in control panel ? File explorer, view, unhide extenions for known files.
+- How to enable extensions in control panel ? File explorer, view, unhide extenions for known files.
 - What is the syntax of Public key ? ssh-rsa {code} Laptop-name
 - What is the syntax of Private key ? BEGIN OPENSSH PRIVATE KEY {code} END OPENSSH PRIVATE KEY
 - Now create a server in AWS and connect to that server using Public and Private keys.
 - Import keypair in AWS by going to --> Network and security options --> Keypairs --> Actions and Import key pair (Publickey) without any gaps.
 - Create a SG (Firewall) for inbound. All traffic 0.0.0.0/0 (Representation of internet)
-- Launch instance with keypairs and take Amazon Linux 2AMI (HVM). Make sure the key pair name while you are creating server should match the key pair in Network and Security (Key Pairs).
+- Launch instance with keypairs and take Amazon Linux 2AMI (HVM). Make sure the key pair name while you are creating in server should match the key pair in Network and Security (Key Pairs).
 - How to connect to server then ? ssh -i saikiran.pem ec2-user@IP ---> In pwd location (User directory).
 - Amazon Linux / Amazon Linux 2 ---> Default user name is 'ec2-user'
 - Ubuntu ---> Default user name is 'ubuntu'
@@ -32,20 +32,21 @@
 - $ ---> Normal user ; # ---> Root user (Sudo su -) to exit from root just type exit.
 - Pwd ---> Present working directory you will be directly land in /c/users/saikiran
 - <command_name> --help ---> Get help from that particular command.
-- What are the basic linux commands ?
-- https://dzone.com/articles/top-35-git-commands-with-examples-and-bonus
+- What are the basic linux commands ? https://dzone.com/articles/top-35-git-commands-with-examples-and-bonus
 - Everything is CRUD in software industry (Example of facebook)
-- Updating file with content commands and how to save or read the file ? Enter and ctrl+D
+- How to update a file with content, how to save and how to read ? Just press enter and then ctrl+D
 - Removing file and folder commands ? rm, rmdir, rm -r <folder_name>
-- Copy command in linux and how to copy the files ?
-- Move command in linux and how to move the files ? If you use mv command with in the same folder, it works as a rename also.
+- Copy commands in linux and how to copy the files ?
+- Move commands in linux and how to move the files ? If you use mv command with in the same folder, it works as rename also.
 - Grep command in Linux is a case sensitive. Linux will treat DevOps and DEVOPS as different. So to make this case insensitive (i) use grep -i ---> ps -ef | grep -i nginx
 - Piping symbol | ---> One command output will become the input to another command.
-- Difference between wget and curl commands ?
-- What is cut and awk commands in linux ? We use cut to quickly extract what we require from the text using delimiters. We use awk when we need more advanced processing like filtering rows or formatting output.
-- What are Head and Tail commands in linux ? Head is used to view the first few lines of a file, while tail is used to view the last few lines. Both are useful for quickly inspecting logs or large files while 'tail -f' allows real time monitoring.
-- What is VIM in linux ? Is used for creating and editing files.
+- Difference between Wget and Curl commands ?
+- What is Cut and Awk commands in linux ? We use cut to quickly extract what we require from the text using delimiters. We use awk when we need more advanced processing like filtering rows or formatting output.
+- What are Head and Tail commands in linux ? Head is used to view the first few lines of a file, while tail is used to view the last few lines. Both are useful for quickly inspecting logs or large files while 'tail -f' allows real time log monitoring.
+- What is VIM in linux ? Is used for creating and editing files. Keys are i, :wq, :q!, :q, :set nu, :set nonu, :noh
+- You cannot go directly from "colon/command" mode to "insert" mode, you need to go to the "esc" mode first.
 - Different types of search in a file in server ? :/, :?, shift+G, gg, n
+- How to search a word and replace in a file ? "%s/sbin/SBIN/g" ---> g means all occurances. If you want any particular line then ":2s" s=substitute. Where ever your curosor is just press "yy" it will copy. Just press "p" to paste, "u" to undo, 10p will copy 10 times.
 - What Permissions we have in Linux ? What is the file notation ? R(4), W(2), X(1) (Read, Write, Execution). Execution access is used to run the scripts and commands.
 - In linux when you create a user a group with same name will be created.
 - To give execution permission to user then 'chmod u+x'
