@@ -1,7 +1,7 @@
 ### Sessions (1-11)
-- What is Computer and what characterstics does computer hold ? What are the use cases of Server, TV, Phone.
+- What is Computer and what characterstics does computer hold ? What are the use cases of Server, TV, Phone ?
 - What is Client-Server Architecture ? Transferring media from Phone to Laptop (Viceversa)
-- What is Operating systems like Windows and what does it do ?
+- How does Operating system works ? For example windows OS ?
 - What is the difference between Linux (Servers world) and Windows Operating systems ?
 - How to connect to Linux server (Node) ?
 - What are the Authentication mechanisms to connect to linux server ?
@@ -14,7 +14,7 @@
 - Import keypair in AWS by going to --> Network and security options --> Keypairs --> Actions and Import key pair (Publickey) without any gaps.
 - Create a SG (Firewall) for inbound. All traffic 0.0.0.0/0 (Representation of internet)
 - Launch instance with keypairs and take Amazon Linux 2AMI (HVM). Make sure the key pair name while you are creating server should match the key pair in Network and Security (Key Pairs).
-- ssh -i saikiran.pem ec2-user@IP ---> In pwd location (User directory).
+- How to connect to server then ? ssh -i saikiran.pem ec2-user@IP ---> In pwd location (User directory).
 - Amazon Linux / Amazon Linux 2 ---> Default user name is 'ec2-user'
 - Ubuntu ---> Default user name is 'ubuntu'
 - Centos ---> Default user name is 'centos'
@@ -24,13 +24,13 @@
 - What is Absolute path and Relative path ? An absolute path is the complete path to a file or directory starting from the root. Relative path is relative to current directory.
 - HTTP --> 80 Hypertext Transfer Protocol (Unencrypted web traffic)
 - HTTPS --> 443 Hypertext Transfer Protocol Secure (Encrypted web traffic)
-- SSH --> 22 Secure Shell (Secure remote login and file transfer)
+- SSH --> 22 Secureshell (For secure remote login and file transfer)
 - SMTP --> 25 Simple Mail Transfer Protocol (Sending email)
 - DNS --> 53 Domain Name System (Resolving domain names to IP addresses)
 - Gitbash ---> Is an ssh client and also a mini linux.
 - Protocol ---> We have different protocols like HTTP, HTTPS, SSH, SMTP, DNS etc.
 - $ ---> Normal user ; # ---> Root user (Sudo su -) to exit from root just type exit.
-- pwd ---> Present working directory you will be directly launched in /c/users/saikiran
+- Pwd ---> Present working directory you will be directly land in /c/users/saikiran
 - <command_name> --help ---> Get help from that particular command.
 - What are the basic linux commands ?
 - https://dzone.com/articles/top-35-git-commands-with-examples-and-bonus
