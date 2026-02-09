@@ -46,27 +46,26 @@
 - What is VIM in linux ? Is used for creating and editing files. Keys are i, :wq, :q!, :q, :set nu, :set nonu, :noh
 - You cannot go directly from "colon/command" mode to "insert" mode, you need to go to the "esc" mode first.
 - Different types of search in a file in server ? :/, :?, shift+G, gg, n
-- How to search a word and replace in a file ? "%s/sbin/SBIN/g" ---> g means all occurances. If you want any particular line then ":2s" s=substitute. Where ever your curosor is just press "yy" it will copy. Just press "p" to paste, "u" to undo, 10p will copy 10 times.
-- What Permissions we have in Linux ? What is the file notation ? R(4), W(2), X(1) (Read, Write, Execution). Execution access is used to run the scripts and commands.
-- In linux when you create a user a group with same name will be created.
-- To give execution permission to user then 'chmod u+x'
+- How to search a word and replace in a file ? '%s/sbin/SBIN/g' ---> g means all occurances. If you want any particular line then ':2s' s=substitute. Where ever your curosor is just press "yy" it will copy. Just press "p" to paste, "u" to undo, 10p will copy 10 times.
+- What permissions we have in Linux ? What is the file notation ? R(4), W(2), X(1) (Read, Write, Execution). Why execution is used in linux ?
+- In linux when you create a user, a group with same name will be created.
+- For example to give execution permission to user then 'chmod u+x'
 - Removing read, write access to group 'chmod g-rw'
 - To give read access to all users to all groups then 'chmod ugo+r'
 - To remove write access to a group and inside folder also then 'chmod g-w -R'
 - User management like creating users and giving access to the servers in two methods.
 - Password authentication mechanism and SSH access authentication mechanism.
-- Create a User and Password for saikiran in server ---> 'sudo useradd saikiran' and 'passwd saikiran and all user entries will be in 'cat /etc/passwd' location. 'sudo userdel saikiran'
+- Create a User and Password for saikiran in server ---> 'sudo useradd saikiran' and 'passwd saikiran and all user entries will be in 'cat /etc/passwd' location. 'sudo userdel saikiran' to delete any user.
 - To know userid just enter 'id saikiran' ---> 1st (uid) ; 2nd (gid) ; 3rd (other groups id). To get groups 'getent group'
-- If this saikiran wants to connect to the server using IPaddress, we need to change a configuration in 'vim /etc/ssh/sshd_config' in gitbash. Here by default linux is disabled for login through password authentication as no, so make this yes, then 'systemctl restart sshd'
-- So now how will saikiran login (Connect) to the server ? ---> ssh saikiran@IP
-- Now raheem joined and how to give SSH authentication (or) using Private key ? 'sudo useradd raheem' No need to create password for raheem because we are giving access to him using private key.
+- If this saikiran wants to connect to the server using IPaddress, we need to change a configuration in 'vim /etc/ssh/sshd_config' in gitbash. Here by default linux is disabled for login through password authentication as no, so make this yes then 'systemctl restart sshd' then saikiran will connect to server using 'ssh saikiran@IPaddress'
+- Now raheem joined and how to give SSH authentication (or) using Private key ? 'sudo useradd raheem' No need to create password for raheem because we are giving access to him using private key which is SSH.
 - I will ask the raheem to give his Public key through mail.
-- sudo cd /home/raheem/ enter this command in gitbash after connecting to the server, here we will create folder mkdir .ssh, now create a file inside .ssh folder 'vim authorized_key' paste the raheem public key here, ask him to create keypair for this.
-- Now we will tell raheem that your username is configured and we will give him the IPaddress, then raheem will login using this command 'ssh -i raheem raheem@IP' Here first raheem is his Privatekey and second reheem is Username.
-- The process of creating users and groups is done by linux admin team but just know how to create users and groups, adding users into groups etc.
+- sudo cd /home/raheem/ enter this command in gitbash after connecting to the server, here we will create a folder 'mkdir .ssh' now create a file inside .ssh folder 'vim authorized_key' paste the raheem public key here, ask him to create keypair for this.
+- Now we will tell raheem that your username is configured and we will give him the IPaddress then raheem will login using this command 'ssh -i raheem raheem@IP' Here 1st raheem is his Privatekey and 2nd reheem is Username.
+- The process of creating users and groups is done by linux admin team but just know how to create users and groups, adding users into groups, giving permissions to users etc.
 - What is Process management in linux ? Nothing but how the OS creates, monitor and terminate processes. Each process has unique id. We can monitor processes using ps, top commands and control them with 'kill <pid>' or 'kill -9 <pid>' commands.
-- When process stuck kill the process ---> 'kill PID' do not kill parent process id 1st is PID, second one is parent id. If even kill cannot kill, then forcefull terminate 'kill -9 PID'
-- What is Package management in linux ? How the software is installed, updated or removed on the system. We use yum command ; yum list installed ; yum remove -y ; yum install <package>
+- When process stuck kill the process ---> 'kill PID' do not kill parent process id 1st is PID, 2nd one is parent id. If even kill cannot kill then forceful terminate 'kill -9 PID'
+- What is Package management in linux ? How the software is installed, updated or removed on the system. We use yum command ; yum list installed ; yum remove -y ; yum install <package> -y
 - What is Service management in linux ? Is about starting, stopping, monitoring and configuring background services like web servers or databases. We use tools like systemctl to control them.
 - systemctl start nginx ---> This is how to make a package into service.
 - systemctl status nginx ---> To know if it is running or not (or) we can also check with process 'ps -ef | grep -i nginx'
