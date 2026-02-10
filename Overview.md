@@ -65,14 +65,15 @@
 - The process of creating users and groups is done by linux admin team but just know how to create users and groups, adding users into groups, giving permissions to users etc.
 - What is Process management in linux ? Nothing but how the OS creates, monitor and terminate processes. Each process has unique id. We can monitor processes using ps, top commands and control them with 'kill <pid>' or 'kill -9 <pid>' commands.
 - When process stuck kill the process ---> 'kill PID' do not kill parent process id 1st is PID, 2nd one is parent id. If even kill cannot kill then forceful terminate 'kill -9 PID'
-- What is Package management in linux ? How the software is installed, updated or removed on the system. We use yum command ; yum list installed ; yum remove -y ; yum install <package> -y
-- What is Service management in linux ? Is about starting, stopping, monitoring and configuring background services like web servers or databases. We use tools like systemctl to control them.
-- systemctl start nginx ---> This is how to make a package into service.
-- systemctl status nginx ---> To know if it is running or not (or) we can also check with process 'ps -ef | grep -i nginx'
-- systemctl stop nginx ---> To stop the service.
-- systemctl enable nginx ---> Automatically services will run.
-- systemctl disable nginx ---> Will disable nginx.
-- What is Network managment in linux ? How do you check port and process running ? netstat -lntp
+- What is Package management in linux ? How the software is installed, updated or removed on the system. We use yum command ; yum list installed ; yum install <package> -y ; yum remove -y
+- Algorithm for connecting to any instance ?
+- What is Service management in linux ? Is about starting, stopping, monitoring and configuring background services like web servers or databases. We use tools like 'systemctl' to control them.
+- Systemctl start nginx ---> This is how to make a package into service.
+- Systemctl status nginx ---> To know if it is running or not (or) we can also check with process 'ps -ef | grep -i nginx'
+- Systemctl stop nginx ---> To stop the service.
+- Systemctl enable nginx ---> Automatically services will run.
+- Systemctl disable nginx ---> Will disable nginx.
+- What is Network managment in linux ? How do you check port and process running ? 'netstat -lntp' Every system we have 0-65,535 ports.
 - What are the general trouble shooting process you do ?
 - How to give admin access (or) any other access to linux users ? Example two types of users. Linux admin team should have Full admin access ; DevOps team should have Limited sudo access.
 - Generally to give sudo access we have one file 'vim /etc/sudoers' It is not recommended to open this file because it is crucial, so linux has given one command to open then file safely that is 'visudo'
