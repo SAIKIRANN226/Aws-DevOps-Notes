@@ -54,6 +54,7 @@ Example Ramesh joined in DevOps team
 ### Process management
 - To know if any particular process is running or not ? 'ps -ef | grep jenkins'
 - When process stuck kill the process ---> 'kill PID' do not kill parent process id. 1st is PID and 2nd one is parent id. If even kill cannot kill the process, then forcefull terminate 'kill -9 PID'
+- Foreground process (Block terminal) and Background process (Runs in background) just give & ?
 
 ### Package management
 - To install packages get sudo access first 'sudo su -'
