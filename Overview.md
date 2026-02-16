@@ -106,13 +106,12 @@
 - What is the difference between PublicIP vs PrivateIP ? How the Modem (WiFi Router) will provide Private IPs to the internal systems (or) to laptops ? Using NAT
 - What is NAT (Network address translation) ?
 - How to know your Public IP address (Your Router like airtel) ? Just type 'What is my ip in google'
-- Every router has two sections Public and Private. Modem or router will give private IPs to the internal systems like phone, laptop, refrigerator etc.
+- Every router has two sections Public and Private. Modem or router will give private IPs to the internal systems like phone, laptop, refrigerator etc. If you type 'ipconfig' in cmd you will get all details, IPv4 is my PrivateIP. IP under default gateway is modem. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32 IPaddresses. If we allocate all these, we get problems. So they brought 'NAT' Network Address Translation. However latency will be slow that is nothing but time to respond will be somewhat slow.
 - What is Fibre exchange points ?
 - What is Enterprise archive file ? Servlets (DB) ; JSPS (UI) ---> Monolithic
-- What is Monolithic vs Microservices ? Monolithic means Single unified application, easy to start, hard to scale. Microservices will Split into independent services, scalable and flexible, but more complex.
-- To connect from one server to another server 'telnet <IP> <port_number>'
-- If telnet is not installed ---> sudo yum install telnet -y ; netstat -lntp shows all TCP ports currently being listened on, along with the process using each port. I use it in DevOps to check whether services like Nginx, MySQL, or application servers are actually listening on the expected ports.
-- If you type 'ipconfig' in cmd you will get all details, IPv4 is my PrivateIP. IP under default gateway is modem. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32 IPaddresses. If we allocate all these, we get problems. So they brought 'NAT' Network Address Translation. However latency will be slow that is nothing but time to respond will be somewhat slow.
+- What is Monolithic vs Microservices ? Monolithic means single unified application (Enterprise archive file, where everything will be in one file only, has DB also which is nothing but 2 tier architecture), easy to start, hard to scale. Microservices will split into independent services, scalable and flexible but more complex.
+- Since we have multiple servers and to connect from one server to another server 'telnet <IPaddress> <port_number>'
+- If telnet is not installed ---> 'sudo yum install telnet -y' and 'netstat -lntp' shows all TCP ports currently being listened on, along with the process ids using each port. I use it in DevOps to check whether services like Nginx, MySQL or application servers are actually listening on the expected ports or not ?
 - Frontend (WEB) and Backend (API) are Stateless ; DB is Statefull.
 - WEB and API will work only when DB is in existence. Example of CRUD over facebook.
 - We are using web servers as nginx on HTTP protocol only, it can also use HTTPS.
