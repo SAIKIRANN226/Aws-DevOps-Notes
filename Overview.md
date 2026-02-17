@@ -123,6 +123,11 @@
 - Location of reverse proxy configuration 'vim /etc/nginx/default.d/roboshop.conf'
 - What are the famous HTTP status codes ?
 - Configure the Roboshop project manually ?
+- Whenever you do any changes in the configuration makesure 'systemctl restart nginx'
+- How to check the running logs ? 'tail -f /var/log/messages'
+- What is this IP 127.0.0.1 ? It is the local host only accept connections from that particular server only. It will not allow connections from external servers. To allow from external servers, we need to update to '0.0.0.0'
+- How to find a particular folder or something ---> find . -name "*nginx*" Here . is current folder searching with particular name called nginx.
+- To check all logs 'less -f /var/log/messages'
 - What is cache (Redis) server ? Example of downloaded movie by 1 user.
 - What is Domain name system (DNS) and how do you register your domain ?
 - Steps to install any application in linux ?
