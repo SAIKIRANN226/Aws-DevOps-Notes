@@ -128,8 +128,9 @@
 - What is this IP 127.0.0.1 ? It is the local host only accept connections from that particular server only. It will not allow connections from external servers. To allow from external servers, we need to update to '0.0.0.0'
 - How to find a particular folder or something ---> find . -name "<star>nginx<star>" Here . is current folder searching with particular name called nginx.
 - To check all logs 'less -f /var/log/messages'
-- What is cache (Redis) server ? Example of downloaded movie by 1 user.
-- What is Domain name system (DNS) and how do you register your domain ?
+- What is cache (Redis) server ? Example of downloaded movie by 1 user. It is a cache server. It helps to speed up data retrieval processes by storing frequently accessed data in memory, rather than having to repeatedly fetch it from slower, persistent storage like a database.
+- What is Domain name system (DNS) and how does it work ?
+- How do you register and setup your domain ? Best and cheapest domain register is 'Hostinger'
 - Steps to install any application in linux ?
 - What is the difference between Synchronous and Asynchronous in networking ?
 
