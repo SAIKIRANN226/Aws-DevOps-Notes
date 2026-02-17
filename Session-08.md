@@ -1,6 +1,6 @@
 ### DNS (Domain name system)
 For example when you hit "joindevops.online" where will first request will go ?
-Browser ---> cache ---> OS ---> cache ---> ISP ---> cache ---> Root servers ---> TLD (Top Level Domain) ---> NS ---> A record
+Browser ---> cache ---> OS ---> cache ---> ISP ---> cache ---> Root servers ---> TLD (Top Level Domain) ---> NS (Name Servers Information) ---> A record
 
 ### Domain registars
 We can also buy domain in aws also but it is very costly, so we are buying in hostinger, next
