@@ -132,6 +132,7 @@
 - What is Domain name system (DNS) and how does it work ?
 - How do you register and setup your domain ? Best and cheapest domain register is 'Hostinger'
 - Steps to install any application in linux ?
+- Shift+g ---> Go down ; gg ---> Go up ; q ---> Quit
 - What is the difference between Synchronous and Asynchronous in networking ?
 
 ### Session-12
