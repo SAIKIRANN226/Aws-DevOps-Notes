@@ -4,7 +4,7 @@ Browser ---> cache ---> OS ---> cache ---> ISP ---> cache ---> Root servers --->
 
 ### Domain registars
 We can also buy domain in aws also but it is very costly, so we are buying in hostinger, next
-register your hostinger domain in aws by going to Route53/Dashboard/Hosted zone/Created hosted zone
+register your hostinger domain in aws by going to Route53/Dashboard/Hosted zone/Create one hosted zone
 and enter you created hostinger domain name here/After created this hosted zone will give us 4 
 name servers, update these 4 nameservers in hostinger website by click change name servers, Now
 hostinger responsibility is to update Name servers with TLD what ever you have given in the domain
