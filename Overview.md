@@ -1,20 +1,19 @@
 ### Sessions (1-11)
-- What is Computer and what characterstics does computer hold ? What are the use cases of Server, TV, Phone ?
-- What is Client-Server Architecture ? Transferring media from Phone to Laptop (Viceversa)
+- What is computer and what characterstics does computer hold ? What are the use cases of Server, TV, Phone ?
+- What is Client-Server architecture ? Transferring media from Phone to Laptop (Viceversa)
 - How does Operating system works ? For example windows OS ? We have 2 types of OS Linux and Windows.
-- What is the difference between Linux (Servers world) and Windows Operating systems ?
+- What is the difference between Linux (Servers world) and Windows operating systems ?
 - How to connect to Linux server (Node) ? Box ---> Server, Lock ---> Public key, Key ---> Private key
-- What are the Authentication mechanisms to connect to linux server ?
-- Generate (or) create a link between LOCK and KEY ? ssh-keygen -f <file_name>
-- You can directly generate keys in .ssh folder using 'ssh-keygen -f <file_name>'
+- What are the authentication mechanisms to connect to linux server ?
+- Generate (or) create a link between LOCK and KEY ? 'ssh-keygen -f <file_name>' You can directly generate keys in .ssh folder
 - How to enable extensions in control panel ? File explorer, view, unhide extenions for known files.
 - What is the syntax of Public key ? ssh-rsa {code} Laptop-name
 - What is the syntax of Private key ? BEGIN OPENSSH PRIVATE KEY {code} END OPENSSH PRIVATE KEY
 - Now create a server in AWS and connect to that server using Public and Private keys.
 - Import keypair in AWS by going to --> Network and security options --> Keypairs --> Actions and Import key pair (Publickey) without any gaps.
 - Create a SG (Firewall) for inbound. All traffic 0.0.0.0/0 (Representation of internet)
-- Launch instance with keypairs and take Amazon Linux 2AMI (HVM). Make sure the key pair name while you are creating in server should match the key pair in Network and Security (Key Pairs).
-- How to connect to server then ? ssh -i saikiran.pem ec2-user@IP ---> In pwd location (User directory).
+- Launch instance with keypairs and take Amazon Linux 2AMI (HVM). Make sure the key pair name while you are creating in server should match the key pair in Network and Security.
+- How to connect to server then ? 'ssh -i saikiran.pem ec2-user@IP' ---> In pwd location (User directory).
 - Amazon Linux / Amazon Linux 2 ---> Default user name is 'ec2-user'
 - Ubuntu ---> Default user name is 'ubuntu'
 - Centos ---> Default user name is 'centos'
@@ -27,43 +26,41 @@
 - SSH --> 22 Secureshell (For secure remote login and file transfer)
 - SMTP --> 25 Simple Mail Transfer Protocol (Sending email)
 - DNS --> 53 Domain Name System (Resolving domain names to IP addresses)
-- Gitbash ---> Is an ssh client and also a mini linux.
+- Gitbash ---> Is an SSH client and also a mini linux.
 - Protocol ---> We have different protocols like HTTP, HTTPS, SSH, SMTP, DNS etc.
 - $ ---> Normal user ; # ---> Root user (Sudo su -) to exit from root just type exit.
 - Pwd ---> Present working directory you will be directly land in /c/users/saikiran
 - <command_name> --help ---> Get help from that particular command.
-- What are the basic linux commands ? https://dzone.com/articles/top-35-git-commands-with-examples-and-bonus
+- What are the basic Git commands ? https://dzone.com/articles/top-35-git-commands-with-examples-and-bonus
 - Everything is CRUD in software industry (Example of facebook)
-- How to update a file with content, how to save and how to read ? Just press enter and then ctrl+D
+- How to update a file with content, save, read ? Just press enter then ctrl+d
 - Removing file and folder commands ? rm, rmdir, rm -r <folder_name>
-- Copy commands in linux and how to copy the files ?
-- Move commands in linux and how to move the files ? If you use mv command with in the same folder, it works as rename also.
-- Grep command in Linux is a case sensitive. Linux will treat DevOps and DEVOPS as different. So to make this case insensitive (i) use grep -i ---> ps -ef | grep -i nginx
+- How to use copy and move commands in linux ? If you use mv command with in the same folder, it works as rename also.
+- Grep command in linux is a case sensitive. Linux will treat DevOps and DEVOPS as different. So to make this case insensitive (i) use grep -i ---> 'grep -i DevOps' another example to find a package ---> 'ps -ef | grep -i nginx'
 - Piping symbol | ---> One command output will become the input to another command.
 - Difference between Wget and Curl commands ?
 - What is Cut and Awk commands in linux ? We use cut to quickly extract what we require from the text using delimiters. We use awk when we need more advanced processing like filtering rows or formatting output.
-- What are Head and Tail commands in linux ? Head is used to view the first few lines of a file, while tail is used to view the last few lines. Both are useful for quickly inspecting logs or large files while 'tail -f' allows real time log monitoring.
+- What are Head and Tail commands in linux ? Head is used to view the first few lines of a file while tail is used to view the last few lines. Both are useful for quickly inspecting logs or large files while 'tail -f' allows real time log monitoring.
 - What is VIM in linux ? Is used for creating and editing files. Keys are i, :wq, :q!, :q, :set nu, :set nonu, :noh
-- You cannot go directly from "colon/command" mode to "insert" mode, you need to go to the "esc" mode first.
+- You cannot go directly from 'colon/command' mode to 'insert' mode, you need to go to the 'esc' mode first.
 - Different types of search in a file in server ? :/, :?, shift+G, gg, n
-- How to search a word and replace in a file ? '%s/sbin/SBIN/g' ---> g means all occurances. If you want any particular line then ':2s' s=substitute. Where ever your curosor is just press "yy" it will copy. Just press "p" to paste, "u" to undo, 10p will copy 10 times.
-- What permissions we have in Linux ? What is the file notation ? R(4), W(2), X(1) (Read, Write, Execution). Why execution is used in linux ?
+- How to search a word and replace in a file ? '%s/sbin/SBIN/g' ---> g means all occurances. If you want any particular line then ':2s' s=substitute. Where ever your cursor is just press 'yy' it will copy. Just press 'p' to paste, 'u' to undo, 10p will copy 10 times.
+- We have Read, Write, Execution permissions in Linux ? And file notation is R(4), W(2), X(1). Why execution is used in linux ?
 - In linux when you create a user, a group with same name will be created.
-- For example to give execution permission to user then 'chmod u+x'
-- Removing read, write access to group 'chmod g-rw'
+- For example to give execution permission to user then 'chmod u+x' and to remove read, write access to group 'chmod g-rw'
 - To give read access to all users to all groups then 'chmod ugo+r'
 - To remove write access to a group and inside folder also then 'chmod g-w -R'
-- User management like creating users and giving access to the servers in two methods.
+- User management like creating users and giving access to the servers in 2 methods.
 - Password authentication mechanism and SSH access authentication mechanism.
 - Create a User and Password for saikiran in server ---> 'sudo useradd saikiran' and 'passwd saikiran and all user entries will be in 'cat /etc/passwd' location. 'sudo userdel saikiran' to delete any user.
 - To know userid just enter 'id saikiran' ---> 1st (uid) ; 2nd (gid) ; 3rd (other groups id). To get groups 'getent group'
-- If this saikiran wants to connect to the server using IPaddress, we need to change a configuration in 'vim /etc/ssh/sshd_config' in gitbash. Here by default linux is disabled for login through password authentication as no, so make this yes then 'systemctl restart sshd' then saikiran will connect to server using 'ssh saikiran@IPaddress'
+- If this saikiran wants to connect to the server using IP address, we need to change a configuration in 'vim /etc/ssh/sshd_config' in gitbash. Here by default linux is disabled for login through password authentication as no, so make this yes then 'systemctl restart sshd' then saikiran will connect to server using 'ssh saikiran@IP'
 - Now raheem joined and how to give SSH authentication (or) using Private key ? 'sudo useradd raheem' No need to create password for raheem because we are giving access to him using private key which is SSH.
-- I will ask the raheem to give his Public key through mail.
-- sudo cd /home/raheem/ enter this command in gitbash after connecting to the server, here we will create a folder 'mkdir .ssh' now create a file inside .ssh folder 'vim authorized_key' paste the raheem public key here, ask him to create keypair for this.
-- Now we will tell raheem that your username is configured and we will give him the IPaddress then raheem will login using this command 'ssh -i raheem raheem@IP' Here 1st raheem is his Privatekey and 2nd reheem is Username.
+- I will ask raheem to give his public key through mail. He should create key-pair of this.
+- Sudo cd /home/raheem/ enter this command in gitbash after connecting to the server, here we will create a folder 'mkdir .ssh' now create a file inside .ssh folder 'vim authorized_key' paste raheem public key here.
+- Now we will tell raheem that your username is configured and we will give him the IP address then raheem will login using this command 'ssh -i raheem raheem@IP' Here 1st raheem is his Privatekey and 2nd reheem is Username.
 - The process of creating users and groups is done by linux admin team but just know how to create users and groups, adding users into groups, giving permissions to users etc.
-- What is Process management in linux ? Nothing but how the OS creates, monitor and terminate processes. Each process has unique id. We can monitor processes using ps, top commands and control them with 'kill <pid>' or 'kill -9 <pid>' commands.
+- What is process management in linux ? Nothing but how the OS creates, monitor and terminate processes. Each process has unique id. We can monitor processes using 'ps' and 'top' commands and control them with 'kill <pid>' or 'kill -9 <pid>' commands.
 - When process stuck kill the process ---> 'kill PID' do not kill parent process id 1st is PID, 2nd one is parent id. If even kill cannot kill then forceful terminate 'kill -9 PID'
 - What is Package management in linux ? How the software is installed, updated or removed on the system. We use yum command ; yum list installed ; yum install <package> -y ; yum remove -y
 - Algorithm for connecting to any instance ?
@@ -73,7 +70,7 @@
 - Systemctl stop nginx ---> To stop the service.
 - Systemctl enable nginx ---> Automatically services will run.
 - Systemctl disable nginx ---> Will disable nginx.
-- What is Network managment in linux ? How do you check port and process running ? 'netstat -lntp' Every system we have 0-65,535 ports.
+- What is Network managment in linux ? How do you check port and process running ? 'netstat -lntp' In every system we have 0-65,535 ports.
 - What are the general trouble shooting process you do ?
 - How to give admin access (or) any other access to linux users ? Example two types of users. Linux admin team should have Full admin access ; DevOps team should have Limited sudo access.
 - Generally to give sudo access we have one file 'vim /etc/sudoers' It is not recommended to open this file because it is crucial, so linux has given one command to open then file safely that is 'visudo'
@@ -90,12 +87,12 @@
 - How to create this putty private key ? Load '.pem' file in puttygen and save with .ppk extension
 - Open putty --> connection --> ssh --> auth --> credentials --> load your saved .ppk file
 - Connection --> data --> username (ec2-user) --> then go to session and save (Important)
-- Create a server in AWS and take the IP, paste it in putty (Hostname) click on load to connect.
+- Create a server in AWS and take the public IP and paste it in putty (Hostname) click on load to connect.
 - To change the font open putty --> appearence --> change and then save to make effect in superputty also.
 - What is the Linux file system structure ?
-- When putty stucks (or) unable to enter any command then open putty first load your session then go to connection and give 30 in seconds then go to session and save, generally we have value 0 you need to give any value like 30, that means every 30 seconds connection will be alive, you can give max 300.
-- What is Inode ? For example we have a Hard Disk and inside the HD, we have some memory locations like a number, when you create file in HD, it will be saved in any of the memory location in HD, this file will point to memory location (A number) that is nothing but Inode. Inode is the representation of file or folder inside the memory, it is a number. How to get that number ? ls -li
-- What is Symlink and Hardlink ? Symlink will point to the actual file location not to the inode, while Hardlink will point directly to the inode not to the actual file location. Symlink has its own Inode.
+- When putty stucks (or) unable to enter any command then open putty first load your session then go to connection and give 30 in seconds then go to session and save. Generally we have value 0 you need to give any value like 30 that means every 30 seconds connection will be alive, you can give maximum 300 seconds.
+- What is Inode ? For example we have a hard disk and inside the HD, we have some memory locations like a number, when you create file in HD, it will be saved in any of the memory location in HD, this file will point to memory location (A number) that is nothing but Inode. Inode is the representation of file or folder inside the memory, it is a number. How to get that number ? ls -li
+- What is Symlink and Hardlink ? Symlink will point to the actual file location not to the inode while Hardlink will point directly to the inode not to the actual file location. Symlink has its own Inode.
 - How to create a Symlink for a file ? First create a file hello and add content in it using cat command then create symlink 'ln -s /home/ec2-user/hello /tmp/hello-soft' you can give obsolute path or relative path.
 - How to create a Hardlink for a file ? 'ln /home/ec2-user/hello /tmp/hello-hard'
 - We use NGINX as frontend servers because it can handle heavy traffic, it is used as reverse proxy also. IIS is only used for windows based applications.
