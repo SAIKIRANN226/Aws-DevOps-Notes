@@ -98,15 +98,13 @@
 - What is Symlink and Hardlink ? Symlink will point to the actual file location not to the inode, while Hardlink will point directly to the inode not to the actual file location. Symlink has its own Inode.
 - How to create a Symlink for a file ? First create a file hello and add content in it using cat command then create symlink 'ln -s /home/ec2-user/hello /tmp/hello-soft' you can give obsolute path or relative path.
 - How to create a Hardlink for a file ? 'ln /home/ec2-user/hello /tmp/hello-hard'
-- We use NGINX as frontend servers because it can handle high traffic, it is used as reverse proxy also. IIS is only used for windows based applications.
+- We use NGINX as frontend servers because it can handle heavy traffic, it is used as reverse proxy also. IIS is only used for windows based applications.
 - We have 'winscp' for file transfer, it is a mini windows in linux server.
 - Generally frontend servers called as HTTP servers on port 80. Hosts html and java based applications.
-- Backend is also HTTP servers but on port 8080. Hosts like tomcat, jboss, .net, python etc.
+- Backend is also HTTP servers but on port 8080. Hosts applications like tomcat, jboss, .net, python etc.
 - These frontend and backend servers will connect through API's
-- What is the difference between PublicIP vs PrivateIP ? How the Modem (WiFi Router) will provide Private IPs to the internal systems (or) to laptops ? Using NAT
-- What is NAT (Network address translation) ?
 - How to know your Public IP address (Your Router like airtel) ? Just type 'What is my ip in google'
-- Every router has two sections Public and Private. Modem or router will give private IPs to the internal systems like phone, laptop, refrigerator etc. If you type 'ipconfig' in cmd you will get all details, IPv4 is my PrivateIP. IP under default gateway is modem. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32 IPaddresses. If we allocate all these, we get problems. So they brought 'NAT' Network Address Translation. However latency will be slow that is nothing but time to respond will be somewhat slow.
+- Every router has two sections Public and Private. Modem or router will provide private IPs to the internal systems like phone, laptop, refrigerator etc. using NAT. If you type 'ipconfig' in cmd you will get all details, IPv4 is my PrivateIP. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32 IPaddresses. If we allocate all these, we get problems. So they brought 'NAT' Network Address Translation. However latency will be slow that is nothing but time to respond will be somewhat slow.
 - What is Fibre exchange points ?
 - What is Enterprise archive file ? Servlets (DB) ; JSPS (UI) ---> Monolithic
 - What is Monolithic vs Microservices ? Monolithic means single unified application (Enterprise archive file, where everything will be in one file only, has DB also which is nothing but 2 tier architecture), easy to start, hard to scale. Microservices will split into independent services, scalable and flexible but more complex.
@@ -117,23 +115,26 @@
 - We are using web servers as nginx on HTTP protocol only, it can also use HTTPS.
 - Installing packages using yum and dnf. But dnf is preferred while configuring project manually because it consumes less memory when compared to yum. Yum is used in automation like shellscripting.
 - Location of nginx configuration 'cd /etc/nginx/nginx.conf'
-- Location of the default content of the nginx 'cd usr/share/nginx/html/'
+- Location of default content of nginx 'cd usr/share/nginx/html/'
 - What is Forward proxy and Reverse proxy ? Nginx is used as reverse proxy.
 - Reverse proxy is mainly used for Load balancers and Server anonymous.
 - Location of reverse proxy configuration 'vim /etc/nginx/default.d/roboshop.conf'
 - What are the famous HTTP status codes ?
 - Configure the Roboshop project manually ?
-- Whenever you do any changes in the configuration makesure 'systemctl restart nginx'
-- How to check the running logs ? 'tail -f /var/log/messages'
-- What is this IP 127.0.0.1 ? It is the local host only accept connections from that particular server only. It will not allow connections from external servers. To allow from external servers, we need to update to '0.0.0.0'
-- How to find a particular folder or something ---> find . -name "<star>nginx<star>" Here . is current folder searching with particular name called nginx.
+- Whenever you do any changes in configuration makesure 'systemctl restart nginx'
+- How to check running logs ? 'tail -f /var/log/messages'
+- What is this IP 127.0.0.1 ? It's a local host which accept connections only from that particular server. It will not allow connections from external servers. To allow from external servers, we need to update to '0.0.0.0'
+- How to find a particular folder or something ---> find . -name "<star>nginx<star>" Here . means current folder searching with particular name called nginx.
 - To check all logs 'less -f /var/log/messages'
-- What is cache (Redis) server ? Example of downloaded movie by 1 user. It is a cache server. It helps to speed up data retrieval processes by storing frequently accessed data in memory, rather than having to repeatedly fetch it from slower, persistent storage like a database.
-- What is Domain name system (DNS) and how does it work ?
+- What is Domain Name System (DNS) and how does it work ?
 - How do you register and setup your domain ? Best and cheapest domain register is 'Hostinger'
-- Steps to install any application in linux ?
+- All components first hit redis because it's a cache server. If data is not available in redis then it will hit DB. It helps to speed up data retrieval process by storing frequently accessed data in memory rather than having to repeatedly fetch it from the root servers which will slower the response. Example of downloaded movie by 1 user.
+- Steps to install any application in linux servers ?
 - Shift+g ---> Go down ; gg ---> Go up ; q ---> Quit
+- What is deployment or release wether it's manual or automation ?
 - What is the difference between Synchronous and Asynchronous in networking ?
+- How do you get authentication to github to push the developed code from VS ? We use 'Keypair authentication' instead of username and password everytime.
+- How to clone any repo ? We have HTTPS and SSH.
 
 ### Session-12
 - Why we use SSH based authentication to connect to github accounts ?
