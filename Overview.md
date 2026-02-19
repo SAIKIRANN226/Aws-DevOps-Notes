@@ -1,7 +1,7 @@
 ### Sessions (1-11)
 - What is computer and what characterstics does computer hold ? What are the use cases of Server, TV, Phone ?
-- What is Client-Server architecture ? Transferring media from Phone to Laptop (Viceversa)
-- How does Operating system works ? For example windows OS ? We have 2 types of OS Linux and Windows.
+- What is client-server architecture ? Transferring media from phone to laptop (Vice versa)
+- How does windows operating system works ? We have 2 types of OS Linux and Windows.
 - What is the difference between Linux (Servers world) and Windows operating systems ?
 - How to connect to Linux server (Node) ? Box ---> Server, Lock ---> Public key, Key ---> Private key
 - What are the authentication mechanisms to connect to linux server ?
