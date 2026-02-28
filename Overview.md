@@ -62,7 +62,7 @@
 - The process of creating users and groups is done by linux admin team but just know how to create users and groups, adding users into groups, giving permissions to users etc.
 - What is process management in linux ? Nothing but how the OS creates, monitor and terminate processes. Each process has unique id. We can monitor processes using 'ps' and 'top' commands and control them with 'kill <pid>' or 'kill -9 <pid>' commands.
 - When process stuck kill the process ---> 'kill PID' do not kill parent process id 1st is PID, 2nd one is parent id. If even kill cannot kill then forceful terminate 'kill -9 PID'
-- What is Package management in linux ? How the software is installed, updated or removed on the system. We use yum command ; yum list installed ; yum install <package> -y ; yum remove -y
+- What is Package management in linux ? How the software is installed, updated or removed on the system. We use yum command ; yum list installed ; yum install <package> -y ; yum remove <package> -y
 - Algorithm for connecting to any instance ?
 - What is Service management in linux ? Is about starting, stopping, monitoring and configuring background services like web servers or databases. We use tools like 'systemctl' to control them.
 - Systemctl start nginx ---> This is how to make a package into service.
@@ -73,7 +73,7 @@
 - What is Network managment in linux ? How do you check port and process running ? 'netstat -lntp' In every system we have 0-65,535 ports.
 - What are the general trouble shooting process you do ?
 - How to give admin access (or) any other access to linux users ? Example two types of users. Linux admin team should have Full admin access ; DevOps team should have Limited sudo access.
-- Generally to give sudo access we have one file 'vim /etc/sudoers' It is not recommended to open this file because it is crucial, so linux has given one command to open then file safely that is 'visudo'
+- Generally to give sudo access we have one file 'vim /etc/sudoers' It is not recommended to open this file because it is crucial. So linux has given one command to open that file safely that is 'visudo'
 - Ramesh ---> Give Admin full access, under wheelgroup and enter %admin ALL=(ALL) ALL
 - Suresh limited access ---> %devops ALL=(ALL) /usr/bin/yum,/usr/bin/systemctl
 - For ramesh we have given full admin access but for suresh we can give only few limited access like 'yum' command (To know where this command is installed 'which yum' (or) 'which systemctl' (or) 'which <command-name>'
@@ -91,14 +91,13 @@
 - To change the font open putty --> appearence --> change and then save to make effect in superputty also.
 - What is the Linux file system structure ?
 - When putty stucks (or) unable to enter any command then open putty first load your session then go to connection and give 30 in seconds then go to session and save. Generally we have value 0 you need to give any value like 30 that means every 30 seconds connection will be alive, you can give maximum 300 seconds.
-- What is Inode ? For example we have a hard disk and inside the HD, we have some memory locations like a number, when you create file in HD, it will be saved in any of the memory location in HD, this file will point to memory location (A number) that is nothing but Inode. Inode is the representation of file or folder inside the memory, it is a number. How to get that number ? ls -li
+- What is Inode ? For example we have a hard disk and inside the HD we have some memory locations like numbers. When you create a file in HD, it will be saved in any of the memory locations (A number) in HD, this file will point to that memory location (A number) that is nothing but Inode. Inode is the representation of file or folder inside the memory, it is a number. How to get that number ? ls -li
 - What is Symlink and Hardlink ? Symlink will point to the actual file location not to the inode while Hardlink will point directly to the inode not to the actual file location. Symlink has its own Inode.
 - How to create a Symlink for a file ? First create a file hello and add content in it using cat command then create symlink 'ln -s /home/ec2-user/hello /tmp/hello-soft' you can give obsolute path or relative path.
 - How to create a Hardlink for a file ? 'ln /home/ec2-user/hello /tmp/hello-hard'
-- We use NGINX as frontend servers because it can handle heavy traffic, it is used as reverse proxy also. IIS is only used for windows based applications.
-- We have 'winscp' for file transfer, it is a mini windows in linux server.
-- Generally frontend servers called as HTTP servers on port 80. Hosts html and java based applications.
-- Backend is also HTTP servers but on port 8080. Hosts applications like tomcat, jboss, .net, python etc.
+- We use NGINX as frontend servers because it can handle heavy traffic and it is used as reverse proxy also. IIS is only used for windows based applications.
+- We have 'winscp' for file transfer. It is a mini windows in linux server.
+- Generally frontend servers called as HTTP servers on port 80. Hosts html and java based applications. While Backend is also on HTTP servers but on port 8080. Hosts applications like tomcat, jboss, .net, python etc.
 - These frontend and backend servers will connect through API's
 - How to know your Public IP address given by your airtel subscription ? Just type 'What is my ip in google'
 - Every router has two sections Public and Private. Modem or router will provide private IPs to the internal systems like phone, laptop, refrigerator etc. using NAT. If you type 'ipconfig' in cmd you will get all details, IPv4 is my PrivateIP. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32 IP addresses. If we allocate all these, we get problems. So they brought 'NAT' Network Address Translation. However latency will be slow that is nothing but time to respond will be somewhat slow.
