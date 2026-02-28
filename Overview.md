@@ -100,8 +100,8 @@
 - Generally frontend servers called as HTTP servers on port 80. Hosts html and java based applications.
 - Backend is also HTTP servers but on port 8080. Hosts applications like tomcat, jboss, .net, python etc.
 - These frontend and backend servers will connect through API's
-- How to know your Public IP address (Your Router like airtel) ? Just type 'What is my ip in google'
-- Every router has two sections Public and Private. Modem or router will provide private IPs to the internal systems like phone, laptop, refrigerator etc. using NAT. If you type 'ipconfig' in cmd you will get all details, IPv4 is my PrivateIP. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32 IPaddresses. If we allocate all these, we get problems. So they brought 'NAT' Network Address Translation. However latency will be slow that is nothing but time to respond will be somewhat slow.
+- How to know your Public IP address given by your airtel subscription ? Just type 'What is my ip in google'
+- Every router has two sections Public and Private. Modem or router will provide private IPs to the internal systems like phone, laptop, refrigerator etc. using NAT. If you type 'ipconfig' in cmd you will get all details, IPv4 is my PrivateIP. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32 IP addresses. If we allocate all these, we get problems. So they brought 'NAT' Network Address Translation. However latency will be slow that is nothing but time to respond will be somewhat slow.
 - What is Fibre exchange points ?
 - What is Enterprise archive file ? Servlets (DB) ; JSPS (UI) ---> Monolithic
 - What is Monolithic vs Microservices ? Monolithic means single unified application (Enterprise archive file, where everything will be in one file only, has DB also which is nothing but 2 tier architecture), easy to start, hard to scale. Microservices will split into independent services, scalable and flexible but more complex.
@@ -109,7 +109,7 @@
 - If telnet is not installed ---> 'sudo yum install telnet -y' and 'netstat -lntp' shows all TCP ports currently being listened on, along with the process ids using each port. I use it in DevOps to check whether services like Nginx, MySQL or application servers are actually listening on the expected ports or not ?
 - Frontend (WEB) and Backend (API) are Stateless ; DB is Statefull.
 - WEB and API will work only when DB is in existence. Example of CRUD over facebook.
-- We are using web servers as nginx on HTTP protocol only, it can also use HTTPS.
+- We are using web servers as nginx on HTTP protocol only, it can also use HTTPS. We use nginx because it can handle heavy traffic.
 - Installing packages using yum and dnf. But dnf is preferred while configuring project manually because it consumes less memory when compared to yum. Yum is used in automation like shellscripting.
 - Location of nginx configuration 'cd /etc/nginx/nginx.conf'
 - Location of default content of nginx 'cd usr/share/nginx/html/'
@@ -119,10 +119,9 @@
 - What are the famous HTTP status codes ?
 - Configure the Roboshop project manually ?
 - Whenever you do any changes in configuration makesure 'systemctl restart nginx'
-- How to check running logs ? 'tail -f /var/log/messages'
+- How to check running logs ? 'tail -f /var/log/messages' To see all logs ? 'less -f /var/log/messages'
 - What is this IP 127.0.0.1 ? It's a local host which accept connections only from that particular server. It will not allow connections from external servers. To allow from external servers, we need to update to '0.0.0.0'
 - How to find a particular folder or something ---> find . -name "<star>nginx<star>" Here . means current folder searching with particular name called nginx.
-- To check all logs 'less -f /var/log/messages'
 - What is Domain Name System (DNS) and how does it work ?
 - How do you register and setup your domain ? Best and cheapest domain register is 'Hostinger'
 - All components first hit redis because it's a cache server. If data is not available in redis then it will hit DB. It helps to speed up data retrieval process by storing frequently accessed data in memory rather than having to repeatedly fetch it from the root servers which will slower the response. Example of downloaded movie by 1 user.
