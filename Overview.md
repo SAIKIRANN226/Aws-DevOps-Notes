@@ -132,32 +132,26 @@
 - How to clone any repo ? We have HTTPS and SSH.
 
 ### Session-12
-- Why we use SSH based authentication to connect to github accounts ?
-- What is the Port number of SSH ? 22 its a secure connection.
+- Why we use SSH based authentication to connect to github accounts ? Port number of SSH is 22 and it's a secure connection.
 - We can add multiple github accounts in config file.
-- You can keep your private key in any location but make sure to give correct location of your Private key in
-  config file.
-- Here the location of private key is created in /c/Users/saikiran & i have given ~ / saikiran.pem, how come
-  the location is same ? Because when you enter command "pwd" it will show your current directory when you
-  are in "~" location.
+- You can keep your private key in any location but make sure to give correct location of your private key in config file.
+- Here the location of private key is created in '/c/Users/saikiran' and i have given ~ /saikiran.pem, how come the location is same ? Because when you enter command 'pwd' it will show your current directory when you are in '~' location.
 - Which one should we prefer while cloning the repo HTTPS (or) SSH ?
-- HTTPS is for Username & Password, while SSH is used for Private key based authentication. But prefer HTTPS
-  while cloning any repository from github.
+- HTTPS is for Username & Password while SSH is used for private key based authentication. But prefer HTTPS while cloning any repository from github. HTTPS is used for initial setup while SSH is used for ongoing deployments because of security reasons.
 - Github is nothing but just a folder in internet with tracking capabilities.
 - What is Shibang in Shellscript (or) Bashscript ? #!/bin/bash
-- If you want git in Visual Studio only, then go to View, Terminal, Select gitbash.
-- If you enter wrong URL while pushing to github "git remote set-url origin <url_of_the_repository>"
-- If git is not configured in the github account yet, still developers can start writing their code in VS
-  until git is ready and later they can push it to the git.
-- A normal folder will become git, when you initialize "git init"
-- How do you capture the output of any linux command into a variable ? using command substitution like this
-  DATE=$(date) ; ID=$(id -u) etc.
+- If you want git in Visual Studio only then go to View, Terminal, Select gitbash.
+- If you enter wrong URL while pushing to github 'git remote set-url origin <url_of_the_repository>'
+- If git is not configured in the github account yet still developers can start writing their code in VS until git is ready and later they can push it to the git.
+- A normal folder will become git when you initialize 'git init'
+- How do you capture the output of any linux command into a variable ? Using command substitution DATE=$(date) & ID=$(id -u)
 - What is the use of arguments in the shellscript ? $1, $2, $3... $N, $@, $#
 - While connecting to external systems like DB, how to hide password while entering in terminal ?
-- Is really Data-types are important in shellscript ? NO!
-- What is arrays in shellscript ? Array index will start from 0,1,2,3.... We have notation for "ALL" that is
-  "@" and how many args are passed is "#"
+- Is really Data types are important in shellscript ? NO!
+- What is arrays in shellscript ? Array index will start from 0,1,2,3.... We have notation for 'ALL' that is '@' and how many args are passed is '#'
 - Write a shellscript of array using FRUITS example ?
+- How to switch from main-master (or) master-main branch ? git branch -M main
+- If you want to create a folder in github with .md extension just use '/' after naming your folder and after '/' just create a file with .md extension. Example 'AWS_DevOps_Notes(Repo)/Shellscript/Session-01.md'
 
 ### Session-13
 - Write a shellscript using condition, if given number is greater than 100, given number is lessthan 100.
