@@ -154,16 +154,13 @@
 - If you want to create a folder in github with .md extension just use '/' after naming your folder and after '/' just create a file with .md extension. Example 'AWS_DevOps_Notes(Repo)/Shellscript/Session-01.md'
 
 ### Session-13
-- Write a shellscript using condition, if given number is greater than 100, given number is lessthan 100.
-- Install mysql, git, postfix, net-tools first using conditions, functions & store logs in tmp.
+- Write a shellscript using condition, if given number is greater than 100 and given number is less than 100.
+- Install mysql, git, postfix, net-tools first using conditions, functions and also store logs in tmp.
 - Write a loop script to print numbers from 1 to 1000 ?
 - Write a shellscript to install multiple packages using loops ?
 - What is root user and exit status ? id=0, (id -u), $?
 - What is function in shellscript ? We generally keep our functions under variables.
-- There will be NO logs in "less /var/log/messages" we need to store that logs, otherwise we cannot
-  troubleshoot, but the best practice is to keep a separate log file for applications and only push critical
-  events to /var/log/messages. Make sure you should not log in the current folder of server come outside and
-  then do.
+- There will be NO logs in 'less /var/log/messages' we need to store that logs, otherwise we cannot troubleshoot, but the best practice is to keep a separate log file for applications and only push critical events to /var/log/messages. Make sure you should not log in the current folder of server come outside and then do.
 - What is the purpose of redirection ? Nothing but storing the output in our required folder.
 - How to redirect the output ? "yum install nginx -y > output.text" you can keep any name in place of output
   like saikiran.text etc.
