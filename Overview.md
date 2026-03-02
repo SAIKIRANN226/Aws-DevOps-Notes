@@ -162,7 +162,7 @@
 - What are special variables in shellscript and they should be in double qotes and how do you use the colour coding in shellscript ?
 - You should not do any changes (or) adding new files in server terminal, come one step back like after going to home folder (cd) like ~ ---> Here you can store the logs for practicing as siva showed in the terminal. Here in terminal, if you get any errors (or) not working properly you can delete that folder and clone again from the github (NO problem)
 - Sudo dnf remove <package_name> -y (or) sudo yum remove <package_name> -y 
-- How do you handle the errors in shellscript ? Using a special variable called exit-status $?
+- How do you handle the errors in shellscript ? Using a special variable called exit-status $? and also writing conditions.
 - What is the disadvantage in shellscript ? Even if shellscript faces any error, it wont stop, it will continue to run the script. It is our responsibility to check the errors by writing conditions and exit status.
   
 ### Session-14 
@@ -177,15 +177,15 @@
 - Instead of giving &>> $LOGFILE everywhere, we can give 'exec &>$LOGFILE' under logfile name.
 - What is the use of logs ? In shell scripting, logs are used to record what the script did, when it did it and whether it succeeded or failed. They act like a black box recorder for your script — if something goes wrong, you can look back and see why.
 - To see full log file ---> sudo cat /var/log/messages
-- To see page by page ---> sudo less /var/log/messages
+- To see page by page logs ---> sudo less /var/log/messages
 - To follow logs in real time (or) to see running logs ---> tail -f /var/log/messages
 
 ### Session-15
-- unzip -o /tmp/web.zip ---> Here 'o' is to overwrite, if you run the script multiple times.
-- mkdir -p /app ---> Here -p means if folder exists, it will not create.
-- Similarly you can also write a condition if user exist then dont add, if not add.
+- unzip -o /tmp/web.zip ---> Here 'o' is to overwrite even if you run the script multiple times.
+- mkdir -p /app ---> Here 'p' means if folder exists it will not create.
+- Similarly you can also write a condition like if user exist then dont add, if not add.
 - Dont forget to restart nginx server after doing any changes in configuration file.
-- Make sure to add all private servers in the web cofiguration.
+- Make sure to add all private servers in web configuration.
   
 ### Session-16
 - Write a shellscript to delete old logfiles which are morethan 14 days old ?
