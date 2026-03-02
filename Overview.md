@@ -183,6 +183,7 @@
 ### Session-15
 - unzip -o /tmp/web.zip ---> Here 'o' is to overwrite, if you run the script multiple times.
 - mkdir -p /app ---> Here -p means if folder exists, it will not create.
+- Similarly you can also write a condition if user exist then dont add, if not add.
 - Dont forget to restart nginx server after doing any changes in configuration file.
 - Make sure to add all private servers in the web cofiguration.
   
