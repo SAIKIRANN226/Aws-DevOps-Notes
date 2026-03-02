@@ -193,73 +193,46 @@
 - Check Disk Usage and Send email for alerts ?
 - What is the algorithm for deleting old log files ? Decide SOURCE_DIR, Search for files, Delete.
 - How do you create files with old date in server ? touch -d 20231201 <anyname.log>
-- Command to find old logfiles morethan 14 days old with .log extensions only ? find . -type f -mtime +14 -name "*.log*"
+- Command to find old logfiles morethan 14 days old with .log extensions only ?
 - Instead of direct rm -rf, we used while loop to read command output line by line & then delete.
 - Command to check the information about total space & available space on a file system ? df -hT
 - How to create a new volume (or) disk in aws console & what is the condition for that ?
 - What are the commands to make the disk into usage ? Go through the overview steps of the disk creation.
 - Creating disk is the work of Storage team not DevOps. But just know how it works.
 - How do we find different types of file systems ? Using reverse search.
-- How do you mail the above disk usage from linux server ? We will configure the company mail server details
-  to send email alerts.
-- So we call mail.sh whenever we want to monitor on disk_usage, not only on disk_usage, we can also call for
-  CPU_Utilization, Memory_Utilization etc for monitoring purpose using shellscript, because sometimes mailing
-  is not in our control, linux team will give a script like "mail.sh" we can simply call that instead of
-  writing this whole command "echo "$message" | mail -s "High Disk Usage" info@joindevops.com"
-- Then how to call mail.sh ? "sh mail.sh" "DevOps Team" "High Disk Usage" "$message" "info@joindevops.com"
-  "ALERT High Disk Usage" Whatever you write after sh mail.sh is arguments we are passing.
-- Basically no need to follow the color coding or formatting, we can just use as it is in mail configuration
-  gmail.MD document (or) if your company provide the email configuration document just simply follow that.
-- So configuring gmail.MD document for sending mails is morethan enough.
-- Monitoring team responsibility is, if websites are down, then monitoring team will send alerts to
-  Developers team. If servers are down, then monitoring team will send alerts to DevOps team.
+- How do you mail the above disk usage from linux server ? We will configure the company mail server details to send email alerts.
+- So we call mail.sh whenever we want to monitor on disk_usage, not only on disk_usage, we can also call for CPU_Utilization, Memory_Utilization etc for monitoring purpose using shellscript, because sometimes mailing is not in our control, linux team will give a script like "mail.sh" we can simply call that instead of writing this whole command "echo "$message" | mail -s "High Disk Usage" info@joindevops.com"
+- Sometimes in our company we dont have access, linux team will configure mail.sh, so we can call them by using below command.
+- sh mail.sh" "DevOps Team" "High Disk Usage" "$message" "info@joindevops.com" "ALERT High Disk Usage" Whatever you write after sh mail.sh is arguments we are passing.
+- Basically no need to follow the color coding or formatting, we can just use as it is in mail configuration gmail.MD document (or) if your company provide the mail configuration document just simply follow that. So configuring gmail.MD document for sending mails is morethan enough.
+- Monitoring team responsibility is, if websites are down, then monitoring team will send alerts to Developers team. If servers are down, then monitoring team will send alerts to DevOps team.
 
 ### Session-17
-- What is Crontab ? Usage of crontab & giving the script location in "crontab -e"
+- What is Crontab ? Usage of crontab & giving the script location in 'crontab -e'
 - How to see the running logs of a Crontab ? tail -f /var/log/cron
-- What is Optargs in shellscript ? We can control the script behaviour by giving extra inputs to the script
-  using a tool called Optargs.
+- What is Optargs in shellscript ? We can control the script behaviour by giving extra inputs to the script using a tool called Optargs.
 - How to set any shellscript as Native Linux Command ? echo $PATH
-- If you install any softwares in these PATHS then, automatically windows (or) linux will pick up from this
-  PATHS only.
-- Generally if you keep your script in "/usr/local/bin" location, then you NO need to give ".sh" while
-  executing the shellscript.
-- So "sudo cp 18-greetings.sh /usr/local/bin/greeting (Copied as a greeting name)
-- Give executive access "sudo chmod +x /usr/local/bin/greeting" now if you are in any folder otherthan the
-  script folder also, just run by using name "greeting" (or) greeting -n sai -w good evening.
+- If you install any softwares in these PATHS then, automatically windows (or) linux will pick up from this PATHS only.
+- Generally if you keep your script in '/usr/local/bin' location, then you NO need to give '.sh' while executing the shellscript.
+- So 'sudo cp 18-greetings.sh /usr/local/bin/greeting (Copied as a greeting name)
+- Give executive access 'sudo chmod +x /usr/local/bin/greeting' now if you are in any folder other than the script folder also, just run by using name 'greeting' (or) greeting -n sai -w good evening.
 - Till now we have created ec2 instances & route53 records manually by logging into aws console.
-- Like if web then PublicIP, if not web then PrivateIP right ? Also if mongodb, mysql, shipping then t3.small
-  and remaining t2.micro.
-- We can now create using aws CLI "aws command line" to automate. In every server we have aws command line,
-  you can check using "aws help" in server.
-- So we need to write a script to automate using "aws CLI" for creating instances & records.
-- What are Roles to Resources ? Not only for persons, resources should also have access to access another
-  resource, for that we have Roles to Resources like for example if you have created one EC2 and this EC2
-  instance should go and create another new instances (or) route53 records.
-- How to create a role for ec2 in aws console ? IAM/Roles/Create role/Select EC2 as use case/Next/Admin
-  access (or) AmazonEc2fullaccess/Route53 full access/Give any name to the role.
-- How will you asign above role to the EC2 in aws console ? Select the already created instance & go to
-  Actions/Security/Modify IAM role/Select your created role.
-- Remove old credentials which was created for aws console (For UI) in .aws/ folder by using rm -rf, if you
-  got any errors in cd location using "ls -la" command because that was hidden folder.
-- Command to create instances with tags ?
-- Command to list instances and find the one with your specific name tag ?
-- Command to terminate the instances ?
-- How do you create administrator user in aws console ? By going to IAM, Users, Create user, Attach policies
-  directly, Administrator access, Click on the created user, Security credentials, Create accesskey, select
-  CLI.
-- Then "aws configure" after creating administrator user in aws console.
-- Why we created roles in IAM ? Here if person, he can keep Access_key & Secret_keys safely, will EC2 keep
-  these credentials secretly ? If anybody has access to this EC2, he can able to see these credentials using
-  "ls -la" command in cd .aws/ because these keys are saved in .aws/ folder only. Thats why we have created
-  roles to resources in IAM.
-- Write a shellscript to create all instances & records using aws CLI ? Go through the "roboshop.sh" file in
-  Roboshop-Shellscript.
-- What is UPSERT in shellscript ? If the record exists, update (or) edit it, if it doesn’t exist, it will
-  create the records.
-- Important point, So overall create any one instance and give a role to it, so that it will create multiple
-  instances from this instance only, you need to clone the "roboshop-shellscript" in the server and run the
-  "roboshop.sh" script.
+- Like if web then PublicIP, if not web then PrivateIP right ? Also if mongodb, mysql, shipping then t3.small and remaining t2.micro.
+- We can now create using aws CLI 'aws command line' to automate. In every server we have aws command line, you can check using 'aws help' in server.
+- So we need to write a script to automate using 'aws CLI' for creating instances & records.
+- What are Roles to Resources ? Not only for persons, resources should also have access to access another resource, for that we have Roles to Resources like for example if you have created one EC2 and this EC2 instance should go and create another new instances (or) route53 records.
+- How to create a role for ec2 in aws console ? IAM/Roles/Create role/Select EC2 as use case/Next/Admin access (or) AmazonEc2fullaccess/Route53 full access/Give any name to the role.
+- How will you asign above role to the EC2 in aws console ? Select the already created instance & go to Actions/Security/Modify IAM role/Select your created role.
+- Remove old credentials which was created for aws console (For UI) in .aws/ folder by using rm -rf, if you got any errors in cd location using 'ls -la' command because that was hidden folder.
+- Command to create instances with tags ? aws ec2 run-instances --image-id ami-xxxxxxxx --count 1 --instance-type t2.micro --security-group-ids sg- 903004f8 --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=Saikiran_instance}]'
+- Command to list instances and find the one with your specific name tag ? aws ec2 describe-instances --filters "Name=tag:Name,Values=MyInstanceName" --query "Reservations[].Instances[].InstanceId" --output text
+- Command to terminate the instances ? aws ec2 terminate-instances --instance-ids i-0abc123456def7890
+- How do you create administrator user in aws console ? By going to IAM, Users, Create user, Attach policies directly, Administrator access, Click on the created user, Security credentials, Create accesskey, select CLI.
+- Then 'aws configure' after creating administrator user in aws console.
+- Why we created roles in IAM ? Here if person, he can keep Access_key & Secret_keys safely, will EC2 keep these credentials secretly ? If anybody has access to this EC2, he can able to see these credentials using 'ls -la' command in cd .aws/ because these keys are saved in .aws/ folder only. Thats why we have created roles to resources in IAM.
+- Write a shellscript to create all instances & records using aws CLI ? Go through the 'roboshop.sh' file in Roboshop-Shellscript.
+- What is UPSERT in shellscript ? If the record exists, update (or) edit it, if it doesn’t exist, it will create the records.
+- Important point, So overall create any one instance and give a role to it, so that it will create multiple instances from this instance only, you need to clone the 'roboshop-shellscript' in the server and run the 'roboshop.sh' script.
 - We used --query is to get the PrivateIP of the instances nothing but query from the existing resource.
 
 ### Session-18
