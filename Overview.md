@@ -189,13 +189,11 @@
   
 ### Session-16
 - Write a shellscript to delete old logfiles which are morethan 14 days old ?
+- Generally we have cat /etc/passwd in this, we have all the users information like user_id, group_id, user_name etc. So how to read this whole information properly (or) in a structured way ? For that we can use IFS (Internal field separator).
 - Check Disk Usage and Send email for alerts ?
-- Generally we have cat /etc/passwd in this, we have all the users information like user_id, group_id,
-  user_name etc. So how to read this whole information properly (or) in a structured way ? For that we can
-  use IFS (Internal field separator).
 - What is the algorithm for deleting old log files ? Decide SOURCE_DIR, Search for files, Delete.
-- How do you create files with old date in server ? "touch -d 20231201 <anyname.log>"
-- Command to find old logfiles morethan 14 days old with .log extensions only ?
+- How do you create files with old date in server ? touch -d 20231201 <anyname.log>
+- Command to find old logfiles morethan 14 days old with .log extensions only ? find . -type f -mtime +14 -name "*.log*"
 - Instead of direct rm -rf, we used while loop to read command output line by line & then delete.
 - Command to check the information about total space & available space on a file system ? df -hT
 - How to create a new volume (or) disk in aws console & what is the condition for that ?
