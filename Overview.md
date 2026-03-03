@@ -237,9 +237,9 @@
 
 ### Session-18
 - Ansible-server (or) Configuration-server (or) Main-server (or) Controller machine.
-- What are the disadvantages in shellscript ? L, S, R, E, E, S
+- What are the disadvantages in shellscript ? L, S, R, E, E, S, R, P
 - What are the advantages of ansible over shellscript ? O, C, A, C, O, E, P
-- Ansible can create instances on external systems like azure, aws, gitlab but it is not recommended because ansible is only intended for configuration management and application deployment. Because it does not have a state file to create instances as terraform does. So thats why terraform is best for creation of infrastructure only.
+- Ansible can also create instances on external systems like azure, aws, gitlab but it is not recommended because ansible is only intended for configuration management and application deployment. Because it does not have a state file to create instances as terraform does. So thats why terraform is best for creation of infrastructure only.
 - What is configuration management in general and in ansible ? As a DevOps engineer we need to do CRUD over the server effectively.
 - What are the application deployment basic steps ?
 - What is Idempotence Behaviour in ansible ?
@@ -251,9 +251,9 @@
 - Curl command will not download the file, instead it will show the content on the terminal.
 - To download the file in your local, just use 'wget <paste_the_RAW_URL>'
 - What is PUSH (Ansible) architecture in ansible ? Agent less
-- What is PULL (Chef) architecture in ansible, how do you configure PULL ? Install Agents
+- What is PULL (Chef) architecture in ansible, how do you configure PULL ? By installing agents in nodes.
 - What is the advantage of PULL based when compared to PUSH ?
-- Install ansible in ansible-server and connect to Node ? 'ansible -i NodeIP, all -e ansible_user=centos -e ansible_password=DevOps321 -m ping' Hence connection is success between Ansible and Node.
+- Install ansible in ansible-server and connect to Node ? sudo yum install ansible -y and then 'ansible -i NodeIP, all -e ansible_user=centos -e ansible_password=DevOps321 -m ping' Hence connection is success between Ansible and Node.
 - Install nginx in Node from Ansible ? ansible -i NodeIP, all -e ansible_user=centos -e ansible_password=DevOps321 --become -m yum/service -a "name=nginx state=present/started/stopped"
 - What is the difference between Shell commands and Ansible modules ?
 - What is the difference between Shellscript and Ansible-playbook ?
