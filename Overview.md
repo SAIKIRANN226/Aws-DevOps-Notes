@@ -237,8 +237,8 @@
 
 ### Session-18
 - Ansible-server (or) Configuration-server (or) Main-server (or) Controller machine.
-- What are the disadvantages in shellscript ? L, S, R, E, E, S, R, P
-- What are the advantages of ansible over shellscript ? O, C, A, C, O, E, P
+- What are the disadvantages in shellscript ? L, S, R, E, E, S
+- What are the advantages of ansible over shellscript ? O, C, A, C, O, E, P, R
 - Ansible can also create instances on external systems like azure, aws, gitlab but it is not recommended because ansible is only intended for configuration management and application deployment. Because it does not have a state file to create instances as terraform does. So thats why terraform is best for creation of infrastructure only.
 - What is configuration management in general and in ansible ? As a DevOps engineer we need to do CRUD over the server effectively.
 - What are the application deployment basic steps ?
@@ -270,6 +270,7 @@
 - ansible.builtin.service ---> Its a service module.
 - ansible.builtin.debug ---> This module prints whatever you give.
 - ansible.builtin.command ---> Used to run command on a remote machine directly without using shell.
+- Not only external hosts like web, it can also connect to the local hosts, ansible can manage its own server also.
 - We have variables in ansible play-level, task-level, var_files, vars_prompt, inventory.ini, args.
 - Variable preference in ansible ? CMD, Task, File, Prompt, Play, Inventory.ini, Ansible roles.
 - What are Data-types in ansible ? We have Skills (List type) and Experience (Map type)
