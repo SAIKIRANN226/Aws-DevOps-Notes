@@ -287,7 +287,7 @@
 ### Session-20 
 - Configure Roboshop Project using ansible ? Go through the 'Roboshop-ansible' in VS.
 - Create all the instances & route53 records using shellscript (Roboshop.sh) script.
-- Dont forget to give role to the ansible instance, before creating instances and route53 records.
+- Dont forget to give role to the ansible instance before creating instances and route53 records.
 - Delete the old records if exists ---> Hosted zones --> Except NS and SOA.
 - In ansible we have used file module, dnf module, user module, get url modules etc.
 - How to check remote connections (or) running logs ? sudo tail -f /var/log/messages.
