@@ -30,11 +30,11 @@
 - Protocol ---> We have different protocols like HTTP, HTTPS, SSH, SMTP, DNS etc.
 - $ ---> Normal user ; # ---> Root user (Sudo su -) to exit from root just type exit.
 - Pwd ---> Present working directory you will be directly land in /c/users/saikiran
-- <command_name> --help ---> Get help from that particular command.
+- <command_name> --help ---> Get help from any particular command.
 - What are the basic Git commands ? https://dzone.com/articles/top-35-git-commands-with-examples-and-bonus
 - Everything is CRUD in software industry (Example of facebook)
 - How to update a file with content, save, read ? Just press enter then ctrl+d
-- Removing file and folder commands ? rm, rmdir, rm -r <folder_name>
+- Removing file and folder commands ? rm, rm -rf, rmdir, rm -r <folder_name>
 - How to use copy and move commands in linux ? If you use mv command with in the same folder, it works as rename also.
 - Grep command in linux is a case sensitive. Linux will treat DevOps and DEVOPS as different. So to make this case insensitive (i) use grep -i ---> 'grep -i DevOps' another example to find a package ---> 'ps -ef | grep -i nginx'
 - Piping symbol | ---> One command output will become the input to another command.
@@ -70,13 +70,13 @@
 - Systemctl stop nginx ---> To stop the service.
 - Systemctl enable nginx ---> Automatically services will run.
 - Systemctl disable nginx ---> Will disable nginx.
-- What is Network managment in linux ? How do you check port and process running ? 'netstat -lntp' In every system we have 0-65,535 ports.
+- Network managment in linux ? How do you check port and process running ? 'netstat -lntp' In every system we have 0-65,535 ports.
 - What are the general trouble shooting process you do ?
 - How to give admin access (or) any other access to linux users ? Example two types of users. Linux admin team should have Full admin access ; DevOps team should have Limited sudo access.
 - Generally to give sudo access we have one file 'vim /etc/sudoers' It is not recommended to open this file because it is crucial. So linux has given one command to open that file safely that is 'visudo'
 - Ramesh ---> Give Admin full access, under wheelgroup and enter %admin ALL=(ALL) ALL
 - Suresh limited access ---> %devops ALL=(ALL) /usr/bin/yum,/usr/bin/systemctl
-- For ramesh we have given full admin access but for suresh we can give only few limited access like 'yum' command (To know where this command is installed 'which yum' (or) 'which systemctl' (or) 'which <command-name>'
+- For ramesh we have given full admin access but for suresh we can only give few limited access like 'yum' command (To know where this command is installed 'which yum' (or) 'which systemctl' (or) 'which <command-name>'
 - Everytime opening 'visudo' is also a risky. Linux has given one location 'vim /etc/sudoers.d'
 - vim /etc/sudoers.d/DevOps (Created folder) --> %devops ALL=(ALL) /usr/bin/yum,/usr/bin/systemctl
 - vim /etc/sudoers.d/Admin (Created folder) --> %admin ALL=(ALL) ALL
@@ -98,7 +98,7 @@
 - We use NGINX as frontend servers because it can handle heavy traffic and it is used as reverse proxy also. IIS is only used for windows based applications.
 - We have 'winscp' for file transfer. It is a mini windows in linux server.
 - Generally frontend servers called as HTTP servers on port 80. Hosts html and java based applications. While Backend is also on HTTP servers but on port 8080. Hosts applications like tomcat, jboss, .net, python etc.
-- These frontend and backend servers will connect through API's
+- These frontend and database servers will connect through API's (Backend)
 - How to know your Public IP address given by your airtel subscription ? Just type 'What is my ip in google'
 - Every router has two sections Public and Private. Modem or router will provide private IPs to the internal systems like phone, laptop, refrigerator etc. using NAT. If you type 'ipconfig' in cmd you will get all details, IPv4 is my PrivateIP. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32 IP addresses. If we allocate all these, we get problems. So they brought 'NAT' Network Address Translation. However latency will be slow that is nothing but time to respond will be somewhat slow.
 - What is Fibre exchange points ?
@@ -270,15 +270,15 @@
 - ansible.builtin.service ---> Its a service module.
 - ansible.builtin.debug ---> This module prints whatever you give.
 - ansible.builtin.command ---> Used to run command on a remote machine directly without using shell.
-- Not only external hosts like web, it can also connect to the local hosts, ansible can manage its own server also.
+- Not only external hosts like web, it can also connect to the local hosts. Ansible can manage its own server also.
 - We have variables in ansible play-level, task-level, var_files, vars_prompt, inventory.ini, args.
 - Variable preference in ansible ? CMD, Task, File, Prompt, Play, Inventory.ini, Ansible roles.
 - What are Data-types in ansible ? We have Skills (List type) and Experience (Map type)
 - What are conditions in ansible ? Write a condition for roboshop user exist or not ?
-- Similar to $? in shell, we have "rc" in ansible to check the exit status of the previous command.
+- Similar to $? in shell, we have 'rc' in ansible to check the exit status of the previous command.
 - Write ansible-playbook to loop Ramesh, Suresh, Saikiran, Mahesh.
 - Write ansible-playbook to install nginx, mysql, postfix, net-tools using loop.
-- Write ansible-playbook to install nginx, mysql, postfix, net-tools & also loop "name & state"
+- Write ansible-playbook to install nginx, mysql, postfix, net-tools & also loop 'name & state'
 - What are tags in ansible ? Tags are used in server, if you want a particular task to run.
 - ansible-playbook -t devops 16-tags.yaml ; ansible-playbook -t aws 16-tags.yaml
 - When we can use tags ? For example take catalogue component, if there is any new version of catalogue, what will you do basically ? We do new deployment (or) new release right ? By using basic deployment steps.
@@ -286,20 +286,18 @@
 
 ### Session-20 
 - Configure Roboshop Project using ansible ? Go through the 'Roboshop-ansible' in VS.
-- Create all the instances & route53 records using shellscript (Roboshop.sh) script.
-- Dont forget to give role to the ansible instance before creating instances and route53 records.
-- Delete the old records if exists ---> Hosted zones --> Except NS and SOA.
-- In ansible we have used file module, dnf module, user module, get url modules etc.
-- How to check remote connections (or) running logs ? sudo tail -f /var/log/messages.
+- Create all instances & route53 records using shellscript (Roboshop.sh) script.
+- Don't forget to give role to the ansible instance before creating instances and route53 records.
+- Delete old records if exist ---> Hosted zones --> Except NS and SOA.
+- In ansible we have used file module, dnf module, user module, get url module, package module, ping module, service module, debug module, command module etc.
 - Black Hole ---> &>> /dev/null (Output stored here will be discarded)
-- All the Users informations will be there in 'cat /etc/passwd' in server.
 
 ### Session-21
-- What is 'UPSERT' in roboshop.sh file in 'Roboshop-shellscript' ? Previously it was 'CREATE' now 'UPSERT'
+- What is 'UPSERT' in roboshop.sh file in 'Roboshop-shellscript' ? Previously it was 'CREATE' now 'UPSERT' why ?
 - What is the difference between Command and Shell ?
-- Shell ---> It is like you login inside the server and run the command, Environment variables and redirections (Symbols) will work here.
-- Command ---> It is like running the command outside the server, Environment variables and redirections (Symbols) will not work here.
-- We used functions in shellscript to avoid the repetition of code right ? So similarly in ansible also we have Ansible Roles.
+- Shell -> You login inside the server and run the command. Environment variables and redirections (Symbols) will work here.
+- Command -> You run the command outside the server. Environment variables and redirections (Symbols) will not work here.
+- We used functions in shellscript to avoid repetition of code right ? Similarly in ansible also we have ansible roles.
 
 ### Session-22
 - We have a special file in linux called a 'Black Hole' located at /dev/null. Any data stored here will immediately discarded (Vanishes) '& >> /dev/null' Here & → runs in background, >> /dev/null → discards output.
