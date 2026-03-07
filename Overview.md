@@ -303,13 +303,15 @@
 - We have a special file in linux called a 'Black Hole' located at /dev/null. Any data stored here will immediately discarded (Vanishes) '& >> /dev/null' Here & → runs in background, >> /dev/null → discards output.
 - How to run a file (or) playbook in background ? 'nohup ansible-playbook -i inventory.ini -e ansible_user=centos -e ansible_password=DevOps321 mongodb.yaml & >> /dev/null'
 - Output will be in 'tail -f nohup.out' it will not come in terminal. We cannot run every script in background because of high memory consumption, you can only run few scripts (or) a small instance in background.
-- What are ansible roles ? It is a dry principle, dont repeat yourself like we have used functions in shellscript to avoid the repetition of code. It is a proper directory structure to keep our configuration and we can share this with other users also.
+- What are ansible roles ? It's a dry principle, dont repeat yourself like we have used functions in shellscript to avoid the repetition of code. It is a proper directory structure to keep our configuration and we can share this with other users also.
 - Ansible roles ---> Common is also a role, we have tasks, handlers, templates, files, vars, defaults, meta, library, lookup_plugins.
-- How to debug, if you are facing any error in ansible playbook ? 'ansible-playbook -vvv -i inventory.ini -e ansible_user=centos -e ansible_password=DevOps321 -e component=mongodb main.yaml' We will get the full information on terminal, what is happening in background, so that we can see where is the error.
-- What are the supporting files in project ? Like mongodb.repo, catalogue.service, roboshop.conf etc.
+- Lookup plugins are used for connecting to external systems using dynamic inventory.
+- How to debug if you are facing any error in ansible playbook ? 'ansible-playbook -vvv -i inventory.ini -e ansible_user=centos -e ansible_password=DevOps321 -e component=mongodb main.yaml' We will get the full information on terminal like what is happening in the background, so that we can see where is the error.
+- What are the supporting files in project ? Like mongodb.repo, catalogue.service, roboshop.conf etc. without these, configuration will not be complete.
 - Creating every role is not mandatory, we create what we require.
 - How to call common role (Any role) in another role ? 'ansible.builtin.import_role'
-- How can we ignore errors in ansible ? Using 'ignore_errors: true'
+- How can we ignore errors in ansible ? 'ignore_errors: true'
+- To set indentation in VS use 'shift+tab and tab' 
 
 ### Session-23
 - What is 'ansible.cfg' file ? It is ansible main configuration file, we can control options from here.
@@ -318,10 +320,14 @@
 - For example create a test folder in CD location 'mkdir test'
 - Then cd test/ and 'cp /etc/ansible/ansible.cfg .' then pwd will be '/home/centos/test'
 - Then 'export ANSIBLE_CONFIG=/home/centos/test/ansible.cfg' nothing but i have given first preference.
-- When you test 'ansible --version' in any location, then you can see ansible config file is loading from the '/home/centos/test/ansible.cfg' location. Only if you set environment variable for 'ANSIBLE_CONFIG' and incase if you 'UNSET' this environment variable using 'unset ANSIBLE_CONFIG' now it will be loading from the default location that is '/etc/ansible/ansible.cfg'
+- When you test 'ansible --version' in any location then you can see ansible config file is loading from the '/home/centos/test/ansible.cfg' location. Only if you set environment variable for 'ANSIBLE_CONFIG' and incase if you 'UNSET' this environment variable using 'unset ANSIBLE_CONFIG' now it will be loading from the default location that is '/etc/ansible/ansible.cfg'
 - There are many options in ansible.cfg file (Ansible configuration settings) we may not use all the options, we only use what is required like inventory_path, ask_vault, timeout, user_name, passwords etc.
 - What are the preferences of loading ansible.cfg file ?
-- Instead of giving 'ansible-playbook -i inventory -e ansible_user=centos -e ansible_password=DevOps321 -e component=mongodb main.yaml' We can keep -i inventory as a separate file and keep your username and password in ansible.cfg then command usage is 'ansible-playbook -e component=mongodb main.yaml'
+- ANSIBLE_CONFIG (Environment variable if set)
+- ansible.cfg (In the current directory)
+- ~/.ansible.cfg (In the home directory)
+- /etc/ansible/ansible.cfg
+- So instead of giving 'ansible-playbook -i inventory -e ansible_user=centos -e ansible_password=DevOps321 -e component=mongodb main.yaml' We can keep -i inventory as a separate file and keep your username and password in ansible.cfg then command usage is 'ansible-playbook -e component=mongodb main.yaml'
 - Templates is nothing but a place holders, where we will submit our required values at the run time and it is a Jinja2 format and extension is .j2 go through the code in VS. Like we have used for catalogue.service files.
 - What are Handlers in ansible roles and why we use ?
 - What is the Usage of tags in ansible ? If you want to run a particular task, then we use Tags.
