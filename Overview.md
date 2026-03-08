@@ -334,10 +334,10 @@
 - How to create a full config file ? 'ansible-config init --disabled > ansible.cfg' Here disabled means by default all options are commented, you can uncomment which ever options you want to use.
 
 ### Session-24 
-- Till now where we have given Username & Password ? Command line (or) 'ansible.cfg file'
+- Till now where we have given Username and Password ? Command line (or) 'ansible.cfg' file right ?
 - What is Ansible-Vault ? Storing secrets like keys and passwords etc.
 - Difference between encoding and encryption ?
-- Ansible uses mathematic algorithm (AES256) to encrypt the vault.
+- Ansible uses mathematic algorithm (AES256) to encrypt the vault. Those who know the password they can only decrypt the code.
 - How to create ansible-vault in ansible-server ?
 - Practice folder (Your working directory)
 - Create 'vault' folder inside the Practice folder, if we create vault folder in VS (Windows), it will not reflect in the server, so you need to create in linux server only. Same for 'group_vars' folder.
