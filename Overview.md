@@ -422,21 +422,21 @@
 - Go through the output block in count folder VS ?
 
 ### Session-27 
-- What is locals in terraform and syntax of the locals ? How to call a local ?
-- What is Data-sources in terraform and why it is used ? For example if you want AMI then 'terraform query ami' in google search. Here data-source is used to query the data dynamically from the providers aswel as from the existing resources also.
+- What is locals in terraform and its syntax ? How to call a local ?
+- What is Data-source in terraform and why it is used ? For example if you want AMI then 'terraform query ami' in google search. Here data-source is used to query the data dynamically from the providers aswel as from the existing resources.
 - Types of loops ? Count_based, For_each, Dynamic_loop
 - What is Dynamic_loop and where it is useful ?
 - What is Terraform State (State and Remote state) ?
 - What is Declarative state and Desired state ?
 - What is Current state in terraform and where it will be stored ? Terraform.tfstate
-- When Desired state == Current state, then terraform will not take any action.
-- When Desired state =//= Current state, then terraform will create.
+- When Desired state == Current state then terraform will not take any action.
+- When Desired state =//= Current state then terraform will create.
 - Why the terraform will create lock file while terraform is working on it ?
 - Explain the concept of local state using example of when 2 persons are working on same repo ?
 - What errors these persons will face, if they are working on same repo ?
 - So terraform will compare my state and devops person state. If both are running terraform apply, here duplicates may come and some may get error as already exist.
 - So for this issue we have a central state file to check wether the infra already exist or not ? That is remote state (S3 bucket).
-- Terraform.tfstate is a crucial file, should not delete.
+- Terraform.tfstate is a crucial file should not be deleted.
 - What are the two disadvantages in local state ? Collaboration environment and Security
 - So create S3 bucket and lock that bucket using dynamodb table ?
 - What are the different remote states we have and why we use only 'terraform s3 remote state'
@@ -444,7 +444,7 @@
 - If we write more lines of script we say configuration is increasing.
 - S3 buckets are chargeable in aws, so delete after practice.
 - Use different key names in s3 bucket like in the previous you have used different key 'foreach' you can use as per your wish but not with the same key names because it will merge all.
-- Interview question ? We are using S3 bucket with Dynamodb locking, here local state will not work because it will create duplicates and errors, security will not be there inside the local. So we have to keep it safely in the remote storage like S3 bucket, it will provide better collaboration among the team members and also security.
+- Interview question ? We are using S3 bucket with Dynamodb locking. Here local state will not work because it will create duplicates and errors, security will not be there inside the local. So we have to keep it safely in the remote storage like S3 bucket, it will provide better collaboration among the team members and also security.
 
 ### Session-28
 - How to create multiple environments with terraform in 3 ways ? Using same code but with different configuration ?
@@ -457,7 +457,7 @@
 - When you are switching from one env to another env, you must reinitialize it.
 - Then you can terraform plan, apply (or) destroy using -var-file
 - What if you forgot to give -var-file ? It will load default values from variables.tf
-- What if you commented variables.tf file also ? It will ask the user to prompt inputs. So that you will come to know i forgot to give -var-file.
+- What if you commented variables.tf file also ? It will ask the user to prompt inputs. So that you will come to know you forgot to give -var-file.
 - Only 1 bucket is created in workspace, inside that it will automatically create a default folder env:/ and inside this env folder, terraform will automatically create Dev and Prod workspaces.
 - If you want to know workspace commands just 'terraform workspace'
 - How to create workspace ? 'terraform workspace new dev' do it in gitbash.
@@ -468,7 +468,7 @@
 - So which approach is better ? Tfvars, Workspace, Different repos for different envs ?
 - Provisioners are used to execute the commands on a local machine (or) remote server after it's created, typically used for initial configuration like boot strapping. Provisioners are used only for ec2.
 - What is local-exec provisioner in terraform and what is the syntax ? It enables a keyword ${self.id}
-- What is remote-exec provisioner in terraform & what is the syntax ?
+- What is remote-exec provisioner in terraform and what is the syntax ?
 - Local-exec --> Run on your local machine --> Use case is to notify, trigger local scripts --> No remote access is needed.
 - Remote-exec --> Runs on your remote server --> Use case is to install softwares, configure ec2 post setup, need SSH connection to access remote host for linux and WinRM access for windows.
 - What is the disadvantage of local-exec ? Local-exec provisioner run only one time not every time.
