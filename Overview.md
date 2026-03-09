@@ -385,22 +385,21 @@
 - What is terraform and why it is used ? In how many ways we configured our project ? Why we prefer ansible as configuration management while configuring the big project ?
 - Why we din't prefer manual configuration over Ansible and Shellscript ?
 - What are the advantages of Terraform ? V, C, A, I, C, A, M, H
-- What is Inventory management in terraform ? It is about tracking all the infrastructure resources which terraform provisions and manages using terraform state file (Terraform.tfstate). This state file acts like a inventory. When you terraform plan (or) apply. It will compare your desired state with current state.
+- What is Inventory management in terraform ? It is about tracking all the infrastructure resources which terraform has created and manage the infra using terraform state file (Terraform.tfstate). This state file acts like an inventory. When you terraform plan (or) apply. It will compare your desired state with current state.
 - What is declarative in terraform and How to setup and install terraform ?
 - Install 'hashicorp terraform extension' to get colors.
 - How to get authentication to AWS to push the created infra ? aws CLI install
 - You can install aws cli in two ways ? One is regular method of downloading aws cli software and run the file in windows laptop. Another one is just run the shown commands in cmd from the internet.
-- How to test wether the aws CLI is installed (or) not in cmd and gitbash ? aws --version
+- How to test wether the aws CLI is installed (or) not in cmd and gitbash ? 'aws --version'
 - If credentials are not found then do 'aws configure' before that you need to create terraform administrator user in IAM (or) use existing secret and access keys.
-- Where this credentials like Secret-key and Access-key will be saved ? .aws folder
+- Where this credentials like Secret-key and Access-key will be saved ? '.aws' folder
 - What is the syntax of terrafrom to create any resources and what we call this syntax of terraform ?
 - What is the importance of provider in terraform and what is the extension of terraform to save ?
 - Where to run the terraform commands in gitbash ? Wherever .tf files exist
 - What are the terraform commands and what is their functionality ?
 - What is variable syntax ? Is really data-type in variable syntax is important ? NO!
 - Go through this https://github.com/daws-76s/terraform
-- We can also give Access-key and Secret-keys under region to get the authentication to AWS in provider section, but its not safe to do. Thats why we downloaded 'aws CLI' to authenticate.
-- So Dont push the Access-key and Secret-key to the github (or) internet for safety reasons.
+- We can also give Access-key and Secret-keys under region to get the authentication to AWS in provider section but its not safe to do. Thats why we downloaded 'aws CLI' to authenticate. So Dont push the Access-key and Secret-key to the github (or) internet for security reasons.
 - Go through the all files in Terraform folder in VS.
 
 ### Session-26
