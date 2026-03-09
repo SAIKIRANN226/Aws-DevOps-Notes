@@ -21,7 +21,7 @@ Often we face the problem of different configurations in different environments 
 Basically CRUD over the infrastructure. Using terraform we can create entire infra in minutes reducing the human errors and deleting infra in minutes if not required and updating infra using terraform is also easy. Create the infra, Read the infra, Update the infra, Delete the infra.
 
 ### Inventory Management
-When you login to aws console, we have lot of services like multiple vpc, route53, ec2, lb, cdn, s3 etc. If client ask for the full information about the whole infrastructure, we cannot show it in the aws console by navigating to each and every service and taking notes and then showing to the client and that is also not a good practice. But in terraform you can easily take notes and give reports because we have separate folders for every resources like vpc, sg, vpn, databases, app-alb, web-alb, cdn etc.
+Terraform doesn’t use an inventory file like Ansible. Instead, it maintains a state file that tracks all the infrastructure resources it has created and uses it to determine what changes need to be applied.
 
 ### Cost Optimization
 - Create Infra when required, Delete Infra when not required to save the cost.
