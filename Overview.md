@@ -481,12 +481,11 @@
 ### Session-29
 - What is Module Development in terraform and what is the syntax ? Go through the code of EC2 module in Terraform modules in VS. Here provider.tf will not be there in module developing.
 - How many types of Modules and How many types of Roles are there ?
-- It is DevOps engineer responsibility to write README.md file to let others know how to use module. We keep information like what resources we have created in HA and inputs like what are required, what are optional. What outputs we are provided etc.
+- It is DevOps engineer responsibility to write README.md file to let others know how to use module. We keep information like what resources we have created in HA and inputs like what are required, what are optional, what outputs we are published etc.
 - Create a VPC in aws console ? CIDR (10.0.0.0/16)
-- Google has given some PrivateIP address ranges those only allocated to PrivateIP not for PublicIP, there you can see 24,20,16 bit-blocks.
-- Even ISP people will configure your PrivateIP address in any range among these 3 bit-blocks only.
-- We can select any range, but siva selected as 10.0.0.0/16 range.
-- Atleast you need to create 16 servers to use VPC '10.0.0.0/28' ---> 16 servers, 10.0.0.0/16 ---> 65k servers, generally we give VPC CIDR as 10.0.0.0/16 only, because it does not cost anything, so we can go for maximum.
+- Google has given some PrivateIP address ranges those only allocated to PrivateIP not for PublicIP, there you can see 24,20,16 bit-blocks. Even ISP people will configure your PrivateIP address in any range among these 3 bit-blocks only.
+- We can select any range but siva selected as 10.0.0.0/16 range.
+- Atleast you need to create 16 servers to use VPC '10.0.0.0/28' ---> 16 servers, 10.0.0.0/16 ---> 65k servers. Generally we give VPC CIDR as 10.0.0.0/16 only because it does not cost anything, so we can go for maximum.
 - Create Public subnet in aws console ? CIDR 10.0.1.0/24
 - Create Private subnet in aws console ? CIDR 10.0.2.0/24
 - Create Database subnet in aws console ? CIDR 10.0.3.0/24
@@ -497,14 +496,12 @@
 - Create Internet Gateway and attach to your created VPC in aws console.
 - What is the difference between Public and Private subnets ?
 - CIDR (Classless Inter-Domain Routing) ? We can asign custom IP address range to the subnets.
-- Use always terraform best practices for naming convention like using "_" to avoid double naming.
-- We used Open source modules sometimes, we have dedicated cloud team who develops modules and use them.
-- How do you check internet is working or not ? ping google.com, Ipv4 is 32bit and Ipv6 is 64 bit.
-- Router (Internet Gateway) ---> It has PublicIP and PrivateIP. PublicIP is nothing but just type what is my_ip in google, there you can see Ipv4 address that is your PublicIP, not ipv6. What is your PrivateIP just ipconfig in cmd there you can see IPv4 address Under wireless LAN adapter Wifi.
-- What is your actual IPaddress ? Just type in google what is my IP, if anybody wants to connect to my laptop you can connect using this IP address only. You cannot connect with PrivateIP address.
+- Use always terraform best practices for naming convention like using '_' to avoid double naming.
+- We used open source modules sometimes and also we have dedicated cloud team who develops modules to use them.
+- How do you check internet is working or not ? 'ping google.com' Ipv4 is 32bit and Ipv6 is 64 bit.
+- Router (Internet Gateway) ---> It has PublicIP and PrivateIP. What is your actual IPaddress or PublicIP ? Nothing but just type 'what is my_ip in google' there you can see Ipv4 address that is your PublicIP, not Ipv6. If anybody wants to connect to my laptop they can connect using this IP address only. You cannot connect with PrivateIP address. What is your PrivateIP just 'ipconfig' in cmd there you can see IPv4 address Under wireless LAN adapter Wifi.
 - AWS wont charge for VPC, subnets, route tables, it only charges when you are creating server.
-- We can create as many private subnets we want, however for functionality purpose, we have only two subnets which is Public and Private subnets.
-- Watch from 26:11 to 1:14:21 to understand how VPC works.
+- We can create as many private subnets we want however, for functionality purpose, we have only two subnets which is Public and Private subnets.
 
 ### Session-30
 - What resources we have created inside the VPC in aws console ?
