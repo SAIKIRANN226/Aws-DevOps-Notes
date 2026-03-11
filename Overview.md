@@ -505,11 +505,11 @@
 
 ### Session-30
 - What resources we have created inside the VPC in aws console ?
-- First we have created VPC in aws (Your created VPC is Isolated, even aws dont have access to it). It is like your Private Data-Center in aws cloud.
+- First we have created VPC in aws (Your created VPC is isolated even aws dont have access to it). It is like your private data center in aws cloud.
 - Created Internet Gateway (IGW) and attached to the VPC.
 - Created Public, Private and Database subnets in atleast 2-AZs for High Availability.
 - Created Route tables (Public, Private and Database) and associated with their respective subnets in both regions 1a and 1b.
-- Added Internet Gateway route in Public Route table, because internet should be enabled in Public not in Private, that is the difference between Public and Private subnets.
+- Added Internet Gateway route in Public Route table because internet should be enabled in Public not in Private, that is the difference between Public and Private subnets.
 - Enabled Auto-asign Public IPv4 address only to the Public subnet not to the Private subnet.
 - When you create a VPC, a default route table also known as main route table is automatically created to that VPC. It contains a local route that enables communication with the subnets within the VPC. While this default route table cannot be deleted, its routes can be modified and custom route tables can be created and associated with specific subnets to provide more granular control over network traffic.
 - What is NAT Gateway and why it is used ?
@@ -517,17 +517,15 @@
 - Creating NAT Gateway is not enough we need to add routes between Private subnets and to the Internet gateway (NAT) which is in Public subnet.
 - Which ever Private subnets like Database subnet (or) any other Private subnets wants to connect to the internet, they should add route to the NAT gateway which is in Public subnet. How to add routes is the below line ?
 - Select any of the Private subnet/Routes/Edit routes/Add route (Destination = 0.0.0.0/0, Target = NAT gateway, then select default one in dropdown under Target section only)
-- When you create a NAT gateway, aws will create instance in the background. We dont have access to that instance, since this instance IP is dynamic, whenever you off and on. So create ElasticIP for this instance first and then create NAT Gateway.
-- NAT and ElasticIP is chargeable, so delete after practice.
+- When you create a NAT gateway, aws will create instance in the background. We dont have access to that instance, since this instance IP is dynamic, whenever you off and on. So create ElasticIP for this instance first and then create NAT Gateway. NAT and ElasticIP is chargeable, so delete after practice.
 - Can we get StaticIP for this instance ? YES! we can get but it is very costly thing.
 - Even your home PublicIP is Dynamic. If you want StaticIP, you need to pay money to ISP provider.
 - What is VPC peering and what is the condition to create VPC peering connection ?
 - Create a VPC peering connection between Roboshop_VPC and Default_VPC
 - So let us take Requestor VPC = Roboshop VPC ; Acceptor VPC = Default VPC
 - Accept request in the same account and then add routes in VPC.
-- Try to add routes in main route table, because it is the default route table which is created automatically to communicate between the subnets, if not reflecting, then add explicitly in each route table.
-- If you want only one (or) two Private subnets wants to connect to the vpc peering main road then you can add in those two route tables only.
-- You need to add from the other side also not just one side. This is nothing but routes in VPC.
+- Try to add routes in main route table because it is the default route table which is created automatically to communicate between the subnets, if not reflecting then add explicitly in each route table.
+- If you want only one (or) two Private subnets wants to connect to the vpc peering main road then you can add in those two route tables only. You need to add from the other side also not just one side. This is nothing but routes in VPC.
 - Go through the Terraform-aws-vpc-module, how we developed VPC and resources inside it.
 - We have a Tagging strategy because we have more resources, so we use better tagging strategy.
 - We have Common_tags and Resource_tags ? What is the difference between them ?
