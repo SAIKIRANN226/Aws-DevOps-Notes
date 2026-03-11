@@ -549,7 +549,7 @@
 - We also have open source modules for VPC, if you search in google you can use that also, instead of developing, but for practice you need to know.
 
 ### Session-32
-- Till now we used Allow-all method while creating SG, it is just for practice only but now we need to follow strict SG rules according to the Roboshop Documentation only.
+- Till now we used allow-all method while creating SG, it is just for practice only but now we need to follow strict SG rules according to the Roboshop Documentation only.
 - We have developed our own customized module for creating VPC right ? In this session also we are going to develop our own customized module for SG. Refer Roboshop-aws-sg-module in VS.
 - We created Security groups and SG rules for all components according to the Roboshop Documentation.
 - Why we created separate folders for every resources in Roboshop-terraform ? Refresh time
@@ -559,7 +559,7 @@
 - For example in Big companies, 1 team is taking care for VPC, another team is taking care for SG etc. How do you get the information of resource which is in another team, project, folder ? SSM Parameter store
 - What is SSM Parameter store in AWS systems manager ? Configuration storage.
 - What does Configuration storage (or) Central storage do ?
-- What is the Naming convention while storing Configuration is Key-Value pair in SSM ? Generally Naming format will be in linux structure like /roboshop/dev/vpc_id
+- What is the Naming convention while storing configuration is Key-Value pair in SSM ? Generally Naming format will be in linux structure like /roboshop/dev/vpc_id
 - As we know Data-sources is used to query the data dynamically from the providers and also from the existing resources right ? But to query from the existing resource, we need to give some input like vpc_id, this vpc_id we cannot get from the data-source, but we used data source only to query the default vpc_id but to take the created vpc_id, again data-source is not an option, because we need to give vpc_id as input.
 - Since VPC is in different folder, how do we get vpc_id in SG ? You need to store vpc_id in SSM Parameter store first and then read that saved Key-Value in SG using data-source option.
 - Generally it is not mandatory to create ingress rules while creating SG and why ? But egress is static because this traffic is creating from our server, mostly it will be constant.
@@ -572,15 +572,14 @@
 - Then go to the Security groups in aws console and select created mongodb SG/Edit inbound rules/Add rule, Type is Custom TCP, Port 27017 and in source just type 'sg' next to the custom, you will get the created SGs, in that select already created Catalogue SG. Same for the User also.
 - Now write a terraform code for all the SGs according to the Roboshop Documentation.
 - Now creating EC2s for the roboshop 04-ec2 in VS using Open-source module from the internet.
-- Here the only disadvantage is you cannot connect to this Private instances using SSH because Private instances dont have PublicIP. We have two options Jump host and Installing VPN in Default VPC to connect to private instances which are in Roboshop VPC but make sure you have Peering connection between Default VPC and Roboshop VPC.
+- Here the only disadvantage is you cannot connect to this private instances using SSH because private instances dont have PublicIP. We have two options 'Jump host' and 'Installing VPN in Default VPC' to connect to private instances which are in Roboshop VPC but make sure you have Peering connection between Default VPC and Roboshop VPC.
 
 ### Session-33
-- What are the two ways to connect to Private Instances ? Jump Host and VPN
-- How to connect to Private Instances using VPN ?
+- What are the two ways to connect to private instances which are in Roboshop_VPC ? 'Jump Host' and 'VPN'
+- How to connect to private instances using VPN ?
 - In which VPC should we install OpenVpn (or) create server for VPN ? Default_VPC
 - We must have a peering connection between Default_VPC and Roboshop_VPC.
-- All our private instances are in Roboshop_VPC only.
-- How the traffic is routing from Home server to Private instances ?
+- How the traffic is routing from home server to private instances ?
 - What is the SG rule when mongodb is accepting connections from OpenVpn ?
 - Make sure to enable VPN in all private instances by giving SG of OpenVpn instance to all private instances with SSH rule.
 - How to install OpenVpn in server and connect to it ? Configuring VPN is not our responsibility, we have separate team for this. We use Cisco VPN in our company which is costly but for practice we used OpenVpn Connect.
