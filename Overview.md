@@ -478,29 +478,29 @@
 - What is Creation time and Destroy time in terraform ? Why we use them ?
 
 ### Session-29
-- What is Module Development in terraform and what is the syntax ? Go through the code of EC2 module in Terraform modules in VS. Here provider.tf will not be there in module developing.
-- How many types of Modules and How many types of Roles are there ?
-- It is DevOps engineer responsibility to write README.md file to let others know how to use module. We keep information like what resources we have created in HA and inputs like what are required, what are optional, what outputs we are published etc.
+- What is module development in terraform and what is the syntax ? Go through the code of EC2 module in Terraform modules in VS. Here provider.tf will not be there in module developing.
+- How many types of modules and how many types of roles are there ?
+- It is DevOps engineer responsibility to write 'README.MD' file to let others know how to use module. We keep information like what resources we have created and inputs like what are required, what are optional, what outputs we have published etc.
 - Create a VPC in aws console ? CIDR (10.0.0.0/16)
-- Google has given some PrivateIP address ranges those only allocated to PrivateIP not for PublicIP, there you can see 24,20,16 bit-blocks. Even ISP people will configure your PrivateIP address in any range among these 3 bit-blocks only.
+- Google has given some private_ip address ranges those only allocated to private_ip not for public_ip, there you can see 24,20,16 bit-blocks. Even ISP people will configure your private_ip address in any range among these 3 bit-blocks only.
 - We can select any range but siva selected as 10.0.0.0/16 range.
-- Atleast you need to create 16 servers to use VPC '10.0.0.0/28' ---> 16 servers, 10.0.0.0/16 ---> 65k servers. Generally we give VPC CIDR as 10.0.0.0/16 only because it does not cost anything, so we can go for maximum.
+- You need to create atleast 16 servers to use VPC '10.0.0.0/28' ---> 16 servers, 10.0.0.0/16 ---> 65k servers. Generally go for maximum VPC CIDR as 10.0.0.0/16 because it does not cost anything.
 - Create Public subnet in aws console ? CIDR 10.0.1.0/24
 - Create Private subnet in aws console ? CIDR 10.0.2.0/24
 - Create Database subnet in aws console ? CIDR 10.0.3.0/24
 - Create Public, Private and Database route tables in aws console ?
 - Associate Public, Private and Database route tables with their respective subnets ?
-- Give internet access to the Public subnets.
-- Enable Auto-asign public IPv4 address only to the Public subnet.
-- Create Internet Gateway and attach to your created VPC in aws console.
+- Give internet access to the public subnets.
+- Enable auto-asign public IPv4 address only to the public subnet.
+- Create internet gateway and attach to your created VPC in aws console.
 - What is the difference between Public and Private subnets ?
 - CIDR (Classless Inter-Domain Routing) ? We can asign custom IP address range to the subnets.
 - Use always terraform best practices for naming convention like using '_' to avoid double naming.
 - We used open source modules sometimes and also we have dedicated cloud team who develops modules to use them.
-- How do you check internet is working or not ? 'ping google.com' Ipv4 is 32bit and Ipv6 is 64 bit.
-- Router (Internet Gateway) ---> It has PublicIP and PrivateIP. What is your actual IPaddress or PublicIP ? Nothing but just type 'what is my_ip in google' there you can see Ipv4 address that is your PublicIP, not Ipv6. If anybody wants to connect to my laptop they can connect using this IP address only. You cannot connect with PrivateIP address. What is your PrivateIP just 'ipconfig' in cmd there you can see IPv4 address Under wireless LAN adapter Wifi.
+- How do you check internet is working or not ? 'ping google.com' Ipv4 is 32 bit and Ipv6 is 64 bit.
+- Router (Internet Gateway) ---> It has public_ip and private_ip. What is your actual IP address or public_ip ? Nothing but just type 'what is my ip in google' there you can see Ipv4 address that is your public_ip, not Ipv6. If anybody wants to connect to my laptop they can connect using this IP address only. You cannot connect with private_ip address. What is your private_ip just 'ipconfig' in cmd there you can see IPv4 address Under wireless LAN adapter Wifi.
 - AWS wont charge for VPC, subnets, route tables, it only charges when you are creating server.
-- We can create as many private subnets we want however, for functionality purpose, we have only two subnets which is Public and Private subnets.
+- We can create as many private subnets we want however, for functionality purpose, we have only two subnets which is public and private subnets.
 
 ### Session-30
 - What resources we have created inside the VPC through aws console ?
@@ -510,22 +510,21 @@
 - Created Route tables (Public, Private and Database) and associated with their respective subnets in both regions 1a and 1b.
 - Added internet gateway route in public route table because internet should be enabled in public not in private, that is the difference between public and private subnets.
 - Enabled auto-asign public IPv4 address only to the public subnet not to the private subnet.
-- When you create a VPC, a default route table also known as main route table is automatically created to that VPC. It contains a local route that enables communication with the subnets within the VPC. While this default route table cannot be deleted, its routes can be modified and custom route tables can be created and associated with specific subnets to provide more control over network traffic.
+- When you create a VPC, a default route table also known as main route table is automatically created to that VPC. It contains a local route that enables communication with the subnets within the VPC. While this default route table cannot be deleted, its routes can be modified and custom route tables can be created and associated with specific subnets to get more control over network traffic.
 - What is NAT gateway and why it is used ? It should be created in public subnet (1a or 1b) and why only in public subnet ?
 - Creating NAT gateway is not enough we need to add routes between private subnets and to the internet gateway (NAT) which is in public subnet.
-- Which ever private subnets like database subnet (or) any other private subnet wants to connect to the internet, they should add route to the NAT gateway which is in public subnet. How to add routes is the below line ?
-- Select any of the private subnet/routes/edit_routes/add_route (Destination = 0.0.0.0/0, Target = NAT gateway, then select default one in dropdown under target section only)
-- When you create NAT gateway, aws will create instance in the background. We dont have access to that instance, since this instance_ip is dynamic (Whenever you off and on). So create elastic_ip before creating NAT and then attach this elastic_ip while creating NAT gateway. NAT and ElasticIP are chargeable, so delete after practice.
+- Which ever private subnets like database subnet (or) any other private subnet wants to connect to the internet, they should add route to the NAT gateway which is in public subnet. So select any of the private subnet/routes/edit_routes/add_route (Destination = 0.0.0.0/0, Target = NAT gateway, then select default one in dropdown under target section only)
+- When you create NAT gateway, aws will create instance in the background. We dont have access to that instance, since this instance_ip is dynamic. So create elastic_ip before creating NAT and then attach this elastic_ip while creating NAT gateway. NAT and ElasticIP are chargeable, so delete after practice.
 - Can we get static_ip for this instance ? YES! we can get but it is very costly thing.
 - Even your home public_ip is dynamic. If you want static_ip, you need to pay money to ISP provider.
 - What is VPC peering and what is the condition to create VPC peering connection ?
 - Create a VPC peering connection between Roboshop_VPC and Default_VPC
 - So let us take Requestor VPC = Roboshop VPC ; Acceptor VPC = Default VPC
 - Accept request in the same account and then add routes in VPC. Try to add routes in main route table because it is the default route table which is created automatically to communicate between the subnets, if not reflecting then add explicitly in each route table.
-- If you want only one (or) two private subnets wants to connect to the vpc peering main road then you can add in those two route tables only. You need to add from the other side also not just one side. This is nothing but routes in VPC.
+- If you want only one (or) two private subnets wants to connect to the vpc peering main road then you can add in those two route tables only. Make sure you need to add from the other side also not just one side. This is nothing but routes in VPC.
 - Go through the 'Terraform-aws-vpc-module' how we developed VPC and resources inside it.
 - We use better 'tagging strategy' since we have more resources. So we used common_tags and resource_tags. What is the difference between them ? We used merg function in tagging strategy to merge common_tags and resource_tags.
-- You can also create s3 bucket for VPC in module development.
+- You can also create s3 bucket for VPC while developing vpc module (Optional)
 - We can also write condition in variable syntax using 'validation' keyword
 
 ### Session-31
