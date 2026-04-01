@@ -389,7 +389,7 @@
 - What is declarative in terraform and How to setup and install terraform ?
 - Install 'hashicorp terraform extension' to get colors.
 - How to get authentication to AWS to push the created infra ? aws CLI install
-- You can install aws cli in two ways ? One is regular method of downloading aws cli software and run the file in windows laptop. Another one is just run the shown commands in cmd from the internet.
+- You can install aws cli in two ways ? One is regular method of downloading aws cli software and run the file in windows laptop. Another one is just run shown commands in cmd from the internet. Before installing aws cli make sure you have created terraform user or administrator user and then configure 'aws configure'
 - How to test wether the aws CLI is installed (or) not in cmd and gitbash ? 'aws --version'
 - If credentials are not found then do 'aws configure' before that you need to create terraform administrator user in IAM (or) use existing secret and access keys.
 - Where this credentials like Secret-key and Access-key will be saved ? '.aws' folder
@@ -404,7 +404,7 @@
 
 ### Session-26
 - What is the importance of .gitignore file in terraform ?
-- What is the use of terraform.tfvars ?
+- What is the use of terraform.tfvars ? It will overwrite the value in variables.tf file
 - How to give terraform.tfvars file from the command prompt for plan and apply ?
 - Here terraform.tfvars name is not mandatory, we can use any name like 'saikiran.tfvars'
 - If you dont give -var-file then terraform will take default values from variables.tf file
@@ -414,7 +414,7 @@
 - Var_file ---> terraform plan -var-file="saikiran.tfvars"
 - terraform.tfvars
 - Environment variable.
-- Write a terraform code, if mongodb then t3.small (or) t2.micro using condition ?
+- Write a terraform code like if mongodb then t3.small (or) t2.micro using condition ?
 - Create instances and route53 records using Count_based loop and For_each loop ?
 - Count_based is to iterate list and For_each is to iterate maps.
 - What is function in terraform and what is length function here ? We cannot create our own functions, we have to use terraform inbuilt functions only.
@@ -428,19 +428,18 @@
 - What is Dynamic_loop and where it is useful ?
 - What is Terraform State (State and Remote state) ?
 - What is Declarative state and Desired state ?
-- What is Current state in terraform and where it will be stored ? Terraform.tfstate
+- What is Current state in terraform and where the created resources will be stored ? In terraform.tfstate file that is nothing but current state.
 - When Desired state == Current state then terraform will not take any action.
 - When Desired state =//= Current state then terraform will create.
 - Why the terraform will create lock file while terraform is working on it ?
 - Explain the concept of local state using example of when 2 persons are working on same repo ?
-- What errors these persons will face, if they are working on same repo ?
-- So terraform will compare my state and devops person state. If both are running terraform apply, here duplicates may come and some may get error as already exist.
+- What errors these persons will face, if they are working on same repo ? So terraform will compare my state and devops person state. If both are running terraform apply, here duplicates may come and some may get error as already exist.
 - So for this issue we have a central state file to check wether the infra already exist or not ? That is remote state (S3 bucket).
 - Terraform.tfstate is a crucial file should not be deleted.
-- What are the two disadvantages in local state ? Collaboration environment and Security
+- What are the two disadvantages in local state ? Collaboration environment and Security.
 - So create S3 bucket and lock that bucket using dynamodb table ?
 - What are the different remote states we have and why we use only 'terraform s3 remote state'
-- Where to keep this remote state in terraform code ? Another name of remote state is Backend.
+- Where to keep this remote state in terraform code ? Inside the provider and another name of remote state is Backend.
 - If we write more lines of script we say configuration is increasing.
 - S3 buckets are chargeable in aws, so delete after practice.
 - Use different key names in s3 bucket like in the previous you have used different key 'foreach' you can use as per your wish but not with the same key names because it will merge all.
