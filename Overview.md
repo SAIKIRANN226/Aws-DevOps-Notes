@@ -452,15 +452,15 @@
 - And also we create different folders for Dev and Prod in VS.
 - Can we use 1 bucket for both Dev and Prod in tfvars method ? YES!
 - So create 2 Buckets and 2 Dynamodb tables in aws console in tfvars method with unique names ?
-- You need to initialize Dev backend while terraform init and same for Prod also.
-- When you are switching from one env to another env, you must reinitialize it.
-- Then you can terraform plan, apply (or) destroy using -var-file
+- You need to initialize Dev backend while terraform init and same for Prod also. 'terraform init -backend-config=dev/backend.tf'
+- When you are switching from one env to another env, you must reinitialize it using 'terraform init -reconfigure -backend-config=prod/backend.tf'
+- How to terraform plan, apply (or) destroy using -var-file ? 'terraform plan -var-file=dev/dev.tfvars'
 - What if you forgot to give -var-file ? It will load default values from variables.tf
 - What if you commented variables.tf file also ? It will ask the user to prompt inputs. So that you will come to know you forgot to give -var-file.
 - Only 1 bucket is created in workspace, inside that it will automatically create a default folder env:/ and inside this env folder, terraform will automatically create Dev and Prod workspaces.
 - If you want to know workspace commands just 'terraform workspace'
 - How to create workspace ? 'terraform workspace new dev' do it in gitbash.
-- When you are using terraform it has default variable that is 'terraform.workspace'
+- When you are using terraform it has default variable that is 'terraform.workspace' what is it ? If you are in dev then the value of terraform.workspace will becomes 'dev' if you are in prod then the value of terraform.workspace will becomes 'prod'
 - So we use 'lookup' function in workspace method to control different environments.
 - lookup(map, key) ---> Giving input as map and passing the key below is the example.
 - lookup(var.instance_type, terraform.workspace) 1st one is map and second one is key.
