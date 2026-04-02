@@ -544,38 +544,40 @@
 
 ### Session-32
 - Till now we used 'allow-all' method while creating SG. It is just for practice only but now we need to follow strict SG rules according to the roboshop documentation only.
-- We have developed our own customized module for creating VPC right ? In this session also we are going to develop our own customized module for SG. Refer 'Roboshop-aws-sg-module' in VS.
+- We have developed our own customized VPC module right ? In this session also we are going to develop our own customized SG module. Refer 'Roboshop-aws-sg-module' in VS.
 - We created security groups and SG rules for all components according to the roboshop documentation.
 - Why we created separate folders for every resources in Roboshop-terraform ? Refresh time
 - Since they are in separate folders, so consider they are like different projects.
 - Go through 01-vpc, 02-sg, 03-vpn, 04-ec2 code in Roboshop-terraform in VS.
-- What is the main input required to create a SG ? VPC_ID
-- For example in Big companies, 1 team is taking care for VPC, another team is taking care for SG etc. How do you get the information of resource which are in another team, project, folder ? We have a service called 'SSM Parameter store' in aws systems manager.
-- What does Configuration storage (or) Central storage do ? Different applications can store the configuration and different applications can refer the configuration from here nothing but a central storage for configuration.
-- What is the naming convention while storing configuration is 'Key-Value' pair in SSM ? Generally naming format will be in linux structure like /roboshop/dev/vpc_id
-- As we know data-sources is used to query the data dynamically from the providers and also from the existing resources right ? But to query from the existing resource, we need to give some input like vpc_id, this vpc_id we cannot get from the data-source, but we used data source only to query the default vpc_id but to take the created vpc_id, again data-source is not an option, because we need to give vpc_id as input.
-- Since VPC is in different folder, how do we get vpc_id in SG ? You need to store vpc_id in SSM Parameter store first and then read that saved Key-Value in SG using data-source option.
-- Generally it is not mandatory to create ingress rules while creating SG and why ? But egress is static because this traffic is creating from our server, mostly it will be constant.
-- In real time, whenever you want few ports to open, you need to write a mail to firewall team then they will open the port, if they are using terraform they will do changes in main.tf file
+- What is the main input required to create a security group ? VPC_ID
+- For example in big companies, 1 team is taking care for vpc, another team is taking care for security groups etc. How do you get the information of resource which are in another team, project, folder, company ? We have a service called 'SSM Parameter store' in aws systems manager. This is nothing but a configuration storage (or) central storage where different applications can store the configuration and different applications can refer the configuration.
+- What is the naming convention while storing configuration is 'key-value' pair in SSM ? Generally naming format will be in linux structure like '/roboshop/dev/vpc_id'
+- As we know data-sources is used to query the data dynamically from the providers and also from the existing resources right ? But to query from the existing resource, we need to give some input like vpc_id, this vpc_id we cannot get from the data-source but we used data source only to query the default vpc_id but to take the created vpc_id again data-source is not an option because we need to give vpc_id as input.
+- Since VPC is in different folder, how do we get vpc_id in SG folder ? You need to store vpc_id in SSM Parameter store first and then read that saved vpc_id (or) key-value pair in SG folder using data-source option.
+- Generally it is not mandatory to create ingress rules while creating SG because ingress rules (Ports) may change later like adding new rules or deleting rules, this can be modified later according our requirement but egress is static because this traffic is creating from our server, mostly it will be constant. In real time, whenever you want few ports to open, you need to write a mail to firewall team then they will open the ports. If they are using terraform they will do changes in main.tf file
 - In security groups, we have two names 'Name' and 'Security group name' what is the difference ?
 - As a module developer, you must output the resources in output.tf file like IDs etc. So that other teams will use it.
 - Now creating all security groups according to the roboshop documentation. Mongodb --> Should accept connections from 'catalogue' and 'user' what should be the ingress (Security group rule) of mongodb now ? Source should be the catalogue_ip and port 27017, similarly for user also.
-- Is catalogue_ip is constant everytime ? NO! then what should we do ? We need to take the elastic_ip which is very costly because we have 12 private servers, that means we need to create 12 EIPs. If big project, we may need to create thousands of EIPs, this will generate huge bill to the company.
+- Is catalogue_ip is constant everytime ? NO! then what should we do ? We need to take the elastic_ip which is very costly because we have 12 private servers that means we need to create 12 EIPs. If big project, we may need to create thousands of EIPs this will generate huge bill to the company.
 - So security group has given 1 option, first create mongodb and catalogue security groups.
-- Then go to the security groups in aws console and select created mongodb SG/Edit_inbound_rules/Add_rule, type is custom tcp, port 27017 and in source just type 'sg' next to the custom, you will get the created SGs, in that select already created catalogue SG. Same for the user also.
+- Then go to the security groups in aws console and select created mongodb SG/Edit_inbound_rules/Add_rule, type is custom tcp, port 27017 and in source just type 'sg' next to the custom, you will get the created SGs, in that select already created catalogue SG. Do same for the user also.
 - Now write a terraform code for all the SGs according to the roboshop documentation.
 - Now creating EC2s for the roboshop 04-ec2 in VS using 'open-source module' from the internet.
 - Here the only disadvantage is you cannot connect to this private instances using SSH because private instances dont have public_ip. We have two options 'Jump host' and 'Installing VPN in Default VPC' to connect to private instances which are in 'Roboshop_VPC' but make sure you have peering connection between 'Default VPC and Roboshop VPC'
 
 ### Session-33
-- What are the two ways to connect to private instances which are in Roboshop_VPC ? 'Jump Host' and 'VPN'
-- How to connect to private instances using VPN ?
+- What are the two ways to connect private instances which are in Roboshop_VPC ? 'Jump Host' and 'VPN'
+- What is jump host ? Create one EC2 in public subnet and login to this ec2 first and from there connect to mongodb.
+- How to connect private instances using VPN ?
 - In which VPC should we install OpenVpn (or) create server for VPN ? Default_VPC
 - We must have a peering connection between Default_VPC and Roboshop_VPC.
 - How the traffic is routing from home server to private instances ?
 - What is the SG rule when mongodb is accepting connections from OpenVpn ?
 - Make sure to enable VPN in all private instances by giving SG of OpenVpn instance to all private instances with SSH rule.
-- How to install OpenVpn in server and connect to it ? Configuring VPN is not our responsibility, we have separate team for this. We use Cisco VPN in our company which is costly but for practice we used OpenVpn Connect.
+- How to install OpenVpn in server and connect to it ?
+- Configuring VPN is not our responsibility, we have a separate team for this.
+- We use cisco VPN in our company which is costly but for practice we used OpenVpn connect.
+- If you feel slow while terraform commands like init, plan, apply in gitbash. It is because of vpn (Disconnect vpn and try)
 
 ### Session-34
 - We have created VPC, Security groups, VPN, Instances. So now we want all instances to automatically configured, for that we need to create ansible server in default subnet (Default VPC) this server will provision all instances using ansible playbooks and also create SG for ansible on port SSH 22 to connect to all instances securely.
