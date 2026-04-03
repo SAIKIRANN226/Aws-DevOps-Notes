@@ -580,55 +580,64 @@
 - If you feel slow while terraform commands like init, plan, apply in gitbash. It is because of vpn (Disconnect vpn and try)
 
 ### Session-34
-- We have created VPC, Security groups, VPN, Instances. So now we want all instances to automatically configured, for that we need to create ansible server in default subnet (Default VPC) this server will provision all instances using ansible playbooks and also create SG for ansible on port SSH 22 to connect to all instances securely.
-- For this we need to write a small shellscript ec2-provision.sh in VS to provision the instances. NO need to give sudo access in this script because userdata will get sudo access automatically but in provisioners we need to give sudo access.
-- There is one disadvantage in user-data. If user-data fails one time, it will not come again, we will address this issue with provisioners. So delete ansible-server and do again terraform init, plan, apply.
+- We have created 01-vpc, 02-sg, 03-vpn, 04-ec2. So now we want all instances to automatically configured, for that we need to create ansible server in default subnet in default vpc, this server will provision all instances using ansible playbooks and also create security group for ansible on port SSH 22 to connect to all instances securely.
+- For this we need to write a small shellscript 'ec2-provision.sh' in VS to provision the instances. NO need to give sudo access in this script because userdata will get sudo access automatically but in provisioners we need to give sudo access.
+- There is one disadvantage in userdata. If userdata fails one time, it will not come again, we will address this issue with provisioners. So delete ansible-server and do again terraform init, plan, apply.
 - Userdata logs will be in sudo cd /var/log, ls -la, tail -f cloud-init-output.log
 - LB (Target groups and Rules) and Launch templates (Auto scaling and Policy)
-- First create 2 nginx servers (UI and UX) while creating add userdata #!/bin/bash, yum install nginx -y, mkdir -p /usr/share/nginx/html/ui, echo "<h1GreaterthanSymbolHi we are from UI team<h1GreaterthanSymbol" > /usr/share/nginx/html/ui/index.html, systemctl restart nginx. Create same for Backend team.
-- We are using Application LB because it is most intelligent and Classic LB is very old.
-- Create LB security group, here from where the tarffic is coming to this LB ? From the internet, therefore ingress rule should be HTTP and CIDR 0.0.0.0/0
-- Create SGs for these two nginx servers, these servers will get request from LB, therefore ingress rule should be a SG which is attached to LB.
-- Create target groups for example UI, UX in Listeners first then register using include as pending in default subnet.
-- Now create Load Balancer with port 80 in Default_VPC subnet with min two AZs.
-- Rules in Load balancers, there is default rule, you can add as many rules you want, you can keep path as a condition in this UI/UX example, if path is /ui/* then send to UI target group. Keep Priority as 1.
-- Load Balancer will give us a DNS name, generally we configure this name in route53 record, so create a new record, copy the DNS name and paste and you need to keep Alias and select Alias to Application and Classic Load Balancer.
-- Mostly in companies, errors are not because of coding, it is because of configuration change, even if we make small changes in configuration, we get errors, so thats why we need to keep config independently in SSM Parameter store (Central storage or Configuration storage)
+- First create 2 nginx servers (UI and UX) while creating add userdata #!/bin/bash, yum install nginx -y, mkdir -p /usr/share/nginx/html/ui, echo "<h1GreaterthanSymbolHi we are from UI team<h1GreaterthanSymbol" > /usr/share/nginx/html/ui/index.html, systemctl restart nginx. Create same for ux backend team.
+- We are using 'Application_LB' because it is most intelligent and 'Classic_LB' is very old.
+- Create LB security group, here from where the tarffic is coming to this LB ? From the internet, therefore ingress rule of LB should be HTTP and CIDR 0.0.0.0/0
+- Create SGs for these two nginx servers, these servers will get request from LB, therefore ingress rule of these servers should be a SG which is attached to LB.
+- Create target groups for example ui, ux in listeners first then register using include as pending in default subnet.
+- Now create LB with port 80 in default_vpc subnet with min two AZs.
+- Rules in load balancers, there is default rule, you can add as many rules you want, you can keep path as a condition in this ui/ux example, if path is /ui/* then send to ui target group. Keep priority as 1.
+- LB will give us a DNS name, generally we configure this name in route53 record, so create a new record, copy the DNS name and paste and you need to keep alias and select alias to application and classic load balancer.
+- Mostly in companies, errors are not because of coding, it is because of configuration change, even if we make small changes in configuration, we get errors, so thats why we need to keep configuration independently in SSM Parameter store.
 - SG is very important, since we are connecting to every resources present in aws.
 - Individually we can understand every concept but when we configure the project using all concepts, it will create huge confusion, like for example if we give a request from client (or) from our laptop, the request should reach to the end service which is present in aws, request will cross many stages like client-side configuration should be clear, vpc, igw, subnets etc. have many resources to cross and reach the end service. So this visualization should there in us. Thats why SG is important to use in every resources.
 - No Problem if you delete '.terraform' folder and lock file.
+- Creating ec2 instances 04-ec2 in normal way using module but standard way is 'auto-scaling and launch templates'
+- Yaml file was mentioned in the 02-sg folder, it is just to refer how the sg connections are given.
+- Keeping provider is good in your actual code not in module developing.
   
 ### Session-35
 - Understand the concept of 3-Tier architecture diagram.
-- Start a project Roboshop-infra-Dev in VS, this is for Dev environment, since this is multi-env, you have three options Tfvars-method, Workspace-method and Different repos for different environments, present siva is now creating different repos for different environments. Every method has pros and cons, you can tell this in interview. We also need to create for SIT, UAT, PROD Environments.
-- We keep Web-ALB in https on port 443 because it is facing to the public. App-ALB is private LB, this App-ALB is within our network, we can keep this in http on port 8080 (or) 80.
-- There will be NO direct connections from now, only through Load Balancer.
-- We use Auto-scaling only for frontend and backend. For Databases we use RDS, DynamoDB etc.
-- Creating Databases using PULL strategy. We have one disadvantage in PUSH that is Once we pushed the configuration from the ansible server to the nodes and if the configuration is disturbed or anybody did changes in ansible server, we dont have any idea, so ansible implemented PULL architecture aswel, we can schedule a crontab to PULL the configuration periodically from Git not from the ansible-server and run it, since ansible is idempotence in nature, even if the program runs multiple times, nothing will happen. So go through the code of Roboshop-ansible-roles-Terraform in VS.
+- Start a project 'Roboshop-infra-Dev' in VS this is for 'Dev' environment since this is multi-env, you have 3 options Tfvars-method, Workspace-method and Different repos for different environments. Present siva is now creating different repos for different environments. Every method has pros and cons, you can tell this in interview. We also need to create for SIT, UAT, PROD environments.
+- Create separate buckets and dynamodb tables for different folders inside the 'Roboshop-infra-Dev' project.
+- We keep 'web-alb' in https on port 443 because it is facing to the public. 'app-alb' is private LB, this app-alb is with in our network, so we can keep this in http on port 8080 (or) 80.
+- There will be NO direct connections from now, only through LB even inside the internal servers also because internal servers ip addresses are dynamic.
+- We use auto-scaling only for only frontend and backend. For databases we use RDS, DynamoDB etc.
+- Creating databases using PULL strategy. We have one disadvantage in PUSH that is once we pushed the configuration from the ansible server to the nodes and if the configuration is disturbed or anybody did changes in ansible server, we dont have any idea, so ansible implemented PULL architecture aswel, we can schedule a crontab to PULL the configuration periodically from git not from the ansible server and run it, since ansible is idempotence in nature, even if the program runs multiple times, nothing will happen. So go through the code of Roboshop-ansible-roles-Terraform in VS.
 - Why we use terraform provisioners (Null resource) instead of user-data ? Because we dont know wether the user-data is succeeded or not until we see the logs in server and moreover it will run only one time. But in provisioner we can see on terminal, wether the bootstrap is happening or not ?
 - Every platform like azure, gcp, aws cloud platform will have its own solution to maintain configuration and secrets, in aws cloud we have more resources like ec2, dynamodb, lb etc. So for every service you may use passwords or any other secrets in the configuration at some point of time like in mysql, we have password Roboshop1@, so we have SSM Parameter store, services will refer this.
 - For example in aws cloud, EC2 is a service and if this EC2 wants to retrieve the configuration or passwords which are present in SSM Parameter, then this EC2 must have access to that SSM right ? For that only we give roles to the EC2 in IAM. Second thing is here we are using ansible to provision servers, so ansible should pull the configuration or passwords whatever present in aws from SSM Parameter, then ansible should connect to the aws first, that means ansible should download boto3 and botocore python modules. Third thing is ansible-server should also have IAM role (or) IAM policy to PULL the configuration or passwords from the AWS. If these 3 things are there, we can implement vault.
 - IAM role we have given in the code is iam_instance_profile = role-name, present this role has full admin access, later we can restrict in IAM concepts.
-- We store passwords in SSM Parameter manually not automated.
+- Only thing we cannot automate is storing passwords in SSM that should be done manually.
 - So first store the password in SSM Paramater, for example we have root_password in mysql right ? Store that and naming should be roboshop/dev/msql_root_pass and select secure string and value should be the password itself Roboshop@1, so here ansible should retrieve this password, for that we have a syntax called 'lookup' put this syntax in the ansible-roles, where ever this password is there.
-- If you go manually like ansible.builtin.command/shell there will be no idempotence behaviour, thats why mostly use module only. If there is no official modules from ansible, we can use community modules.
+- If you go manually like 'ansible.builtin.command' (or) 'ansible.builtin.shell' there will be no idempotence behaviour, thats why mostly use module only. If there is no official modules from ansible, we can use community modules.
 - Web and App tier (If traffic increases, Auto-scaling will create instances)
+- We created databases and provisioned using provisioners instead of userdata.
 
 ### Session-36
-- How is the workflow in company like from client to team members ?
-- What is Launch template ? It is like hiring template like HR (Auto-scaling)
-- So first create Application Load balancer is a latest generation works on TCP layer7, we can redirect to different projects using one single App_ALB.
+- Workflow in company from client to team members ? Client --> Business analyst --> Team manager --> Team leads --> Team members.
+- What is launch template ? It is like hiring template similar to HR (Auto scaling)
+- First create 'app_alb' (Latest generation works on tcp layer 7) this can redirect to different projects using 1 single app_alb. App_alb is nothing but team manager.
+- Since the app_alb DNS is dynamic so we need to create a record for DNS.
 - What is context path and host path ?
-- Now create catalogue target group nothing but like a team creation. Who will take resources in this team ? HR (Auto scaling) for this we need hiring template. How this hiring template will be ready ? Below are the points.
-- First create instance.
+- Now create catalogue target group nothing but a team creation. Who will take resources in this team ? HR (Auto scaling) for this we need hiring template. How this hiring template will be ready ? Below are the points.
+- First create catalogue target group.
+- Create one instance.
 - Provision instance with ansible or shell.
 - Stop the instance.
-- Take the AMI from the ec2 instance only.
+- Take the AMI from the above ec2 instance only.
 - Delete the instance.
-- Now create launch template with AMI.
-- If we give this Launch template to the auto-scaling, it will create the instances depending up on the traffic.
-- Create Listener or rules.
-- Create Auto-scaling policy.
+- Now create launch template with the AMI.
+- If we give this launch template to the auto scaling, it will create the instances depending up on the traffic.
+- If you are not aware of what options to give in the code, just try to create a sample resource in the aws console and see what options are required and keep the same options in code by taking from the google, do for every resource if you are not aware of.
+- Create auto scaling group.
+- Create listeners and rules.
+- Create auto scaling policy.
   
 ### Session-37
 - What is deregistration ? Once the de-registration is started, instance should complete its pending requests and LB should not give any new requests. We have given 300 or 60 seconds time for this.
