@@ -639,7 +639,7 @@
 - Create auto scaling policy.
   
 ### Session-37
-- What is deregistration ? Once the de-registration is started, instance should complete its pending requests and LB should not give any new requests. We have given 300 or 60 seconds time for this.
+- What is deregistration ? Once the deregistration is started instance should complete its pending requests and LB should not give any new requests to the servers. We have given 300 or 60 seconds time for this.
 - What is rolling update ? We have many strategies but rolling update is very famous.
 - Now for web component. First create security group and then 'Web_ALB' here listener is 443 (Give access from internet) and rule should be if anybody enter 'web-dev.daws76s.online' our website should open. Before creating listener, you need to create certificate that is HTTPS, there should be a domain for certificate, so create domain on *.daws76s.online and attach this certificate to listener. Go through 07-acm in VS. If you are mentioning listener 443 then you should attach the certificate.
 - You need to validate the domain, so aws will give you CNAME name and CNAME value using this you need to create a record in whichever domain you are using like we are using hostinger or in aws or some other websites, you can only create records, if you have those particular domains login credentials only.
