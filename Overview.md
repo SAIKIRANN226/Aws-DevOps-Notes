@@ -693,29 +693,32 @@
 - Once we got succeeded in merging code into the main branch, we can deploy into higher environments like QA, SIT, UAT, and PROD. What if we success in DEV and failed in QA ? what should i do ? Again they should create another feature branch they should change the code again in Dev environment and then do CICD.
 - We have '.git' folder in every repo nothing but it stores all the information of git like tracking, metadata, objects etc.
 - The above all branching strategies will be done by developers only not devops team. We only discuss how the branching strategies should be with developers and we dont have any rights to raise PR, Approve requests etc.
+- If we got emergency, we can just test in 'DEV' and then directly go for the 'PROD'
+- Explain merge conflicts in git ?
 
 ### Session-42
-- How to install Jenkins in server ?
-- Installing java in Jenkins is mandatory because jenkins is developed on java only, but no need to install jenkins in agent (Java is enough for the agent to work).
-- Jenkins-Master may not required to know everything, but agent must know everything because actual work is done by the agent only, however logs will be shown in Jenkins-Master.
-- Jenkins port number is 8080, Nexus port number is 8081.
+- How to install jenkins in server ? Jenkins is a CICD tool.
+- Installing java in jenkins is mandatory because jenkins is developed on java only but no need to install jenkins in agent (Java is enough for the agent to work).
+- Jenkins-Master may not required to know everything but agent must know everything because actual work is done by the agent only. However logs will be shown in Jenkins-Master.
+- Jenkins port number is 8080 and Nexus port number is 8081.
 - What is Free-style project in Jenkins ?
-- What is the difference between creating aws resources in aws console & through code ?
-- Difference between Free-style & Pipeline jobs ?
-- Create a job first using Free-style & then Pipeline ?
-- What is Pipeline script from SCM or GitOps ? 
-- Write a RAW syntax of a Declarative pipeline ?
-- What is agent in Jenkins ? How many agents are required ?
-- How do you configure Master-Agent architecture in jenkins ? Manage jenkins, nodes, create node, executors, remote root directory, labels, launch methods, host, configure credentials, host key verification strategy. 
+- What is the difference between creating aws resources in aws console and through code ?
+- Difference between Free-style and Pipeline jobs ?
+- Create a job first using Free-style and then Pipeline ?
+- What is Pipeline script from SCM or GitOps ?
+- Jenkins file will notation will be 'Jenkinsfile'
+- Write a RAW syntax of a declarative pipeline ? Script path should be the exact name of Jenkinsfile.
+- What is agent in jenkins ? How many agents are required ?
+- How do you configure 'Master-Agent' architecture in jenkins ? Manage jenkins, nodes, create node, executors, remote root directory, labels, launch methods, host, configure credentials, host key verification strategy. 
 - Where does the entire jenkins database will be ? /var/lib/jenkins, similarly we need to create a directory for agent also in /home/centos/jenkins-agent (Any-name) because CentOS dont have sudo access in /var/lib/jenkins, it has only in home folder (or) click on question mark ? symbol, there you can see how to give the path.
-- How many agents you are using in your company ? We are supporting multiple programming languages like java, python, nodesjs, .net for each language, we have 2-2 agents.
+- How many agents you are using in your company ? Since we are supporting multiple programming languages like java, python, nodesjs, .net for each language we have 2-2 agents.
 - Triggers in Jenkins pipeline ?
-- Environment in Jenkins pipeline ?
-- Options in Jenkins pipeline ?
-- Parameters in Jenkins pipeline ?
+- Environment in Jenkins pipeline ? The environment block in jenkins pipeline is used to define environment variables that can be accessed across stages and inside shell commands. It helps in centralizing configuration, avoiding hardcoding and making pipelines reusable. It is also commonly used to give credentials securely and to handle different deployment environments like DEV, QA, PROD.
+- Options in jenkins pipeline ? The options block in jenkins pipeline is used to control pipeline execution behavior such as timeout, disable concurrency builds etc.
+- Parameters in jenkins pipeline ? Parameters in jenkins pipeline are used to accept user inputs at runtime when triggering a build. We can give the inputs like environment, branch or deployment flags to be passed without modifying the pipeline code.
 
 ### Session-43
-- Difference between Scripted pipeline & Declarative pipeline ?
+- Difference between Scripted pipeline and Declarative pipeline ?
 - Input option in Jenkins pipeline ?
 - Create a Jenkins file for infra to vpc. Use terraform init, plan, apply. Use input option before apply. Since this pipeline is running on agent. We need to install terraform command & aws credentials (Aws configure) in agent server. While aws configure dont take sudo access because Jenkins-master is connecting to agent using centos. Search in google like install terraform linux.
 - To get colors we have a plugin called ansiColor('xterm') in options itself. So install this plugin in manage jenkins, plugins. Also write a code in jenkins file in options. If plugins are not working even after installing just do systemctl restart jenkins.
