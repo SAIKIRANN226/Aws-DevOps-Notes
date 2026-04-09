@@ -673,33 +673,26 @@
 - We are using shift left strategy in our pipeline like Code quality checks, Tests, Security scanning and performance testing in Dev itself, so that we can catch the issues sooner and also we can reduce the cost aswel as we can improve the software quality.
 
 ### Session-41
-- What is Git and how it will track ?
+- What is GIT and how it will track ?
 - How to generate a commit-id for your content or file ? echo hello | git hash-object --stdin
-- Git will calculate based on the content.
+- Git will calculate commit-id based on the content.
 - Commit-id is also known as SHA code which has 40 characters (Universal unique id)
-- git log --> You will get the commit-ids of the entire content of that repo in github.
-- Git is a Key-Value pair (Key=commit-id, Value=content)
-- If you want the information about the commit-id then "git cat-file <commit_id> -p"
-- If you want all commit-ids in oneline ---> git log --oneline
-- Protection rule in Git for main (or) master branch ?
-- What is the minimum protection to the main branch ? PR, Require approvals, Require linear history, Dismiss
-  stale pull request approvals when new commits are pushed.
-- When you create a feature branch and you cloned the main branch. But still commit-ids of main branch &
-  feature branch are same and why ? When will the commit-id of feature branch will change ?
-- Once developers got approvals, he will get merge options like Merge commit, Squash and merge, Rebase and
-  merge. These are nothing but merging strategies.
+- Git log --> You will get the commit-ids of the entire content of that repo in github.
+- Git is a key-value pair (Key=commit-id, Value=content)
+- If you want the information about the commit-id then 'git cat-file <commit_id> -p'
+- If you want all commit-ids of a repo in oneline ---> git log --oneline
+- What are protection rules in git for main (or) master branch ?
+- What are the minimum protection rules to the main branch ? PR, Require approvals, Require linear history, Dismiss stale pull request approvals when new commits are pushed.
+- What is Dismiss stale pull request approvals when new commits are pushed ? When this setting is enabled, if someone approves a pull request (PR) and then new commits are pushed to that PR then the existing approvals are removed (Dismissed). This ensures that the code which was approved is still valid after the latest changes.
+- When you create a feature branch and you cloned the main branch into the feature branch. But still commit-ids of main branch and feature branch are same and why ? When will the commit-id of feature branch will change ?
+- Once developers got approvals he will get merge options like Merge commit, Squash and merge, Rebase and merge. These are nothing but merging strategies.
 - Which merging strategies will be preferred among these three ?
-- Most in companies go for the Merge commit, not Squash and Rebase why ?
-- When to use Merge and when to use Rebase ?
-- We are following feature branching strategy, we have main branch as long live branch, anything otherthan
-  main branch we call it as feature branch, developers will work in feature branches, they will do CICD in
-  feature branch itself, once it is successful they will raise PR, based on the discussions, PR will be
-  approved and from the main branch, we do deployment into the higher environments QA, SIT, UAT, PROD.
-- Once we got succeeded in merging code into the main branch, we can deploy into higher environments like QA,
-  SIT, UAT, and PROD. What if we success in DEV and failed in QA ? what should i do ? again they should create
-  another feature branch, they should change the code again in Dev environment and then do CICD.
-- You will have ".git" folder in every repo, it stores all the information of git like tracking, metadata,
-  objects etc. Everything will be stored in this folder only.
+- Mostly companies go for the merge commit not squash and rebase why ?
+- When to use merge and when to use rebase ?
+- We are following feature branching strategy, we have main branch as long live branch anything other than main branch we call it as feature branch, developers will work in feature branches and before raising PR we will do CICD in feature branch itself in dev environment, once it is successful they will raise PR based on the discussions. PR will be approved and from the main branch, we do deployment into the higher environments like QA, SIT, UAT, PROD. Since code is same across all environments but configuration is different. Configuration should be dettached from code for that we are using ssm parameter store.
+- Once we got succeeded in merging code into the main branch, we can deploy into higher environments like QA, SIT, UAT, and PROD. What if we success in DEV and failed in QA ? what should i do ? Again they should create another feature branch they should change the code again in Dev environment and then do CICD.
+- We have '.git' folder in every repo nothing but it stores all the information of git like tracking, metadata, objects etc.
+- The above all branching strategies will be done by developers only not devops team. We only discuss how the branching strategies should be with developers and we dont have any rights to raise PR, Approve requests etc.
 
 ### Session-42
 - How to install Jenkins in server ?
