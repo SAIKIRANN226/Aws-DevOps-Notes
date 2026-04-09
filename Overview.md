@@ -718,15 +718,15 @@
 - Parameters in jenkins pipeline ? Parameters in jenkins pipeline are used to accept user inputs at runtime when triggering a build. We can give the inputs like environment, branch or deployment flags to be passed without modifying the pipeline code.
 
 ### Session-43
-- Difference between Scripted pipeline and Declarative pipeline ?
-- Input option in Jenkins pipeline ?
-- Create a Jenkins file for infra to vpc. Use terraform init, plan, apply. Use input option before apply. Since this pipeline is running on agent. We need to install terraform command & aws credentials (Aws configure) in agent server. While aws configure dont take sudo access because Jenkins-master is connecting to agent using centos. Search in google like install terraform linux.
-- To get colors we have a plugin called ansiColor('xterm') in options itself. So install this plugin in manage jenkins, plugins. Also write a code in jenkins file in options. If plugins are not working even after installing just do systemctl restart jenkins.
+- Difference between scripted pipeline and declarative pipeline ?
+- Input option in jenkins pipeline ?
+- Create a jenkins file for infra to vpc. Use terraform init, plan, apply. Use input option before apply. Since this pipeline is running on agent. We need to install terraform command & aws credentials (Aws configure) in agent server. While aws configure dont take sudo access because Jenkins-master is connecting to agent using centos. Search in google like install terraform linux.
+- To get colors we have a plugin called ansiColor ('xterm') in options itself. So install this plugin in manage jenkins plugins. Also write a code in jenkins file in options. If plugins are not working even after installing just do systemctl restart jenkins.
 - Jenkins pipeline when with parameters.
 - That means overall we can write CICD for infra also.
 - Before doing CICD for application infra, project infra should be ready.
-- What are CI part & CD part stages in application like catalogue ?
-- What is pipeline utility steps plugin ? To read the Json file.
+- What are CI part and CD part stages in application like catalogue ?
+- What is pipeline utility steps plugin ? Install this plugin in manage jenkins to read the json file to get the catalogue version.
 - Next is installing dependencies ? Installing nodejs (From the roboshop documentation) in agent is mandatory in order to install npm dependency.
 - Next zip (Build) the above catalogue output code nothing but artifact & store in nexus repository.
 - We use Sonatype nexus because it is a widely adopted and reliable artifact repository manager. Create an instance with a minimum of 2GB RAM & 30GB storage (T3.medium). While the actual installation is typically handled by the SRE (Site Reliability Engineering) team, it's important to understand the concept. Dont worry about installation or updates. What is internal YUM repositories ? This is why Nexus acts as a central point not only for storing build artifacts but also for serving as a local repository for all required libraries and dependencies.
