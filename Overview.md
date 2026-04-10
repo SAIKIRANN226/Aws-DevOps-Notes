@@ -673,77 +673,77 @@
 - We are using shift left strategy in our pipeline like Code quality checks, Tests, Security scanning and performance testing in Dev itself, so that we can catch the issues sooner and also we can reduce the cost aswel as we can improve the software quality.
 
 ### Session-41
-- What is GIT and how it will track ?
+- What is Git and how it will track ?
 - How to generate a commit-id for your content or file ? echo hello | git hash-object --stdin
-- Git will calculate commit-id based on the content.
+- Git will calculate the commit-id based on the content.
 - Commit-id is also known as SHA code which has 40 characters (Universal unique id)
-- Git log --> You will get the commit-ids of the entire content of that repo in github.
+- Git log --> You will get all the commit-ids of the entire content of that repo in gitbash.
 - Git is a key-value pair (Key=commit-id, Value=content)
 - If you want the information about the commit-id then 'git cat-file <commit_id> -p'
 - If you want all commit-ids of a repo in oneline ---> git log --oneline
-- What are protection rules in git for main (or) master branch ?
-- What are the minimum protection rules to the main branch ? PR, Require approvals, Require linear history, Dismiss stale pull request approvals when new commits are pushed.
-- What is Dismiss stale pull request approvals when new commits are pushed ? When this setting is enabled, if someone approves a pull request (PR) and then new commits are pushed to that PR then the existing approvals are removed (Dismissed). This ensures that the code which was approved is still valid after the latest changes.
+- What are the minimum protection rules in git for main (or) master branch ? PR, Require approvals, Require linear history, Dismiss stale pull request approvals when new commits are pushed.
+- What is dismiss stale pull request approvals when new commits are pushed ? When this setting is enabled, if someone approves a pull request (PR) and then new commits are pushed to that PR then the existing approvals are removed (Dismissed). This ensures that the code which was approved is still valid after the latest changes.
 - When you create a feature branch and you cloned the main branch into the feature branch. But still commit-ids of main branch and feature branch are same and why ? When will the commit-id of feature branch will change ?
 - Once developers got approvals he will get merge options like Merge commit, Squash and merge, Rebase and merge. These are nothing but merging strategies.
+- Merge commit ---> A normal commit records changes within a branch, while a merge commit combines two branches and preserves both histories.
+- Squash and merge ---> It combines them into a single commit for cleaner history. Mostly this is useful for individual developers who works on microservices who do lots of commits which doesnt look good.
+- Rebase and merge ---> It rewrites the commit history and creating a linear history without new extra merge commits. 
 - Which merging strategies will be preferred among these three ?
 - Mostly companies go for the merge commit not squash and rebase why ?
-- When to use merge and when to use rebase ?
+- When to use merge commit and when to use rebase and merge ?
 - We are following feature branching strategy, we have main branch as long live branch anything other than main branch we call it as feature branch, developers will work in feature branches and before raising PR we will do CICD in feature branch itself in dev environment, once it is successful they will raise PR based on the discussions. PR will be approved and from the main branch, we do deployment into the higher environments like QA, SIT, UAT, PROD. Since code is same across all environments but configuration is different. Configuration should be dettached from code for that we are using ssm parameter store.
-- Once we got succeeded in merging code into the main branch, we can deploy into higher environments like QA, SIT, UAT, and PROD. What if we success in DEV and failed in QA ? what should i do ? Again they should create another feature branch they should change the code again in Dev environment and then do CICD.
+- Once we got succeeded in merging code into the main branch, we can deploy into higher environments like QA, SIT, UAT, and PROD. What if we success in dev and failed in qa ? what should i do ? Again they should create another feature branch they should change the code again in dev environment and then do CICD.
 - We have '.git' folder in every repo nothing but it stores all the information of git like tracking, metadata, objects etc.
 - The above all branching strategies will be done by developers only not devops team. We only discuss how the branching strategies should be with developers and we dont have any rights to raise PR, Approve requests etc.
-- If we got emergency, we can just test in 'DEV' and then directly go for the 'PROD'
+- If we got emergency, we can just test in dev and then directly go for the prod.
 - Explain merge conflicts in git ?
 
 ### Session-42
 - How to install jenkins in server ? Jenkins is a CICD tool.
 - Installing java in jenkins is mandatory because jenkins is developed on java only but no need to install jenkins in agent (Java is enough for the agent to work).
-- Jenkins-Master may not required to know everything but agent must know everything because actual work is done by the agent only. However logs will be shown in Jenkins-Master.
-- Jenkins port number is 8080 and Nexus port number is 8081.
-- What is Free-style project in Jenkins ?
-- What is the difference between creating aws resources in aws console and through code ?
-- Difference between Free-style and Pipeline jobs ?
-- Create a job first using Free-style and then Pipeline ?
-- What is Pipeline script from SCM or GitOps ?
-- Jenkins file will notation will be 'Jenkinsfile'
-- Write a RAW syntax of a declarative pipeline ? Script path should be the exact name of Jenkinsfile.
+- Jenkins-master may not required to know everything but agent must know everything because actual work is done by the agent only. However logs of agent will also be shown in jenkins-master only. Jenkins port number is 8080 and Nexus port number is 8081.
+- What is free-style project in jenkins ?
+- What is the difference between creating aws resources in aws console and through code ? That is the difference between free-style and pipeline jobs ? 
+- Create a job first using free-style and then pipeline ?
+- Anybody can do the changes in free-style aswel as in pipeline jobs from jenkins ui. For that we have pipeline script from SCM or GitOps ? This is the best approach. Jenkins file will notation will be 'Jenkinsfile'
+- Write a RAW syntax of a declarative pipeline ? Script path should be the exact name of jenkinsfile.
 - What is agent in jenkins ? How many agents are required ?
-- How do you configure 'Master-Agent' architecture in jenkins ? Manage jenkins, nodes, create node, executors, remote root directory, labels, launch methods, host, configure credentials, host key verification strategy. 
+- How do you configure 'master-agent' architecture in jenkins ? Manage jenkins, nodes, create node, executors, remote root directory, labels, launch methods, host, configure credentials, host key verification strategy.
 - Where does the entire jenkins database will be ? /var/lib/jenkins, similarly we need to create a directory for agent also in /home/centos/jenkins-agent (Any-name) because CentOS dont have sudo access in /var/lib/jenkins, it has only in home folder (or) click on question mark ? symbol, there you can see how to give the path.
 - How many agents you are using in your company ? Since we are supporting multiple programming languages like java, python, nodesjs, .net for each language we have 2-2 agents.
-- Triggers in Jenkins pipeline ?
-- Environment in Jenkins pipeline ? The environment block in jenkins pipeline is used to define environment variables that can be accessed across stages and inside shell commands. It helps in centralizing configuration, avoiding hardcoding and making pipelines reusable. It is also commonly used to give credentials securely and to handle different deployment environments like DEV, QA, PROD.
-- Options in jenkins pipeline ? The options block in jenkins pipeline is used to control pipeline execution behavior such as timeout, disable concurrency builds etc.
-- Parameters in jenkins pipeline ? Parameters in jenkins pipeline are used to accept user inputs at runtime when triggering a build. We can give the inputs like environment, branch or deployment flags to be passed without modifying the pipeline code.
+- Triggers in jenkins pipeline ? We have a webhook in github to setup triggers.
+- Environment in jenkins pipeline ? The environment block in jenkins pipeline is used to define environment variables that can be accessed across stages and inside shell commands. It helps in centralizing configuration, avoiding hardcoding and making pipelines reusable. It is also commonly used to give credentials securely and to handle different deployment environments like DEV, QA, PROD.
+- Options in jenkins pipeline ? The options block in jenkins pipeline is used to control pipeline execution behavior such as timeout, disable concurrent builds etc.
+- Parameters in jenkins pipeline ? Parameters in jenkins pipeline are used to accept user inputs at runtime when triggering a build. We can give the inputs like environments and branches.
 
 ### Session-43
 - Difference between scripted pipeline and declarative pipeline ?
-- Input option in jenkins pipeline ?
-- Create a jenkins file for infra to vpc. Use terraform init, plan, apply. Use input option before apply. Since this pipeline is running on agent. We need to install terraform command & aws credentials (Aws configure) in agent server. While aws configure dont take sudo access because Jenkins-master is connecting to agent using centos. Search in google like install terraform linux.
-- To get colors we have a plugin called ansiColor ('xterm') in options itself. So install this plugin in manage jenkins plugins. Also write a code in jenkins file in options. If plugins are not working even after installing just do systemctl restart jenkins.
+- Input option in jenkins pipeline ? Taking approval before going to the next stage.
+- Create a jenkins file for infra to vpc. Use terraform init, plan, apply. Use input option before apply. Since this pipeline is running on agent. We need to install terraform command and aws credentials (Aws configure) in agent server. While aws configure dont take sudo access because jenkins-master is connecting to agent using centos, so configure with normal user not with sudo access. Search in google like install terraform linux.
+- To get colors we have a plugin called ansiColor ('xterm') in options itself. So install this plugin in manage jenkins plugins. Also write a code in jenkins file under the options. If plugins are not working even after installing just do systemctl restart jenkins.
 - Jenkins pipeline when with parameters.
-- That means overall we can write CICD for infra also.
-- Before doing CICD for application infra, project infra should be ready.
-- What are CI part and CD part stages in application like catalogue ?
+- That means overall we can write CICD pipeline for infra also. But we dont create project infra using pipeline, we create only using terraform because this infra is very rarely touched, this is just to show that we can also create jenkinsfile for project infra also. So first create whole project infra using terraform and then create CICD jenkinsfile for application infra like catalogue, cart, shipping etc. Make sure before doing CICD for application infra, project infra should be ready.
+- What are CI and CD stages in application like catalogue ?
 - What is pipeline utility steps plugin ? Install this plugin in manage jenkins to read the json file to get the catalogue version.
-- Next is installing dependencies ? Installing nodejs (From the roboshop documentation) in agent is mandatory in order to install npm dependency.
-- Next zip (Build) the above catalogue output code nothing but artifact & store in nexus repository.
-- We use Sonatype nexus because it is a widely adopted and reliable artifact repository manager. Create an instance with a minimum of 2GB RAM & 30GB storage (T3.medium). While the actual installation is typically handled by the SRE (Site Reliability Engineering) team, it's important to understand the concept. Dont worry about installation or updates. What is internal YUM repositories ? This is why Nexus acts as a central point not only for storing build artifacts but also for serving as a local repository for all required libraries and dependencies.
-- Now create a cataloge repository to hold the catalogue artifacts using "maven2 hosted" format. What is maven2 hosted format ? It is popular format, used for maintaining application artifacts in unique way. Group id ---> com.roboshop, artifact id ---> catalogue, version ---> 1.0.0. Folder structure be like com/roboshop/catalogue/version folder 1.0.0, 1.0.1, 2.0.0 etc.
-- We have version policy Release (Prod), Snapshot (Dev), Mixed (Both)
-- Allow redeploy in Deployment policy because we are in dev.
+- Next is installing dependencies ? Installing nodejs (From the roboshop documentation) in agent is mandatory in order to install npm dependencies.
+- Next zip (Build) the above catalogue output code nothing but artifact and store in nexus repository.
+- We use sonatype nexus because it is a widely adopted and reliable artifact repository manager. Create an instance with a minimum of 2GB RAM and 30GB storage (T3.medium). While the actual installation is typically handled by the SRE (Site Reliability Engineering) team, but it's important to understand the concept. Dont worry about installations or updates.
+- What is internal YUM repositories ? Nothing but instead of getting libraries and dependencies from the internet, companies will keep those inside the YUM repositories so that we can use from here. That is why nexus acts as a central point not only for storing build artifacts but also for serving as a local repository for all required libraries and dependencies.
+- Now create a cataloge repository in nexus to hold the catalogue artifacts using 'maven2 hosted' format. What is maven2 hosted format ? It is popular format used for maintaining application artifacts in a unique way like below.
+- Group id --> com.roboshop, artifact id --> catalogue, version --> 1.0.0. Folder structure be like com/roboshop/catalogue/version folder 1.0.0, 1.0.1, 2.0.0 etc.
+- We have version policy release (Prod), snapshot (Dev), mixed (Both)
+- Allow re-deploy option in deployment policy because we are in dev.
 - Now we get URL of that repository.
-- Remove workspace directory after pipeline success.
-- Install "Pipeline Stage View Plugin" in jenkins.
-- How to create any file as backup ? Example Jenkinsfile.bkp (or) main.tf.bkp
+- Remove workspace folder in pipeline in post section 'deleteDir()' this is must.
+- Install 'Pipeline Stage View Plugin' in jenkins to see in stages.
+- How to create any file as backup ? Jenkinsfile.bkp (or) main.tf.bkp
 
 ### Session-44
-- We have artifact in jenkins, how to push this to catalogue nexus repository ? We have Nexus artifact uploader plugin, install this in jenkins UI & also keep the code in jenkinsfile.
-- What is the Algorithm for Catalogue (CI) ?
-- What is the Algorithm for Catalogue (CD) ?
-- Go through the code of Catalogue CI & CD in VS.
-- What is Upstream (CI) & Downstream (CD) in jenkins pipeline ?
+- We have artifact in jenkins how to push this to catalogue to nexus repository ? We have Nexus artifact uploader plugin, install this in jenkins UI & also keep the code in jenkinsfile.
+- What is the algorithm for Catalogue (CI) ?
+- What is the algorithm for Catalogue (CD) ?
+- Go through the code of catalogue CI and CD in VS.
+- What is upstream (CI) and downstream (CD) in jenkins pipeline ?
 - How to call another pipeline from jenkins pipeline ? Using "Buildjob"
 - You need to attach vpn SG to the agent, because catalogue is accepting connections from vpn.
 
