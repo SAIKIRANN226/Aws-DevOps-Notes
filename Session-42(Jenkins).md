@@ -51,39 +51,53 @@ Now understand the Jenkins pipeline syntax from google. Now create a job with pi
 
 ### Raw syntax of a pipeline (interview-question)
     pipeline {
-          agent {
-             node {
-                 label 'saikiran-agent'
-             }
-          }
-          stages {
-              stage('Build') {
-                   steps {
-                      echo 'Building...'
-                   }
-              }
-              stage('Test') {
-                   steps {
-                      echo 'Testing...'
-                   }
-              }
-              stage('Deploy') {
-                   steps {
-                      echo 'Deploying...'
-                   }
-              }
-          }
-          post {
-              always {
-                   echo 'I will always say hello'
-              }
-              failure {
-                   echo 'This will run if failure'
-              }
-              success {
-                   echo 'This will run if pipeline is success'
-              }
-          }
+        agent {
+    		node {
+    			label 'saikiran-agent'
+    		}
+    	}
+    
+        parameters {
+            string(name: 'ENV', defaultValue: 'dev', description: 'Environment')
+        }
+    
+        environment {
+            APP_NAME = "sample-app"
+        }
+    
+        options {
+            timeout(time: 10, unit: 'MINUTES')
+            disableConcurrentBuilds()
+        }
+    
+        stages {
+            stage('Build') {
+                steps {
+                    echo "Building ${APP_NAME}"
+                }
+            }
+    
+            stage('Test') {
+                steps {
+                    echo "Running tests"
+                }
+            }
+    
+            stage('Deploy') {
+                steps {
+                    echo "Deploying to ${ENV}"
+                }
+            }
+        }
+    
+        post {
+            success {
+                echo "Pipeline succeeded"
+            }
+            failure {
+                echo "Pipeline failed"
+            }
+        }
     }
 
 ### What is agent in Jenkins ?
