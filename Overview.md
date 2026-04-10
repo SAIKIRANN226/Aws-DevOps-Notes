@@ -739,29 +739,30 @@
 - How to create any file as backup ? Jenkinsfile.bkp (or) main.tf.bkp
 
 ### Session-44
-- We have artifact in jenkins how to push this to catalogue to nexus repository ? We have Nexus artifact uploader plugin, install this in jenkins UI & also keep the code in jenkinsfile.
-- What is the algorithm for Catalogue (CI) ?
-- What is the algorithm for Catalogue (CD) ?
+- We have catalogue artifact in jenkins how to push this to nexus repository ? We have nexus artifact uploader plugin, install this in jenkins UI and also keep the code in jenkinsfile.
+- What is the algorithm for catalogue (CI) ?
+- What is the algorithm for catalogue (CD) ?
 - Go through the code of catalogue CI and CD in VS.
 - What is upstream (CI) and downstream (CD) in jenkins pipeline ?
-- How to call another pipeline from jenkins pipeline ? Using "Buildjob"
-- You need to attach vpn SG to the agent, because catalogue is accepting connections from vpn.
+- How to call another pipeline from jenkins pipeline ? Using 'Buildjob'
+- You need to attach vpn SG to the agent because catalogue is accepting connections from vpn.
+- We can also install a plugin called 'rebuilder' it will run with the old values.
 
 ### Session-45
-- Types of scannings in jenkins pipeline ? Static source code analysis, Static Application Security Testing (SAST), Dynamic Application Security Testing (DAST), Open Source Library Scanning, Docker Image Scanning.
-- We are using "Shift-Left" method, we do all types of scannings in Dev enviroment itself, to make sure everything is ok, then only we can go for the higher environments.
-- How the Sonarqube scanner will work ? Installation of sonarqube is taken care by SRE team. Jenkins-Agent will clone the code in his server and it should have "scanner cli" software which need to be installed, it will scan the code and upload to the "Sonarqube" console (or) server. Then developers will see the results in "Sonarqube" console (or) server.
+- Types of scannings in jenkins pipeline ? static source code analysis, static application security testing (SAST), dynamic application security testing (DAST), open source library scanning, docker image scanning.
+- We are using shift-left method, we do all types of scannings in dev enviroment itself to make sure everything is ok then only we can go for the higher environments.
+- How the sonarqube scanner will work ? Installation of sonarqube is taken care by SRE team. Jenkins agent will clone the code in his server and it should have 'scanner cli' software which need to be installed, it will scan the code and upload to the "Sonarqube" console (or) server. Then developers will see the results in 'sonarqube' console (or) server.
 - Port number of sonarqube is 9000.
 - Sonar-project.properties ?
-- Quality Gates in sonarqube (We keep some standards) ?
+- Quality gates in sonarqube (We keep some standards) ?
 - If quality gates failed, should we fail the pipeline and inform developers to fix this code ? YES
 - So we should keep a condition in pipeline (Sonar-project.properties) to fail the pipeline "sonar.qualitygate.wait=true" node modules comes from internet, so NO need to scan node_modules directory here, so we put this line of code in properties "sonar.exclusions=node_modules**"
 - What is multi branch pipeline ? We are using multi branch pipeline in jenkins.
-- What is Jenkins shared library ? What is the process ?
-- For example developers are the owner of the catalogue repository, but jenkinsfile will be managed by the DevOps engineer only. So DevOps engineer doing frequent changes in DevOps repo (Catalogue) is not good. For this only we have jenkins shared library (Centralized pipeline). For example if we have 20 repos we need to write same jenkinsfile for every repo, instead we can create and maintain the shared library repo (Groovy code, reusable pipeline steps). We can keep all multiple pipelines in jenkins shared library for different languages and deployment platforms.
-- We need to inform this Jenkins shared library repo to the jenkins by going to the manage jenkins, system, global pipeline libraries, add here, default version should be main and name (Any-name), project repo should be git URL. Refer this library in jenkins pipeline using @Library('roboshop-shared-library'). We use groovy syntax in jenkinsfile #!groovy
-- How to call these pipelines ? For example nodejsVM, javaVM, pythonVM is a centralized pipeline. We need to send parameters like what type of application and component to "pipelineDecission.groovy"
-- "pipelineDecission.groovy" we can decide which pipeline to call.
+- What is jenkins shared library ? It is a library of pipelines and use it whenever you want and what is the process ?
+- For example developers are the owner of the catalogue repository but jenkinsfile will be managed by the DevOps engineer only. So DevOps engineer doing frequent changes in Developers repo (Catalogue) is not good. For this only we have jenkins shared library (Centralized pipeline). For example if we have 20 repos we need to write same jenkinsfile for every repo, instead we can create and maintain the shared library repo (Groovy code, reusable pipeline steps). We can keep all multiple pipelines in jenkins shared library for different languages and deployment platforms.
+- We need to inform this jenkins shared library repo to the jenkins by going to the manage jenkins, system, global pipeline libraries, add here, default version should be main and name (Any-name), project repo should be git URL. Refer this library in jenkins pipeline using @Library('roboshop-shared-library'). We use groovy syntax in jenkinsfile #!groovy
+- How to call these pipelines ? For example nodejsVM, javaVM, pythonVM is a centralized pipeline. We need to send parameters like what type of application and component to 'pipelineDecission.groovy'
+- 'pipelineDecission.groovy' we can decide which pipeline to call.
 
 ### Session-46
 - What is the pipeline process you are following in your company ? Interview question.
@@ -775,7 +776,7 @@
 - First create whole project infra using one jenkinsfile. If there is NO dependency from one folder to another folder like 04-databases & 05-app-alb. For that we have "Parallel stages" in Jenkins pipeline (We need to use a keyword called parallel) so because of this parallel, both resources will create at a time to save the time. Other folders like VPC, SG, VPN have dependencies (Like it is following sequential process). We can also add plan command or 07-acm code also.
 - We can keep all static values like nexus URL, file path, credentials etc in "pipelineGlobals.groovy"
 - What is change management process ?
-- What is Jira to Jenkins Integration ? Jira is a ticket management tool.
+- What is jira to jenkins integration ? Jira is a ticket management tool.
   
 ### Session-47
 - Algorithm for CICD pipeline for Roboshop is first make sure project infra (Dev & Prod) is ready. So create  one jenkinsfile for whole project infra.
