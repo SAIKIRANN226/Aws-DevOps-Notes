@@ -835,25 +835,28 @@
 - Nexus repository is to maintain artifacts and dockerhub is used to maintain docker images.
 
 ### Session-50
-- What is Dockerfile & why we use different instructions ? A Dockerfile is a text file that contains a set of instructions to build a Docker image. It defines everything your container needs like OS, software, dependencies, configurations and the default command. Dockerfile is a declarative way of creating docker image. It’s like a recipe for creating a Docker image.
-- We have instructions in Dockerfile FROM, RUN, CMD, LABEL, EXPOSE, ENV, COPY, ADD, ENTRYPOINT, USER, WORKDIR, ARG, ONBUILD.
+- What is dockerfile and why we use different instructions ? A dockerfile contains a set of instructions to build a docker image. It defines everything your container needs like OS, software, dependencies, configurations and the default command. Dockerfile is a declarative way of creating our own docker images. It’s like a recipe for creating a docker image. Dockerfile starts with capital D.
+- We have instructions in dockerfile FROM, RUN, CMD, LABEL, EXPOSE, ENV, COPY, ADD, ENTRYPOINT, USER, WORKDIR, ARG, ONBUILD.
 - FROM ---> Defines the base image for the Dockerfile. Every Dockerfile must start with a FROM instruction.
 - RUN ---> Executes commands at build time and creates a new image layer, usually for installing packages or dependencies.
-- CMD ---> Defines the default command that runs when a container starts. It can be overridden at runtime.
-- LABEL ---> Adds metadata to the image, like maintainer info, version, or description.
-- EXPOSE ---> Documents the port the container listens on at runtime. It doesn’t publish the port; it just declares it.
+- CMD ---> Defines the default command that runs when a container starts. It can be overridden at runtime. Systemctl command will not work in container, to work it should be the main OS but the container is baseOS. So we have give the command manually. Search in google like 'nginx running command inside the container' there will be a daemon command put that in CMD 
+- LABEL ---> Adds metadata to the image, like maintainer info, version, or description. It can used for filtering. 
+- EXPOSE ---> Documents the port the container listens on at runtime. It doesn’t publish the port it just declares it.
 - ENV ---> Sets environment variables inside the container, useful for configuration and passing dynamic values.
 - COPY ---> Copies files/directories from the host machine into the container filesystem.
-- ADD ---> Similar to COPY, but also supports remote URLs and automatically extracts compressed files.
+- ADD ---> Similar to COPY but also supports remote URLs and automatically extracts compressed files.
 - ENTRYPOINT ---> Defines the main command that always runs when the container starts. Unlike CMD, it’s not easily overridden.
 - USER ---> Specifies the user (or UID/GID) under which the container will run, mainly for security to avoid root.
 - WORKDIR ---> Sets the working directory for subsequent instructions like RUN, CMD, ENTRYPOINT, COPY, and ADD.
 - ARG ---> Defines variables that are passed at build time using --build-arg, useful for dynamic image builds.
 - ONBUILD ---> Adds a trigger instruction that executes later, when the image is used as a base for another build.
 - Note that in Dockerfile, first instruction should be "FROM" nothing but referring baseOS.
-- What is RUN vs CMD instruction ?
-- 
-
+- Popular interview question, what is RUN vs CMD instruction ? RUN at the time of image building and CMD runs at the time of container creation. What is the difference between COPY vs ADD ? Both are used to copy the files from local to image but ADD have 2 extra capabilities one is it can directly download files from internet, another one is it can directly untar the tar files. CMD vs ENTRYPOINT ? Both runs at the container creation time only but CMD command can be overridden by another command at run time. ENTRYPOINT command cannot be overridden at run time, if you try to do so, the command you are entering at run time will go and append to entrypoint. We can use CMD and ENTRYPOINT for best results like CMD is supplying the default arguments to ENTRYPOINT, user can always override CMD arguments at the run time. Nothing but like we are not giving access to override the main command to users, if user forgot to give arguments, we have CMD to supply the default arguments.
+- USER instruction defines which Linux user the container should run as (instead of default root), mainly for security. We can restrict root access with USER instruction. Docker containers should not run with root user its a security issue they can easily get the complete storage of underline OS. One docker container should not access to another docker container. We can disable this option to a user.
+- WORKDIR instruction is sets the default directory inside the container where commands will run, similar to setting a current working directory with cd .
+- ARG vs ENV instruction ? ARG will provide values to the dockerfile only at build time, while ENV will access values at build time, run time and also in the container.
+- ONBUILD instruction is rarely used today but it’s handy for creating reusable base images.
+- Why we are using almalinux ? Because there will be no ping command because its a bare minimum OS.
 
 ### Session-51
 - 
