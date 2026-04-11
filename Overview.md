@@ -772,19 +772,18 @@
 - What is jira to jenkins integration ? Jira is a ticket management tool.
   
 ### Session-47
-- Algorithm for CICD pipeline for Roboshop is first make sure project infra (Dev & Prod) is ready. So create  one jenkinsfile for whole project infra.
-- For example we are going for catalogue, then create 1 catalogue repo and download the code from roboshop documentation using wget URL or download manually into that catalogue repo & also keep jenkinsfile, point this jenkinsfile to shared library (Dry principle & centralized pipeline) & also make sure you have shared libraries configured in jenkins system configuration in manage jenkins.
-- Shared library VM pipeline will be called & stages will be clone, get the version from package.json, install dependencies, unit tests, build, scans. If developer opt for deploy, we can deploy.
-- Then catalogue deploy will call terraform-roboshop-app.
-- We are passing environment, version, component to the bootstrap script.
+- Algorithm for CICD pipeline for roboshop project is first make sure project infra (Dev and Prod) is ready and get the vpns connected here we can also keep one vpn for both or different vpn for both. Few companies keep single VPN for all environments, we can also keep single VPN, but it is better to keep 1 VPN for every environment. Next create 1 jenkinsfile for whole project infra for both dev and prod.
+- Next go for the application infra which starts with catalogue. So create 1 catalogue repo and download the code from roboshop documentation using wget URL or download manually into that catalogue repo and also keep jenkinsfile for this catalogue and point this jenkinsfile to shared library (Dry principle and centralized pipeline) and also make sure you have shared libraries configured in jenkins system configuration in manage jenkins aswel as keep the code in catalogue jenkinsfile.
+- Then jenkinsfile will call shared library and here it will go pipelineDecission based on the case like if nodejsVM then it will call nodejsVM pipeline and stages will be cloned, get the version from package.json, install dependencies, unit tests, build, scans. If developer opt for deploy we can deploy.
+- Then we are passing it to the catalogue deploy will call terraform-roboshop-app.
 - Bootstrap script will clone roboshop-ansible-roles-tf and run catalogue role.
-- Now setting up CICD for user module. As a DevOps team, we have nodejs CICD is ready & a new project user module is started by the developers and how can you setup CICD for user module ? User module developers will send a mail to the DevOps team stating that we have started user module and we want DevOps team to help us to setup CICD for user module, then DevOps team will setup meeting with developers and explain our centralized pipeline structure which we used for catalogue. So now setup user module. Create 1 repo for user module and tell them to keep the jenkinsfile. Dont forget to create repo for user in nexus. If new project is started they should have repo existed in nexus, generally this will be done by SRE team.
-- Few companies keep single VPN for all environments, we can also keep single VPN, but it is better to keep 1 VPN for every environment.
-- Normal pipeline for CD (Deploy), Multi-branch pipeline for CI.
+- Now setting up CICD for user module. As a DevOps team, we have nodejs CICD is ready and a new project user module is started by the developers and how can you setup CICD for user module ? User module developers will send a mail to the DevOps team stating that we have started user module and we want DevOps team to help us to setup CICD for user module then DevOps team will setup meeting with developers and explain our centralized pipeline structure which we used for catalogue. So now setup user module. Create 1 repo for user module and tell them to keep the jenkinsfile. Dont forget to create repo for user in nexus. If new project is started they should have repo existed in nexus, generally this will be done by SRE team.
+- Normal pipeline for CD (Deploy) but Multi-branch pipeline for CI.
+- This whole process of cicd is VM based, nobody is used vm based everybody is doing in docker and kubernetes. Earlier we were deploying applications into VM later we migrated into the docker and kubernetes if you are 4-5 years of experience. You can tell them like few applications are still in VM, we need to migrate those also. We have different kinds of pipelines, we have nodejsVM pipeline, nodejsEKS pipeline, javaVM pipeline, javaEKS pipeline, we have the setup ready, any deployment platform and any language we support.
 
 ### Session-48
 - Physical servers, Virtualization, Containerization.
-- Independent Houses, Apartments, Individual rooms.
+- Independent houses, Apartments, Individual rooms.
 - Security is more in Physical server since everything will be in our control, while VM there are chances anybody can look into, so implement proper security in VM and Containers.
 - What is Containerization ?
 - What is Virtualization concept (or) VMware ? Nothing but Resource Utilization.
