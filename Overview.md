@@ -783,54 +783,42 @@
 
 ### Session-48
 - Physical servers (Independent house), Virtualization (Apartment), Containerization (Single room).
-- Security is more in physical server because everything will be in our control while VM there are chances anybody can look into. So we need to implement proper security in vm and containers.
-- What is containerization ?
+- Security is more in physical server because everything will be in our control, while in virtualization there are chances anybody can look into. So we need to implement proper security in vm and containers like say security groups.
+- What is containerization ? Containerization is a light weight form of vm.
 - What is virtualization concept (or) VM ware ? Cloud technologies are using VM ware concept nothing but resource utilization.
 - Resource utilization in VM is better when compared to physical server, resource utilization in containers is much better than VM.
-- What is dedicated hosts in aws ?
-- Resource utilization is good in VM when compared to physical servers like creating multiple logical servers and if require we can take extra configuration from the big physical server or laptop.
-- So we have containerization concept inside the VM. We need to create individual rooms inside the VM nothing but system resources (CentOS, 1GB ram, 100GB HDD) are shared that means containers will take resources based on their demand from this system resources. Containers are isolated from each other. System resources will wont block. Boot time is very less (With in seconds) compared to VM (EC2 instance).
-- When we are moving to docker and kubernetes, we dont care what is the underline OS.
+- What is dedicated hosts in aws ? Nothing but physical servers used by big companies.
+- Resource utilization is good in VM when compared to physical servers like creating multiple logical servers and if require we can take extra configuration from the big physical server from aws or laptop.
+- So we have containerization concept inside the VM. We need to create individual rooms inside the VM. Here system resources (CentOS, 1GB ram, 100GB HDD) are shared that means containers will take resources based on their demand from this system resources. Containers are isolated from each other. System resources will wont block. Boot time is very less (With in seconds) compared to VM ec2 instance. When we are moving to docker and kubernetes, we dont care what is the underline base OS.
 - What is configuration ? Example of vacating individual house, apartment and room. Configuration will be less in containers when compared to physical servers and vm.
-- What is ami and container ? Ami has FatOS (4GB) and Container has BaseOS (5MB)
-- Docker image ---> BaseOS (5MB-250MB) + application run time + created users + created directory + installed applications.
-- Working in dev but not working in prod ? Main issue is configuration changes and OS this may be because of you are using different OS in qa, sit, prod. But where as in docker image the advantage is we take same image from dev to sit, uat, prod. Thats why we call it as immutable image and portable we even dont know what is the base OS we are using but our intention is image should work.
+- What is ami and container ? Ami has Fat OS (4GB) and Container has Base OS (5MB)  
+- Docker image --> Base OS (5MB-250MB) + application run time + created users + created directory + installed applications.
+- Working in dev but not working in prod in VMs ? Main issue is configuration changes and OS this may be because of you are using different OS in QA, SIT, PROD. But where as in docker image the advantage is we take same image from DEV to SIT, UAT, PROD. Thats why we call it as immutable image and portable we even dont know what is the base OS we are using but our intention is image should work.
 - How to install docker in servers ? Search in google 'Docker install centos' run the shown commands in server.
-- When you install docker a group called 'docker' is created.
-- Users who are in this group they can only access docker commands without root user.
-- So add your user (Centos) to this group. Using 'usermod -aG docker centos'
-- Then logout and login again in server. Now docker commands will work without root user. Docker images command show you the images exist in the server.
-- Difference between AMI and EC2 ? EC2 is the running version of AMI. AMI is recipe and EC2 is dish. An AMI is a pre-configured template that contains the operating system and required software while an EC2 instance is the actual virtual machine created using that AMI. AMIs are used to launch EC2 instances.
-- Similarly the difference between docker image and container ? Container is the running version of docker image.
-- If you want to pull image then use 'docker pull nginx' nothing but baseOS + nginx installed then try 'docker images' command. Where does this image is pulling ? From the dockerHub.
+- When you install docker a group called 'docker' is created. Users who are in this group they can only access docker commands without root user. So add your user (Centos) to this group. Using 'usermod -aG docker centos' Then logout and login again in server. Now docker commands will work without root user 'docker images' command show you the images exist in the server.
+- Difference between AMI and EC2 ? EC2 is the running version of AMI. AMI is recipe and EC2 is dish. An AMI is a pre-configured template that contains the operating system and required software while an EC2 instance is the actual virtual machine created using that AMI. AMIs are used to launch EC2 instances. Similarly the difference between docker image and container ? Container is the running version of docker image.
+- If you want to pull image then use 'docker pull nginx' in server, nothing but base OS + nginx installed then try 'docker images' command. Where does this image is pulling ? From the dockerhub. You can signup for dockerhub.
 - Docker commands are docker images, docker pull nginx (You will get the latest image)
-- Now create container from the above created image nginx 'docker create nginx:latest'
-- Next run the above created container then use 'docker start <container_id>'
+- Now create container from the above created nginx image 'docker create <image-name/id>:latest' 'docker create nginx:latest'
+- Next run the above created container using 'docker start <container_id>' to get the container id use 'docker ps -a'
 - To see only running containers use 'docker ps' and to see all containers with all status 'docker ps -a'
 - To remove 'docker rm <container_id>' before you need to stop 'docker stop <container_id>'
 - To remove without stopping ---> docker rm -f <container_id>
 - To remove images ---> docker rmi <image_name>/image_id
 - To remove all images at a time ---> 'docker images -a -q' then 'docker rmi docker images -a q'
-- Instead of pull + create + run commands ---> docker run nginx
-- To run in background ---> docker run -d nginx
-- Nginx is running now and how can i access it ? You cannot use VM port to container, so you need to allocate any port to the host first 'docker run -d -p 8080:80 nginx' 8080 port is for VM or host, this is mapped with nginx port or container port 80. This is interview question is how can you expose a port of a container ?
-- You cannot use same port 8080 because it is already allocated, you can use any other random ports like 8081, 8082, 8083 etc. When you create containers, you are getting random names.
-- To create with name ---> docker run -d -p 8081:80 --name sai nginx
+- Instead of pull + create + run commands ---> docker run nginx. To run in background ---> docker run -d nginx
+- Nginx is running now and how can i access it ? You cannot use VM port to container, so you need to allocate any port to the host first 'docker run -d -p 8080:80 nginx' 8080 port is for VM or host, this is mapped with nginx port or container port 80. Interview question is, how can you expose a port of a container ? Using 'docker run -d -p 8080:80 nginx' You cannot use same port 8080 because it is already allocated to a container, you can use any other random ports like 8081, 8082, 8083 etc. When you create containers, you will see random names of containers. To change name of your own then use 'docker run -d -p 8081:80 --name sai nginx'
 - How can you login to the existing container ? 'docker exec -it <container_name/id> bash'
-- How to see the base OS of a container ? 'cat /etc/*release'
-- Container will also have IP address ---> 'docker inspect <container_id>'
-- Till now we used others images from the dockerHub right ? Then how to create our own docker images ? Using dockerfiles
+- How to see the base OS of a container ? 'cat /etc/*release' check with sudo access.
+- Container will also have IP address, to check this ---> 'docker inspect <container_id>'
+- Till now we used others images from the dockerHub right ? Then how to create our own docker images ? 'Dockerfile'
 
 ### Session-49
-- What is the difference between virtualization and containerization (Interview question) ? Resource utilization is not good in virtualization when compared to containerization.
-- A declarative way of creating our own docker image using dockerfiles. You can create using dockerfile reference from google. First create a repo for dockerfiles in github.
-- We need to learn instructions for building our roboshop as docker images. We have multiple instructions you can refer in dockerfile reference from google.
-- Dockerfile should be 'Dockerfile' with D caps.
-- First instruction is FROM. Nothing but we should have a baseOS or image, upon this image only we install everything for application.
-- After cloning repo in server. How to build the created docker image ? docker build -t <URL>/<USERNAME>/<IMAGE>:<VERSION> .
-- If you are not giving url, username, image then you are not pushing to the dockerhub. If you want to push to the local then 'docker build -t from:v1 .'
-- Here t --> tags, URL ---> After building the image, we need to push to somewhere right ? Which is dockerhub and URL is 'docker.io' similar to dockerhub, we have ECR in aws for that also we have URL, similarly we have nexus docker registry URL, you can push to any URL. Incase if you dont want to push to the dockerhub then you can create in local also 'docker build image:version .'
-- Later if you want to push from local to dockerhub then just retag it 'docker tag image:version url/username/image:version'
+- What is the difference between virtualization and containerization (Interview question) ? Resource utilization is not good in virtualization when compared to containerization. In vm resource utilization is completely blocked.
+- A declarative way of creating our own docker images using dockerfiles. First create a repo for dockerfiles in github. First we need to learn instructions to create our own docker images then later we can build our roboshop as docker images. We have multiple instructions, you can refer in dockerfile reference from google. Dockerfile should be 'Dockerfile' with D caps.
+- First instruction is FROM. Nothing but we should have a base OS or image, upon this image only we install everything required for application. Push to github, clone in server then build the image using 'docker build -t <URL>/<USERNAME>/<IMAGE_NAME>:<VERSION> .' Here . means we are saying our dockerfile is in current directory.
+- Here t --> tags, URL --> After building the image, we need to push to somewhere right ? Which is dockerhub and URL is 'docker.io' similar to dockerhub, we have ECR in aws for that also we have URL, similarly we have nexus docker registry URL, you can push to any URL. Incase if you dont want to push to the dockerhub or any other docker repository hubs then you can push in local also 'docker build -t image:version .' --> Usage is 'docker build -t from:v1 .' If you are not giving url, username, image then you are not pushing to the dockerhub.
+- Later if you want to push from local to dockerhub then just retag it 'docker tag image_name:version url/image_name:version'
 - Login to docker then 'docker push image:version url/username/image:version'
 - Nexus repository is to maintain artifacts and dockerhub is used to maintain docker images.
 
