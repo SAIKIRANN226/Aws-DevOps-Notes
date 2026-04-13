@@ -783,15 +783,16 @@
 
 ### Session-48
 - Physical servers (Independent house), Virtualization (Apartment), Containerization (Single room).
-- Security is more in physical server because everything will be in our control, while in virtualization there are chances anybody can look into. So we need to implement proper security in vm and containers like say security groups.
-- What is containerization ? Containerization is a light weight form of vm.
+- Security will be more in physical server because everything will be in our control, while in virtualization there are chances anybody can look into. So we need to implement proper security in VM and containers using security groups.
+- What is containerization ? Containerization is a light weight form of VM.
+- How is the booting time of configuring any application until up and running in physical server, VM and containers ?
 - What is virtualization concept (or) VM ware ? Cloud technologies are using VM ware concept nothing but resource utilization.
 - Resource utilization in VM is better when compared to physical server, resource utilization in containers is much better than VM.
 - What is dedicated hosts in aws ? Nothing but physical servers used by big companies.
 - Resource utilization is good in VM when compared to physical servers like creating multiple logical servers and if require we can take extra configuration from the big physical server from aws or laptop.
 - So we have containerization concept inside the VM. We need to create individual rooms inside the VM. Here system resources (CentOS, 1GB ram, 100GB HDD) are shared that means containers will take resources based on their demand from this system resources. Containers are isolated from each other. System resources will wont block. Boot time is very less (With in seconds) compared to VM ec2 instance. When we are moving to docker and kubernetes, we dont care what is the underline base OS.
-- What is configuration ? Example of vacating individual house, apartment and room. Configuration will be less in containers when compared to physical servers and vm.
-- What is ami and container ? Ami has Fat OS (4GB) and Container has Base OS (5MB)  
+- What is configuration ? Example of vacating individual house, apartment and room. Configuration will be less in containers when compared to physical servers and VM.
+- What is ami and container ? Ami has Fat OS (4GB) and Container has Base OS (5MB)
 - Docker image --> Base OS (5MB-250MB) + application run time + created users + created directory + installed applications.
 - Working in dev but not working in prod in VMs ? Main issue is configuration changes and OS this may be because of you are using different OS in QA, SIT, PROD. But where as in docker image the advantage is we take same image from DEV to SIT, UAT, PROD. Thats why we call it as immutable image and portable we even dont know what is the base OS we are using but our intention is image should work.
 - How to install docker in servers ? Search in google 'Docker install centos' run the shown commands in server.
@@ -807,7 +808,7 @@
 - To remove images ---> docker rmi <image_name>/image_id
 - To remove all images at a time ---> 'docker images -a -q' then 'docker rmi docker images -a q'
 - Instead of pull + create + run commands ---> docker run nginx. To run in background ---> docker run -d nginx
-- Nginx is running now and how can i access it ? You cannot use VM port to container, so you need to allocate any port to the host first 'docker run -d -p 8080:80 nginx' 8080 port is for VM or host, this is mapped with nginx port or container port 80. Interview question is, how can you expose a port of a container ? Using 'docker run -d -p 8080:80 nginx' You cannot use same port 8080 because it is already allocated to a container, you can use any other random ports like 8081, 8082, 8083 etc. When you create containers, you will see random names of containers. To change name of your own then use 'docker run -d -p 8081:80 --name sai nginx'
+- Nginx is running now and how can i access it ? You cannot use VM port to container, so you need to allocate any port to the host first 'docker run -d -p 8080:80 nginx' 8080 port is for VM or host, this is mapped with nginx port or container port 80. Interview question is, how can you expose port of a container ? Using 'docker run -d -p 8080:80 nginx' You cannot use same port 8080 because it is already allocated to one container, you can use any other random ports like 8081, 8082, 8083 etc. When you create containers, you will see random silly names of containers. To change name of your own then use 'docker run -d -p 8081:80 --name sai nginx'
 - How can you login to the existing container ? 'docker exec -it <container_name/id> bash'
 - How to see the base OS of a container ? 'cat /etc/*release' check with sudo access.
 - Container will also have IP address, to check this ---> 'docker inspect <container_id>'
@@ -871,7 +872,7 @@
 - You should not run container with root access because there may be a chance that container getting complete file system access of the underline host. So create one system user in host OS which ever like if you are using alpine then create user in alpine and add it to the group (Roboshop) using user instruction.
 - Go through the concept of docker architecture in session-52 ?
 - Go through the concept of docker layer in session-52 ?
-- Instead of installing docker setup and docker compose manually, siva has created one shellscript to install automatically 'curl <raw_url> | sudo bash'
+- Instead of installing docker setup and docker compose manually, siva has created a shellscript to install automatically. Just use that url here 'curl <raw_url> | sudo bash'
 
 ### Session-53
 - Kubernetes and AWS are PaaS (Platform as a Service) that means whatever the services are required to make your application up and running, everything will be provided by them only. For example to store the configuration and secrets. In AWS we have SSM parameter store. In Kubernetes we have 'ConfigMap'
