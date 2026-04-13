@@ -859,17 +859,19 @@
 - Next shipping component, here we have multi stage builds mainly for java projects, which is very important for interview, while developing java code, we need 'maven jdk' after building this we get jar file but for running no need of maven and jdk, we just need jre (Java runtime environment) jdk is heavy memory. So docker container will restrict this type of building the java code because it will take heavy memory, so thats why we use multi stage builds. This is the best practice we need to use in docker containers. Next go for rabbitmq, payment components.
 
 ### Session-52
-- How to build all images at a time ? for i in mongodb mysql catalogue cart user shipping payment web ; do cd $i ; docker build -t $i:v1 . ; cd .. ; done
-- How to run all images as containers ? docker compose up -d
-- What are the best practices you will follow as a DevOps engineer efficiently & securely in Docker ? Use only official images from the dockerhub, Create custom dockerfiles, Keep images & containers size small, Use multi stage builds, Use docker volumes to persist the data, Use custom networks to isolate containers from other projects, Docker system prune will delete the unused data to create free space.
-- Containers are temporary, if you remove docker then data will also be deleted.
-- Two types of volumes "unnamed & named volumes"
-- Volumes are used only for database applications like mysql, mongodb etc.
-- How to create a volume ? "docker volume create nginx" created volume should be mounted.
-- You should not run container with root access because there may be a chance that container getting complete file system access of the underline host. So create one system user in hostOS which ever like if you are using alpine then create user in alpine & add it to the group (Roboshop)
-- What is Docker architecture ?
-- What is Docker layer ? Docker images are build in multiple layers.
-- Instead of installing docker & docker compose manually, siva has created one shellscript to install automatically "curl <raw_url> | sudo bash"
+- How to build all images at a time ? Do this in server command line 'for i in mongodb mysql catalogue cart user shipping payment web ; do cd $i ; docker build -t $i:v1 . ; cd .. ; done'
+- How to run all images as containers at a time ? 'docker compose up -d'
+- What are the best practices you will follow as a DevOps engineer efficiently and securely in docker ? Below are the points.
+- Use only official images from the dockerhub.
+- Create custom dockerfiles like we have created for all components.
+- Keep images and containers in small size like below 1GB.
+- Use multi stage builds, use docker volumes to persist the data. Go through the docker volumes concept in Session-52.
+- Use custom networks to isolate containers from other projects.
+- Docker system prune will delete the unused data to create free space.
+- You should not run container with root access because there may be a chance that container getting complete file system access of the underline host. So create one system user in host OS which ever like if you are using alpine then create user in alpine and add it to the group (Roboshop) using user instruction.
+- Go through the concept of docker architecture in session-52 ?
+- Go through the concept of docker layer in session-52 ?
+- Instead of installing docker setup and docker compose manually, siva has created one shellscript to install automatically 'curl <raw_url> | sudo bash'
 
 ### Session-53
 - Kubernetes and AWS are PaaS (Platform as a Service) that means whatever the services are required to make your application up and running, everything will be provided by them only. For example to store the configuration and secrets. In AWS we have SSM parameter store. In Kubernetes we have 'ConfigMap'
