@@ -22,21 +22,19 @@ Before running images, make sure all images are ready. Then run all images as co
 - While developing we use JDK, but to run we use JRE, because JDK memory > JRE memory
 
 ### Docker volumes
-- When you remove docker ? What happens to data ? Will data be removed ? Yes data also be deleted because containers are temperory
-- Two types of volumes unnamed volumes & named volumes
-- How you created network, similarly you can create docker volume also "docker volume create nginx" "docker volume inspect nginx"
-- unnamed volumes will not be there in docker management you need to manage yourself, while named volumes you have docker commands to manage the volumes like removing, creating, inspect etc.
-- When to use volumes ? When you using database applications then you have to use it. So create volumes and also mount it.
-- You should not run container with root access because there may be chance that container getting complete file system access of the underline host. So create one system user in hostOS which ever like if you are using alpine then create user in alpine and add it to the group (Roboshop)
+- When you remove docker ? What happens to data ? Will data be removed ? Yes data also be deleted because containers are temperory. You can check where the docker is storing data using 'docker inspect container_id'
+- Two types of volumes unnamed volumes and named volumes. Unnamed volumes will not be there in docker management you need to manage yourself using "docker volume create nginx" and "docker volume inspect nginx", while named volumes you have docker commands to manage the volumes like removing, creating, inspect etc.
+- When to use volumes ? When you using database applications then you have to use it. So create volumes and also mount it in docker compose.yaml file.
+- You should not run container with root access because there may be chance that container getting complete file system access of the underline host. So create one system user in host OS which ever like if you are using alpine then create user in alpine and add it to the group (Roboshop) this we do in user instruction.
 
 ### Docker architecture
-When you hit "docker run nginx" 
-- Docker command will send a request to docker daemon (engine)
+When you hit "docker run nginx" architecture is nothing but how data or requests is coming and how data or requests are going
+- Docker clients like docker build, docker pull, docker run commands will send a request to docker daemon (engine)
 - Docker engine receives the request
 - It will check wether the image is available in local or not ?
 - If available it will create container and show the response to client
 - If not available then it will pull from central dockerhub and keep it in local.
-- Create container and respond to client
+- Create container and respond to client.
 
 ### Docker layers
 - What ever instructions you write that are nothing but layers
