@@ -39,7 +39,7 @@ When you hit "docker run nginx" architecture is nothing but how data or requests
 ### Docker layers
 - What ever instructions you write that are nothing but layers
 - For example first instruction is baseOS
-- Then create container out of base instruction
+- Then create container on base instruction
 - Next runs second instruction inside the container
 - Then it will create image out of these
 - Then it will create container out of those 2 instructions
