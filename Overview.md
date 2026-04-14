@@ -739,15 +739,16 @@
 - How to create any file as backup ? Jenkinsfile.bkp (or) main.tf.bkp
 
 ### Session-44
-- We have catalogue artifact in jenkins how to push this to nexus repository url ? We have nexus artifact uploader plugin, install this in jenkins UI and also keep the code in jenkinsfile.
-- What is the algorithm for catalogue (CI) ?
-- What is the algorithm for catalogue (CD) ?
-- Until CI part, no need to create project infra but now we are going for CD, so create project infra and databases first. Catalogue component and other components will be done through CICD. Go through the code of catalogue CI and CD in VS. Previously ansible was downloading the package from s3 bucket, now it should download the artifact from the nexus location and also download specific version (You need to make few changes in roboshop-ansible-roles in appsetup in common files). So what should we give to ansible ? We need to give nexus location and artifact version, so make changes in playbook according to this. From terraform you should send artifact version to ansible in command line which is in provisioner inline.
+- In previous session, we completed till building the code nothing but as zip file in catalogue CI process but before going for deploy, we need to send this build artifact to catalogue nexus repo which we have created in nexus server. We have catalogue artifact in jenkins CI then how to push this artifact to nexus repository url ? For this we have nexus artifact uploader plugin, install this in jenkins UI and also keep the code in jenkinsfile. Till this we call it jenkins CI process.
+- What is the process for catalogue (CI) ? Until the creation and pushing the artifacts to nexus url.
+- What is the process for catalogue (CD) ? Create server, provision it using ansible, stop server, take ami, create launch template version, refresh auto-scaling. We already did this in terraform, so copy this whole catalogue code from 'Roboshop-infra-dev'
+- Until CI part, no need to create project infra but now we are going for CD, so create project infra and databases first. Catalogue component and other components will be done through CICD. Go through the code of catalogue CI and CD in VS. Previously ansible was downloading the package from s3 bucket, now it should download the artifact from the nexus location and also download specific version (You need to make few changes in roboshop-ansible-roles in appsetup in common files). So what should we give to ansible ? We need to give nexus location and artifact version, so make changes in playbook according to this. So in jenkinsfile you have to pass a variable of version dynamically using -var-file in plan stage (Terraform) and then pass it to ansible in provisioner remote-exec inline. So version is travelling from developers code in vs ---> jenkins ---> terraform ---> ansible
 - Keep parameters also for version and environment for catalogue.
 - What is upstream (CI) and downstream (CD) in jenkins pipeline ? When CI success then only call CD.
-- Catalogue CI should send values of version and environment to CD, how to call another pipeline from jenkins pipeline ? Using 'buildjob'
+- Catalogue CI will send values of version and environment to CD, how to call another pipeline from jenkins pipeline ? 'buildjob'
 - You need to attach vpn SG to the agent because catalogue is accepting connections from vpn.
 - We can also install a plugin called 'rebuilder' it will run with the old values.
+- We are following semantic versions like major version, minor version, patch version.
 
 ### Session-45
 - Types of scannings in jenkins pipeline ? static source code analysis, static application security testing (SAST), dynamic application security testing (DAST), open source library scanning, docker image scanning.
