@@ -673,44 +673,40 @@
 - We are using shift left strategy in our pipeline like Code quality checks, Tests, Security scanning and performance testing in Dev itself, so that we can catch the issues sooner and also we can reduce the cost aswel as we can improve the software quality.
 
 ### Session-41
-- What is Git and how it will track ?
-- How to generate a commit-id for your content or file ? echo hello | git hash-object --stdin
-- Git will calculate the commit-id based on the content.
-- Commit-id is also known as SHA code which has 40 characters (Universal unique id)
+- What is Git and how it will track ? It is just a folder in internet with tracking capabilities.
+- How to generate a commit-id for your content or file ? echo hello | git hash-object --stdin  
+- Git will calculate the commit-id based on the content. Commit-id is also known as SHA code which has 40 characters (Universal unique id). Git is a key-value pair (Key=commit-id, Value=content)
 - Git log --> You will get all the commit-ids of the entire content of that repo in gitbash.
-- Git is a key-value pair (Key=commit-id, Value=content)
-- If you want the information about the commit-id then 'git cat-file <commit_id> -p'
+- If you want the information about the commit-id then ---> git cat-file <commit_id> -p
 - If you want all commit-ids of a repo in oneline ---> git log --oneline
 - What are the minimum protection rules in git for main (or) master branch ? PR, Require approvals, Require linear history, Dismiss stale pull request approvals when new commits are pushed.
 - What is dismiss stale pull request approvals when new commits are pushed ? When this setting is enabled, if someone approves a pull request (PR) and then new commits are pushed to that PR then the existing approvals are removed (Dismissed). This ensures that the code which was approved is still valid after the latest changes.
 - When you create a feature branch and you cloned the main branch into the feature branch. But still commit-ids of main branch and feature branch are same and why ? When will the commit-id of feature branch will change ?
-- Once developers got approvals he will get merge options like Merge commit, Squash and merge, Rebase and merge. These are nothing but merging strategies.
-- Merge commit ---> A normal commit records changes within a branch, while a merge commit combines two branches and preserves both histories.
-- Squash and merge ---> It combines them into a single commit for cleaner history. Mostly this is useful for individual developers who works on microservices who do lots of commits which doesnt look good.
-- Rebase and merge ---> It rewrites the commit history and creating a linear history without new extra merge commits. 
-- Which merging strategies will be preferred among these three ?
-- Mostly companies go for the merge commit not squash and rebase why ?
+- Once developer got approvals, he will get merge options (Merging strategies) Merge commit, Squash and merge, Rebase and merge.
+- Merge commit ---> A normal commit changes within a branch, while a merge commit combines two branches and preserves both histories. This merge commit will create one extra commit to the main branch when you merge from feature to main branch, that means main branch is moved 1 step forward. This extra commit-id has 2 parents, one is from the feature branch and another is from main branch, so thats why merge commit will preserve both histories, it is like chain structure.
+- Squash and merge ---> It combines lot of commits by 1 developer into a single commit for cleaner history. Mostly this is useful for individual developers, who works on microservices and who do lot of commits to main branch which doesnt look good.
+- Rebase and merge ---> It rewrites the commit history and creating a linear history without new extra merge commits. It will not preserve the history and commit-ids will be changing.
+- Which merging strategies will be preferred among these three ? Mostly companies go for merge commit not squash or rebase why ?
 - When to use merge commit and when to use rebase and merge ?
-- We are following feature branching strategy, we have main branch as long live branch anything other than main branch we call it as feature branch, developers will work in feature branches and before raising PR we will do CICD in feature branch itself in dev environment, once it is successful they will raise PR based on the discussions. PR will be approved and from the main branch, we do deployment into the higher environments like QA, SIT, UAT, PROD. Since code is same across all environments but configuration is different. Configuration should be dettached from code for that we are using ssm parameter store.
-- Once we got succeeded in merging code into the main branch, we can deploy into higher environments like QA, SIT, UAT, and PROD. What if we success in dev and failed in qa ? what should i do ? Again they should create another feature branch they should change the code again in dev environment and then do CICD.
+- We are following feature branching strategy, we have main branch as long live branch anything other than main branch we call it as feature branch, developers will work in feature branches and before raising PR we will do CICD in feature branch itself in dev environment, once it is successful they will raise PR based on the discussions. PR will be approved and from the main branch, we do deployment into the higher environments like QA, SIT, UAT, PROD. Since code is same across all environments but configuration is different. Configuration should be dettached from code, for that we are using ssm parameter store.
+- What if we success in DEV and failed in QA ? What should they do ? Again they should create another feature branch, they should change the code again in DEV environment and then do CICD.
 - We have '.git' folder in every repo nothing but it stores all the information of git like tracking, metadata, objects etc.
-- The above all branching strategies will be done by developers only not devops team. We only discuss how the branching strategies should be with developers and we dont have any rights to raise PR, Approve requests etc.
-- If we got emergency, we can just test in dev and then directly go for the prod.
-- Explain merge conflicts in git ?
+- The above all branching strategies will be done by developers only not devops team. We only discuss how the branching strategies should be by sitting with developers and we dont have any rights to raise PR, Approve requests etc.
+- If we got emergency, we can just test in DEV and then directly go for the PROD deployment.
+- Explain merge conflicts in git ? So pull before push is the best strategy need to follow to avoid merge conflicts.
 
 ### Session-42
-- How to install jenkins in server ? Jenkins is a CICD tool.
+- Jenkins is a CICD tool, how to install jenkins in server ? Create 1 instance with t3.small with 30GB and default SG. Then install jenkins and java on this jenkins server using jenkins.io website for centos.
 - Installing java in jenkins is mandatory because jenkins is developed on java only but no need to install jenkins in agent (Java is enough for the agent to work).
 - Jenkins-master may not required to know everything but agent must know everything because actual work is done by the agent only. However logs of agent will also be shown in jenkins-master only. Jenkins port number is 8080 and Nexus port number is 8081.
-- What is free-style project in jenkins ?
-- What is the difference between creating aws resources in aws console and through code ? That is the difference between free-style and pipeline jobs ? 
+- What is free-style project in jenkins ? Nothing but creating pipeline through user interface in jenkins server.
+- What is the difference between creating aws resources in aws console and through code ? That is the difference between free-style and pipeline jobs ? Advantage in code and pipeline is, we can control versions and rollback changes, if something goes wrong.
 - Create a job first using free-style and then pipeline ?
-- Anybody can do the changes in free-style aswel as in pipeline jobs from jenkins ui. For that we have pipeline script from SCM or GitOps ? This is the best approach. Jenkins file will notation will be 'Jenkinsfile'
+- Anybody can do the changes in free-style aswel as in pipeline jobs from jenkins ui. For that we have best approach that is 'pipeline script from SCM' and jenkins file notation is 'Jenkinsfile'
 - Write a RAW syntax of a declarative pipeline ? Script path should be the exact name of jenkinsfile.
-- What is agent in jenkins ? How many agents are required ?
+- What is agent in jenkins ? How many agents are required ? We are supporting multiple programming languages like java, python, nodesjs, .net for each language, we have 2-2 agents.
 - How do you configure 'master-agent' architecture in jenkins ? Manage jenkins, nodes, create node, executors, remote root directory, labels, launch methods, host, configure credentials, host key verification strategy.
 - Where does the entire jenkins database will be ? /var/lib/jenkins, similarly we need to create a directory for agent also in /home/centos/jenkins-agent (Any-name) because CentOS dont have sudo access in /var/lib/jenkins, it has only in home folder (or) click on question mark ? symbol, there you can see how to give the path.
-- How many agents you are using in your company ? Since we are supporting multiple programming languages like java, python, nodesjs, .net for each language we have 2-2 agents.
 - Triggers in jenkins pipeline ? We have a webhook in github to setup triggers.
 - Environment in jenkins pipeline ? The environment block in jenkins pipeline is used to define environment variables that can be accessed across stages and inside shell commands. It helps in centralizing configuration, avoiding hardcoding and making pipelines reusable. It is also commonly used to give credentials securely and to handle different deployment environments like DEV, QA, PROD.
 - Options in jenkins pipeline ? The options block in jenkins pipeline is used to control pipeline execution behavior such as timeout, disable concurrent builds etc.
