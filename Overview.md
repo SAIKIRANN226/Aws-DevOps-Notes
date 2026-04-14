@@ -704,43 +704,48 @@
 - Create a job first using free-style and then pipeline ?
 - Anybody can do the changes in free-style aswel as in pipeline jobs from jenkins ui. For that we have best approach that is 'pipeline script from SCM' and jenkins file notation is 'Jenkinsfile'
 - Write a RAW syntax of a declarative pipeline ? Script path should be the exact name of jenkinsfile.
-- What is agent in jenkins ? How many agents are required ? We are supporting multiple programming languages like java, python, nodesjs, .net for each language, we have 2-2 agents.
-- How do you configure 'master-agent' architecture in jenkins ? Manage jenkins, nodes, create node, executors, remote root directory, labels, launch methods, host, configure credentials, host key verification strategy.
+- What is agent in jenkins ? How many agents are required ? Since we are supporting multiple programming languages like java, python, nodesjs, .net for each language, we have 2-2 agents.
+- How do you configure 'master-agent' architecture in jenkins ? We have multiple agents, we configure in manage jenkins, nodes, create node, executors, remote root directory, labels, launch methods, host, configure credentials, host key verification strategy.
 - Where does the entire jenkins database will be ? /var/lib/jenkins, similarly we need to create a directory for agent also in /home/centos/jenkins-agent (Any-name) because CentOS dont have sudo access in /var/lib/jenkins, it has only in home folder (or) click on question mark ? symbol, there you can see how to give the path.
-- Triggers in jenkins pipeline ? We have a webhook in github to setup triggers.
+- Triggers in jenkins pipeline ? We have a webhook (Event based communication) in github to setup triggers.
 - Environment in jenkins pipeline ? The environment block in jenkins pipeline is used to define environment variables that can be accessed across stages and inside shell commands. It helps in centralizing configuration, avoiding hardcoding and making pipelines reusable. It is also commonly used to give credentials securely and to handle different deployment environments like DEV, QA, PROD.
 - Options in jenkins pipeline ? The options block in jenkins pipeline is used to control pipeline execution behavior such as timeout, disable concurrent builds etc.
-- Parameters in jenkins pipeline ? Parameters in jenkins pipeline are used to accept user inputs at runtime when triggering a build. We can give the inputs like environments and branches.
+- Parameters in jenkins pipeline ? Used to accept user inputs at runtime when triggering a build. We can give the inputs like environments and branches.
 
 ### Session-43
-- Difference between scripted pipeline and declarative pipeline ?
-- Input option in jenkins pipeline ? Taking approval before going to the next stage.
-- Create a jenkins file for infra to vpc. Use terraform init, plan, apply. Use input option before apply. Since this pipeline is running on agent. We need to install terraform command and aws credentials (Aws configure) in agent server. While aws configure dont take sudo access because jenkins-master is connecting to agent using centos, so configure with normal user not with sudo access. Search in google like install terraform linux.
+- Difference between scripted pipeline and declarative pipeline ? Groovy syntax will not work in scripted pipeline.
+- Input option in jenkins pipeline ? Taking approval before going to the next stage, we can also keep colours code here.
+- Create a jenkins file for infra to vpc. Use terraform init, plan, apply. Use input option before apply. Since this pipeline is running on agent. We need to install terraform command and aws credentials (Aws configure) in agent server. While aws configure dont take sudo access because jenkins-master is connecting to agent using centos, so configure with normal user not with sudo access. Search in google like install terraform linux for centos.
 - To get colors we have a plugin called ansiColor ('xterm') in options itself. So install this plugin in manage jenkins plugins. Also write a code in jenkins file under the options. If plugins are not working even after installing just do systemctl restart jenkins.
-- Jenkins pipeline when with parameters.
+- Jenkins pipeline when with parameters. In jenkins pipline, when condition is used to control whether a stage should continue or not. When used with parameters it will allow the stages to execute based on user input provided at run time.
 - That means overall we can write CICD pipeline for infra also. But we dont create project infra using pipeline, we create only using terraform because this infra is very rarely touched, this is just to show that we can also create jenkinsfile for project infra also. So first create whole project infra using terraform and then create CICD jenkinsfile for application infra like catalogue, cart, shipping etc. Make sure before doing CICD for application infra, project infra should be ready.
 - What are CI and CD stages in application like catalogue ?
-- What is pipeline utility steps plugin ? Install this plugin in manage jenkins to read the json file to get the catalogue version.
-- Next is installing dependencies ? Installing nodejs (From the roboshop documentation) in agent is mandatory in order to install npm dependencies.
-- Next zip (Build) the above catalogue output code nothing but artifact and store in nexus repository.
+- CI ---> Pulls the code from git + Build the application + Runs the test
+- CD ---> Take the build code + Deploy it to environment.
+- Difference between Continuous Delivery and Continuous Deployment ? In continuous delivery, after building the code, we need to wait for the approval, its like manual process, while in continuous deployement, no need to wait for the approval, it will automatically deploy into environments.
+- Once the project infra is ready, we write jenkinsfile for catalogue, so keep catalogue code in catalogue folder.
+- What is pipeline utility steps plugin ? Install in manage jenkins to read the json file to get the catalogue version.
+- Next stage is installing dependencies ? Installing nodejs (From the roboshop documentation) in agent is mandatory in order to install npm dependencies.
+- Next stage is build the above catalogue code and zip it (Nothing but artifact) and store in nexus repository.
 - We use sonatype nexus because it is a widely adopted and reliable artifact repository manager. Create an instance with a minimum of 2GB RAM and 30GB storage (T3.medium). While the actual installation is typically handled by the SRE (Site Reliability Engineering) team, but it's important to understand the concept. Dont worry about installations or updates.
-- What is internal YUM repositories ? Nothing but instead of getting libraries and dependencies from the internet, companies will keep those inside the YUM repositories so that we can use from here. That is why nexus acts as a central point not only for storing build artifacts but also for serving as a local repository for all required libraries and dependencies.
+- What is internal YUM repositories ? Nothing but instead of getting libraries and dependencies from the internet, companies will keep those inside the YUM repositories, so that we can use from here. That is why nexus acts as a central point not only for storing build artifacts but also for serving as a local repository for all required libraries and dependencies.
 - Now create a cataloge repository in nexus to hold the catalogue artifacts using 'maven2 hosted' format. What is maven2 hosted format ? It is popular format used for maintaining application artifacts in a unique way like below.
 - Group id --> com.roboshop, artifact id --> catalogue, version --> 1.0.0. Folder structure be like com/roboshop/catalogue/version folder 1.0.0, 1.0.1, 2.0.0 etc.
 - We have version policy release (Prod), snapshot (Dev), mixed (Both)
 - Allow re-deploy option in deployment policy because we are in dev.
-- Now we get URL of that repository.
+- Now we get URL of that repository. In this url only, we store the catalogue artifact. So we zip catalogue artifact in jenkins and send it to this url. Give the nexusURL and authentication, make sure to add nexus credentials in manage jenkins and give that credentials id name in pipeline code also.
 - Remove workspace folder in pipeline in post section 'deleteDir()' this is must.
 - Install 'Pipeline Stage View Plugin' in jenkins to see in stages.
 - How to create any file as backup ? Jenkinsfile.bkp (or) main.tf.bkp
 
 ### Session-44
-- We have catalogue artifact in jenkins how to push this to nexus repository ? We have nexus artifact uploader plugin, install this in jenkins UI and also keep the code in jenkinsfile.
+- We have catalogue artifact in jenkins how to push this to nexus repository url ? We have nexus artifact uploader plugin, install this in jenkins UI and also keep the code in jenkinsfile.
 - What is the algorithm for catalogue (CI) ?
 - What is the algorithm for catalogue (CD) ?
-- Go through the code of catalogue CI and CD in VS.
-- What is upstream (CI) and downstream (CD) in jenkins pipeline ?
-- How to call another pipeline from jenkins pipeline ? Using 'Buildjob'
+- Until CI part, no need to create project infra but now we are going for CD, so create project infra and databases first. Catalogue component and other components will be done through CICD. Go through the code of catalogue CI and CD in VS. Previously ansible was downloading the package from s3 bucket, now it should download the artifact from the nexus location and also download specific version (You need to make few changes in roboshop-ansible-roles in appsetup in common files). So what should we give to ansible ? We need to give nexus location and artifact version, so make changes in playbook according to this. From terraform you should send artifact version to ansible in command line which is in provisioner inline.
+- Keep parameters also for version and environment for catalogue.
+- What is upstream (CI) and downstream (CD) in jenkins pipeline ? When CI success then only call CD.
+- Catalogue CI should send values of version and environment to CD, how to call another pipeline from jenkins pipeline ? Using 'buildjob'
 - You need to attach vpn SG to the agent because catalogue is accepting connections from vpn.
 - We can also install a plugin called 'rebuilder' it will run with the old values.
 
