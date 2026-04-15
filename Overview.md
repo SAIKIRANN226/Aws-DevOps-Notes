@@ -751,27 +751,22 @@
 - We are following semantic versions like major version, minor version, patch version.
 
 ### Session-45
-- Types of scannings in jenkins pipeline ? static source code analysis, static application security testing (SAST), dynamic application security testing (DAST), open source library scanning, docker image scanning.
-- We are using shift-left method, we do all types of scannings in dev enviroment itself to make sure everything is ok then only we can go for the higher environments.
-- How the sonarqube scanner will work ? Installation of sonarqube is taken care by SRE team. Jenkins agent will clone the code in his server and it should have 'scanner cli' software which need to be installed, it will scan the code and upload to the "Sonarqube" console (or) server. Then developers will see the results in 'sonarqube' console (or) server.
-- Port number of sonarqube is 9000.
-- Sonar-project.properties ?
-- Quality gates in sonarqube (We keep some standards) ?
-- If quality gates failed, should we fail the pipeline and inform developers to fix this code ? YES
-- So we should keep a condition in pipeline (Sonar-project.properties) to fail the pipeline "sonar.qualitygate.wait=true" node modules comes from internet, so NO need to scan node_modules directory here, so we put this line of code in properties "sonar.exclusions=node_modules**"
+- Types of scannings in jenkins pipeline ? Static source code analysis, Static application security testing (SAST), Dynamic application security testing (DAST), Open source library scanning, Docker image scanning.
+- We are using shift-left method, we do all types of scannings in DEV enviroment itself to make sure everything is ok then only we can go for the higher environments.
+- How the sonarqube scanner will work ? Installation of sonarqube is taken care by SRE team. Jenkins agent will clone the code in his server and it should have 'scanner cli' software which need to be installed same way how you installed sonarqube, it will scan the code and upload to the 'Sonarqube' console (or) server. Then developers will see the results in 'sonarqube' console (or) server. Port number of sonarqube is 9000. But scanner cli should have sonarqube url and login information like username and password, for that we need to give in 'Sonar-project.properties' which is in opt/sonar/conf location, so that scanner cli will understand where to upload the results. Now configure this in pipeline
+- Quality gates in sonarqube (We keep some standards) like code should be clean ? If quality gates failed, we should fail the pipeline and inform developers to fix this code. So we should keep a condition in pipeline (Sonar-project.properties) to fail the pipeline 'sonar.qualitygate.wait=true' node modules comes from internet, so NO need to scan node_modules directory here, so we put this line of code in properties 'sonar.exclusions=node_modules**'
 - What is multi branch pipeline ? We are using multi branch pipeline in jenkins.
 - What is jenkins shared library ? It is a library of pipelines and use it whenever you want and what is the process ?
 - For example developers are the owner of the catalogue repository but jenkinsfile will be managed by the DevOps engineer only. So DevOps engineer doing frequent changes in Developers repo (Catalogue) is not good. For this only we have jenkins shared library (Centralized pipeline). For example if we have 20 repos we need to write same jenkinsfile for every repo, instead we can create and maintain the shared library repo (Groovy code, reusable pipeline steps). We can keep all multiple pipelines in jenkins shared library for different languages and deployment platforms.
 - We need to inform this jenkins shared library repo to the jenkins by going to the manage jenkins, system, global pipeline libraries, add here, default version should be main and name (Any-name), project repo should be git URL. Refer this library in jenkins pipeline using @Library('roboshop-shared-library'). We use groovy syntax in jenkinsfile #!groovy
-- How to call these pipelines ? For example nodejsVM, javaVM, pythonVM is a centralized pipeline. We need to send parameters like what type of application and component to 'pipelineDecission.groovy'
-- 'pipelineDecission.groovy' we can decide which pipeline to call.
+- How to call these pipelines ? For example nodejsVM, javaVM, pythonVM is a centralized pipeline. We need to send parameters like what type of application and component to 'pipelineDecission.groovy' we can decide which pipeline to call using this decission.
 
 ### Session-46
-- What is the pipeline process or cicd architecture you are following in your project ? Interview question prepare well from this https://github.com/daws-76s/concepts/blob/master/CICD.MD
-- First create whole project infra for 'Roboshop-infra-dev' using one jenkinsfile instead of doing manually. If there is NO dependency from one folder to another folder like 04-databases and 05-app-alb. For that we have 'parallel stages' in jenkins pipeline (We need to use a keyword called parallel) so because of this parallel both resources will create at a time to save the time. Other folders like vpc, sg, vpn have dependencies (Like it is following sequential process).
-- We can keep all static values like nexus url, file path, credentials etc in 'pipelineGlobals.groovy'
-- What is change management process ?
-- What is jira to jenkins integration ? Jira is a ticket management tool.
+- What is the pipeline process or cicd architecture you are following in your project ? Interview question prepare well from this https://github.com/daws-76s/concepts/blob/master/CICD.MD This process is for DEV environment but when we go for PROD, we should understand change management process.
+- First create whole project infra for 'Roboshop-infra-dev' using one jenkinsfile instead of doing manually. If there is NO dependency from one folder to another folder like 04-databases and 05-app-alb. For that we have 'parallel stages' in jenkins pipeline (We need to use a keyword called parallel) so because of this parallel both resources will create at a time, it will save the time. Other folders like vpc, sg, vpn have dependencies (Like it is following sequential process).
+- We can keep all static values like nexus url, file path, credentials etc in 'pipelineGlobals.groovy' in jenkins shared library.
+- What is change management process ? Only used for PROD deployment.
+- What is JIRA to Jenkins integration ? Jira is a ticket management tool. We will write a separate pipeline for PROD and handover to JIRA team.
   
 ### Session-47
 - Algorithm for CICD pipeline for roboshop project is first make sure project infra (Dev and Prod) is ready and get the vpns connected here we can also keep one vpn for both or different vpn for both. Few companies keep single VPN for all environments, we can also keep single VPN, but it is better to keep 1 VPN for every environment. Next create 1 jenkinsfile for whole project infra for both dev and prod.
