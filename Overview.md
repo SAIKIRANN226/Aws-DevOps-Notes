@@ -1,135 +1,133 @@
 ### Sessions (1-11)
-- What is computer and what characterstics does computer hold ? What are the use cases of Server, TV, Phone ?
+- What is computer and what characterstics does computer hold ? What is the purpose of Server, TV, Phone ?
 - What is client-server architecture ? Transferring media from phone to laptop and vice versa.
-- How does windows operating system works ? We have 2 types of OS Linux and Windows.
-- What is the difference between Linux and Windows operating systems ?
-- How to connect to Linux server (Node) ? Box ---> Server, Lock ---> Public key, Key ---> Private key.
-- What are the authentication mechanisms to connect to linux server ?
-- Create a link between LOCK and KEY ? 'ssh-keygen -f <file_name>' You can also directly generate keys in .ssh folder
-- How to enable extensions in control panel ? File explorer, view, unhide extenions for known files.
-- What is the syntax of Public key ? 'ssh-rsa {code} Laptop-name'
-- What is the syntax of Private key ? 'BEGIN OPENSSH PRIVATE KEY {code} END OPENSSH PRIVATE KEY'
-- Now create a server in AWS and connect to that server using Public and Private keys.
-- Import keypair in AWS Network and security options --> Keypairs --> Actions and Import key pair (Publickey) without any gaps.
+- How does windows operating system works ? We have 2 types of OS linux and windows.
+- What is the difference between linux and windows operating systems ?
+- How to connect to linux server (Node) ? Box ---> Server ; Lock ---> Public key ; Key ---> Private key.
+- What are the authentication mechanisms to connect to any linux server ? We use SSH (Secure shell) to connect.
+- Create a link between LOCK and KEY ? 'ssh-keygen -f <file_name>' you can also directly generate keys in .ssh folder
+- How to enable extensions in control panel ? File explorer, view, unhide extenions for known file types.
+- What is the syntax of public key ? 'ssh-rsa {code} laptop-name'
+- What is the syntax of private key ? 'BEGIN OPENSSH PRIVATE KEY {code} END OPENSSH PRIVATE KEY'
+- Now create a server in AWS and connect to that server using public and private keys in gitbash or server.
+- Import keypair in AWS Network and security options --> Keypairs --> Actions and Import key pair (Public key) without any gaps.
 - Create a SG (Firewall) for inbound. All traffic 0.0.0.0/0 (Representation of internet)
-- Launch instance using keypairs and take Amazon Linux 2AMI (HVM). Make sure the key pair name while you are creating in server should match the key pair in Network and Security.
-- How to connect to server then ? 'ssh -i saikiran.pem ec2-user@IP' ---> In pwd location (User directory).
+- Launch instance using keypairs and take Amazon Linux 2AMI (HVM). Make sure the key pair name while you are creating in server should match the key pair in network and security options in aws.
+- How to connect to server in pwd (User directory) location ? 'ssh -i saikiran.pem ec2-user@IP'
 - Amazon Linux / Amazon Linux 2 ---> Default user name is 'ec2-user'
 - Ubuntu ---> Default user name is 'ubuntu'
 - Centos ---> Default user name is 'centos'
 - Debian ---> Default user name is 'admin (or) debian'
 - RHEL ---> Default user name is 'ec2-user (or) root'
 - Cheapest region is us-east-1 ---> Latency is somewhat slow which is negligible.
-- What is Absolute path and Relative path ? An absolute path is the complete path to a file or directory starting from the root. Relative path is relative to current directory.
+- What is absolute path and relative path ? An absolute path is the complete path to a file or directory starting from the root. Relative path is relative to current directory.
 - HTTP --> 80 Hypertext Transfer Protocol (Unencrypted web traffic)
 - HTTPS --> 443 Hypertext Transfer Protocol Secure (Encrypted web traffic)
 - SSH --> 22 Secureshell (For secure remote login and file transfer)
 - SMTP --> 25 Simple Mail Transfer Protocol (Sending email)
 - DNS --> 53 Domain Name System (Resolving domain names to IP addresses)
 - Gitbash ---> Is an SSH client and also a mini linux.
-- Protocol ---> We have different protocols like HTTP, HTTPS, SSH, SMTP, DNS etc.
+- Protocols ---> We have different types of protocols like HTTP, HTTPS, SSH, SMTP, DNS etc.
 - $ ---> Normal user ; # ---> Root user (Sudo su -) to exit from root just type exit.
 - Pwd ---> Present working directory you will be directly land in /c/users/saikiran
-- <command_name> --help ---> Get help from any particular command.
+- How to get help from any particular command ? <command_name> --help
 - What are the basic Git commands ? https://dzone.com/articles/top-35-git-commands-with-examples-and-bonus
 - Everything is CRUD in software industry (Example of facebook)
-- How to update a file with content, save, read ? Just press enter then ctrl+d
+- How to update a file with content, save, read ? Just press enter and ctrl+d
 - Removing file and folder commands ? rm, rm -rf, rmdir, rm -r <folder_name>
 - How to use copy and move commands in linux ? If you use mv command with in the same folder, it works as rename also.
-- Grep command in linux is a case sensitive. Linux will treat DevOps and DEVOPS as different. So to make this case insensitive (i) use grep -i ---> 'grep -i DevOps' another example to find a package ---> 'ps -ef | grep -i nginx'
+- Grep command in linux is a case sensitive. Linux will treat DevOps and DEVOPS as different. So to make this case insensitive (i) use grep -i ---> 'grep -i DevOps' another example to find any package ---> 'ps -ef | grep -i nginx'
 - Piping symbol | ---> One command output will become the input to another command.
-- Difference between Wget and Curl commands ?
-- What is Cut and Awk commands in linux ? We use cut to quickly extract what we require from the text using delimiters. We use awk when we need more advanced processing like filtering rows or formatting output.
-- What are Head and Tail commands in linux ? Head is used to view the first few lines of a file while tail is used to view the last few lines. Both are useful for quickly inspecting logs or large files while 'tail -f' allows real time log monitoring.
+- Difference between wget and curl commands ?
+- What is cut and awk commands in linux ? We use cut to quickly extract what we require from the text using delimiters. We use awk, when we need more advanced processing like filtering rows or formatting output.
+- What are head and tail commands in linux ? Head is used to view the first few lines of a file, while tail is used to view the last few lines. Both are useful for quickly inspecting logs or large files, while 'tail -f' allows real time log monitoring.
 - What is VIM in linux ? Is used for creating and editing files. Keys are i, :wq, :q!, :q, :set nu, :set nonu, :noh
 - You cannot go directly from 'colon/command' mode to 'insert' mode, you need to go to the 'esc' mode first.
-- Different types of search in a file in server ? :/, :?, shift+G, gg, n
+- Different types of search in a file in server ? :/, :?, shift+g, gg, n, q
 - How to search a word and replace in a file ? '%s/sbin/SBIN/g' ---> g means all occurances. If you want any particular line then ':2s' s=substitute. Where ever your cursor is just press 'yy' it will copy. Just press 'p' to paste, 'u' undo, '10p' copy 10 times.
-- We have Read, Write, Execution permissions in Linux ? And file notation is R(4), W(2), X(1). Why execution is used in linux ?
-- In linux when you create a user, a group with same name will be created.
+- We have Read, Write, Execution permissions in linux ? And file notation is R(4), W(2), X(1). Why execution is used in linux ?
+- In linux when you create a user, a group with same name will be created. 'sudo useradd saikiran'
 - For example to give execution permission to user then 'chmod u+x' and to remove read, write access to group 'chmod g-rw'
 - To give read access to all users and to all groups and others also then 'chmod ugo+r'
 - To remove write access to a group and inside folder also then 'chmod g-w -R'
 - User management is like creating users and giving access to the servers in 2 methods.
 - Password authentication mechanism and SSH access authentication mechanism.
-- Create a User and Password for saikiran in server ---> 'sudo useradd saikiran' and 'passwd saikiran and all user entries will be in 'cat /etc/passwd' location. 'sudo userdel saikiran' to delete any user.
+- Create a user and password for saikiran in server ---> 'sudo useradd saikiran' and 'passwd saikiran and all user entries will be in 'cat /etc/passwd' location. 'sudo userdel saikiran' to delete any user.
 - To know userid just enter 'id saikiran' ---> 1st (uid) ; 2nd (gid) ; 3rd (other groups id). To get groups 'getent group'
-- If this saikiran wants to connect to the server using IP address, we need to change a configuration in 'vim /etc/ssh/sshd_config' in gitbash. Here by default linux is disabled for login through password authentication as no, so make this yes then 'systemctl restart sshd' then saikiran will connect to server using 'ssh saikiran@IP'
-- Now raheem joined and how to give SSH authentication (or) using Private key ? 'sudo useradd raheem' No need to create password for raheem because we are giving access to him using private key which is SSH.
-- I will ask raheem to give his public key through mail. He should create key-pair of this.
-- Sudo cd /home/raheem/ enter this command in gitbash after connecting to the server, here we will create a folder 'mkdir .ssh' now create a file inside .ssh folder 'vim authorized_key' paste raheem public key here.
-- Now we will tell raheem that your username is configured and we will give him the IP address then raheem will login using this command 'ssh -i raheem raheem@IP' Here 1st raheem is his Privatekey and 2nd reheem is Username.
+- If this saikiran wants to connect to the server using IP address, we need to change a configuration in 'vim /etc/ssh/sshd_config' in gitbash. Here by default linux is disabled for login through password authentication as no, so make this yes then 'systemctl restart sshd' then saikiran will able to connect server using 'ssh saikiran@IP'
+- Now raheem joined and how to give SSH authentication (or) using private key ? 'sudo useradd raheem' No need to create password for raheem because we are giving access to him using private key which is SSH.
+- I will ask raheem to give his public key through mail. He should create key-pair of this using 'ssh-keygen -f <file-name>'
+- Sudo cd /home/raheem/ enter this command in gitbash after connecting to the server, here we will create a folder 'mkdir .ssh' now create a file inside .ssh folder 'vim authorized_key' paste raheem public key here. Username raheem is similar to saikiran user in your laptop in C drive, here we have .ssh folder right ? Same as in raheem user, we need to create .ssh folder explicitly.
+- Now we will tell raheem that your username is configured and we will give him the IP address then raheem will login using this command 'ssh -i raheem raheem@IP' Here 1st raheem is his privatekey and 2nd reheem is username.
 - The process of creating users and groups is done by linux admin team but just know how to create users and groups, adding users into groups, giving permissions to users etc.
 - What is process management in linux ? Nothing but how the OS creates, monitor and terminate processes. Each process has unique id. We can monitor processes using 'ps' and 'top' commands and control them with 'kill <pid>' or 'kill -9 <pid>' commands.
 - When process stuck kill the process ---> 'kill PID' do not kill parent process id 1st is PID, 2nd one is parent id. If even kill cannot kill then forceful terminate 'kill -9 PID'
-- What is Package management in linux ? How the software is installed, updated or removed on the system. We use yum command ; yum list installed ; yum install <package> -y ; yum remove <package> -y
+- What is package management in linux ? How the software is installed, updated or removed on the system. We use yum command ; yum list installed ; yum install <package> -y ; yum remove <package> -y
 - Algorithm for connecting to any instance ?
-- What is Service management in linux ? Is about starting, stopping, monitoring and configuring background services like web servers or databases. We use tools like 'systemctl' to control them.
+- What is service management in linux ? Is about starting, stopping, monitoring. We use tools like 'systemctl' to control them. Example a courier from delhi to hyderabad.
 - Systemctl start nginx ---> This is how to make a package into service.
 - Systemctl status nginx ---> To know if it is running or not (or) we can also check with process 'ps -ef | grep -i nginx'
 - Systemctl stop nginx ---> To stop the service.
 - Systemctl enable nginx ---> Automatically services will run.
 - Systemctl disable nginx ---> Will disable nginx.
-- Network managment in linux ? How do you check port and process running ? 'netstat -lntp' In every system we have 0-65,535 ports.
+- Network managment in linux ? How do you check port and process running ? 'netstat -lntp'
 - What are the general trouble shooting process you do ?
-- How to give admin access (or) any other access to linux users ? Example two types of users. Linux admin team should have Full admin access ; DevOps team should have Limited sudo access.
-- Generally to give sudo access we have one file 'vim /etc/sudoers' It is not recommended to open this file because it is crucial. So linux has given one command to open that file safely that is 'visudo'
-- Ramesh ---> Give Admin full access, under wheelgroup and enter %admin ALL=(ALL) ALL
+- How to give admin access (or) any other access to linux users ? Example two types of users. Linux admin team should have full admin access ; DevOps team should have limited sudo access.
+- Generally to give sudo access, we have one file 'vim /etc/sudoers' It is not recommended to open this file because it is crucial. So linux has given one command to open that file safely that is 'visudo'
+- Ramesh ---> Give admin full access, under wheelgroup and enter %admin ALL=(ALL) ALL
 - Suresh limited access ---> %devops ALL=(ALL) /usr/bin/yum,/usr/bin/systemctl
-- For ramesh we have given full admin access but for suresh we can only give few limited access like 'yum' command (To know where this command is installed 'which yum' (or) 'which systemctl' (or) 'which <command-name>'
+- Why adding in the wheel group only ? Because wheel group only have admin access.
+- For ramesh we have given full admin access but for suresh we can only give few limited access like 'yum' command, to know where this command is installed 'which yum' (or) 'which systemctl' (or) 'which <command-name>'
 - Everytime opening 'visudo' is also a risky. Linux has given one location 'vim /etc/sudoers.d'
 - vim /etc/sudoers.d/DevOps (Created folder) --> %devops ALL=(ALL) /usr/bin/yum,/usr/bin/systemctl
 - vim /etc/sudoers.d/Admin (Created folder) --> %admin ALL=(ALL) ALL
-- What is 3 Tier architecture ? Frontend, Backend, Database servers.
+- What is 3 tier architecture ? Frontend, Backend and Database servers.
 - In previous session how do we connected to servers in gitbash ?
 - Then how do we connect to servers using putty and super putty (Extension for putty) ?
-- In gitbash we call Privatekey as '.pem' but in putty we call it as '.ppk' (Putty privatekey)
+- In gitbash we call privatekey as '.pem' but in putty we call it as '.ppk' (Putty privatekey)
 - How to create this putty private key ? Load '.pem' file in puttygen and save with .ppk extension
 - Open putty --> connection --> ssh --> auth --> credentials --> load your saved .ppk file
 - Connection --> data --> username (ec2-user) --> then go to session and save (Important)
 - Create a server in AWS and take the public IP and paste it in putty (Hostname) click on load to connect.
 - To change the font open putty --> appearence --> change and then save to make effect in superputty also.
-- What is the Linux file system structure ?
-- When putty stucks (or) unable to enter any command then open putty first load your session then go to connection and give 30 in seconds then go to session and save. Generally we have value 0 you need to give any value like 30 that means every 30 seconds connection will be alive, you can give maximum 300 seconds.
-- What is Inode ? For example we have a hard disk and inside the HD we have some memory locations like numbers. When you create a file in HD, it will be saved in any of the memory locations (A number) in HD, this file will point to that memory location (A number) that is nothing but Inode. Inode is the representation of file or folder inside the memory, it is a number. How to get that number ? ls -li
-- What is Symlink and Hardlink ? Symlink will point to the actual file location not to the inode while Hardlink will point directly to the inode not to the actual file location. Symlink has its own Inode.
-- How to create a Symlink for a file ? First create a file hello and add content in it using cat command then create symlink 'ln -s /home/ec2-user/hello /tmp/hello-soft' you can give obsolute path or relative path.
-- How to create a Hardlink for a file ? 'ln /home/ec2-user/hello /tmp/hello-hard'
-- We use NGINX as frontend servers because it can handle heavy traffic and it is used as reverse proxy also. IIS is only used for windows based applications.
-- We have 'winscp' for file transfer. It is a mini windows in linux server.
-- Generally frontend servers called as HTTP servers on port 80. Hosts html and java based applications. While Backend is also on HTTP servers but on port 8080. Hosts applications like tomcat, jboss, .net, python etc.
+- What is the linux file system structure ? cd /, boot, dev, etc, lib, home, media, mnt, tmp, var etc.
+- From where the html files will load in nginx ? '/usr/share/nginx/html' we have index.html file, go to this folder 'sudo su -' then cd usr/share/nginx/html, here we can also keep your own short html format which should do in the server only.
+- When putty stucks (or) unable to enter any command then open putty first load your session then go to connection and give 30 in seconds then go to session and save it. Generally we have value 0, you need to give any value like 30 that means every 30 seconds connection will be alive, you can give maximum 300 seconds.
+- What is inode ? For example we have a hard disk and inside the HD we have some memory locations like numbers. When you create a file in HD, it will be saved in any of the memory locations (A number) in HD, this file will point to that memory location (A number) that is nothing but inode. Inode is the representation of file or folder inside the memory, it is a number. How to get that inode number ? 'ls -li'
+- What is symlink and hardlink ? Symlink will point to the actual file location not to the inode, while hardlink will point directly to the inode, not to the actual file location. Symlink has its own inode.
+- How to create a symlink for a file ? First create a file hello and add content in it using cat command then create symlink 'ln -s /home/ec2-user/hello /tmp/hello-soft' you can give obsolute path or relative path.
+- How to create a hardlink for a file ? 'ln /home/ec2-user/hello /tmp/hello-hard'
+- We use nginx as frontend servers because it can handle heavy traffic and it is used as reverse proxy also. IIS is only used for windows based applications. We have 'winscp' for file transfer. It is a mini windows in linux server.
+- Generally frontend servers called as HTTP servers on port 80. Hosts html and java based applications. While backend is also on HTTP servers but on port 8080. Hosts applications like tomcat, jboss, .net, python etc.
 - These frontend and database servers will connect through API's (Backend)
-- How to know your Public IP address given by your airtel subscription ? Just type 'What is my ip in google'
-- Every router has two sections Public and Private. Modem or router will provide private IPs to the internal systems like phone, laptop, refrigerator etc. using NAT. If you type 'ipconfig' in cmd you will get all details, IPv4 is my PrivateIP. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32 IP addresses. If we allocate all these, we get problems. So they brought 'NAT' Network Address Translation. However latency will be slow that is nothing but time to respond will be somewhat slow.
-- What is Fibre exchange points ?
+- How to know your public IP address given by your airtel subscription ? Just type 'What is my ip in google'
+- Every router has two sections public and private. Modem (or) router will provide private IPs to internal systems like phone, laptop, refrigerator etc. using NAT. If you type 'ipconfig' in cmd, you will get all details. IPv4 is my private IP. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32 IP addresses. If we allocate all these, we get problems. So they brought 'NAT' Network Address Translation. However latency will be slow that is nothing but time to respond will be some what slow.
+- What is Fibre exchange points ? Nothing but how internet is working around the world.
 - What is Enterprise archive file ? Servlets (DB) ; JSPS (UI) ---> Monolithic
-- What is Monolithic vs Microservices ? Monolithic means single unified application (Enterprise archive file, where everything will be in one file only, has DB also which is nothing but 2 tier architecture), easy to start, hard to scale. Microservices will split into independent services, scalable and flexible but more complex.
+- What is Monolithic vs Microservices ? Monolithic means single unified application (Enterprise archive file, where everything will be in one file only, has DB also which is nothing but 2 tier architecture) easy to start and hard to scale. Microservices will split into independent services, scalable and flexible but more complex.
 - Since we have multiple servers and to connect from one server to another server 'telnet <IPaddress> <port_number>'
-- If telnet is not installed ---> 'sudo yum install telnet -y' and 'netstat -lntp' shows all TCP ports currently being listened on, along with the process ids using each port. I use it in DevOps to check whether services like Nginx, MySQL or application servers are actually listening on the expected ports or not ?
+- If telnet is not installed ---> 'sudo yum install telnet -y' and 'netstat -lntp' shows all TCP ports currently being listened on, along with the process ids using each port. I use it in DevOps to check whether services like nginx, mysql or application servers are actually listening on the expected ports or not ?
 - Frontend (WEB) and Backend (API) are Stateless ; DB is Statefull.
 - WEB and API will work only when DB is in existence. Example of CRUD over facebook.
 - We are using web servers as nginx on HTTP protocol only, it can also use HTTPS. We use nginx because it can handle heavy traffic.
 - Installing packages using yum and dnf. But dnf is preferred while configuring project manually because it consumes less memory when compared to yum. Yum is used in automation like shellscripting.
 - Location of nginx configuration 'cd /etc/nginx/nginx.conf'
 - Location of default content of nginx 'cd usr/share/nginx/html/'
-- What is Forward proxy and Reverse proxy ? Nginx is used as reverse proxy.
-- Reverse proxy is mainly used for Load balancers and Server anonymous.
-- Location of reverse proxy configuration 'vim /etc/nginx/default.d/roboshop.conf'
+- What is forward proxy and reverse proxy ? Nginx is used as reverse proxy. Reverse proxy is mainly used for load balancers and server anonymous. Location of reverse proxy configuration 'vim /etc/nginx/default.d/roboshop.conf'
 - What are the famous HTTP status codes ?
-- Configure the Roboshop project manually ?
-- Whenever you do any changes in configuration makesure 'systemctl restart nginx'
+- Configure the roboshop project manually according to the documentation.
+- Whenever you do any changes in nginx configuration make sure 'systemctl restart nginx'
 - How to check running logs ? 'tail -f /var/log/messages' To see all logs ? 'less -f /var/log/messages'
-- What is this IP 127.0.0.1 ? It's a local host which accept connections only from that particular server. It will not allow connections from external servers. To allow from external servers, we need to update to '0.0.0.0'
-- How to find a particular folder or something ---> find . -name "<star>nginx<star>" Here . means current folder searching with particular name called nginx.
-- What is Domain Name System (DNS) and how does it work ?
+- What is this ip 127.0.0.1 ? It's a local host which accept connections only from that particular server. It will not allow connections from the external servers. To allow from external servers, we need to update to '0.0.0.0'
+- How to find a particular folder or something ? find . -name "<star>nginx<star>" Here . means current folder searching with particular name called nginx.
+- How DNS will work ? When you hit 'joindevops.online' request will first go to Browser_cache --> OS_cache --> ISP_cache --> Root servers --> TLD (Top level domain) --> Name servers information --> A record.
 - How do you register and setup your domain ? Best and cheapest domain register is 'Hostinger'
-- All components first hit redis because it's a cache server. If data is not available in redis then it will hit DB. It helps to speed up data retrieval process by storing frequently accessed data in memory rather than having to repeatedly fetch it from the root servers which will slower the response. Example of downloaded movie by 1 user.
+- All components first hit redis because it's a cache server. If data is not available in redis then it will hit DB. It helps to speed up data retrieval process by storing frequently accessed data in memory like redis rather than having to repeatedly fetch it from the root servers, which will slower the response. Example of a downloaded movie by 1 user.
 - Steps to install any application in linux servers ?
-- Shift+g ---> Go down ; gg ---> Go up ; q ---> Quit
 - What is deployment or release wether it's manual or automation ?
 - What is the difference between Synchronous and Asynchronous in networking ?
-- How do you get authentication to github to push the developed code from VS ? We use 'Keypair authentication' instead of username and password everytime.
-- How to clone any repo ? We have HTTPS and SSH.
+- How do you get authentication to github to push the developed code from VS ? We use 'keypair authentication' instead of username and password everytime. Public key in github settings and private key in config file (Git ssh config syntax) in .ssh folder
+- How to clone any repo ? https is used with username and password, while ssh is used with private key. Mostly ssh is used by repository owners, while https is used to clone others repository in our machine. Its better to clone using https only.
 
 ### Session-12
 - Why we use SSH based authentication to connect to github accounts ? Port number of SSH is 22 and it's a secure connection.
