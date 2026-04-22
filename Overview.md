@@ -147,28 +147,27 @@
 
 ### Session-13
 - Write a shellscript using condition. If given number is greater than 100 or less than 100.
-- Install mysql, git, postfix, net-tools first using conditions, functions and also store logs in tmp.
-- Write a script using loops to print numbers from 1 to 1000 and also to install multiple packages ?
-- What is root user and exit status ? id=0, (id -u), $?
+- Install mysql, git, postfix, net-tools first using conditions, functions and also store logs in tmp folder.
+- Write a script using loops to print numbers from 1 to 1000 and also install multiple packages using loops ?
+- What are these ? Root user ---> id=0, (id -u) and Exit status ---> $?
 - What is function in shellscript ? We generally keep functions under variables.
-- There will be NO logs in 'less /var/log/messages' we need to store that logs explicitly otherwise we cannot troubleshoot but the best practice is to keep a separate log file for applications and only push critical events to '/var/log/messages' make sure you should not log in the current folder of server come outside and then do.
+- There will be NO logs in 'less /var/log/messages' we need to store that logs explicitly otherwise we cannot troubleshoot but the best practice is to keep a separate log file for applications and only push critical events to '/var/log/messages' make sure when you practice logs, dont log in the working folder of server come outside and then do.
 - What is the purpose of redirection ? Nothing but storing the output in our required folder or file.
 - How to redirect the output ? 'yum install nginx -y > output.text' you can keep any name in place of output like saikiran.text
-- What are special variables in shellscript and they should be in double qotes and how do you use the colour coding in shellscript ?
+- What are special variables in shellscript and they should be in double qotes and how do you get colour coding in shellscript ?
 - You should not do any changes (or) adding new files in server terminal, come one step back like after going to home folder (cd) like ~ ---> Here you can store the logs for practicing as siva showed in the terminal. Here in terminal, if you get any errors (or) not working properly you can delete that folder and clone again from the github (No problem)
 - Sudo dnf remove <package_name> -y (or) sudo yum remove <package_name> -y 
-- What is the disadvantage in shellscript ? Handling errors is the main disadvantage in shellscript, by default shellscript does not stop when error occurs, it will continue to run the script with other commands. It is our responsibility to check the errors by writing conditions and also using a special variable called exit status $?
+- What is the disadvantage in shellscript ? Handling errors is the main disadvantage in shellscript because by default shellscript does not stop when error occurs, it will continue to run the script with other commands. It is our responsibility to check the errors by writing conditions and also using a special variable called exit status '$?'
   
 ### Session-14 
 - Write a shellscript to install multiple packages using loop, like giving args outside the script ?
-- Configure the Roboshop project using shellscript ?
-- What is SED in shellscript ? If i want permanent change (sed -i) and temperory change (sed -e) ?
-- Where this SED is used in shellscript ? It is used to search, find, replace, insert or delete text in a file without opening the file in a text editor. VIM is used for humans but for scripts we need to use SED editor.
-- Command to check for remote connections ? netstat -lntp
+- Configure the roboshop project using shellscript ?
+- What is SED in shellscript and where it is used ? It is used to search, find, replace, insert or delete text in a file without opening the file in a text editor. Generally vim is used for humans but for scripts, we need to use SED editor. If i want permanent change (sed -i) and temperory change (sed -e)
+- Command to check for remote connections and ports opened or not ? 'netstat -lntp'
 - Shellscript is like keeping all individual linux commands in one file instead of running one by one commands which was done while configuring the project manually.
-- yum list installed git (or) yum list installed | grep <package_name>
-- Can we set $? (Exit status) to automatically exit in shellscript ? 'set -e' but it wont work because when you are configuring the project for the first time and you may need to create a folder and there is no folder then shellscript will automatically exit.
-- Instead of giving &>> $LOGFILE everywhere, we can give 'exec &>$LOGFILE' under logfile name.
+- Yum list installed git (or) yum list installed | grep <package_name>
+- Can we set $? (Exit status) to automatically exit in shellscript ? 'set -e' but it does not work because when you are configuring the project for the first time and you may need to create a folder and there is no folder then shellscript will automatically exit.
+- Instead of giving '&>> $LOGFILE' everywhere, we can give 'exec &>$LOGFILE' under logfile name.
 - What is the use of logs ? In shell scripting, logs are used to record what the script did, when it did it and whether it succeeded or failed. They act like a black box recorder for your script — if something goes wrong, you can look back and see why.
 - To see full log file ---> sudo cat /var/log/messages
 - To see page by page logs ---> sudo less /var/log/messages
@@ -178,7 +177,7 @@
 - unzip -o /tmp/web.zip ---> Here 'o' is to overwrite even if you run the script multiple times.
 - mkdir -p /app ---> Here 'p' means if folder exists it will not create.
 - Similarly you can also write a condition like if user exist then dont add, if not add.
-- Dont forget to restart nginx server after doing any changes in configuration file.
+- Dont forget to restart nginx server after doing any changes in nginx configuration file.
 - Make sure to add all private servers in web configuration.
   
 ### Session-16
