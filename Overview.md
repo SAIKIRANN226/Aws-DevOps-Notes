@@ -127,25 +127,22 @@
 - What is deployment or release wether it's manual or automation ?
 - What is the difference between Synchronous and Asynchronous in networking ?
 - How do you get authentication to github to push the developed code from VS ? We use 'keypair authentication' instead of username and password everytime. Public key in github settings and private key in config file (Git ssh config syntax) in .ssh folder
-- How to clone any repo ? https is used with username and password, while ssh is used with private key. Mostly ssh is used by repository owners, while https is used to clone others repository in our machine. Its better to clone using https only.
+- How to clone any repo ? https is used with username and password, while ssh is used with private key. Mostly ssh is used by repository owners, while https is used to clone others repository in our machine, its better to clone using https only. HTTPS is used for initial setup while SSH is used for ongoing deployments because of security reasons.
 
 ### Session-12
-- Why we use SSH based authentication to connect to github accounts ? Port number of SSH is 22 and it's a secure connection.
-- We can add multiple github accounts in config file. You can keep your private key in any location but make sure to give correct location of your private key in config file.
-- Here the location of private key is created in '/c/Users/saikiran' and i have given ~ /saikiran.pem, how come the location is same ? Because when you enter command 'pwd' it will show your current directory when you are in '~' path.
-- Which one should we prefer while cloning the repo HTTPS (or) SSH ? HTTPS is for Username and Password while SSH is used for private key based authentication. But prefer HTTPS while cloning any repository from github. HTTPS is used for initial setup while SSH is used for ongoing deployments because of security reasons.
-- Github is nothing but just a folder in internet with tracking capabilities.
-- What is Shibang in Shellscript (or) Bashscript ? #!/bin/bash
-- If you want git in Visual Studio only then go to View, Terminal, Select gitbash.
+- Why we use ssh based authentication to connect github accounts ? Port number of ssh is 22 and it's a secure connection.
+- We can add multiple github accounts in config file. You can keep your private key in any location but make sure to give correct location of your private key in config file. Here the location of private key is created in '/c/Users/saikiran' and i have given ~ /saikiran.pem, how come the location is same ? Because when you enter command 'pwd' it will show your current directory when you are in '~' path. Github is nothing but just a folder in internet with tracking capabilities.
+- What is shibang in shellscript (or) bashscript ? #!/bin/bash
+- If you want gitbash in visual studio only then go to view, terminal, select gitbash.
 - If you enter wrong URL while pushing to github 'git remote set-url origin <url_of_the_repository>'
-- If git is not configured in the github account yet still developers can start writing their code in VS until git is ready and later they can push it to the git.
-- A normal folder will become git when you initialize 'git init'
-- How do you capture the output of any linux command into a variable ? Using command substitution DATE=$(date) and ID=$(id -u) etc.
-- What is the use of arguments in the shellscript ? $1, $2, $3... $n, $@, $#
+- If git is not configured in the github account yet, still developers can start writing their code in VS until git is ready and later they can push it to git. A normal folder will become git when you initialize 'git init'
+- Variables in shellscript is a dry concept like dont repeat yourself. We can call these using $ symbol.
+- How do you capture the output of any linux command into a variable ? Using a command substitution like DATE=$(date), ID=$(id -u), Result=$(ls -la) etc.
+- What is the use of arguments in shellscript ? It is used to pass input values to a script at run time instead of hardcoding, so this makes the script dynamic and resuable. They are accessed using variables like $1, $2, $3... $n, $@, $# inside the script.
 - How to hide password while connecting to external systems like DB in terminal ? 'read -s'
-- Is really data types are important in shellscript ? NO!
-- What is arrays in shellscript ? Array index will start from 0,1,2,3.... We have notation for 'ALL' that is '@' and how many args are passed is '#' Write a shellscript of array using FRUITS example ?
-- How to switch from main-master (or) master-main branch ? git branch -M main
+- Is really data types are important in shellscript ? NO! it will automatically consider which data type is.
+- What is arrays in shellscript ? Array index will start from 0,1,2,3.... we have notation for 'ALL' that is '@' and how many args are passed is '#' write a shellscript of array using FRUITS example ?
+- How to switch from main-master (or) master-main branch ? git branch -M main/master
 - If you want to create a folder in github with .md extension just use '/' after naming your folder and after '/' just create a file with .md extension. Example 'AWS_DevOps_Notes(Repo)/Shellscript/Session-01.md'
 
 ### Session-13
