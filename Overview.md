@@ -148,14 +148,14 @@
 ### Session-13
 - Write a shellscript using condition. If given number is greater than 100 or less than 100.
 - Install mysql, git, postfix, net-tools first using conditions, functions and also store logs in tmp.
-- Write a loop script to print numbers from 1 to 1000 ? Write a shellscript to install multiple packages using loops ?
+- Write a script using loops to print numbers from 1 to 1000 and also to install multiple packages ?
 - What is root user and exit status ? id=0, (id -u), $?
 - What is function in shellscript ? We generally keep functions under variables.
-- There will be NO logs in 'less /var/log/messages' we need to store that logs explicitly otherwise we cannot troubleshoot but the best practice is to keep a separate log file for applications and only push critical events to /var/log/messages. Make sure you should not log in the current folder of server come outside and then do.
-- What is the purpose of redirection ? Nothing but storing the output in our required folder.
+- There will be NO logs in 'less /var/log/messages' we need to store that logs explicitly otherwise we cannot troubleshoot but the best practice is to keep a separate log file for applications and only push critical events to '/var/log/messages' make sure you should not log in the current folder of server come outside and then do.
+- What is the purpose of redirection ? Nothing but storing the output in our required folder or file.
 - How to redirect the output ? 'yum install nginx -y > output.text' you can keep any name in place of output like saikiran.text
 - What are special variables in shellscript and they should be in double qotes and how do you use the colour coding in shellscript ?
-- You should not do any changes (or) adding new files in server terminal, come one step back like after going to home folder (cd) like ~ ---> Here you can store the logs for practicing as siva showed in the terminal. Here in terminal, if you get any errors (or) not working properly you can delete that folder and clone again from the github (NO problem)
+- You should not do any changes (or) adding new files in server terminal, come one step back like after going to home folder (cd) like ~ ---> Here you can store the logs for practicing as siva showed in the terminal. Here in terminal, if you get any errors (or) not working properly you can delete that folder and clone again from the github (No problem)
 - Sudo dnf remove <package_name> -y (or) sudo yum remove <package_name> -y 
 - How do you handle the errors in shellscript ? Using a special variable called exit-status $? and also writing conditions.
 - What is the disadvantage in shellscript ? Even if shellscript faces any error, it wont stop, it will continue to run the script. It is our responsibility to check the errors by writing conditions and exit status.
