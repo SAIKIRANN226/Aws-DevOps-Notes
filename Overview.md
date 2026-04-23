@@ -181,24 +181,24 @@
 - Make sure to add all private servers in web configuration.
   
 ### Session-16
-- Write a shellscript to delete old logfiles which are morethan 14 days old ?
-- Generally we have cat /etc/passwd in this, we have all the users information like user_id, group_id, user_name etc. So how to read this whole information properly (or) in a structured way ? For that we can use IFS (Internal field separator).
-- Check Disk Usage and Send email for alerts ?
-- What is the algorithm for deleting old log files ? Decide SOURCE_DIR, Search for files, Delete.
-- How do you create files with old date in server ? touch -d 20231201 <anyname.log>
-- Command to find old logfiles morethan 14 days old with .log extensions only ?
-- Instead of direct rm -rf, we used while loop to read command output line by line & then delete.
-- Command to check the information about total space & available space on a file system ? df -hT
-- How to create a new volume (or) disk in aws console & what is the condition for that ?
+- Write a shellscript to delete old logfiles which are more than 14 days old ?
+- Generally we have 'cat /etc/passwd' file and in this, we have all the users information like user_id, group_id, user_name etc. So how to read this whole information properly (or) in a structured way ? Using IFS (Internal field separator).
+- Write a shellscript to check disk usage and send email for alerts ?
+- What is the algorithm for deleting old log files ? First decide SOURCE_DIR, search for files, delete.
+- How do you create files with old date in server ? 'touch -d 20231201 <anyname.log>'
+- Command to find old logfiles more than 14 days old with .log extensions only ?
+- Instead of direct rm -rf, we used while loop to read command output line by line and then delete.
+- Command to check the information about total space and available space on a file system ? 'df -hT'
+- How to create a new volume (or) disk in aws console and what is the condition for that ?
 - What are the commands to make the disk into usage ? Go through the overview steps of the disk creation.
-- Creating disk is the work of Storage team not DevOps. But just know how it works.
+- Creating disk is the work of storage team not DevOps. But just know how it works.
 - How do we find different types of file systems ? Using reverse search.
 - How do you mail the above disk usage from linux server ? We will configure the company mail server details to send email alerts.
-- So we call mail.sh whenever we want to monitor on disk_usage, not only on disk_usage, we can also call for CPU_Utilization, Memory_Utilization etc for monitoring purpose using shellscript, because sometimes mailing is not in our control, linux team will give a script like "mail.sh" we can simply call that instead of writing this whole command "echo "$message" | mail -s "High Disk Usage" info@joindevops.com"
+- So we call mail.sh whenever we want to monitor on disk_usage, not only on disk_usage, we can also call for CPU_utilization, Memory_utilization etc. for monitoring purpose using shellscript because sometimes mailing is not in our control, linux team will give a script like 'mail.sh' we can simply call that instead of writing this whole command "echo "$message" | mail -s "High Disk Usage" info@joindevops.com"
 - Sometimes in our company we dont have access, linux team will configure mail.sh, so we can call them by using below command.
-- sh mail.sh" "DevOps Team" "High Disk Usage" "$message" "info@joindevops.com" "ALERT High Disk Usage" Whatever you write after sh mail.sh is arguments we are passing.
-- Basically no need to follow the color coding or formatting, we can just use as it is in mail configuration gmail.MD document (or) if your company provide the mail configuration document just simply follow that. So configuring gmail.MD document for sending mails is morethan enough.
-- Monitoring team responsibility is, if websites are down, then monitoring team will send alerts to Developers team. If servers are down, then monitoring team will send alerts to DevOps team.
+- sh mail.sh "DevOps Team" "High Disk Usage" "$message" "info@joindevops.com" "ALERT High Disk Usage" whatever you write after sh mail.sh is arguments we are passing.
+- Basically no need to follow the colour coding or formatting, we can just use as it is in mail configuration gmail.MD document (or) if your company provide the mail configuration document just simply follow that. So configuring gmail.MD document for sending mails is more than enough.
+- Monitoring team responsibility is, if websites are down, then monitoring team will send alerts to developers team. If servers are down, then monitoring team will send alerts to DevOps team.
 
 ### Session-17
 - What is Crontab ? Usage of crontab & giving the script location in 'crontab -e'
