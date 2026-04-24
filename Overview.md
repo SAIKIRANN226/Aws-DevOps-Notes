@@ -201,32 +201,27 @@
 - Monitoring team responsibility is, if websites are down, then monitoring team will send alerts to developers team. If servers are down, then monitoring team will send alerts to DevOps team.
 
 ### Session-17
-- What is Crontab ? Usage of crontab & giving the script location in 'crontab -e'
-- How to see the running logs of a Crontab ? tail -f /var/log/cron
-- What is Optargs in shellscript ? We can control the script behaviour by giving extra inputs to the script using a tool called Optargs.
-- How to set any shellscript as Native Linux Command ? echo $PATH
-- If you install any softwares in these PATHS then, automatically windows (or) linux will pick up from this PATHS only.
-- Generally if you keep your script in '/usr/local/bin' location, then you NO need to give '.sh' while executing the shellscript.
+- What is crontab ? Usage of crontab and giving the script location in 'crontab -e'
+- How to see the running logs of a crontab ? 'tail -f /var/log/cron'
+- What is optargs in shellscript ? We can control the script behaviour by giving extra inputs to the script using a tool called optargs. How to set any shellscript as native linux command ? 'echo $PATH'
+- If you install any softwares in these paths, then automatically windows (or) linux will pick up from this paths only.
+- Generally if you keep your script in '/usr/local/bin' location, then you no need to give '.sh' while executing the shellscript.
 - So 'sudo cp 18-greetings.sh /usr/local/bin/greeting (Copied as a greeting name)
-- Give executive access 'sudo chmod +x /usr/local/bin/greeting' now if you are in any folder other than the script folder also, just run by using name 'greeting' (or) greeting -n sai -w good evening.
-- Till now we have created ec2 instances & route53 records manually by logging into aws console.
-- Like if web then PublicIP, if not web then PrivateIP right ? Also if mongodb, mysql, shipping then t3.small and remaining t2.micro.
-- We can now create using aws CLI 'aws command line' to automate. In every server we have aws command line, you can check using 'aws help' in server.
-- So we need to write a script to automate using 'aws CLI' for creating instances & records.
-- What are Roles to Resources ? Not only for persons, resources should also have access to access another resource, for that we have Roles to Resources like for example if you have created one EC2 and this EC2 instance should go and create another new instances (or) route53 records.
-- How to create a role for ec2 in aws console ? IAM/Roles/Create role/Select EC2 as use case/Next/Admin access (or) AmazonEc2fullaccess/Route53 full access/Give any name to the role.
-- How will you asign above role to the EC2 in aws console ? Select the already created instance & go to Actions/Security/Modify IAM role/Select your created role.
-- Remove old credentials which was created for aws console (For UI) in .aws/ folder by using rm -rf, if you got any errors in cd location using 'ls -la' command because that was hidden folder.
+- Then give executive access 'sudo chmod +x /usr/local/bin/greeting' now if you are in any folder other than the script folder also, just run by using name 'greeting' (or) greeting -n sai -w good evening.
+- Till now we have created ec2 instances and route53 records manually through aws console right ? Like if web then public ip, if not web then private ip right ? Also if mongodb, mysql, shipping then t3.small and remaining t2.micro. So we are now making automate using shellscript. We can now create using aws cli 'aws command line' to automate. In every server we have aws command line, you can check using 'aws help' in server. So we need to write a script to automate using 'aws CLI' for creating instances and records. Aws cli means, you can create instances and route53 records without logging into the aws console from the command line.
+- What is the concept of IAM (Identity access management) ?
+- What is the difference between authentication and athorization ? Authentication is the process of verifying a user’s identity using credentials like username and password, while authorization determines access rights after identity is confirmed. Authentication happens first, followed by authorization.
+- What are roles to resources ? Not only for persons, resources should also have access to access another resource, for that we have roles to resources, like for example if you have created one EC2 and this EC2 instance should go and create another new instances (or) route53 records.
+- How to create a role for ec2 in aws console ? IAM/Roles/Create role/Select ec2 as use case/Next/Admin access (or) AmazonEc2fullaccess/Route53 full access/Give any name to the role. How will you asign this role to the ec2 in aws console ? Select the already created instance and go to Actions/security/modify IAM role/Select your created role. Remove old credentials which was created for aws console (For UI) in .aws/ folder by using rm -rf, if you got any errors in cd location using 'ls -la' command because that was hidden folder.
 - Command to create instances with tags ? aws ec2 run-instances --image-id ami-xxxxxxxx --count 1 --instance-type t2.micro --security-group-ids sg- 903004f8 --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=Saikiran_instance}]'
 - Command to list instances and find the one with your specific name tag ? aws ec2 describe-instances --filters "Name=tag:Name,Values=MyInstanceName" --query "Reservations[].Instances[].InstanceId" --output text
 - Command to terminate the instances ? aws ec2 terminate-instances --instance-ids i-0abc123456def7890
-- How do you create administrator user in aws console ? By going to IAM, Users, Create user, Attach policies directly, Administrator access, Click on the created user, Security credentials, Create accesskey, select CLI.
+- Write a shellscript to create all instances and records using aws CLI ? Go through the 'roboshop.sh' file in Roboshop-shellscript. You need to clone the 'Roboshop-shellscript' in server and run the 'roboshop.sh' script.
+- How do you create administrator user in aws console ? By going to IAM, Users, Create user, Attach policies directly, Administrator access, Click on the created user, Security credentials, Create accesskey and secretkey, select CLI.
 - Then 'aws configure' after creating administrator user in aws console.
-- Why we created roles in IAM ? Here if person, he can keep Access_key & Secret_keys safely, will EC2 keep these credentials secretly ? If anybody has access to this EC2, he can able to see these credentials using 'ls -la' command in cd .aws/ because these keys are saved in .aws/ folder only. Thats why we have created roles to resources in IAM.
-- Write a shellscript to create all instances & records using aws CLI ? Go through the 'roboshop.sh' file in Roboshop-Shellscript.
+- Why we created roles in IAM ? Here if person, he can keep access_key and secret_keys safely, will ec2 keep these credentials secretly ? If anybody has access to this ec2, he can able to see these credentials using 'ls -la' command in cd .aws/ because these keys are saved in .aws/ folder only. Thats why we have created roles to resources in IAM.
 - What is UPSERT in shellscript ? If the record exists, update (or) edit it, if it doesn’t exist, it will create the records.
-- Important point, So overall create any one instance and give a role to it, so that it will create multiple instances from this instance only, you need to clone the 'roboshop-shellscript' in the server and run the 'roboshop.sh' script.
-- We used --query is to get the PrivateIP of the instances nothing but query from the existing resource.
+- We used --query to get the private ip of the instances nothing but query from the existing resource.
 
 ### Session-18
 - Ansible-server (or) Configuration-server (or) Main-server (or) Controller machine.
