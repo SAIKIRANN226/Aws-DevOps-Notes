@@ -228,24 +228,19 @@
 - What are the advantages of ansible over shellscript ? O, C, A, C, O, E, P, R
 - Ansible can also create instances on external systems like azure, aws, gitlab but it is not recommended because ansible is only intended for configuration management and application deployment. Because it does not have a state file to create instances as terraform does. So thats why terraform is best for creation of infrastructure only.
 - What is configuration management in general and in ansible ? As a DevOps engineer we need to do CRUD over the server effectively.
-- What are the application deployment basic steps ?
-- What is Idempotence Behaviour in ansible ?
-- Create two servers Ansible and Node in AWS ?
-- Connect to Node server from Ansible server ? 'sshpass -p DevOps321 ssh centos@NodeIP'
-- Create a file in Node from Ansible server ? sshpass -p DevOps321 ssh centos@NodeIP -C "echo Hi how are you > /tmp/sai.txt"
-- Install any github session in Node from ansible server ? sshpass -p DevOps321 ssh centos@NodeIP -C "curl <paste_the_RAW_URL> | sudo bash"
-- To show the file content directly on terminal just use 'curl <paste_the_RAW_URL>'
-- Curl command will not download the file, instead it will show the content on the terminal.
-- To download the file in your local, just use 'wget <paste_the_RAW_URL>'
-- What is PUSH (Ansible) architecture in ansible ? Agent less
-- What is PULL (Chef) architecture in ansible, how do you configure PULL ? By installing agents in nodes.
-- What is the advantage of PULL based when compared to PUSH ?
-- Install ansible in ansible-server and connect to Node ? sudo yum install ansible -y and then 'ansible -i NodeIP, all -e ansible_user=centos -e ansible_password=DevOps321 -m ping' Hence connection is success between Ansible and Node.
-- Install nginx in Node from Ansible ? ansible -i NodeIP, all -e ansible_user=centos -e ansible_password=DevOps321 --become -m yum/service -a "name=nginx state=present/started/stopped"
-- What is the difference between Shell commands and Ansible modules ?
-- What is the difference between Shellscript and Ansible-playbook ?
+- What is idempotence behaviour in ansible ?
+- Create two servers ansible and node in aws ?
+- Connect to node server from ansible server ? 'sshpass -p DevOps321 ssh centos@nodeip'
+- Create a file in node from ansible server ? sshpass -p DevOps321 ssh centos@nodeip -C "echo Hi how are you > /tmp/sai.txt"
+- Install any github session in node from ansible server ? sshpass -p DevOps321 ssh centos@NodeIP -C "curl <paste_the_RAW_URL> | sudo bash" To show the file content directly on terminal just use 'curl <paste_the_raw_url>'
+- What is push (Ansible) architecture in ansible ? Agent less
+- What is pull (Chef) architecture in ansible, how do you configure pull ? By installing agents in nodes.
+- What is the advantage of pull based when compared to push ?
+- Install ansible in ansible-server and connect to node ? sudo yum install ansible -y and then 'ansible -i NodeIP, all -e ansible_user=centos -e ansible_password=DevOps321 -m ping'
+- Install nginx in node from ansible ? ansible -i NodeIP, all -e ansible_user=centos -e ansible_password=DevOps321 --become -m yum/service -a "name=nginx state=present/started/stopped"
+- What is the difference between shell commands and ansible modules ? and also shellscript and ansible-playbook ?
 - YAML is the markup language used in ansible. Identation is mandatory in yaml format.
-- What is Inventory in ansible ? Nothing but a list of hosts (Servers) where Ansible will run its automation tasks on these servers. It’s basically your address book for servers, telling Ansible what machines exist, how to connect to them and how they’re grouped.
+- What is inventory in ansible ? Nothing but a list of hosts (Servers) where ansible will run its automation tasks on these servers. It’s basically your address book for servers, telling ansible what machines exist, how to connect to them and how they’re grouped.
 - Go through all the files in 'Ansible' folder in VS.
 - https://github.com/daws-76s/concepts/blob/master/ansible.MD
 
@@ -257,16 +252,15 @@
 - ansible.builtin.service ---> Its a service module.
 - ansible.builtin.debug ---> This module prints whatever you give.
 - ansible.builtin.command ---> Used to run command on a remote machine directly without using shell.
-- Not only external hosts like web, it can also connect to the local hosts. Ansible can manage its own server also.
+- Not only external hosts like web, it can also connect to its local hosts. Ansible can manage its own server also.
 - We have variables in ansible play-level, task-level, var_files, vars_prompt, inventory.ini, args.
 - Variable preference in ansible ? CMD, Task, File, Prompt, Play, Inventory.ini, Ansible roles.
-- What are Data-types in ansible ? We have Skills (List type) and Experience (Map type)
+- What are data-types in ansible ? We have skills (List type) and experience (Map type)
 - What are conditions in ansible ? Write a condition for roboshop user exist or not ?
 - Similar to $? in shell, we have 'rc' in ansible to check the exit status of the previous command.
-- Write ansible-playbook to loop Ramesh, Suresh, Saikiran, Mahesh.
-- Write ansible-playbook to install nginx, mysql, postfix, net-tools using loop.
-- Write ansible-playbook to install nginx, mysql, postfix, net-tools & also loop 'name & state'
-- What are tags in ansible ? Tags are used in server, if you want a particular task to run.
+- Write ansible-playbook to loop ramesh, suresh, saikiran, mahesh.
+- Write ansible-playbook to install nginx, mysql, postfix, net-tools and also loop 'name and state'
+- What are tags in ansible ? Tags are used in server, if you want a particular task to run like below.
 - ansible-playbook -t devops 16-tags.yaml ; ansible-playbook -t aws 16-tags.yaml
 - When we can use tags ? For example take catalogue component, if there is any new version of catalogue, what will you do basically ? We do new deployment (or) new release right ? By using basic deployment steps.
 - Command will be ---> ansible-playbook -e component=catalogue -t deployment main.yaml
