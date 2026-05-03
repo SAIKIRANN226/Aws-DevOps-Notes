@@ -266,18 +266,19 @@
 - Command will be ---> ansible-playbook -e component=catalogue -t deployment main.yaml
 
 ### Session-20 
-- Configure Roboshop Project using ansible ? Go through the 'Roboshop-ansible' in VS.
-- Create all instances & route53 records using shellscript (Roboshop.sh) script.
+- Configure Roboshop project using ansible ? Go through the 'Roboshop-ansible' in VS.
+- Create all instances and route53 records using shellscript (Roboshop.sh) script.
 - Don't forget to give role to the ansible instance before creating instances and route53 records.
 - Delete old records if exist ---> Hosted zones --> Except NS and SOA.
-- In ansible we have used file module, dnf module, user module, get url module, package module, ping module, service module, debug module, command module etc.
+- In ansible we have used file module, dnf module, user module, get url module, package module, ping module, service module, debug module, command module, copy module etc.
 - Black Hole ---> &>> /dev/null (Output stored here will be discarded)
+- Difference between ansible.builtin.command and ansible.builtin.shell ? The command module executes command directly without using shell making it more secure but it does not support shell features like pipes, redirections. Shell command will execute through shell allowing all shell features like pipes, redirections, variables but with less secure. Therefore, command should be preferred unless shell features are required. If we don't find module in default ansible document then we can use shell (or) command. Here in this case 'ansible.builtin.command' is not working because command dont have shell features, it is running the command outside the machine, while shell ---> It is like you logged inside the target machine directly and running the command and if i login to the catalouge and run the 'dnf module disable nodejs -y ; dnf module enable nodejs:18 -y' it can easily run but when you are running this from outside the command, then it will consider these two as one command, thats why shell is slow and less secure.
 
 ### Session-21
 - What is 'UPSERT' in roboshop.sh file in 'Roboshop-shellscript' ? Previously it was 'CREATE' now 'UPSERT' why ?
-- What is the difference between Command and Shell ?
-- Shell -> You login inside the server and run the command. Environment variables and redirections (Symbols) will work here.
-- Command -> You run the command outside the server. Environment variables and redirections (Symbols) will not work here.
+- What is the difference between command and shell ?
+- Shell --> You login inside the server and run the command. Environment variables and redirections (Symbols) will work here.
+- Command --> You run the command outside the server. Environment variables and redirections (Symbols) will not work here.
 - We used functions in shellscript to avoid repetition of code right ? Similarly in ansible also we have ansible roles.
 
 ### Session-22
@@ -288,8 +289,7 @@
 - Ansible roles ---> Common is also a role, we have tasks, handlers, templates, files, vars, defaults, meta, library, lookup_plugins.
 - Lookup plugins are used for connecting to external systems using dynamic inventory.
 - How to debug if you are facing any error in ansible playbook ? 'ansible-playbook -vvv -i inventory.ini -e ansible_user=centos -e ansible_password=DevOps321 -e component=mongodb main.yaml' We will get the full information on terminal like what is happening in the background, so that we can see where is the error.
-- What are the supporting files in project ? Like mongodb.repo, catalogue.service, roboshop.conf etc. without these, configuration will not be complete.
-- Creating every role is not mandatory, we create what we require.
+- What are the supporting files in project ? Like mongodb.repo, catalogue.service, roboshop.conf, without these configuration will not be complete. Creating every role is not mandatory, we create what we require.
 - How to call common role (Any role) in another role ? 'ansible.builtin.import_role'
 - How can we ignore errors in ansible ? 'ignore_errors: true'
 - To set indentation in VS use 'shift+tab and tab' 
