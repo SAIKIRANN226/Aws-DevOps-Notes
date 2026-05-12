@@ -311,24 +311,24 @@
 - So instead of giving 'ansible-playbook -i inventory -e ansible_user=centos -e ansible_password=DevOps321 -e component=mongodb main.yaml' We can keep -i inventory as a separate file and keep your username and password in ansible.cfg then command usage is 'ansible-playbook -e component=mongodb main.yaml'
 - Templates is nothing but a place holders, where we will submit our required values at the run time and it is a Jinja2 format and extension is .j2 go through the code in VS. Like we have used for catalogue.service files.
 - What are Handlers in ansible roles and why we use ?
-- What is the Usage of tags in ansible ? If you want to run a particular task, then we use Tags.
+- What is the usage of tags in ansible ? If you want to run a particular task, then we use Tags.
 - How to create a full config file ? 'ansible-config init --disabled > ansible.cfg' Here disabled means by default all options are commented, you can uncomment which ever options you want to use.
 
 ### Session-24 
-- Till now where we have given Username and Password ? Command line (or) 'ansible.cfg' file right ?
-- What is Ansible-Vault ? Storing secrets like keys and passwords etc.
+- Till now where we have given username and password ? Command line (or) 'ansible.cfg' file right ?
+- What is ansible-vault ? Storing secrets like keys and passwords etc.
 - Difference between encoding and encryption ?
 - Ansible uses mathematic algorithm (AES256) to encrypt the vault. Those who know the password they can only decrypt the code.
 - How to create ansible-vault in ansible-server ?
 - Practice folder (Your working directory)
-- Create 'vault' folder inside the Practice folder, if we create vault folder in VS (Windows), it will not reflect in the server, so you need to create in linux server only. Same for 'group_vars' folder.
+- Create 'vault' folder inside the practice folder, if we create vault folder in VS (Windows), it will not reflect in the server, so you need to create in linux server only. Same for 'group_vars' folder.
 - Next create 'group_vars' folder inside the vault folder then.
 - Create 'vault-file' inside the group_vars folder using below command.
-- 'ansible-vault create Practice/vault/group_vars/some_name.yaml' keep your Username and Password in this file using 'ansible-vault edit group_vars/saikiran.yaml' ansible_user: centos ; ansible_password: DevOps321 and save it :wq!
-- Also create ansible.cfg, inventory.ini and your playbook files (Inside the Practice folder not in vault or group_vars folders)
+- 'ansible-vault create Practice/vault/group_vars/some_name.yaml' keep your username and password in this file using 'ansible-vault edit group_vars/saikiran.yaml' ansible_user: centos ; ansible_password: DevOps321 and save it :wq!
+- Also create ansible.cfg, inventory.ini and your playbook files (Inside the practice folder not in vault or group_vars folders)
 - Keep 'ask_vault_pass=True' in ansible.cfg (or) 'ansible-playbook saikiran.yaml --ask-vault-pass'
-- How to connect to the instance ? 'ansible-playbook saikiran.yaml' since we have inventory in separate file and Username and Password are kept in vault.
-- Since our whole infra is in SSM Parameter in AWS systems manager, this is also a vault from AWS, but we integrate ansible-vault with the SSM Parameter and we fetch the values from AWS instead of depending on ansible vault, ansible vault commands and all those things etc.
+- How to connect to the instance ? 'ansible-playbook saikiran.yaml' since we have inventory in separate file and username and password are kept in vault.
+- Since our whole infra is in SSM Parameter in AWS systems manager, this is also a vault from AWS but we integrate ansible-vault with the SSM Parameter and we fetch the values from AWS instead of depending on ansible vault, ansible vault commands and all those things etc.
 - What is Dynamic Inventory in ansible ? What is auto-scaling of servers ?
 - For example we have 10 servers now because of traffic and i need to run (or) manage these servers using ansible playbooks. Till now we targeted only single server using ansible, but we never targeted multiple servers at a time.
 - When auto-scaling is created, ansible will connect to AWS to fetch the IP addresses of the newly created servers (Using auto-scaling). How ansible will fetch IP addresses dynamically ? We have a plugin called 'aws ec2 inventory'
@@ -353,14 +353,14 @@
 - Now install 'pip3.11 install boto3 botocore'
 - 'ansible-inventory -i web.aws_ec2.yaml --list' now it will fetch the instances with name 'web'
 - Ansible fetched all the web-instances right ? Now if you want to connect to this web instances. 'ansible aws_ec2 -i web.aws_ec2.yaml -e ansible_user=centos -e ansible_password=DevOps321 -m ping' then web instances will give us replay 'pong'
-- What is Plug and Play ? If your ansible-server wants to connect to external systems like aws, azure, gcp etc. Then we need to add some plug of aws, azure, gcp thats what we call plug, similarly if ansible have aws plugin to connect to aws ec2, then we can fetch IP addresses. That is nothing but 'AWS Dynamic inventory plugin'
+- What is Plug and Play ? If your ansible-server wants to connect to external systems like aws, azure, gcp etc. Then we need to add some plug of aws, azure, gcp thats what we call plug, similarly if ansible have aws plugin to connect to aws ec2, then we can fetch IP addresses. That is nothing but 'AWS Dynamic Inventory Plugin'
 - We use ansible.cfg file to minimize the commands (or) arguments to the script in server.
 - Use 'ansible-vault encrypt group_vars/<some_name>.yaml' if already has existing vault.
 - If you want to edit the existing vault ---> 'ansible-vault edit web.yaml'
 - If you want to know wether it is encrypted or not ? 'cat group_vars/<some_name>.yaml'
 - If you want to see your credentials ? then 'ansible-vault view group_vars/<some_name>.yaml'
 - You can use ansible-vault anywhere in the roboshop project for any components you want.
-- Earlier we used Ansible-vault but recently we migrated to AWS SSM Parameter, since our entire infra is in AWS. We integrated ansible-vault with SSM Parameter to fetch the values directly from the AWS instead of ansible-vault. Which is a seamless integration instead of depending ansible-vault and ansible-vault commands.
+- Earlier we used ansible-vault but recently we migrated to AWS SSM Parameter Store, since our entire infra is in AWS. We integrated ansible-vault with SSM Parameter to fetch the values directly from the AWS instead of ansible-vault. Which is a seamless integration instead of depending ansible-vault and ansible-vault commands.
 
 ### Session-25
 - What is terraform and why it is used ? In how many ways we configured our project ? Why we prefer ansible as configuration management while configuring the big project ?
