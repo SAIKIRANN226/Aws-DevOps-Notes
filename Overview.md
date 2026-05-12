@@ -311,29 +311,27 @@
 - So instead of giving 'ansible-playbook -i inventory -e ansible_user=centos -e ansible_password=DevOps321 -e component=mongodb main.yaml' We can keep -i inventory as a separate file and keep your username and password in ansible.cfg then command usage is 'ansible-playbook -e component=mongodb main.yaml'
 - Templates is nothing but a place holders, where we will submit our required values at the run time and it is a Jinja2 format and extension is .j2 go through the code in VS. Like we have used for catalogue.service files.
 - What are Handlers in ansible roles and why we use ?
-- What is the usage of tags in ansible ? If you want to run a particular task, then we use Tags.
+- What is the usage of tags in ansible ? If you want to run a particular task, then we use tags.
 - How to create a full config file ? 'ansible-config init --disabled > ansible.cfg' Here disabled means by default all options are commented, you can uncomment which ever options you want to use.
 
 ### Session-24 
 - Till now where we have given username and password ? Command line (or) 'ansible.cfg' file right ?
-- What is ansible-vault ? Storing secrets like keys and passwords etc.
-- Difference between encoding and encryption ?
+- What is ansible-vault ? Storing secrets like keys and passwords etc. Difference between encoding and encryption ?
 - Ansible uses mathematic algorithm (AES256) to encrypt the vault. Those who know the password they can only decrypt the code.
 - How to create ansible-vault in ansible-server ?
 - Practice folder (Your working directory)
 - Create 'vault' folder inside the practice folder, if we create vault folder in VS (Windows), it will not reflect in the server, so you need to create in linux server only. Same for 'group_vars' folder.
 - Next create 'group_vars' folder inside the vault folder then.
 - Create 'vault-file' inside the group_vars folder using below command.
-- 'ansible-vault create Practice/vault/group_vars/some_name.yaml' keep your username and password in this file using 'ansible-vault edit group_vars/saikiran.yaml' ansible_user: centos ; ansible_password: DevOps321 and save it :wq!
+- 'ansible-vault create Practice/vault/group_vars/<some_name>.yaml' keep your username and password in this file using 'ansible-vault edit group_vars/saikiran.yaml' ansible_user: centos ; ansible_password: DevOps321 and save it :wq!
 - Also create ansible.cfg, inventory.ini and your playbook files (Inside the practice folder not in vault or group_vars folders)
 - Keep 'ask_vault_pass=True' in ansible.cfg (or) 'ansible-playbook saikiran.yaml --ask-vault-pass'
-- How to connect to the instance ? 'ansible-playbook saikiran.yaml' since we have inventory in separate file and username and password are kept in vault.
-- Since our whole infra is in SSM Parameter in AWS systems manager, this is also a vault from AWS but we integrate ansible-vault with the SSM Parameter and we fetch the values from AWS instead of depending on ansible vault, ansible vault commands and all those things etc.
-- What is Dynamic Inventory in ansible ? What is auto-scaling of servers ?
-- For example we have 10 servers now because of traffic and i need to run (or) manage these servers using ansible playbooks. Till now we targeted only single server using ansible, but we never targeted multiple servers at a time.
-- When auto-scaling is created, ansible will connect to AWS to fetch the IP addresses of the newly created servers (Using auto-scaling). How ansible will fetch IP addresses dynamically ? We have a plugin called 'aws ec2 inventory'
-- For example, if you want to run update to the all the web instances then 'ansible-server' should connect to AWS and fetch instances with the Name 'web' which are present in us-east-1 region. We use 'aws ec2 inventory' plugin. Go through the 'web.aws_ec2.yaml' file in the VS.
-- You can keep any name like 'saikiran.aws_ec2.yaml' but file must end with '.aws_ec2.yaml'
+- How to connect to the instance then ? 'ansible-playbook saikiran.yaml' since we have inventory in separate file, username and password are kept in ansible vault.
+- Since our whole infra is in SSM Parameter in AWS systems manager, this is also a vault from AWS but we integrate ansible-vault with the SSM Parameter and we fetch the values from AWS instead of depending on ansible vault, ansible vault commands.
+- What is Dynamic inventory in ansible ? What is auto-scaling of servers ?
+- For example we have 10 servers now because of traffic and i need to run (or) manage these servers using ansible playbooks. Till now we targeted only single server using ansible but we never targeted multiple servers at a time.
+- When auto-scaling is created, ansible will connect to AWS to fetch the IP addresses of the newly created servers (Using auto scaling). How ansible will fetch IP addresses dynamically ? We have a plugin called 'aws ec2 inventory'
+- For example, if you want to run update to the all the web instances then 'ansible-server' should connect to AWS and fetch instances with the name 'web' which are present in us-east-1 region. We use 'aws ec2 inventory' plugin. Go through the 'web.aws_ec2.yaml' file in the VS. You can keep any name like 'saikiran.aws_ec2.yaml' but file must end with '.aws_ec2.yaml'
 - Syntax of the above plugin is below, you can search in google.
   
         plugin: amazon.aws.aws_ec2
