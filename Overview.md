@@ -1,6 +1,6 @@
 ### Sessions (1-11)
 - What is computer and what characterstics does computer hold ? What is the purpose of Server, TV, Phone ?
-- What is client-server architecture ? Transferring media from phone to laptop and vice versa.
+- What is 'client-server' architecture ? Transferring media from phone to laptop and vice versa.
 - How does windows operating system works ? We have 2 types of OS linux and windows.
 - What is the difference between linux and windows operating systems ?
 - How to connect to linux server (Node) ? Box ---> Server ; Lock ---> Public key ; Key ---> Private key.
