@@ -29,8 +29,9 @@
 - Gitbash ---> Is an SSH client and also a mini linux.
 - Protocols ---> We have different types of protocols like HTTP, HTTPS, SSH, SMTP, DNS etc.
 - $ ---> Normal user ; # ---> Root user (Sudo su -) to exit from root just type exit.
-- Pwd ---> Present working directory you will be directly land in /c/users/saikiran
+- Pwd ---> Present working directory you will be directly landed in /c/users/saikiran
 - How to get help from any particular command ? <command_name> --help
+- What are the basic linux commands ?
 - What are the basic Git commands ? https://dzone.com/articles/top-35-git-commands-with-examples-and-bonus
 - Everything is CRUD in software industry (Example of facebook)
 - How to update a file with content, save, read ? Just press enter and ctrl+d
@@ -56,12 +57,12 @@
 - To know userid just enter 'id saikiran' ---> 1st (uid) ; 2nd (gid) ; 3rd (other groups id). To get groups 'getent group'
 - If this saikiran wants to connect to the server using IP address, we need to change a configuration in 'vim /etc/ssh/sshd_config' in gitbash. Here by default linux is disabled for login through password authentication as no, so make this yes then 'systemctl restart sshd' then saikiran will able to connect server using 'ssh saikiran@IP'
 - Now raheem joined and how to give SSH authentication (or) using private key ? 'sudo useradd raheem' No need to create password for raheem because we are giving access to him using private key which is SSH.
-- I will ask raheem to give his public key through mail. He should create key-pair of this using 'ssh-keygen -f <file-name>'
+- I will ask raheem to give his public key through mail. He should create key-pair for this using 'ssh-keygen -f <file-name>'
 - Sudo cd /home/raheem/ enter this command in gitbash after connecting to the server, here we will create a folder 'mkdir .ssh' now create a file inside .ssh folder 'vim authorized_key' paste raheem public key here. Username raheem is similar to saikiran user in your laptop in C drive, here we have .ssh folder right ? Same as in raheem user, we need to create .ssh folder explicitly.
 - Now we will tell raheem that your username is configured and we will give him the IP address then raheem will login using this command 'ssh -i raheem raheem@IP' Here 1st raheem is his privatekey and 2nd reheem is username.
 - The process of creating users and groups is done by linux admin team but just know how to create users and groups, adding users into groups, giving permissions to users etc.
 - What is process management in linux ? Nothing but how the OS creates, monitor and terminate processes. Each process has unique id. We can monitor processes using 'ps' and 'top' commands and control them with 'kill <pid>' or 'kill -9 <pid>' commands.
-- When process stuck kill the process ---> 'kill PID' do not kill parent process id 1st is PID, 2nd one is parent id. If even kill cannot kill then forceful terminate 'kill -9 PID'
+- When process stuck kill the process ---> 'kill PID' do not kill parent process id, 1st is PID & 2nd one is parent id. If even kill cannot kill then forceful terminate 'kill -9 PID'
 - What is package management in linux ? How the software is installed, updated or removed on the system. We use yum command ; yum list installed ; yum install <package> -y ; yum remove <package> -y
 - Algorithm for connecting to any instance ?
 - What is service management in linux ? Is about starting, stopping, monitoring. We use tools like 'systemctl' to control them. Example a courier from delhi to hyderabad.
