@@ -62,21 +62,23 @@
 - Now we will tell raheem that your username is configured and we will give him the IP address then raheem will login using this command 'ssh -i raheem raheem@IP' Here 1st raheem is his privatekey and 2nd reheem is username.
 - The process of creating users and groups is done by linux admin team but just know how to create users and groups, adding users into groups, giving permissions to users etc.
 - What is process management in linux ? Nothing but how the OS creates, monitor and terminate processes. Each process has unique id. We can monitor processes using 'ps' and 'top' commands and control them with 'kill <pid>' or 'kill -9 <pid>' commands.
+- Example to check any process is running or not ? 'ps -ef | grep ssh'
 - When process stuck kill the process ---> 'kill PID' do not kill parent process id, 1st is PID & 2nd one is parent id. If even kill cannot kill then forceful terminate 'kill -9 PID'
 - What is package management in linux ? How the software is installed, updated or removed on the system. We use yum command ; yum list installed ; yum install <package> -y ; yum remove <package> -y
-- Algorithm for connecting to any instance ?
+- Algorithm for connecting to any instance ? Nothing but writing step by steps in your own language.
 - What is service management in linux ? Is about starting, stopping, monitoring. We use tools like 'systemctl' to control them. Example a courier from delhi to hyderabad.
 - Systemctl start nginx ---> This is how to make a package into service.
 - Systemctl status nginx ---> To know if it is running or not (or) we can also check with process 'ps -ef | grep -i nginx'
 - Systemctl stop nginx ---> To stop the service.
 - Systemctl enable nginx ---> Automatically services will run.
-- Systemctl disable nginx ---> Will disable nginx.
-- Network managment in linux ? How do you check port and process running ? 'netstat -lntp'
+- Systemctl disable nginx ---> Will disable nginx. Nginx uses http protocol and port number 80
+- Network managment in linux ? How do you check port and process running ? 'sudo netstat -lntp' before this command check wether netstat is installed or not in server ? 'sudo yum install net-tools'
 - What are the general trouble shooting process you do ?
+- To check wether internet is working or not in linux server ? 'ping google.com' (or) 'ping 52.92.83.76'
 - How to give admin access (or) any other access to linux users ? Example two types of users. Linux admin team should have full admin access ; DevOps team should have limited sudo access.
 - Generally to give sudo access, we have one file 'vim /etc/sudoers' It is not recommended to open this file because it is crucial. So linux has given one command to open that file safely that is 'visudo'
 - Ramesh ---> Give admin full access, under wheelgroup and enter %admin ALL=(ALL) ALL
-- Suresh limited access ---> %devops ALL=(ALL) /usr/bin/yum,/usr/bin/systemctl
+- Suresh (Limited access) ---> %devops ALL=(ALL) /usr/bin/yum,/usr/bin/systemctl
 - Why adding in the wheel group only ? Because wheel group only have admin access.
 - For ramesh we have given full admin access but for suresh we can only give few limited access like 'yum' command, to know where this command is installed 'which yum' (or) 'which systemctl' (or) 'which <command-name>'
 - Everytime opening 'visudo' is also a risky. Linux has given one location 'vim /etc/sudoers.d'
