@@ -85,7 +85,11 @@
 - vim /etc/sudoers.d/DevOps (Created folder) --> %devops ALL=(ALL) /usr/bin/yum,/usr/bin/systemctl
 - vim /etc/sudoers.d/Admin (Created folder) --> %admin ALL=(ALL) ALL
 - What is 3 tier architecture ? Frontend, Backend and Database servers.
-- In previous session how do we connected to servers in gitbash ?
+
+
+
+
+- In previous session, how do we connected to servers in gitbash ?
 - Then how do we connect to servers using putty and super putty (Extension for putty) ?
 - In gitbash we call privatekey as '.pem' but in putty we call it as '.ppk' (Putty privatekey)
 - How to create this putty private key ? Load '.pem' file in puttygen and save with .ppk extension
@@ -94,8 +98,8 @@
 - Create a server in AWS and take the public IP and paste it in putty (Hostname) click on load to connect.
 - To change the font open putty --> appearence --> change and then save to make effect in superputty also.
 - What is the linux file system structure ? cd /, boot, dev, etc, lib, home, media, mnt, tmp, var etc.
-- From where the html files will load in nginx ? '/usr/share/nginx/html' we have index.html file, go to this folder 'sudo su -' then cd usr/share/nginx/html, here we can also keep your own short html format which should do in the server only.
-- When putty stucks (or) unable to enter any command then open putty first load your session then go to connection and give 30 in seconds then go to session and save it. Generally we have value 0, you need to give any value like 30 that means every 30 seconds connection will be alive, you can give maximum 300 seconds.
+- From where the html files will load in nginx ? '/usr/share/nginx/html' we have index.html file, go to this folder using 'sudo su -' then cd usr/share/nginx/html, here we can also keep your own short html format which should be done in the server only.
+- When putty stucks (or) unable to enter any command then open putty first load your session then go to connection and give 30 in seconds then go to session and save it. Generally we have value 0, you need to give any value like 30 that means for every 30 seconds connection will be alive, you can give maximum 300 seconds.
 - What is inode ? For example we have a hard disk and inside the HD we have some memory locations like numbers. When you create a file in HD, it will be saved in any of the memory locations (A number) in HD, this file will point to that memory location (A number) that is nothing but inode. Inode is the representation of file or folder inside the memory, it is a number. How to get that inode number ? 'ls -li'
 - What is symlink and hardlink ? Symlink will point to the actual file location not to the inode, while hardlink will point directly to the inode, not to the actual file location. Symlink has its own inode.
 - How to create a symlink for a file ? First create a file hello and add content in it using cat command then create symlink 'ln -s /home/ec2-user/hello /tmp/hello-soft' you can give obsolute path or relative path.
