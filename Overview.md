@@ -85,22 +85,18 @@
 - vim /etc/sudoers.d/DevOps (Created folder) --> %devops ALL=(ALL) /usr/bin/yum,/usr/bin/systemctl
 - vim /etc/sudoers.d/Admin (Created folder) --> %admin ALL=(ALL) ALL
 - What is 3 tier architecture ? Frontend, Backend and Database servers.
-
-
-
-
 - In previous session, how do we connected to servers in gitbash ?
 - Then how do we connect to servers using putty and super putty (Extension for putty) ?
-- In gitbash we call privatekey as '.pem' but in putty we call it as '.ppk' (Putty privatekey)
+- In gitbash we call private key as '.pem' but in putty we call it as '.ppk' (Putty private key)
 - How to create this putty private key ? Load '.pem' file in puttygen and save with .ppk extension
 - Open putty --> connection --> ssh --> auth --> credentials --> load your saved .ppk file
 - Connection --> data --> username (ec2-user) --> then go to session and save (Important)
 - Create a server in AWS and take the public IP and paste it in putty (Hostname) click on load to connect.
-- To change the font open putty --> appearence --> change and then save to make effect in superputty also.
-- What is the linux file system structure ? cd /, boot, dev, etc, lib, home, media, mnt, tmp, var etc.
-- From where the html files will load in nginx ? '/usr/share/nginx/html' we have index.html file, go to this folder using 'sudo su -' then cd usr/share/nginx/html, here we can also keep your own short html format which should be done in the server only.
+- To change the font, open putty --> appearence --> change and then save to make effect in superputty also.
+- What is the linux file system structure (Blue colours are folders and white colours are files) ? cd /, boot, dev, etc, lib, home, media, mnt, tmp, var etc.
+- From where the html files (or) default content of nginx will be loaded ? '/usr/share/nginx/html' we have index.html file, go to this folder using 'sudo su -' then cd usr/share/nginx/html, here we can also keep your own short html format which should be done in the server only. Location of nginx configuration will be in 'cd /etc/nginx/nginx.conf'
 - When putty stucks (or) unable to enter any command then open putty first load your session then go to connection and give 30 in seconds then go to session and save it. Generally we have value 0, you need to give any value like 30 that means for every 30 seconds connection will be alive, you can give maximum 300 seconds.
-- What is inode ? For example we have a hard disk and inside the HD we have some memory locations like numbers. When you create a file in HD, it will be saved in any of the memory locations (A number) in HD, this file will point to that memory location (A number) that is nothing but inode. Inode is the representation of file or folder inside the memory, it is a number. How to get that inode number ? 'ls -li'
+- What is inode ? For example we have a hard disk and inside the HD, we have some memory locations like numbers. When you create a file in HD, it will be saved in any of the memory locations (A number) in HD, this file will point to that memory location (A number) that is nothing but inode. Inode is the representation of file or folder inside the memory, it is a number. How to get that inode number ? 'ls -li'
 - What is symlink and hardlink ? Symlink will point to the actual file location not to the inode, while hardlink will point directly to the inode, not to the actual file location. Symlink has its own inode.
 - How to create a symlink for a file ? First create a file hello and add content in it using cat command then create symlink 'ln -s /home/ec2-user/hello /tmp/hello-soft' you can give obsolute path or relative path.
 - How to create a hardlink for a file ? 'ln /home/ec2-user/hello /tmp/hello-hard'
@@ -109,29 +105,25 @@
 - These frontend and database servers will connect through API's (Backend)
 - How to know your public IP address given by your airtel subscription ? Just type 'What is my ip in google'
 - Every router has two sections public and private. Modem (or) router will provide private IPs to internal systems like phone, laptop, refrigerator etc. using NAT. If you type 'ipconfig' in cmd, you will get all details. IPv4 is my private IP. IPv4 are exhausting and we are upgrading to IPv6 till then we can use IPv4. We have 2power32 IP addresses. If we allocate all these, we get problems. So they brought 'NAT' Network Address Translation. However latency will be slow that is nothing but time to respond will be some what slow.
-- What is Fibre exchange points ? Nothing but how internet is working around the world.
-- What is Enterprise archive file ? Servlets (DB) ; JSPS (UI) ---> Monolithic
+- What is Fibre exchange points ? Nothing but how the internet is working around the world.
+- What is Enterprise archive file ? Servlets (DB) ; JSPS (UI) ---> Monolithic application.
 - What is Monolithic vs Microservices ? Monolithic means single unified application (Enterprise archive file, where everything will be in one file only, has DB also which is nothing but 2 tier architecture) easy to start and hard to scale. Microservices will split into independent services, scalable and flexible but more complex.
 - Since we have multiple servers and to connect from one server to another server 'telnet <IPaddress> <port_number>'
 - If telnet is not installed ---> 'sudo yum install telnet -y' and 'netstat -lntp' shows all TCP ports currently being listened on, along with the process ids using each port. I use it in DevOps to check whether services like nginx, mysql or application servers are actually listening on the expected ports or not ?
-- Frontend (WEB) and Backend (API) are Stateless ; DB is Statefull.
-- WEB and API will work only when DB is in existence. Example of CRUD over facebook.
-- We are using web servers as nginx on HTTP protocol only, it can also use HTTPS. We use nginx because it can handle heavy traffic.
+- Frontend (WEB) and Backend (API) are Stateless ; DB is Statefull. WEB and API will work only when DB is in existence. Example of CRUD over facebook. We are using web servers as nginx on HTTP protocol only, it can also use HTTPS. We use nginx because it can handle heavy traffic.
 - Installing packages using yum and dnf. But dnf is preferred while configuring project manually because it consumes less memory when compared to yum. Yum is used in automation like shellscripting.
-- Location of nginx configuration 'cd /etc/nginx/nginx.conf'
-- Location of default content of nginx 'cd usr/share/nginx/html/'
 - What is forward proxy and reverse proxy ? Nginx is used as reverse proxy. Reverse proxy is mainly used for load balancers and server anonymous. Location of reverse proxy configuration 'vim /etc/nginx/default.d/roboshop.conf'
 - What are the famous HTTP status codes ?
 - Configure the roboshop project manually according to the documentation.
 - Whenever you do any changes in nginx configuration make sure 'systemctl restart nginx'
 - How to check running logs ? 'tail -f /var/log/messages' To see all logs ? 'less -f /var/log/messages'
-- What is this ip 127.0.0.1 ? It's a local host which accept connections only from that particular server. It will not allow connections from the external servers. To allow from external servers, we need to update to '0.0.0.0'
+- What is this ip 127.0.0.1 ? It's a local host which accept connections only from that particular server. It will not allow connections from the external servers. To allow from external servers also, we need to update to '0.0.0.0'
 - How to find a particular folder or something ? find . -name "<star>nginx<star>" Here . means current folder searching with particular name called nginx.
 - How DNS will work ? When you hit 'joindevops.online' request will first go to Browser_cache --> OS_cache --> ISP_cache --> Root servers --> TLD (Top level domain) --> Name servers information --> A record.
 - How do you register and setup your domain ? Best and cheapest domain register is 'Hostinger'
 - All components first hit redis because it's a cache server. If data is not available in redis then it will hit DB. It helps to speed up data retrieval process by storing frequently accessed data in memory like redis rather than having to repeatedly fetch it from the root servers, which will slower the response. Example of a downloaded movie by 1 user.
 - Steps to install any application in linux servers ?
-- What is deployment or release wether it's manual or automation ?
+- What is deployment (or) release wether it's manual or automation ?
 - What is the difference between Synchronous and Asynchronous in networking ?
 - How do you get authentication to github to push the developed code from VS ? We use 'keypair authentication' instead of username and password everytime. Public key in github settings and private key in config file (Git ssh config syntax) in .ssh folder
 - How to clone any repo ? https is used with username and password, while ssh is used with private key. Mostly ssh is used by repository owners, while https is used to clone others repository in our machine, its better to clone using https only. HTTPS is used for initial setup while SSH is used for ongoing deployments because of security reasons.
