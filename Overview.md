@@ -19,7 +19,7 @@
 - Centos ---> Default user name is 'centos'
 - Debian ---> Default user name is 'admin (or) debian'
 - RHEL ---> Default user name is 'ec2-user (or) root'
-- Cheapest region is us-east-1 ---> Latency is somewhat slow which is negligible.
+- Cheapest region is us-east-1 ---> Latency is somewhat slow which is negligible. Every region has min 2 availability zones. In aws we call everything as resources say like ec2, sg, vpc, etc. Where ever you are, if you just type CD and enter you will go to user directory and 'clear' command will clear all the lines. When you open gitbash, by default you will be landed in the '/c/Users/saikiran' location and when ever you stuck in the gitbash just enter 'ctrl+c'
 - What is absolute path and relative path ? An absolute path is the complete path to a file or directory starting from the root. Relative path is relative to current directory.
 - HTTP --> 80 Hypertext Transfer Protocol (Unencrypted web traffic)
 - HTTPS --> 443 Hypertext Transfer Protocol Secure (Encrypted web traffic)
