@@ -46,6 +46,7 @@
 - You cannot go directly from 'colon/command' mode to 'insert' mode, you need to go to the 'esc' mode first.
 - Different types of search in a file in server ? :/, :?, shift+g, gg, n, q
 - How to search a word and replace in a file ? '%s/sbin/SBIN/g' ---> g means all occurances. If you want any particular line then ':2s' s=substitute. Where ever your cursor is just press 'yy' it will copy. Just press 'p' to paste, 'u' undo, '10p' copy 10 times.
+- Few linux commands are ls,cat,touch,rm,rmdir,mkdir,cut,awk,curl,wget,grep,head,tail,vim,cp,mv etc. Dont worry about the linux commands whenever you want can be used from the internet (or) just 'command name --help'
 - We have Read, Write, Execution permissions in linux ? And file notation is R(4), W(2), X(1). Why execution is used in linux ?
 - In linux when you create a user, a group with same name will be created. 'sudo useradd saikiran'
 - For example to give execution permission to user then 'chmod u+x' and to remove read, write access to group 'chmod g-rw'
