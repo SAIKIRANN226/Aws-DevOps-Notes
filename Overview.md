@@ -85,8 +85,19 @@
 - Everytime opening 'visudo' is also a risky. Linux has given one location 'vim /etc/sudoers.d'
 - vim /etc/sudoers.d/DevOps (Created folder) --> %devops ALL=(ALL) /usr/bin/yum,/usr/bin/systemctl
 - vim /etc/sudoers.d/Admin (Created folder) --> %admin ALL=(ALL) ALL
-- What is 3 tier architecture ? Frontend, Backend and Database servers.
-- In previous session, how do we connected to servers in gitbash ?
+
+
+
+
+
+
+
+- What is 3-tier architecture ? What are Frontend, Backend and Database servers ?
+- Frontend (WEB) and Backend (API) are Stateless ; DB is Statefull. WEB and API will work only when DB is in existence.
+- Example of CRUD over DB facebook. We are using web servers as nginx on HTTP (80) protocol only, it can also use HTTPS.
+- We use nginx because it can handle heavy traffic and most popular web server. Nginx is used as reverse proxy.
+- In previous session, how do we connected to servers in gitbash ? Using keys but from now we connect through putty sessions.
+- How to create a putty session for a server to connect ? This is username and password authentication not using keypair.
 - Then how do we connect to servers using putty and super putty (Extension for putty) ?
 - In gitbash we call private key as '.pem' but in putty we call it as '.ppk' (Putty private key)
 - How to create this putty private key ? Load '.pem' file in puttygen and save with .ppk extension
@@ -111,7 +122,6 @@
 - What is Monolithic vs Microservices ? Monolithic means single unified application (Enterprise archive file, where everything will be in one file only, has DB also which is nothing but 2 tier architecture) easy to start and hard to scale. Microservices will split into independent services, scalable and flexible but more complex.
 - Since we have multiple servers and to connect from one server to another server 'telnet <IPaddress> <port_number>'
 - If telnet is not installed ---> 'sudo yum install telnet -y' and 'netstat -lntp' shows all TCP ports currently being listened on, along with the process ids using each port. I use it in DevOps to check whether services like nginx, mysql or application servers are actually listening on the expected ports or not ?
-- Frontend (WEB) and Backend (API) are Stateless ; DB is Statefull. WEB and API will work only when DB is in existence. Example of CRUD over facebook. We are using web servers as nginx on HTTP protocol only, it can also use HTTPS. We use nginx because it can handle heavy traffic.
 - Installing packages using yum and dnf. But dnf is preferred while configuring project manually because it consumes less memory when compared to yum. Yum is used in automation like shellscripting.
 - What is forward proxy and reverse proxy ? Nginx is used as reverse proxy. Reverse proxy is mainly used for load balancers and server anonymous. Location of reverse proxy configuration 'vim /etc/nginx/default.d/roboshop.conf'
 - What are the famous HTTP status codes ?
