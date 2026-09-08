@@ -92,9 +92,7 @@
 
 
 
-- What is 3-tier architecture ? What are Frontend, Backend and Database servers ?
-- Frontend (WEB) and Backend (API) are Stateless ; DB is Statefull. WEB and API will work only when DB is in existence.
-- Example of CRUD over DB facebook. We are using web servers as nginx on HTTP (80) protocol only, it can also use HTTPS.
+- What is 3-tier architecture ? Frontend, Backend and Database servers. Frontend (WEB) and Backend (API) are Stateless ; DB is Statefull. WEB and API will work only when DB is in existence (Example of CRUD over DB facebook). We are using web servers as nginx on HTTP (80) protocol only, it can also use HTTPS.
 - We use nginx because it can handle heavy traffic and most popular web server. Nginx is used as reverse proxy.
 - In previous session, how do we connected to servers in gitbash ? Using keys but from now we connect through putty sessions.
 - How to create a putty session for a server to connect ? This is username and password authentication not using keypair.
