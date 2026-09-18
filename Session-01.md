@@ -1,5 +1,5 @@
 ### What is Computer ?
-Laptop, Mobile, Refrigerator, Washing machine etc. We can call these also a computer because a computer has some characterstics like CPU, RAM, STORAGE etc. When we connect these devices to Internet (WiFi) an IP address will be created to operate the computer with in the local and from anywhere in the world.
+Laptop, Mobile, Refrigerator, Washing machine, Server etc. We can call these also a computer because a computer has some characterstics like OS, CPU, RAM, STORAGE etc. When we connect these devices to Internet (WiFi) an IP address will be created to operate the computer with in the local and from anywhere in the world.
 
 ### Below is the example of Usecases
 - www.facebook.com ---> Is a Server, Based on the purpose like below.
@@ -14,7 +14,7 @@ Laptop, Mobile, Refrigerator, Washing machine etc. We can call these also a comp
 - Therefore, whole IT is communication between Clients and Servers.
 
 ### Operating systems
-- Windows OS ---> A bridge between User and Hardware 
+- Windows OS ---> Acts like a bridge between User and Hardware 
 - User instructions will turn into ---> Commands turn into ---> 0/1 ---> Hardware. OS will takecare of converting 0's and 1's
 
 ### Windows vs Linux
@@ -23,7 +23,7 @@ Laptop, Mobile, Refrigerator, Washing machine etc. We can call these also a comp
 
 ### How to connect to Linux servers ?
 - BOX = Linux server (or) Node
-- LOCK = Public key (Should be in aws-server)
+- LOCK = Public key (Should be in aws console)
 - KEY = Private key (Should be with you)
 
 ### Authentication mechanisms to connect linux server
