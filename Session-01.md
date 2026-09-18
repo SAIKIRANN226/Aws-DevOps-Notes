@@ -30,7 +30,7 @@ Laptop, Mobile, Refrigerator, Washing machine, Server etc. We can call these als
 - What you know ---> Username and Password
 - What you have ---> RSA tokens
 - What you are  ---> Palms, retina, fingerprints etc.
-As of now we are going for second method, that is SSH (Secureshell). So here we need to generate (or) create a link between "LOCK and KEY" by using a command in gitbash "ssh-keygen -f <filename>" and press enter two times then there will be two files generated with ".pub" extension and one more file with the same name but "without extension" and to rename this file with extension or to enable extension, go to the Controlpanel, File explorer options, View, Unhide extensions for known files and then rename your private key with ".pem" and the syntax for the keys are below.
+But we go for SSH (Secureshell) method. So here we need to generate (or) create a link between "LOCK and KEY" by using a command in gitbash "ssh-keygen -f <filename>" and press enter two times then there will be two files generated with ".pub" extension and one more file with the same name but "without extension" and to rename this file with extension or to enable extension, go to the Controlpanel, File explorer options, View, Unhide extensions for known files and then rename your private key with ".pem" and the syntax for the keys are below.
 - Syntax for the Publickey is ---> ssh-rsa {code} Laptop-name
 - Syntax for the Privatekey is ---> BEGIN OPENSSH PRIVATE KEY {code} END OPENSSH PRIVATE KEY
 So you have created a link, now create a server in AWS and connect to that server with these keys.
